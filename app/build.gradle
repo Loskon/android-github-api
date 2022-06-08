@@ -1,0 +1,70 @@
+plugins {
+    alias deps.plugins.androidApplication
+    alias deps.plugins.kotlin
+}
+
+android {
+    compileSdk deps.versions.compileSdk.get() as Integer
+
+    defaultConfig {
+        applicationId "com.loskon.githubapi"
+
+        minSdk deps.versions.minSdk.get() as Integer
+        targetSdk deps.versions.targetSdk.get() as Integer
+
+        versionCode deps.versions.debugVersionCode.get() as Integer
+        versionName deps.versions.debugVersionName.get()
+
+        buildConfigField 'String', 'API_BASE_URL', '"https://api.github.com/"'
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+        }
+
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+        test.java.srcDirs += 'src/test/kotlin'
+    }
+}
+
+dependencies {
+    // Android
+    implementation deps.appcompat
+    implementation deps.material
+    implementation deps.constraintlayout
+    implementation deps.recyclerview
+    implementation deps.activity
+    implementation deps.fragment
+    implementation deps.bundles.lifecycle
+    // Kotlin
+    implementation deps.core
+    // Timber
+    implementation deps.timber
+    // Other
+    implementation deps.splashscreen
+    // Test
+    testImplementation deps.junit4
+    androidTestImplementation deps.extJunit
+}

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Regular margin -->
+    <dimen name="margin_tiny">2dp</dimen>
+    <dimen name="margin_xsmall">4dp</dimen>
+    <dimen name="margin_small">8dp</dimen>
+    <dimen name="margin_xmedium">12dp</dimen>
+    <dimen name="margin_medium">16dp</dimen>
+    <dimen name="margin_large">24dp</dimen>
+    <dimen name="margin_xlarge">28dp</dimen>
+    <dimen name="margin_higher">32dp</dimen>
+    <dimen name="margin_xhigher">36dp</dimen>
+    <!-- Regular text -->
+    <dimen name="txt_tiny">10sp</dimen>
+    <dimen name="txt_small">14sp</dimen>
+    <dimen name="txt_medium">16sp</dimen>
+    <dimen name="txt_large">20sp</dimen>
+    <dimen name="txt_higher">24sp</dimen>
+    <!-- Special -->
+    <dimen name="base_round_top_bg_corner_radius">30dp</dimen>
+</resources>
