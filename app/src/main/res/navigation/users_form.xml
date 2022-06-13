@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/users_form"
+    app:startDestination="@id/usersFragment">
+
+    <fragment
+        android:id="@+id/usersFragment"
+        android:name="com.loskon.githubapi.app.features.users.presentation.UserListFragment"
+        android:label="UsersFragment"
+        tools:layout="@layout/fragment_user_list">
+        <action
+            android:id="@+id/goUserProfileFragment"
+            app:destination="@id/userProfileFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/userProfileFragment"
+        android:name="com.loskon.githubapi.app.features.userprofile.presentation.UserProfileFragment"
+        android:label="fragment_user_profile"
+        tools:layout="@layout/fragment_user_profile">
+
+        <argument
+            android:name="username"
+            app:argType="string" />
+    </fragment>
+
+</navigation>

@@ -3,6 +3,7 @@ plugins {
     alias deps.plugins.androidApplication apply false
     alias deps.plugins.androidLibrary apply false
     alias deps.plugins.kotlin apply false
+    alias deps.plugins.navigation apply false
     alias deps.plugins.ktlint apply false
     alias deps.plugins.detekt apply false
     alias deps.plugins.gradlevers apply false
@@ -98,11 +99,11 @@ subprojects {
         }
     }
 
-    task checkBeforePushFast(group: 'verification', description: 'Inspect your code before push') {
+    task checkBeforePushFast(group: 'verification', description: 'Inspect code before push') {
         dependsOn 'checkstyle', 'detektCode', 'ktlint'
     }
 
-    task checkBeforePush(group: 'verification', description: 'Inspect your code before push') {
+    task checkBeforePush(group: 'verification', description: 'Deep inspect code before push') {
         dependsOn 'checkstyle', 'detekt', 'ktlint', 'lintDebug'
     }
 }

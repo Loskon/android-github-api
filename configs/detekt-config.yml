@@ -300,19 +300,19 @@ naming:
     constantPattern: '[A-Z][_A-Z0-9]*'
     propertyPattern: '[A-Za-z][_A-Za-z0-9]*'
     privatePropertyPattern: '_?[A-Za-z][_A-Za-z0-9]*'
-  VariableMaxLength:
+  valiableMaxLength:
     active: false
     excludes: ['**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**']
-    maximumVariableNameLength: 64
-  VariableMinLength:
+    maximumvaliableNameLength: 64
+  valiableMinLength:
     active: false
     excludes: ['**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**']
-    minimumVariableNameLength: 1
-  VariableNaming:
+    minimumvaliableNameLength: 1
+  valiableNaming:
     active: true
     excludes: ['**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**']
-    variablePattern: '[a-z][A-Za-z0-9]*'
-    privateVariablePattern: '(_)?[a-z][A-Za-z0-9]*'
+    valiablePattern: '[a-z][A-Za-z0-9]*'
+    privatevaliablePattern: '(_)?[a-z][A-Za-z0-9]*'
     excludeClassPattern: '$^'
     ignoreOverridden: true
 
@@ -447,7 +447,7 @@ style:
     ignoreNumbers: ['-1', '0', '1', '2']
     ignoreHashCodeFunction: true
     ignorePropertyDeclaration: true
-    ignoreLocalVariableDeclaration: false
+    ignoreLocalvaliableDeclaration: false
     ignoreConstantDeclaration: true
     ignoreCompanionObjectPropertyDeclaration: true
     ignoreAnnotation: false
@@ -542,7 +542,7 @@ style:
   UseDataClass:
     active: false
     ignoreAnnotated: []
-    allowVars: false
+    allowvals: false
   UseEmptyCounterpart:
     active: false
   UseIfEmptyOrIfBlank:
@@ -557,7 +557,7 @@ style:
     active: true
   UtilityClassWithPublicConstructor:
     active: false
-  VarCouldBeVal:
+  valCouldBeVal:
     active: false
   WildcardImport:
     active: true

@@ -1,6 +1,7 @@
 plugins {
     alias deps.plugins.androidApplication
     alias deps.plugins.kotlin
+    alias deps.plugins.navigation
 }
 
 android {
@@ -57,12 +58,19 @@ dependencies {
     implementation deps.recyclerview
     implementation deps.activity
     implementation deps.fragment
+    implementation deps.swiperefreshlayout
     implementation deps.bundles.lifecycle
+    implementation deps.bundles.navigation
+    // Network
+    implementation deps.bundles.retrofit.gson
+    implementation deps.glide
     // Kotlin
     implementation deps.core
+    // DI
+    implementation deps.koin
     // Timber
     implementation deps.timber
-    // Other
+    // Misc
     implementation deps.splashscreen
     // Test
     testImplementation deps.junit4

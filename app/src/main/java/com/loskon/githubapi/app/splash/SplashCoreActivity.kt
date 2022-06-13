@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import com.loskon.githubapi.app.MainActivity
+import com.loskon.githubapi.app.main.MainActivity
 import com.loskon.template.base.countdowntimer.SplashCountDownTimer
 
 /**
@@ -33,6 +33,6 @@ class SplashCoreActivity : AppCompatActivity() {
     }
 
     companion object {
-        private const val SPLASH_DURATION = 1000L
+        private const val SPLASH_DURATION = 800L
     }
 }

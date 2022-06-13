@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.loskon.githubapi">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name="com.loskon.githubapi.app.App"
         android:allowBackup="true"
@@ -23,7 +26,7 @@
         </activity>
 
         <activity
-            android:name=".app.MainActivity"
+            android:name=".app.main.MainActivity"
             android:exported="false" />
 
     </application>

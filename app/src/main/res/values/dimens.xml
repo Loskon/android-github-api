@@ -8,8 +8,9 @@
     <dimen name="margin_medium">16dp</dimen>
     <dimen name="margin_large">24dp</dimen>
     <dimen name="margin_xlarge">28dp</dimen>
-    <dimen name="margin_higher">32dp</dimen>
-    <dimen name="margin_xhigher">36dp</dimen>
+    <dimen name="margin_enlarge">32dp</dimen>
+    <dimen name="margin_xenlarge">36dp</dimen>
+    <dimen name="margin_higher">48dp</dimen>
     <!-- Regular text -->
     <dimen name="txt_tiny">10sp</dimen>
     <dimen name="txt_small">14sp</dimen>
@@ -18,4 +19,5 @@
     <dimen name="txt_higher">24sp</dimen>
     <!-- Special -->
     <dimen name="base_round_top_bg_corner_radius">30dp</dimen>
+    <dimen name="bottom_bar_height">48dp</dimen>
 </resources>

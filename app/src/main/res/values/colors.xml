@@ -10,4 +10,6 @@
     <color name="white">#FFFFFFFF</color>
     <!-- Own -->
     <color name="blue">#0288D1</color>
+    <color name="slateblue">#6750a4</color>
+    <color name="sienna">#9c4247</color>
 </resources>

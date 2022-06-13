@@ -1,4 +1,4 @@
-package com.loskon.hpapiclient.base.presentation
+package com.loskon.githubapi.base.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
