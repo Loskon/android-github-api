@@ -27,14 +27,13 @@ class UserListAdapter : RecyclerView.Adapter<UserListAdapter.UsersViewHolder>() 
         with(holder.binding) {
             ImageLoader.loadImage(user.avatarUrl, ivUserCard)
             tvUserCardName.text = user.login
-            tvUserCardGrade.text = user.id.toString()
+            tvUserCardGrade.text = user.type
             cardViewUser.setDebounceClickListener { clickListener?.invoke(user) }
         }
     }
 
     override fun getItemCount(): Int = list.size
 
-    //----------------------------------------------------------------------------------------------
     @SuppressLint("NotifyDataSetChanged")
     fun setUsers(newList: List<UserModel>) {
         list = newList

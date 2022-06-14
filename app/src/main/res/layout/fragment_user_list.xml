@@ -1,69 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:animateLayoutChanges="true">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tv_no_internet"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@color/sienna"
-        android:gravity="center"
-        android:padding="2dp"
-        android:text="@string/no_internet_connection"
-        android:textColor="@android:color/white"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="visible" />
-
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/refresh_layout"
+    <LinearLayout
+        android:id="@+id/lll"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/coorrd"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_no_internet">
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/bottom_bar_height"
+        android:animateLayoutChanges="true"
+        android:orientation="vertical">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_users"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:listitem="@layout/item_user_card" />
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:id="@+id/coorrd"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <com.google.android.material.progressindicator.LinearProgressIndicator
-            android:id="@+id/indicator"
+        <TextView
+            android:id="@+id/tv_no_internet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginBottom="@dimen/bottom_bar_height"
-            android:indeterminate="true"
-            app:indicatorColor="@android:color/holo_red_dark"
-            app:trackColor="@android:color/transparent" />
+            android:background="@color/sienna"
+            android:gravity="center"
+            android:padding="2dp"
+            android:text="@string/no_internet_connection"
+            android:textColor="@android:color/white"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible" />
 
-        <com.google.android.material.bottomappbar.BottomAppBar
-            android:id="@+id/bottom_bar_users_list"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/refresh_layout"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/bottom_bar_height"
-            android:layout_gravity="bottom"
-            android:background="@android:color/white"
-            android:gravity="bottom" />
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toTopOf="@+id/coorrd"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_no_internet">
 
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_users"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:listitem="@layout/item_user_card" />
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/indicator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="@dimen/bottom_bar_height"
+        android:indeterminate="true"
+        app:indicatorColor="@color/slateblue"
+        app:trackColor="@android:color/transparent" />
+
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:id="@+id/bottom_bar_users_list"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bottom_bar_height"
+        android:layout_gravity="bottom"
+        android:background="@android:color/white"
+        app:menu="@menu/bottom_bar_menu"
+        app:navigationIcon="@drawable/baseline_format_list_bulleted_black_24" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

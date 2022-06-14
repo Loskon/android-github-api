@@ -22,8 +22,11 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.getUser.observe(viewLifecycleOwner) { user ->
+            binding.lll2.isVisible = user != null
             binding.piUserProfile.isVisible = user == null
             user?.let { binding.tv.text = user.login }
         }
+
+        binding.bottomAppBar.setNavigationOnClickListener { requireActivity().onBackPressed() }
     }
 }

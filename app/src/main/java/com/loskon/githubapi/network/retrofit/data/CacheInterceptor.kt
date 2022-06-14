@@ -20,7 +20,7 @@ class CacheInterceptor(private val context: Context) : Interceptor {
             val onlineRequest = request.onlineCacheControl()
             chain.proceed(onlineRequest).addCacheHeader(false)
         } else {
-            if (hasDataCacheDir()) {
+            if (hasCacheDir()) {
                 val offlineRequest = request.offlineCacheControl()
                 chain.proceed(offlineRequest).addCacheHeader(true)
             } else {
@@ -29,7 +29,7 @@ class CacheInterceptor(private val context: Context) : Interceptor {
         }
     }
 
-    private fun hasDataCacheDir(): Boolean {
+    private fun hasCacheDir(): Boolean {
         val path = context.cacheDir.path + File.separator + CACHE_DIR_NAME
         return File(path).exists()
     }
@@ -49,7 +49,7 @@ class CacheInterceptor(private val context: Context) : Interceptor {
     }
 
     companion object {
-        const val CACHE_HEADER = "Cache-Header"
         private const val CACHE_CONTROL = "Cache-Control"
+        const val CACHE_HEADER = "Cache-Header"
     }
 }

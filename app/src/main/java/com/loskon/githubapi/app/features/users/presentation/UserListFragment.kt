@@ -38,7 +38,7 @@ class UserListFragment : Fragment(R.layout.fragment_user_list) {
 
     private fun configureParentLayout() {
         // To disable flickering during textView animation
-        binding.root.layoutTransition.disableTransitionType(LayoutTransition.APPEARING)
+        binding.lll.layoutTransition.disableTransitionType(LayoutTransition.APPEARING)
     }
 
     private fun configureRefreshLayout() {
@@ -88,12 +88,13 @@ class UserListFragment : Fragment(R.layout.fragment_user_list) {
         binding.indicator.setVisibleKtx(false)
         when (errorType) {
             ErrorType.EMPTY_CACHE -> binding.tvNoInternet.setGoneVisibleKtx(true)
-            ErrorType.NO_SUCCESSFUL -> showSnackbar("getString()")
-            ErrorType.UNKNOWN -> "R.string.error_message_offline"
+            ErrorType.NO_SUCCESSFUL -> showSnackbar(getString(R.string.problems_get_data, message))
+            ErrorType.OTHER -> showSnackbar(message)
         }
     }
 
-    private fun showSnackbar(errorMessage: String) {
-        Snackbar.make(binding.root, errorMessage, Snackbar.LENGTH_LONG).show()
+    private fun showSnackbar(errorMessage: String?) {
+        val message = errorMessage ?: getString(R.string.unknown_error)
+        Snackbar.make(binding.root, message, Snackbar.LENGTH_LONG).show()
     }
 }

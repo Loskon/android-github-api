@@ -22,15 +22,15 @@ class UserListViewModel(
     private val usersAction = MutableStateFlow<UserListUiAction>(UserListUiAction.ShowLoadingIndicator(true))
     val geuUsersAction get() = usersAction.asStateFlow()
 
-    private var stateJob: Job? = null
+    private var job: Job? = null
 
     init {
         getUsersAsFlow()
     }
 
     private fun getUsersAsFlow() {
-        stateJob?.cancel()
-        stateJob = launchErrorJob(onErrorBlock = { handleErrors(it) }) {
+        job?.cancel()
+        job = launchErrorJob(onErrorBlock = { handleErrors(it) }) {
             userListInteractor.getUsersAsFlow().collectLatest { setMainState(it) }
         }
     }
@@ -38,8 +38,8 @@ class UserListViewModel(
     private fun handleErrors(throwable: Throwable) {
         when (throwable) {
             is EmptyCacheException -> usersAction.tryEmit(UserListUiAction.ShowError(ErrorType.EMPTY_CACHE))
-            is NoSuccessfulException -> usersAction.tryEmit(UserListUiAction.ShowError(ErrorType.NO_SUCCESSFUL))
-            else -> usersAction.tryEmit(UserListUiAction.ShowError(ErrorType.UNKNOWN))
+            is NoSuccessfulException -> usersAction.tryEmit(UserListUiAction.ShowError(ErrorType.NO_SUCCESSFUL, throwable.message))
+            else -> usersAction.tryEmit(UserListUiAction.ShowError(ErrorType.OTHER, throwable.message))
         }
     }
 

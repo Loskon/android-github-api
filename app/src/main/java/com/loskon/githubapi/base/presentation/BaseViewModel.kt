@@ -18,7 +18,7 @@ open class BaseViewModel : ViewModel() {
         onErrorBlock: ((Throwable) -> Unit)? = null,
         block: suspend () -> Unit
     ): Job {
-        return viewModelScope.launch(getExceptionHandler(error, onErrorBlock)) {
+        return viewModelScope.launch() {
             try {
                 error?.tryEmit(null)
                 block()

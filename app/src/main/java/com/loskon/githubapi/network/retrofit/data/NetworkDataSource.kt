@@ -1,6 +1,7 @@
 package com.loskon.githubapi.network.retrofit.data
 
 import com.loskon.githubapi.network.retrofit.data.CacheInterceptor.Companion.CACHE_HEADER
+import com.loskon.githubapi.network.retrofit.data.dto.RepositoryDto
 import com.loskon.githubapi.network.retrofit.data.dto.UserDto
 import com.loskon.githubapi.network.retrofit.data.exception.NoSuccessfulException
 import com.loskon.githubapi.network.retrofit.domain.GithubApi
@@ -13,7 +14,7 @@ class NetworkDataSource(
     private val githubApi: GithubApi
 ) {
 
-    suspend fun getUsersAsFlow(pageSize: Int = 100): Flow<Pair<Boolean, List<UserDto>>> {
+    suspend fun getUsersAsFlow(pageSize: Int = 10): Flow<Pair<Boolean, List<UserDto>>> {
         return flow {
             val response = githubApi.getUsers(pageSize)
 
@@ -21,8 +22,7 @@ class NetworkDataSource(
                 val fromCache = response.headers().get(CACHE_HEADER).toBoolean()
                 emit(fromCache to (response.body() ?: emptyList()))
             } else {
-                val jsonObject = JSONObject(response.errorBody()?.charStream()?.readText().toString())
-                throw NoSuccessfulException("ErrorBody: $jsonObject, code: ${response.code()}")
+                throw NoSuccessfulException(response.code())
             }
         }
     }
@@ -36,7 +36,20 @@ class NetworkDataSource(
             } else {
                 val jsonObj = JSONObject(response.errorBody()?.charStream()?.readText().toString())
                 Timber.d(jsonObj.toString())
-                throw NoSuccessfulException(response.code().toString())
+                throw NoSuccessfulException(response.code())
+            }
+        }
+    }
+
+    suspend fun getRepositoriesAsFlow(username: String): Flow<Pair<Boolean, List<RepositoryDto>>> {
+        return flow {
+            val response = githubApi.getRepositories(username)
+
+            if (response.isSuccessful) {
+                val fromCache = response.headers().get(CACHE_HEADER).toBoolean()
+                emit(false to (response.body() ?: emptyList()))
+            } else {
+                throw NoSuccessfulException(response.code())
             }
         }
     }

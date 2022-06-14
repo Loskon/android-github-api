@@ -41,8 +41,10 @@ data class UserDto(
 
 fun UserDto.toUserModel(): UserModel {
     return UserModel(
-        login = login ?: "login",
+        login = login ?: "",
         id = id ?: 0,
-        avatarUrl = avatarUrl ?: "avatarUrl"
+        avatarUrl = avatarUrl ?: "",
+        htmlUrl = htmlUrl ?: "",
+        type = type ?: ""
     )
 }
