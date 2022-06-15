@@ -9,15 +9,11 @@ class UserProfileInteractor(
 ) {
 
     suspend fun getUser(username: String): Flow<UserModel> {
-        return userProfileRepository.getUser(username)
-    }
-
-    suspend fun getUser1(username: String): Flow<UserModel> {
-        val userFlow = userProfileRepository.getUser1(username)
+        val userFlow = userProfileRepository.getUser(username)
         val repositoriesFlow = userProfileRepository.getRepositories(username)
 
         return combine(userFlow, repositoriesFlow) { user, repositories ->
-            user.copy(repositories = repositories)
+            user.copy(repositories = repositories.sortedBy { it.name })
         }
     }
 }

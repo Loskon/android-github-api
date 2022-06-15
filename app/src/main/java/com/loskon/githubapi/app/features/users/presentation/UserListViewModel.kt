@@ -2,7 +2,7 @@ package com.loskon.githubapi.app.features.users.presentation
 
 import com.loskon.githubapi.app.features.users.domain.UserListInteractor
 import com.loskon.githubapi.app.features.users.presentation.state.ErrorType
-import com.loskon.githubapi.app.features.users.presentation.state.UserListUiAction
+import com.loskon.githubapi.app.features.users.presentation.state.UserListAction
 import com.loskon.githubapi.base.presentation.BaseViewModel
 import com.loskon.githubapi.network.retrofit.exception.EmptyCacheException
 import com.loskon.githubapi.network.retrofit.exception.NoSuccessfulException
@@ -19,7 +19,7 @@ class UserListViewModel(
     private val usersState = MutableStateFlow<List<UserModel>?>(null)
     val getUsersState get() = usersState.asStateFlow()
 
-    private val usersAction = MutableStateFlow<UserListUiAction>(UserListUiAction.ShowLoadingIndicator(true))
+    private val usersAction = MutableStateFlow<UserListAction>(UserListAction.ShowLoadingIndicator(true))
     val geuUsersAction get() = usersAction.asStateFlow()
 
     private var job: Job? = null
@@ -31,19 +31,19 @@ class UserListViewModel(
     private fun getUsersAsFlow() {
         job?.cancel()
         job = launchErrorJob(onErrorBlock = { handleErrors(it) }) {
-            userListInteractor.getUsersAsFlow().collectLatest { setMainState(it) }
+            userListInteractor.getUsersPairAsFlow().collectLatest { setMainState(it) }
         }
     }
 
     private fun handleErrors(throwable: Throwable) {
         when (throwable) {
-            is EmptyCacheException -> emitAction(UserListUiAction.ShowError(ErrorType.EMPTY_CACHE))
-            is NoSuccessfulException -> emitAction(UserListUiAction.ShowError(ErrorType.NO_SUCCESSFUL, throwable.message))
-            else -> emitAction(UserListUiAction.ShowError(ErrorType.OTHER, throwable.message))
+            is EmptyCacheException -> emitAction(UserListAction.ShowError(ErrorType.EMPTY_CACHE))
+            is NoSuccessfulException -> emitAction(UserListAction.ShowError(ErrorType.NO_SUCCESSFUL, throwable.message))
+            else -> emitAction(UserListAction.ShowError(ErrorType.OTHER, throwable.message))
         }
     }
 
-    private fun emitAction(action: UserListUiAction) {
+    private fun emitAction(action: UserListAction) {
         usersAction.tryEmit(action)
     }
 
@@ -51,14 +51,14 @@ class UserListViewModel(
         usersState.emit(first.second)
 
         if (first.first) {
-            emitAction(UserListUiAction.ShowError(ErrorType.EMPTY_CACHE))
+            emitAction(UserListAction.ShowError(ErrorType.EMPTY_CACHE))
         } else {
-            emitAction(UserListUiAction.ShowLoadingIndicator(false))
+            emitAction(UserListAction.ShowLoadingIndicator(false))
         }
     }
 
     fun performRepeatRequest() {
-        usersAction.tryEmit(UserListUiAction.ShowLoadingIndicator(true))
+        usersAction.tryEmit(UserListAction.ShowLoadingIndicator(true))
         getUsersAsFlow()
     }
 }

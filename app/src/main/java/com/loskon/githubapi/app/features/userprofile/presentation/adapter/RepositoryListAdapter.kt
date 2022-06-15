@@ -4,7 +4,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.loskon.githubapi.base.extension.view.setDebounceClickListener
-import com.loskon.githubapi.base.extension.view.textNotEmpty
+import com.loskon.githubapi.base.extension.view.textWithGone
+import com.loskon.githubapi.base.presentation.RecyclerDiffUtil
 import com.loskon.githubapi.databinding.ItemRepositoryCardBinding
 import com.loskon.githubapi.network.retrofit.model.RepositoryModel
 import com.loskon.githubapi.viewbinding.viewBinding
@@ -26,8 +27,8 @@ class RepositoryListAdapter : RecyclerView.Adapter<RepositoryListAdapter.Reposit
 
         with(holder.binding) {
             tvRepositoryTitle.text = repository.name
-            tvRepositoryDescription.textNotEmpty(repository.description)
-            tvRepositoryLanguage.textNotEmpty(repository.language)
+            tvRepositoryDescription.textWithGone(repository.description)
+            tvRepositoryLanguage.textWithGone(repository.language)
             cardViewRepository.setDebounceClickListener { clickListener?.invoke(repository) }
         }
     }
@@ -35,7 +36,7 @@ class RepositoryListAdapter : RecyclerView.Adapter<RepositoryListAdapter.Reposit
     override fun getItemCount(): Int = list.size
 
     fun setRepositories(newList: List<RepositoryModel>) {
-        val diffUtil = RepositoryListDiffUtil(list, newList)
+        val diffUtil = RecyclerDiffUtil(list, newList, repositoryListDiffUtil)
         val diffResult = DiffUtil.calculateDiff(diffUtil, false)
         list = newList
         diffResult.dispatchUpdatesTo(this)

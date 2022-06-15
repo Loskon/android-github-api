@@ -8,9 +8,9 @@ class UserListInteractor(
     private val userListRepository: UserListRepository
 ) {
 
-    suspend fun getUsersAsFlow(): Flow<Pair<Boolean, List<UserModel>>> {
-        return userListRepository.getUsersAsFlow().map { pair ->
-            pair.first to pair.second.filter { it.type == USER_TYPE }
+    suspend fun getUsersPairAsFlow(): Flow<Pair<Boolean, List<UserModel>>> {
+        return userListRepository.getUsersPairAsFlow().map { pair ->
+            pair.first to pair.second.filter { it.type == USER_TYPE }.sortedBy { it.id }
         }
     }
 

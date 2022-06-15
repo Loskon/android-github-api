@@ -5,5 +5,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface UserListRepository {
 
-    suspend fun getUsersAsFlow(): Flow<Pair<Boolean, List<UserModel>>>
+    suspend fun getUsersPairAsFlow(): Flow<Pair<Boolean, List<UserModel>>>
 }

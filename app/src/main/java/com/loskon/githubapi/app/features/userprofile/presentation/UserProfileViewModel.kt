@@ -17,7 +17,7 @@ class UserProfileViewModel(
 
     init {
         launchErrorJob {
-            userProfileInteractor.getUser1(username).collectLatest { user.emit(it) }
+            userProfileInteractor.getUser(username).collectLatest { user.emit(it) }
         }
     }
 }

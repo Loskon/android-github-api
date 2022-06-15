@@ -8,7 +8,5 @@ interface UserProfileRepository {
 
     suspend fun getUser(username: String): Flow<UserModel>
 
-    suspend fun getUser1(username: String): Flow<UserModel>
-
     suspend fun getRepositories(username: String): Flow<List<RepositoryModel>>
 }

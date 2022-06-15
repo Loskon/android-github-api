@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.SimpleItemAnimator
 import com.loskon.githubapi.R
 import com.loskon.githubapi.app.features.userprofile.presentation.adapter.RepositoryListAdapter
 import com.loskon.githubapi.base.extension.flow.observe
-import com.loskon.githubapi.base.extension.view.textNotEmpty
+import com.loskon.githubapi.base.extension.view.textWithGone
 import com.loskon.githubapi.databinding.FragmentUserProfileBinding
 import com.loskon.githubapi.network.glide.ImageLoader
 import com.loskon.githubapi.network.retrofit.model.UserModel
@@ -62,8 +62,8 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
         with(binding.incUserProfile) {
             ImageLoader.loadImage(user.avatarUrl, ivUserProfileAvatar)
             tvUserProfileLogin.text = user.login
-            tvUserProfileName.textNotEmpty(user.name)
-            tvUserProfileLocation.textNotEmpty(user.location)
+            tvUserProfileName.textWithGone(user.name)
+            tvUserProfileLocation.textWithGone(user.location)
         }
 
         repositoriesAdapter.setRepositories(user.repositories)

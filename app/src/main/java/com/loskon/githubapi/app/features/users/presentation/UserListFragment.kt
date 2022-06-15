@@ -11,7 +11,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.loskon.githubapi.R
 import com.loskon.githubapi.app.features.users.presentation.adapter.UserListAdapter
 import com.loskon.githubapi.app.features.users.presentation.state.ErrorType
-import com.loskon.githubapi.app.features.users.presentation.state.UserListUiAction
+import com.loskon.githubapi.app.features.users.presentation.state.UserListAction
 import com.loskon.githubapi.base.extension.flow.observe
 import com.loskon.githubapi.base.extension.view.setGoneVisibleKtx
 import com.loskon.githubapi.base.extension.view.setVisibleKtx
@@ -74,8 +74,8 @@ class UserListFragment : Fragment(R.layout.fragment_user_list) {
 
         viewModel.geuUsersAction.observe(viewLifecycleOwner) { action ->
             when (action) {
-                is UserListUiAction.ShowLoadingIndicator -> showLoadingIndicator(action.loading)
-                is UserListUiAction.ShowError -> showError(action.type, action.message)
+                is UserListAction.ShowLoadingIndicator -> showLoadingIndicator(action.loading)
+                is UserListAction.ShowError -> showError(action.type, action.message)
             }
         }
     }

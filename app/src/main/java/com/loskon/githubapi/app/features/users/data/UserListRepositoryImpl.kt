@@ -11,7 +11,7 @@ class UserListRepositoryImpl(
     private val networkDataSource: NetworkDataSource
 ) : UserListRepository {
 
-    override suspend fun getUsersAsFlow(): Flow<Pair<Boolean, List<UserModel>>> {
+    override suspend fun getUsersPairAsFlow(): Flow<Pair<Boolean, List<UserModel>>> {
         return networkDataSource.getUsersAsFlow().map { pair -> pair.first to pair.second.map { it.toUserModel() } }
     }
 }
