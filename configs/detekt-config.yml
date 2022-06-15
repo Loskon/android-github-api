@@ -300,21 +300,6 @@ naming:
     constantPattern: '[A-Z][_A-Z0-9]*'
     propertyPattern: '[A-Za-z][_A-Za-z0-9]*'
     privatePropertyPattern: '_?[A-Za-z][_A-Za-z0-9]*'
-  valiableMaxLength:
-    active: false
-    excludes: ['**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**']
-    maximumvaliableNameLength: 64
-  valiableMinLength:
-    active: false
-    excludes: ['**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**']
-    minimumvaliableNameLength: 1
-  valiableNaming:
-    active: true
-    excludes: ['**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**']
-    valiablePattern: '[a-z][A-Za-z0-9]*'
-    privatevaliablePattern: '(_)?[a-z][A-Za-z0-9]*'
-    excludeClassPattern: '$^'
-    ignoreOverridden: true
 
 performance:
   active: true
@@ -447,7 +432,6 @@ style:
     ignoreNumbers: ['-1', '0', '1', '2']
     ignoreHashCodeFunction: true
     ignorePropertyDeclaration: true
-    ignoreLocalvaliableDeclaration: false
     ignoreConstantDeclaration: true
     ignoreCompanionObjectPropertyDeclaration: true
     ignoreAnnotation: false
@@ -539,10 +523,6 @@ style:
     active: false
   UseCheckOrError:
     active: false
-  UseDataClass:
-    active: false
-    ignoreAnnotated: []
-    allowvals: false
   UseEmptyCounterpart:
     active: false
   UseIfEmptyOrIfBlank:
@@ -556,8 +536,6 @@ style:
   UselessCallOnNotNull:
     active: true
   UtilityClassWithPublicConstructor:
-    active: false
-  valCouldBeVal:
     active: false
   WildcardImport:
     active: true

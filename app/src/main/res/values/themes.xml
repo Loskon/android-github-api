@@ -3,7 +3,7 @@
     <!-- Base Splash screen application theme. -->
     <style name="StartingAppTheme" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@android:color/white</item>
-        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_github</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_frame_9_light</item>
         <item name="postSplashScreenTheme">@style/AppTheme</item>
     </style>
 
@@ -22,10 +22,15 @@
         <item name="android:statusBarColor">@android:color/white</item>
         <item name="android:windowLightStatusBar">true</item>
 
+        <!-- Window background color.-->
+        <item name="android:windowBackground">@android:color/white</item>
+        <item name="android:colorBackground">@android:color/white</item>
+
         <!-- Customize your theme here. -->
         <item name="android:fontFamily">@font/roboto_light</item>
         <!-- Disable overScrollMode.  -->
         <item name="android:overScrollMode">never</item>
+
     </style>
 
 </resources>

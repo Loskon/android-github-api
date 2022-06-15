@@ -1,8 +1,8 @@
 package com.loskon.githubapi.app.features.userprofile.presentation
 
 import com.loskon.githubapi.app.features.userprofile.domain.UserProfileInteractor
-import com.loskon.githubapi.network.retrofit.domain.model.UserModel
 import com.loskon.githubapi.base.presentation.BaseViewModel
+import com.loskon.githubapi.network.retrofit.model.UserModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
@@ -17,7 +17,7 @@ class UserProfileViewModel(
 
     init {
         launchErrorJob {
-            userProfileInteractor.getUser(username).collectLatest { user.emit(it) }
+            userProfileInteractor.getUser1(username).collectLatest { user.emit(it) }
         }
     }
 }

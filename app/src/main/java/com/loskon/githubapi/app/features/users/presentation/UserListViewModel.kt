@@ -4,9 +4,9 @@ import com.loskon.githubapi.app.features.users.domain.UserListInteractor
 import com.loskon.githubapi.app.features.users.presentation.state.ErrorType
 import com.loskon.githubapi.app.features.users.presentation.state.UserListUiAction
 import com.loskon.githubapi.base.presentation.BaseViewModel
-import com.loskon.githubapi.network.retrofit.data.exception.EmptyCacheException
-import com.loskon.githubapi.network.retrofit.data.exception.NoSuccessfulException
-import com.loskon.githubapi.network.retrofit.domain.model.UserModel
+import com.loskon.githubapi.network.retrofit.exception.EmptyCacheException
+import com.loskon.githubapi.network.retrofit.exception.NoSuccessfulException
+import com.loskon.githubapi.network.retrofit.model.UserModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -37,19 +37,23 @@ class UserListViewModel(
 
     private fun handleErrors(throwable: Throwable) {
         when (throwable) {
-            is EmptyCacheException -> usersAction.tryEmit(UserListUiAction.ShowError(ErrorType.EMPTY_CACHE))
-            is NoSuccessfulException -> usersAction.tryEmit(UserListUiAction.ShowError(ErrorType.NO_SUCCESSFUL, throwable.message))
-            else -> usersAction.tryEmit(UserListUiAction.ShowError(ErrorType.OTHER, throwable.message))
+            is EmptyCacheException -> emitAction(UserListUiAction.ShowError(ErrorType.EMPTY_CACHE))
+            is NoSuccessfulException -> emitAction(UserListUiAction.ShowError(ErrorType.NO_SUCCESSFUL, throwable.message))
+            else -> emitAction(UserListUiAction.ShowError(ErrorType.OTHER, throwable.message))
         }
+    }
+
+    private fun emitAction(action: UserListUiAction) {
+        usersAction.tryEmit(action)
     }
 
     private suspend fun setMainState(first: Pair<Boolean, List<UserModel>>) {
         usersState.emit(first.second)
 
         if (first.first) {
-            usersAction.tryEmit(UserListUiAction.ShowError(ErrorType.EMPTY_CACHE))
+            emitAction(UserListUiAction.ShowError(ErrorType.EMPTY_CACHE))
         } else {
-            usersAction.tryEmit(UserListUiAction.ShowLoadingIndicator(false))
+            emitAction(UserListUiAction.ShowLoadingIndicator(false))
         }
     }
 

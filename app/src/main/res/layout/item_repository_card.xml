@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_view_repository"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/margin_xsmall"
+    app:cardCornerRadius="@dimen/margin_xsmall"
+    app:cardUseCompatPadding="true"
+    app:rippleColor="?attr/colorControlHighlight">
+
+    <LinearLayout
+        android:id="@+id/lin_layout_repository"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/margin_xmedium"
+        android:paddingVertical="@dimen/margin_xmedium">
+
+        <TextView
+            android:id="@+id/tv_repository_title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:ellipsize="end"
+            android:gravity="start"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/txt_medium"
+            android:textStyle="bold"
+            tools:text="repository" />
+
+        <TextView
+            android:id="@+id/tv_repository_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_xsmall"
+            android:ellipsize="end"
+            android:gravity="start"
+            android:maxLines="2"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="@dimen/txt_small"
+            tools:ignore="TextContrastCheck"
+            tools:text="description" />
+
+        <TextView
+            android:id="@+id/tv_repository_language"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_xsmall"
+            android:ellipsize="end"
+            android:gravity="start"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="@dimen/txt_small"
+            tools:ignore="TextContrastCheck"
+            tools:text="language" />
+
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

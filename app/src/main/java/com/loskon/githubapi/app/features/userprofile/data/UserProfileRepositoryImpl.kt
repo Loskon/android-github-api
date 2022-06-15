@@ -1,12 +1,14 @@
 package com.loskon.githubapi.app.features.userprofile.data
 
 import com.loskon.githubapi.app.features.userprofile.domain.UserProfileRepository
-import com.loskon.githubapi.network.retrofit.data.NetworkDataSource
-import com.loskon.githubapi.network.retrofit.data.dto.toRepositoryModel
-import com.loskon.githubapi.network.retrofit.data.dto.toUserModel
-import com.loskon.githubapi.network.retrofit.domain.model.UserModel
+import com.loskon.githubapi.network.retrofit.NetworkDataSource
+import com.loskon.githubapi.network.retrofit.dto.toRepositoryModel
+import com.loskon.githubapi.network.retrofit.dto.toUserModel
+import com.loskon.githubapi.network.retrofit.model.RepositoryModel
+import com.loskon.githubapi.network.retrofit.model.UserModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.map
 
 class UserProfileRepositoryImpl(
     private val networkDataSource: NetworkDataSource
@@ -17,10 +19,18 @@ class UserProfileRepositoryImpl(
         val repositoriesFlow = networkDataSource.getRepositoriesAsFlow(username)
 
         return combine(userFlow, repositoriesFlow) { user, repositories ->
-            repositories.second.map { it.toRepositoryModel() }
             user.toUserModel()
         }
 
         // return networkDataSource.getUserAsFlow(username).map { it.toUserModel() }
+    }
+
+    override suspend fun getUser1(username: String): Flow<UserModel> {
+        return networkDataSource.getUserAsFlow(username).map { it.toUserModel() }
+    }
+
+    override suspend fun getRepositories(username: String): Flow<List<RepositoryModel>> {
+        return networkDataSource.getRepositoriesAsFlow(username).map {
+                pair -> pair.second.map { it.toRepositoryModel() } }
     }
 }

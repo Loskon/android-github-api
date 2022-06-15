@@ -7,30 +7,19 @@
     android:layout_height="match_parent"
     tools:context=".app.features.userprofile.presentation.UserProfileFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <LinearLayout
-        android:id="@+id/lll2"
+    <include
+        android:id="@+id/inc_user_profile"
+        layout="@layout/inc_user_profile"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="@dimen/bottom_bar_height"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/tv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/hello_blank_fragment"
-            android:textSize="34sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </LinearLayout>
+        android:layout_marginBottom="@dimen/bottom_bar_height" />
 
     <com.google.android.material.progressindicator.CircularProgressIndicator
         android:id="@+id/pi_user_profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/bottom_bar_height"
         android:indeterminate="true"
         android:visibility="gone"
         app:indicatorColor="?android:colorPrimary"

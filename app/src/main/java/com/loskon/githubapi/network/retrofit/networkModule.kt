@@ -2,9 +2,6 @@ package com.loskon.githubapi.network.retrofit
 
 import android.content.Context
 import com.loskon.githubapi.BuildConfig
-import com.loskon.githubapi.network.retrofit.data.CacheInterceptor
-import com.loskon.githubapi.network.retrofit.data.NetworkDataSource
-import com.loskon.githubapi.network.retrofit.domain.GithubApi
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import org.koin.android.ext.koin.androidContext

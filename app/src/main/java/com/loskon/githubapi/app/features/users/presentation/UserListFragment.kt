@@ -31,7 +31,7 @@ class UserListFragment : Fragment(R.layout.fragment_user_list) {
 
         configureParentLayout()
         configureRefreshLayout()
-        configureUsersAdapter()
+        configureUserListAdapter()
         configureRecyclerView()
         installObservers()
     }
@@ -51,7 +51,7 @@ class UserListFragment : Fragment(R.layout.fragment_user_list) {
         }
     }
 
-    private fun configureUsersAdapter() {
+    private fun configureUserListAdapter() {
         usersAdapter.setItemClickListener { user ->
             val action = UserListFragmentDirections.goUserProfileFragment(user.login)
             findNavController().navigate(action)
@@ -62,6 +62,7 @@ class UserListFragment : Fragment(R.layout.fragment_user_list) {
         with(binding.rvUsers) {
             (itemAnimator as? SimpleItemAnimator)?.supportsChangeAnimations = false
             layoutManager = LinearLayoutManager(requireContext())
+            setHasFixedSize(true)
             adapter = usersAdapter
         }
     }
