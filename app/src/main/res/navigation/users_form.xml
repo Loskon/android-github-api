@@ -3,13 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/users_form"
-    app:startDestination="@id/usersFragment">
+    app:startDestination="@id/userListFragment">
 
     <fragment
-        android:id="@+id/usersFragment"
-        android:name="com.loskon.githubapi.app.features.users.presentation.UserListFragment"
+        android:id="@+id/userListFragment"
+        android:name="com.loskon.githubapi.app.features.userlist.presentation.UserListFragment"
         android:label="UsersFragment"
         tools:layout="@layout/fragment_user_list">
+
         <action
             android:id="@+id/goUserProfileFragment"
             app:destination="@id/userProfileFragment" />
@@ -24,6 +25,16 @@
         <argument
             android:name="username"
             app:argType="string" />
+
+        <action
+            android:id="@+id/goRepositoryInfoBottomSheetFragment"
+            app:destination="@id/repositoryInfo" />
     </fragment>
+
+    <dialog
+        android:id="@+id/repositoryInfo"
+        android:name="com.loskon.githubapi.app.features.repositoryinfo.RepositoryInfoBottomSheetFragment"
+        android:label="RepositoryInfoBottomSheetFragment"
+        tools:layout="@layout/shhet_2" />
 
 </navigation>

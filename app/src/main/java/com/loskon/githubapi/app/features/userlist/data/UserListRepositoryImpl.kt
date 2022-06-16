@@ -1,6 +1,6 @@
-package com.loskon.githubapi.app.features.users.data
+package com.loskon.githubapi.app.features.userlist.data
 
-import com.loskon.githubapi.app.features.users.domain.UserListRepository
+import com.loskon.githubapi.app.features.userlist.domain.UserListRepository
 import com.loskon.githubapi.network.retrofit.NetworkDataSource
 import com.loskon.githubapi.network.retrofit.dto.toUserModel
 import com.loskon.githubapi.network.retrofit.model.UserModel

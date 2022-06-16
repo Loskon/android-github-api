@@ -1,4 +1,4 @@
-package com.loskon.githubapi.app.features.users.presentation.adapter
+package com.loskon.githubapi.app.features.userlist.presentation.adapter
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil

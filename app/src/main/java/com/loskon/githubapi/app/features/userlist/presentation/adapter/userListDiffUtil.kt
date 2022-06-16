@@ -1,4 +1,4 @@
-package com.loskon.githubapi.app.features.users.presentation.adapter
+package com.loskon.githubapi.app.features.userlist.presentation.adapter
 
 import com.loskon.githubapi.base.presentation.RecyclerListDiffUtil
 import com.loskon.githubapi.network.retrofit.model.UserModel

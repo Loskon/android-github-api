@@ -1,4 +1,4 @@
-package com.loskon.githubapi.app.features.users.domain
+package com.loskon.githubapi.app.features.userlist.domain
 
 import com.loskon.githubapi.network.retrofit.model.UserModel
 import kotlinx.coroutines.flow.Flow

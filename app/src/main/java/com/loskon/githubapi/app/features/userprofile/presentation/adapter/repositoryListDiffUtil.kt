@@ -3,9 +3,6 @@ package com.loskon.githubapi.app.features.userprofile.presentation.adapter
 import com.loskon.githubapi.base.presentation.RecyclerListDiffUtil
 import com.loskon.githubapi.network.retrofit.model.RepositoryModel
 
-/**
- * Вычисление обновления списка
- */
 val repositoryListDiffUtil = object : RecyclerListDiffUtil<RepositoryModel> {
 
     override fun areItemsTheSame(oldItem: RepositoryModel, newItem: RepositoryModel): Boolean {

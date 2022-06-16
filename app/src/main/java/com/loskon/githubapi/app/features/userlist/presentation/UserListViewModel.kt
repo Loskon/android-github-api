@@ -1,8 +1,8 @@
-package com.loskon.githubapi.app.features.users.presentation
+package com.loskon.githubapi.app.features.userlist.presentation
 
-import com.loskon.githubapi.app.features.users.domain.UserListInteractor
-import com.loskon.githubapi.app.features.users.presentation.state.ErrorType
-import com.loskon.githubapi.app.features.users.presentation.state.UserListAction
+import com.loskon.githubapi.app.features.userlist.domain.UserListInteractor
+import com.loskon.githubapi.app.features.userlist.presentation.state.ErrorType
+import com.loskon.githubapi.app.features.userlist.presentation.state.UserListAction
 import com.loskon.githubapi.base.presentation.BaseViewModel
 import com.loskon.githubapi.network.retrofit.exception.EmptyCacheException
 import com.loskon.githubapi.network.retrofit.exception.NoSuccessfulException

@@ -1,4 +1,4 @@
-package com.loskon.githubapi.app.features.users.presentation.state
+package com.loskon.githubapi.app.features.userlist.presentation.state
 
 sealed class UserListAction {
     class ShowLoadingIndicator(val loading: Boolean) : UserListAction()

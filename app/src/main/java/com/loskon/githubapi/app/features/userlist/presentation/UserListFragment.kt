@@ -1,4 +1,4 @@
-package com.loskon.githubapi.app.features.users.presentation
+package com.loskon.githubapi.app.features.userlist.presentation
 
 import android.animation.LayoutTransition
 import android.os.Bundle
@@ -9,9 +9,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.SimpleItemAnimator
 import com.google.android.material.snackbar.Snackbar
 import com.loskon.githubapi.R
-import com.loskon.githubapi.app.features.users.presentation.adapter.UserListAdapter
-import com.loskon.githubapi.app.features.users.presentation.state.ErrorType
-import com.loskon.githubapi.app.features.users.presentation.state.UserListAction
+import com.loskon.githubapi.app.features.userlist.presentation.adapter.UserListAdapter
+import com.loskon.githubapi.app.features.userlist.presentation.state.ErrorType
+import com.loskon.githubapi.app.features.userlist.presentation.state.UserListAction
 import com.loskon.githubapi.base.extension.flow.observe
 import com.loskon.githubapi.base.extension.view.setGoneVisibleKtx
 import com.loskon.githubapi.base.extension.view.setVisibleKtx
@@ -38,7 +38,7 @@ class UserListFragment : Fragment(R.layout.fragment_user_list) {
 
     private fun configureParentLayout() {
         // To disable flickering during textView animation
-        binding.lll.layoutTransition.disableTransitionType(LayoutTransition.APPEARING)
+        binding.linLayoutUserList.layoutTransition.disableTransitionType(LayoutTransition.APPEARING)
     }
 
     private fun configureRefreshLayout() {
@@ -62,8 +62,8 @@ class UserListFragment : Fragment(R.layout.fragment_user_list) {
         with(binding.rvUsers) {
             (itemAnimator as? SimpleItemAnimator)?.supportsChangeAnimations = false
             layoutManager = LinearLayoutManager(requireContext())
-            setHasFixedSize(true)
             adapter = usersAdapter
+            setHasFixedSize(true)
         }
     }
 

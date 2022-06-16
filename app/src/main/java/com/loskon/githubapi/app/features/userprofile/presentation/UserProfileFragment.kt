@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.SimpleItemAnimator
@@ -37,8 +38,8 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
 
     private fun configureRepositoryListAdapter() {
         repositoriesAdapter.setItemClickListener { repository ->
-            // val action = UserListFragmentDirections.goUserProfileFragment(repositoryModel.login)
-            // findNavController().navigate(action)
+             val action = UserProfileFragmentDirections.goRepositoryInfoBottomSheetFragment()
+             findNavController().navigate(action)
         }
     }
 
