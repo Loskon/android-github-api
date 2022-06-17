@@ -2,16 +2,17 @@ package com.loskon.githubapi.app.features.userprofile.presentation
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.SimpleItemAnimator
 import com.loskon.githubapi.R
-import com.loskon.githubapi.app.features.userprofile.presentation.adapter.RepositoryListAdapter
+import com.loskon.githubapi.app.features.userprofile.presentation.adapter.RepoListAdapter
 import com.loskon.githubapi.base.extension.flow.observe
+import com.loskon.githubapi.base.extension.view.setGoneVisibleKtx
 import com.loskon.githubapi.base.extension.view.textWithGone
+import com.loskon.githubapi.base.widget.AddAnimationItemAnimator
 import com.loskon.githubapi.databinding.FragmentUserProfileBinding
 import com.loskon.githubapi.network.glide.ImageLoader
 import com.loskon.githubapi.network.retrofit.model.UserModel
@@ -25,7 +26,7 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
     private val binding by viewBinding(FragmentUserProfileBinding::bind)
     private val args: UserProfileFragmentArgs by navArgs()
 
-    private val repositoriesAdapter = RepositoryListAdapter()
+    private val repositoriesAdapter = RepoListAdapter()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -38,8 +39,8 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
 
     private fun configureRepositoryListAdapter() {
         repositoriesAdapter.setItemClickListener { repository ->
-             val action = UserProfileFragmentDirections.goRepositoryInfoBottomSheetFragment()
-             findNavController().navigate(action)
+            val action = UserProfileFragmentDirections.goRepositoryInfoBottomSheetFragment(repository)
+            findNavController().navigate(action)
         }
     }
 
@@ -47,27 +48,30 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
         with(binding.incUserProfile.rvRepositories) {
             (itemAnimator as? SimpleItemAnimator)?.supportsChangeAnimations = false
             layoutManager = LinearLayoutManager(requireContext())
+            itemAnimator = AddAnimationItemAnimator()
             adapter = repositoriesAdapter
         }
     }
 
     private fun installObserver() {
-        viewModel.getUser.observe(viewLifecycleOwner) { user ->
-            binding.incUserProfile.root.isVisible = user != null
-            binding.piUserProfile.isVisible = user == null
+        viewModel.getUserProfileState.observe(viewLifecycleOwner) { user ->
+            binding.incUserProfile.root.setGoneVisibleKtx(user != null)
+            binding.piUserProfile.setGoneVisibleKtx(user == null)
             user?.let { setUser(it) }
         }
     }
 
     private fun setUser(user: UserModel) {
         with(binding.incUserProfile) {
-            ImageLoader.loadImage(user.avatarUrl, ivUserProfileAvatar)
-            tvUserProfileLogin.text = user.login
-            tvUserProfileName.textWithGone(user.name)
-            tvUserProfileLocation.textWithGone(user.location)
+            user.apply {
+                ImageLoader.loadImage(avatarUrl, ivUserProfileAvatar)
+                tvUserProfileLogin.text = login
+                tvUserProfileName.textWithGone(name)
+                tvUserProfileLocation.textWithGone(location)
+                tvRepositoriesEmpty.setGoneVisibleKtx(repositories.isEmpty())
+                repositoriesAdapter.setRepositories(repositories)
+            }
         }
-
-        repositoriesAdapter.setRepositories(user.repositories)
     }
 
     private fun setupViewsListener() {

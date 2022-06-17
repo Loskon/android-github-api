@@ -2,8 +2,9 @@ package com.loskon.githubapi.app
 
 import android.app.Application
 import com.loskon.githubapi.BuildConfig
-import com.loskon.githubapi.app.features.userprofile.userProfileModule
+import com.loskon.githubapi.app.features.repositoryinfo.repoInfoModule
 import com.loskon.githubapi.app.features.userlist.userListModule
+import com.loskon.githubapi.app.features.userprofile.userProfileModule
 import com.loskon.githubapi.network.retrofit.networkModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
@@ -21,7 +22,7 @@ class App : Application() {
     private fun initializeKoin(application: Application) {
         startKoin {
             androidContext(application)
-            modules(listOf(networkModule, userListModule, userProfileModule))
+            modules(listOf(networkModule, userListModule, userProfileModule, repoInfoModule))
         }
     }
 }

@@ -10,6 +10,6 @@ import org.koin.dsl.module
 val userProfileModule = module {
 
     single<UserProfileRepository> { UserProfileRepositoryImpl(get()) }
-    viewModel { params -> UserProfileViewModel(params[0], get()) }
+    viewModel { params -> UserProfileViewModel(get(), params[0]) }
     factory { UserProfileInteractor(get()) }
 }

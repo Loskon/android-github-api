@@ -6,4 +6,14 @@
     <string name="problems_get_data">Problems with getting data. Error code: %1$s</string>
     <string name="unknown_error">Unknown error</string>
     <string name="public_repositories">Public repositories:</string>
+
+    <string name="to_close">To close</string>
+    <string name="repositories_empty">No public repositories :(</string>
+    <string name="description_header">Description</string>
+    <string name="language_header">Language</string>
+    <string name="size_header">Size</string>
+    <string name="created_date_header">Created date</string>
+    <string name="updated_date_header">Updated date</string>
+    <string name="pushed_date_header">Pushed date</string>
+    <string name="link_to_repository_header">Link to repository</string>
 </resources>

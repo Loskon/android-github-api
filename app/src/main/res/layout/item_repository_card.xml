@@ -12,7 +12,7 @@
     app:rippleColor="?attr/colorControlHighlight">
 
     <LinearLayout
-        android:id="@+id/lin_layout_repository"
+        android:id="@+id/lin_layout_repository_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -20,7 +20,7 @@
         android:paddingVertical="@dimen/margin_xmedium">
 
         <TextView
-            android:id="@+id/tv_repository_title"
+            android:id="@+id/tv_repository_card_name"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:ellipsize="end"
@@ -28,10 +28,10 @@
             android:textColor="@android:color/black"
             android:textSize="@dimen/txt_medium"
             android:textStyle="bold"
-            tools:text="repository" />
+            tools:text="fullName" />
 
         <TextView
-            android:id="@+id/tv_repository_description"
+            android:id="@+id/tv_repository_description_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_xsmall"
@@ -44,7 +44,7 @@
             tools:text="description" />
 
         <TextView
-            android:id="@+id/tv_repository_language"
+            android:id="@+id/tv_repository_language_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_xsmall"

@@ -1,8 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:startDestination="@id/users_form">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/userListFragment">
 
-    <include app:graph="@navigation/users_form"/>
-    <include app:graph="@navigation/settings_form"/>
+    <fragment
+        android:id="@+id/userListFragment"
+        android:name="com.loskon.githubapi.app.features.userlist.presentation.UserListFragment"
+        android:label="UsersFragment"
+        tools:layout="@layout/fragment_user_list">
+        <action
+            android:id="@+id/goUserProfileFragment"
+            app:destination="@id/userProfileFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/userProfileFragment"
+        android:name="com.loskon.githubapi.app.features.userprofile.presentation.UserProfileFragment"
+        android:label="fragment_user_profile"
+        tools:layout="@layout/fragment_user_profile">
+        <argument
+            android:name="username"
+            app:argType="string" />
+        <action
+            android:id="@+id/goRepositoryInfoBottomSheetFragment"
+            app:destination="@id/repositoryInfo" />
+    </fragment>
+
+    <dialog
+        android:id="@+id/repositoryInfo"
+        android:name="com.loskon.githubapi.app.features.repositoryinfo.presentation.RepoInfoBottomSheetFragment"
+        android:label="RepositoryInfoBottomSheetFragment"
+        tools:layout="@layout/sheet_repository_info">
+
+        <argument
+            android:name="repository"
+            app:argType="com.loskon.githubapi.network.retrofit.model.RepositoryModel" />
+    </dialog>
 
 </navigation>

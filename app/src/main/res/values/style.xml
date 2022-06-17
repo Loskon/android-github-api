@@ -34,4 +34,9 @@
         <item name="android:background">@drawable/sheet_round_corner</item>
     </style>
 
+    <!-- RoundedSheetDialogStyle -->
+    <style name="BottomAppBarColor">
+        <item name="colorControlNormal">@android:color/holo_red_dark</item>
+    </style>
+
 </resources>

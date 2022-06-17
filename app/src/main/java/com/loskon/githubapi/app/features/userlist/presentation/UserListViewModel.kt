@@ -11,6 +11,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
+import java.net.UnknownHostException
 
 class UserListViewModel(
     private val userListInteractor: UserListInteractor
@@ -39,6 +40,7 @@ class UserListViewModel(
         when (throwable) {
             is EmptyCacheException -> emitAction(UserListAction.ShowError(ErrorType.EMPTY_CACHE))
             is NoSuccessfulException -> emitAction(UserListAction.ShowError(ErrorType.NO_SUCCESSFUL, throwable.message))
+            is UnknownHostException -> ""
             else -> emitAction(UserListAction.ShowError(ErrorType.OTHER, throwable.message))
         }
     }

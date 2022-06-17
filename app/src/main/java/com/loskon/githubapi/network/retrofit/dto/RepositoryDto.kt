@@ -1,8 +1,10 @@
 package com.loskon.githubapi.network.retrofit.dto
 
 import com.google.gson.annotations.SerializedName
+import com.loskon.githubapi.base.datetime.toLocalDateTime
 import com.loskon.githubapi.network.retrofit.model.LicenseModel
 import com.loskon.githubapi.network.retrofit.model.RepositoryModel
+import java.time.LocalDateTime
 import java.util.Date
 
 data class RepositoryDto(
@@ -92,9 +94,9 @@ fun RepositoryDto.toRepositoryModel(): RepositoryModel {
         fullName = fullName ?: "",
         htmlUrl = htmlUrl ?: "",
         description = description ?: "",
-        createdAt = createdAt ?: Date(),
-        updatedAt = updatedAt ?: Date(),
-        pushedAt = pushedAt ?: Date(),
+        createdAt = createdAt?.toLocalDateTime() ?: LocalDateTime.now(),
+        updatedAt = updatedAt?.toLocalDateTime() ?: LocalDateTime.now(),
+        pushedAt = pushedAt?.toLocalDateTime() ?: LocalDateTime.now(),
         size = size ?: 0L,
         language = language ?: "",
         license = license?.toLicenseModel() ?: LicenseModel(),

@@ -2,6 +2,7 @@ plugins {
     alias deps.plugins.androidApplication
     alias deps.plugins.kotlin
     alias deps.plugins.navigation
+    alias deps.plugins.parcelize
 }
 
 android {
@@ -32,6 +33,8 @@ android {
     }
 
     compileOptions {
+        coreLibraryDesugaringEnabled true
+
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
@@ -51,6 +54,8 @@ android {
 }
 
 dependencies {
+    // Desugaring
+    coreLibraryDesugaring deps.desugar
     // Android
     implementation deps.appcompat
     implementation deps.material
@@ -59,6 +64,7 @@ dependencies {
     implementation deps.activity
     implementation deps.fragment
     implementation deps.swiperefreshlayout
+    implementation deps.preference
     implementation deps.bundles.lifecycle
     implementation deps.bundles.navigation
     // Network

@@ -52,4 +52,17 @@ class NetworkDataSource(
             }
         }
     }
+
+    suspend fun getRepositoryAsFlow(username: String, repo: String): Flow<Pair<Boolean, RepositoryDto>> {
+        return flow {
+            val response = githubApi.getRepository(username, repo)
+
+            if (response.isSuccessful) {
+                val fromCache = response.headers().get(CACHE_HEADER).toBoolean()
+                emit(false to (response.body() ?: RepositoryDto()))
+            } else {
+                throw NoSuccessfulException(response.code())
+            }
+        }
+    }
 }

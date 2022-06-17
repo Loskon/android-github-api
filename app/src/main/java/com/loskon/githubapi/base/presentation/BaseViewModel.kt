@@ -7,6 +7,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 open class BaseViewModel : ViewModel() {
 
@@ -33,6 +34,7 @@ open class BaseViewModel : ViewModel() {
         onErrorBlock: ((Throwable) -> Unit)? = null
     ): CoroutineExceptionHandler {
         return CoroutineExceptionHandler { _, throwable ->
+            Timber.e(throwable)
             onErrorBlock?.invoke(throwable)
             error?.tryEmit(throwable)
         }

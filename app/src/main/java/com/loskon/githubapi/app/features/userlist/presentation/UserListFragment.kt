@@ -15,7 +15,10 @@ import com.loskon.githubapi.app.features.userlist.presentation.state.UserListAct
 import com.loskon.githubapi.base.extension.flow.observe
 import com.loskon.githubapi.base.extension.view.setGoneVisibleKtx
 import com.loskon.githubapi.base.extension.view.setVisibleKtx
+import com.loskon.githubapi.base.widget.AddAnimationItemAnimator
 import com.loskon.githubapi.databinding.FragmentUserListBinding
+import com.loskon.githubapi.utils.AppPreference
+import com.loskon.githubapi.utils.ColorHelper
 import com.loskon.githubapi.viewbinding.viewBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -33,7 +36,16 @@ class UserListFragment : Fragment(R.layout.fragment_user_list) {
         configureRefreshLayout()
         configureUserListAdapter()
         configureRecyclerView()
+        setupViewsListener()
         installObservers()
+    }
+
+    private fun setupViewsListener() {
+        binding.bottomBarUsersList.setNavigationOnClickListener {
+            val theme = AppPreference.hasDarkMode(requireContext()).not()
+            AppPreference.setDarkMode(requireContext(), theme)
+            ColorHelper.toggleDarkTheme(theme)
+        }
     }
 
     private fun configureParentLayout() {
@@ -62,6 +74,7 @@ class UserListFragment : Fragment(R.layout.fragment_user_list) {
         with(binding.rvUsers) {
             (itemAnimator as? SimpleItemAnimator)?.supportsChangeAnimations = false
             layoutManager = LinearLayoutManager(requireContext())
+            itemAnimator = AddAnimationItemAnimator()
             adapter = usersAdapter
             setHasFixedSize(true)
         }
@@ -96,6 +109,6 @@ class UserListFragment : Fragment(R.layout.fragment_user_list) {
 
     private fun showSnackbar(errorMessage: String?) {
         val message = errorMessage ?: getString(R.string.unknown_error)
-        Snackbar.make(binding.root, message, Snackbar.LENGTH_LONG).show()
+        Snackbar.make(binding.root, message, Snackbar.LENGTH_LONG).setAnchorView(binding.bottomBarUsersList).show()
     }
 }

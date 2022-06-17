@@ -6,10 +6,10 @@ import com.loskon.githubapi.network.retrofit.model.UserModel
 val userListDiffUtil = object : RecyclerListDiffUtil<UserModel> {
 
     override fun areItemsTheSame(oldItem: UserModel, newItem: UserModel): Boolean {
-        return oldItem.id == newItem.id
+        return oldItem.login == newItem.login
     }
 
     override fun areContentsTheSame(oldItem: UserModel, newItem: UserModel): Boolean {
-        return oldItem.nodeId == newItem.nodeId && oldItem.htmlUrl == newItem.htmlUrl
+        return oldItem.id == newItem.id && oldItem.nodeId == newItem.nodeId
     }
 }

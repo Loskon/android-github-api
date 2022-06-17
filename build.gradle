@@ -7,6 +7,7 @@ plugins {
     alias deps.plugins.ktlint apply false
     alias deps.plugins.detekt apply false
     alias deps.plugins.gradlevers apply false
+    alias deps.plugins.parcelize apply false
 }
 
 task clean(type: Delete) {
@@ -87,7 +88,7 @@ subprojects {
         def regex = /^[0-9,.v-]+(-r)?$/
         return !stableKeyword && !(version ==~ regex)
     }
-    
+
     // noinspection UnnecessaryQualifiedReference
     task checkDependenciesUpdates(type: com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask) {
         group = "verification"

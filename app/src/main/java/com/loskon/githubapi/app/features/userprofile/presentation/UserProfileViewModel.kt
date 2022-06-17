@@ -8,16 +8,16 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 
 class UserProfileViewModel(
-    private val username: String,
-    private val userProfileInteractor: UserProfileInteractor
+    private val userProfileInteractor: UserProfileInteractor,
+    private val username: String
 ) : BaseViewModel() {
 
-    private val user = MutableStateFlow<UserModel?>(null)
-    val getUser get() = user.asStateFlow()
+    private val userProfileState = MutableStateFlow<UserModel?>(null)
+    val getUserProfileState get() = userProfileState.asStateFlow()
 
     init {
         launchErrorJob {
-            userProfileInteractor.getUser(username).collectLatest { user.emit(it) }
+            userProfileInteractor.getUser(username).collectLatest { userProfileState.emit(it) }
         }
     }
 }

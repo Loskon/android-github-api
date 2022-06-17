@@ -1,6 +1,6 @@
 package com.loskon.githubapi.network.retrofit.model
 
-import java.util.Date
+import java.time.LocalDateTime
 
 data class UserModel(
     val login: String = "",
@@ -33,8 +33,8 @@ data class UserModel(
     val publicGists: Int = 0,
     val followers: Int = 0,
     val following: Int = 0,
-    val createdAt: Date = Date(),
-    val updatedAt: Date = Date(),
+    val createdAt: LocalDateTime = LocalDateTime.now(),
+    val updatedAt: LocalDateTime = LocalDateTime.now(),
     // own
     val repositories: List<RepositoryModel> = emptyList()
 )

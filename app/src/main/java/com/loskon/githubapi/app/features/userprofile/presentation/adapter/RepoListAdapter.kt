@@ -13,7 +13,7 @@ import com.loskon.githubapi.viewbinding.viewBinding
 /**
  * Адаптер для работы со списком репозиториев
  */
-class RepositoryListAdapter : RecyclerView.Adapter<RepositoryListAdapter.RepositoryViewHolder>() {
+class RepoListAdapter : RecyclerView.Adapter<RepoListAdapter.RepositoryViewHolder>() {
 
     private var clickListener: ((RepositoryModel) -> Unit)? = null
     private var list: List<RepositoryModel> = emptyList()
@@ -26,17 +26,19 @@ class RepositoryListAdapter : RecyclerView.Adapter<RepositoryListAdapter.Reposit
         val repository = list[position]
 
         with(holder.binding) {
-            tvRepositoryTitle.text = repository.name
-            tvRepositoryDescription.textWithGone(repository.description)
-            tvRepositoryLanguage.textWithGone(repository.language)
-            cardViewRepository.setDebounceClickListener { clickListener?.invoke(repository) }
+            repository.apply {
+                tvRepositoryCardName.text = fullName
+                tvRepositoryDescriptionCard.textWithGone(description)
+                tvRepositoryLanguageCard.textWithGone(language)
+                cardViewRepository.setDebounceClickListener { clickListener?.invoke(this) }
+            }
         }
     }
 
     override fun getItemCount(): Int = list.size
 
     fun setRepositories(newList: List<RepositoryModel>) {
-        val diffUtil = RecyclerDiffUtil(list, newList, repositoryListDiffUtil)
+        val diffUtil = RecyclerDiffUtil(list, newList, repoListDiffUtil)
         val diffResult = DiffUtil.calculateDiff(diffUtil, false)
         list = newList
         diffResult.dispatchUpdatesTo(this)

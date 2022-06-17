@@ -6,11 +6,13 @@
         android:id="@+id/users_form"
         android:icon="@drawable/baseline_format_list_bulleted_black_24"
         android:title="menu_list"
+        app:iconTint="?android:colorPrimary"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/settings_form"
         android:icon="@drawable/baseline_settings_black_24"
         android:title="menu_settings"
+        app:iconTint="?android:colorPrimary"
         app:showAsAction="ifRoom" />
 </menu>
