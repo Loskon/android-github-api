@@ -1,6 +1,6 @@
 package com.loskon.githubapi.app.features.userlist.presentation.adapter
 
-import com.loskon.githubapi.base.presentation.RecyclerListDiffUtil
+import com.loskon.githubapi.base.widget.recyclerview.RecyclerListDiffUtil
 import com.loskon.githubapi.network.retrofit.model.UserModel
 
 val userListDiffUtil = object : RecyclerListDiffUtil<UserModel> {

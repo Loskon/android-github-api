@@ -1,4 +1,4 @@
-package com.loskon.githubapi.base.widget
+package com.loskon.githubapi.base.widget.recyclerview
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter

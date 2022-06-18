@@ -10,15 +10,16 @@ import androidx.recyclerview.widget.SimpleItemAnimator
 import com.google.android.material.snackbar.Snackbar
 import com.loskon.githubapi.R
 import com.loskon.githubapi.app.features.userlist.presentation.adapter.UserListAdapter
-import com.loskon.githubapi.app.features.userlist.presentation.state.ErrorType
+import com.loskon.githubapi.app.features.userlist.presentation.state.ErrorTypeUserList
 import com.loskon.githubapi.app.features.userlist.presentation.state.UserListAction
+import com.loskon.githubapi.base.extension.content.getThemeMaterialColorKtx
 import com.loskon.githubapi.base.extension.flow.observe
 import com.loskon.githubapi.base.extension.view.setGoneVisibleKtx
 import com.loskon.githubapi.base.extension.view.setVisibleKtx
-import com.loskon.githubapi.base.widget.AddAnimationItemAnimator
+import com.loskon.githubapi.base.widget.recyclerview.AddAnimationItemAnimator
 import com.loskon.githubapi.databinding.FragmentUserListBinding
 import com.loskon.githubapi.utils.AppPreference
-import com.loskon.githubapi.utils.ColorHelper
+import com.loskon.githubapi.utils.ColorUtil
 import com.loskon.githubapi.viewbinding.viewBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -44,22 +45,23 @@ class UserListFragment : Fragment(R.layout.fragment_user_list) {
         binding.bottomBarUsersList.setNavigationOnClickListener {
             val theme = AppPreference.hasDarkMode(requireContext()).not()
             AppPreference.setDarkMode(requireContext(), theme)
-            ColorHelper.toggleDarkTheme(theme)
+            ColorUtil.toggleDarkTheme(theme)
         }
     }
 
     private fun configureParentLayout() {
-        // To disable flickering during textView animation
+        // To disable flickering animation
         binding.linLayoutUserList.layoutTransition.disableTransitionType(LayoutTransition.APPEARING)
     }
 
     private fun configureRefreshLayout() {
-        with(binding.refreshLayout) {
+        with(binding.refreshLayoutUserList) {
             setOnRefreshListener {
-                viewModel.performRepeatRequest()
+                viewModel.performUsersRequest()
                 isRefreshing = false
             }
-            setColorSchemeResources(R.color.slateblue)
+            val color = requireContext().getThemeMaterialColorKtx(android.R.attr.colorPrimary)
+            setColorSchemeColors(color)
         }
     }
 
@@ -94,16 +96,18 @@ class UserListFragment : Fragment(R.layout.fragment_user_list) {
     }
 
     private fun showLoadingIndicator(loading: Boolean) {
-        binding.indicator.setVisibleKtx(loading)
-        if (loading.not()) binding.tvNoInternet.setGoneVisibleKtx(false)
+        binding.indicatorUserList.setVisibleKtx(loading)
+        if (loading.not()) binding.tvNoInternetUserList.setGoneVisibleKtx(false)
     }
 
-    private fun showError(errorType: ErrorType, message: String?) {
-        binding.indicator.setVisibleKtx(false)
+    private fun showError(errorType: ErrorTypeUserList, message: String?) {
+        binding.indicatorUserList.setVisibleKtx(false)
         when (errorType) {
-            ErrorType.EMPTY_CACHE -> binding.tvNoInternet.setGoneVisibleKtx(true)
-            ErrorType.NO_SUCCESSFUL -> showSnackbar(getString(R.string.problems_get_data, message))
-            ErrorType.OTHER -> showSnackbar(message)
+            ErrorTypeUserList.EMPTY_CACHE -> binding.tvNoInternetUserList.setGoneVisibleKtx(true)
+            ErrorTypeUserList.NO_SUCCESSFUL -> showSnackbar(getString(R.string.problems_get_data, message))
+            ErrorTypeUserList.TIMEOUT -> showSnackbar(getString(R.string.timeout))
+            ErrorTypeUserList.UNKNOWN_HOST -> showSnackbar(getString(R.string.unknown_host))
+            ErrorTypeUserList.OTHER -> showSnackbar(message)
         }
     }
 

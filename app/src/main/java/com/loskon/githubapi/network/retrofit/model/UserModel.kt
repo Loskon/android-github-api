@@ -36,5 +36,6 @@ data class UserModel(
     val createdAt: LocalDateTime = LocalDateTime.now(),
     val updatedAt: LocalDateTime = LocalDateTime.now(),
     // own
+    val fromCache: Boolean = false,
     val repositories: List<RepositoryModel> = emptyList()
 )

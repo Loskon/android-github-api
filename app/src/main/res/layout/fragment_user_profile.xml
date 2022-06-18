@@ -7,30 +7,56 @@
     android:layout_height="match_parent"
     tools:context=".app.features.userprofile.presentation.UserProfileFragment">
 
-    <include
-        android:id="@+id/inc_user_profile"
-        layout="@layout/inc_user_profile"
+    <LinearLayout
+        android:id="@+id/ll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="@dimen/bottom_bar_height" />
+        android:layout_marginBottom="@dimen/bottom_bar_height"
+        android:animateLayoutChanges="true"
+        android:orientation="vertical">
 
-    <com.google.android.material.progressindicator.CircularProgressIndicator
-        android:id="@+id/pi_user_profile"
-        android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/tv_no_internet_user_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/sienna"
+            android:gravity="center"
+            android:padding="2dp"
+            android:text="@string/no_internet_connection"
+            android:textColor="@android:color/white"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible" />
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/refresh_layout_user_profile"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <include
+                android:id="@+id/inc_user_profile"
+                layout="@layout/inc_user_profile"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </LinearLayout>
+
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/indicator_user_profile"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_gravity="bottom"
         android:layout_marginBottom="@dimen/bottom_bar_height"
         android:indeterminate="true"
-        android:visibility="gone"
         app:indicatorColor="?android:colorPrimary"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="visible" />
+        app:trackColor="@android:color/transparent"
+        app:trackThickness="2dp" />
 
     <com.google.android.material.bottomappbar.BottomAppBar
-        android:id="@+id/bottomAppBar"
+        android:id="@+id/bottom_bar_user_profile"
         android:layout_width="match_parent"
         android:layout_height="@dimen/bottom_bar_height"
         android:layout_gravity="bottom"

@@ -39,7 +39,7 @@ data class UserDto(
     @SerializedName("updated_at") val updatedAt: Date? = null
 )
 
-fun UserDto.toUserModel(): UserModel {
+fun UserDto.toUserModel(fromCache: Boolean = false): UserModel {
     return UserModel(
         login = login ?: "",
         id = id ?: 0,
@@ -47,6 +47,7 @@ fun UserDto.toUserModel(): UserModel {
         htmlUrl = htmlUrl ?: "",
         type = type ?: "",
         name = name ?: "",
-        location = location ?: ""
+        location = location ?: "",
+        fromCache = fromCache
     )
 }

@@ -1,8 +1,10 @@
-package com.loskon.githubapi.base.presentation
+package com.loskon.githubapi.base.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -15,11 +17,12 @@ open class BaseViewModel : ViewModel() {
     open val errorStateFlow get() = errorState.asStateFlow()
 
     protected fun launchErrorJob(
+        dispatcher: CoroutineDispatcher = Dispatchers.Default,
         error: MutableStateFlow<Throwable?>? = errorState,
         onErrorBlock: ((Throwable) -> Unit)? = null,
         block: suspend () -> Unit
     ): Job {
-        return viewModelScope.launch(getExceptionHandler(error, onErrorBlock)) {
+        return viewModelScope.launch(dispatcher + getExceptionHandler(error, onErrorBlock)) {
             try {
                 error?.tryEmit(null)
                 block()

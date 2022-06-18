@@ -34,7 +34,7 @@ class CacheInterceptor(private val context: Context) : Interceptor {
     }
 
     private fun Request.onlineCacheControl(): Request {
-        val cacheControl = CacheControl.Builder().maxAge(1, TimeUnit.MINUTES).build()
+        val cacheControl = CacheControl.Builder().maxAge(10, TimeUnit.SECONDS).build()
         return newBuilder().header(CACHE_CONTROL, cacheControl.toString()).build()
     }
 

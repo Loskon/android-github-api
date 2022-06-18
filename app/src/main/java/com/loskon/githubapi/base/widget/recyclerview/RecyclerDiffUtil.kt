@@ -1,4 +1,4 @@
-package com.loskon.githubapi.base.presentation
+package com.loskon.githubapi.base.widget.recyclerview
 
 import androidx.recyclerview.widget.DiffUtil
 

@@ -1,6 +1,6 @@
 package com.loskon.githubapi.app.features.repositoryinfo.presentation
 
-import com.loskon.githubapi.base.presentation.BaseViewModel
+import com.loskon.githubapi.base.presentation.viewmodel.BaseViewModel
 import com.loskon.githubapi.network.retrofit.model.RepositoryModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

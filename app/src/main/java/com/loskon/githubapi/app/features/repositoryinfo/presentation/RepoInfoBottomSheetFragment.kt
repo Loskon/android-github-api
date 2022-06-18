@@ -8,17 +8,17 @@ import com.loskon.githubapi.base.datetime.toFormattedString
 import com.loskon.githubapi.base.extension.flow.observe
 import com.loskon.githubapi.base.extension.view.setDebounceClickListener
 import com.loskon.githubapi.base.extension.view.setGoneVisibleKtx
-import com.loskon.githubapi.base.presentation.BaseBottomSheetDialogFragment
-import com.loskon.githubapi.databinding.SheetRepositoryInfo2Binding
+import com.loskon.githubapi.base.presentation.dialogfragment.BaseBottomSheetDialogFragment
+import com.loskon.githubapi.databinding.SheetRepositoryInfoBinding
 import com.loskon.githubapi.network.retrofit.model.RepositoryModel
 import com.loskon.githubapi.viewbinding.viewBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-class RepoInfoBottomSheetFragment : BaseBottomSheetDialogFragment(R.layout.sheet_repository_info2) {
+class RepoInfoBottomSheetFragment : BaseBottomSheetDialogFragment(R.layout.sheet_repository_info) {
 
     private val viewModel: RepoInfoViewModel by viewModel(parameters = { parametersOf(args.repository) })
-    private val binding by viewBinding(SheetRepositoryInfo2Binding::bind)
+    private val binding by viewBinding(SheetRepositoryInfoBinding::bind)
     private val args: RepoInfoBottomSheetFragmentArgs by navArgs()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

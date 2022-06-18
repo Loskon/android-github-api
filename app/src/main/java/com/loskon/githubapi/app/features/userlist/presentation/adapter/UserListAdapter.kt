@@ -4,7 +4,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.loskon.githubapi.base.extension.view.setDebounceClickListener
-import com.loskon.githubapi.base.presentation.RecyclerDiffUtil
+import com.loskon.githubapi.base.widget.recyclerview.RecyclerDiffUtil
 import com.loskon.githubapi.databinding.ItemUserCardBinding
 import com.loskon.githubapi.network.glide.ImageLoader
 import com.loskon.githubapi.network.retrofit.model.UserModel

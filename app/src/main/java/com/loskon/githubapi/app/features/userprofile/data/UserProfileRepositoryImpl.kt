@@ -14,11 +14,14 @@ class UserProfileRepositoryImpl(
 ) : UserProfileRepository {
 
     override suspend fun getUser(username: String): Flow<UserModel> {
-        return networkDataSource.getUserAsFlow(username).map { it.toUserModel() }
+        return networkDataSource.getUserPairAsFlow(username).map { pair ->
+            pair.second.toUserModel(pair.first)
+        }
     }
 
     override suspend fun getRepositories(username: String): Flow<List<RepositoryModel>> {
-        return networkDataSource.getRepositoriesAsFlow(username).map { pair ->
-            pair.second.map { it.toRepositoryModel() } }
+        return networkDataSource.getRepositoriesPairAsFlow(username).map { pair ->
+            pair.second.map { it.toRepositoryModel() }
+        }
     }
 }

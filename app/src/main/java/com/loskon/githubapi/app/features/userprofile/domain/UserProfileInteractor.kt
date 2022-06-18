@@ -13,7 +13,7 @@ class UserProfileInteractor(
         val repositoriesFlow = userProfileRepository.getRepositories(username)
 
         return combine(userFlow, repositoriesFlow) { user, repositories ->
-            user.copy(repositories = repositories.sortedBy { it.name })
+            user.copy(repositories = repositories.sortedBy { it.fullName })
         }
     }
 }
