@@ -10,10 +10,10 @@ import androidx.recyclerview.widget.SimpleItemAnimator
 import com.google.android.material.snackbar.Snackbar
 import com.loskon.githubapi.R
 import com.loskon.githubapi.app.features.userprofile.presentation.adapter.RepoListAdapter
-import com.loskon.githubapi.base.extension.content.getThemeMaterialColorKtx
+import com.loskon.githubapi.app.features.userprofile.presentation.state.UserProfileState
 import com.loskon.githubapi.base.extension.flow.observe
+import com.loskon.githubapi.base.extension.fragment.getColorPrimary
 import com.loskon.githubapi.base.extension.view.setGoneVisibleKtx
-import com.loskon.githubapi.base.extension.view.setVisibleKtx
 import com.loskon.githubapi.base.extension.view.textWithGone
 import com.loskon.githubapi.base.presentation.viewmodel.IOErrorType
 import com.loskon.githubapi.base.widget.recyclerview.AddAnimationItemAnimator
@@ -49,8 +49,7 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
                 viewModel.performUserRequest()
                 isRefreshing = false
             }
-            val color = requireContext().getThemeMaterialColorKtx(android.R.attr.colorPrimary)
-            setColorSchemeColors(color)
+            setColorSchemeColors(getColorPrimary())
         }
     }
 
@@ -75,29 +74,23 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
     }
 
     private fun installObserver() {
-        viewModel.getUserModel.observe(viewLifecycleOwner) { user ->
-            displayViews(user == null)
-            if (user != null) setUser(user)
+        viewModel.getUserProfileState.observe(viewLifecycleOwner) { userProfileState ->
+            displayViews(userProfileState)
+            userProfileState.user?.let { setUser(it) }
         }
 
-        viewModel.getLoadingStatus.observe(viewLifecycleOwner) { userProfileState ->
-            if (userProfileState != null) {
-                Timber.d(userProfileState.loading.toString())
-                showLoadingIndicator(userProfileState.loading)
-            }
-        }
-
-        viewModel.getIoErrorAction.observe(viewLifecycleOwner) { ioErrorState ->
-            if (ioErrorState != null) {
-                Timber.d(ioErrorState.type.toString())
-                showError(ioErrorState.type, ioErrorState.message)
-            }
+        viewModel.getIoErrorState.observe(viewLifecycleOwner) {
+            if (it != null) showError(it.type, it.message)
         }
     }
 
-    private fun displayViews(display: Boolean) {
-        binding.indicatorUserProfile.setGoneVisibleKtx(display)
-        binding.incUserProfile.root.setGoneVisibleKtx(display.not())
+    private fun displayViews(userProfileState: UserProfileState) {
+        with(binding) {
+            //Timber.d(userProfileState.loading.toString())
+            incUserProfile.root.setGoneVisibleKtx(userProfileState.user != null)
+            indicatorUserProfile.setGoneVisibleKtx(userProfileState.loading)
+            tvOfflineModeUserProfile.setGoneVisibleKtx(userProfileState.fromCache)
+        }
     }
 
     private fun setUser(user: UserModel) {
@@ -113,19 +106,15 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
         }
     }
 
-    private fun showLoadingIndicator(loading: Boolean) {
-
-    }
-
     private fun showError(errorType: IOErrorType?, message: String?) {
-        binding.indicatorUserProfile.setVisibleKtx(false)
+        Timber.d(errorType.toString())
         when (errorType) {
-            IOErrorType.EMPTY_CACHE -> binding.tvNoInternetUserProfile.setGoneVisibleKtx(true)
+            IOErrorType.EMPTY_CACHE -> showSnackbar(getString(R.string.no_internet_connection))
             IOErrorType.NO_SUCCESSFUL -> showSnackbar(getString(R.string.problems_get_data, message))
             IOErrorType.TIMEOUT -> showSnackbar(getString(R.string.timeout))
             IOErrorType.UNKNOWN_HOST -> showSnackbar(getString(R.string.unknown_host))
             IOErrorType.OTHER -> showSnackbar(message)
-            else -> {}
+            null -> {}
         }
     }
 

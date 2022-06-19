@@ -12,8 +12,8 @@ import com.loskon.githubapi.R
 import com.loskon.githubapi.app.features.userlist.presentation.adapter.UserListAdapter
 import com.loskon.githubapi.app.features.userlist.presentation.state.ErrorTypeUserList
 import com.loskon.githubapi.app.features.userlist.presentation.state.UserListAction
-import com.loskon.githubapi.base.extension.content.getThemeMaterialColorKtx
 import com.loskon.githubapi.base.extension.flow.observe
+import com.loskon.githubapi.base.extension.fragment.getColorPrimary
 import com.loskon.githubapi.base.extension.view.setGoneVisibleKtx
 import com.loskon.githubapi.base.extension.view.setVisibleKtx
 import com.loskon.githubapi.base.widget.recyclerview.AddAnimationItemAnimator
@@ -60,8 +60,7 @@ class UserListFragment : Fragment(R.layout.fragment_user_list) {
                 viewModel.performUsersRequest()
                 isRefreshing = false
             }
-            val color = requireContext().getThemeMaterialColorKtx(android.R.attr.colorPrimary)
-            setColorSchemeColors(color)
+            setColorSchemeColors(getColorPrimary())
         }
     }
 

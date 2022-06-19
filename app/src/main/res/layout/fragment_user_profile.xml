@@ -16,13 +16,13 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/tv_no_internet_user_profile"
+            android:id="@+id/tv_offline_mode_user_profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/sienna"
+            android:background="@android:color/darker_gray"
             android:gravity="center"
             android:padding="2dp"
-            android:text="@string/no_internet_connection"
+            android:text="offline"
             android:textColor="@android:color/white"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"

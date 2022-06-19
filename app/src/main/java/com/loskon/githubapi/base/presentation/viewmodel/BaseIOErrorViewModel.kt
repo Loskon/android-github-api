@@ -5,8 +5,8 @@ import com.loskon.githubapi.network.retrofit.exception.NoSuccessfulException
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 
@@ -25,19 +25,28 @@ enum class IOErrorType {
 
 open class IOErrorViewModel : BaseViewModel() {
 
-    private val ioErrorAction = MutableStateFlow<IOErrorState?>(null)
-    val getIoErrorAction get() = ioErrorAction.asStateFlow()
+    private val ioErrorState = MutableSharedFlow<IOErrorState?>(replay = 1)
+    val getIoErrorState get() = ioErrorState.asSharedFlow()
 
     fun launchIOErrorJob(
         dispatcher: CoroutineDispatcher = Dispatchers.IO,
-        block: suspend () -> Unit
+        errorFunction: ((Throwable) -> Unit)? = null,
+        function: suspend () -> Unit
     ): Job {
         return launchErrorJob(
             dispatcher,
-            onErrorBlock = { handleErrors(it) }
+            errorFunction = { throwable -> handleErrorFunction(throwable, errorFunction) }
         ) {
-            block()
+            function()
         }
+    }
+
+    private fun handleErrorFunction(
+        throwable: Throwable,
+        errorFunction: ((Throwable) -> Unit)? = null
+    ) {
+        errorFunction?.invoke(throwable)
+        handleErrors(throwable)
     }
 
     private fun handleErrors(throwable: Throwable?) {
@@ -53,10 +62,6 @@ open class IOErrorViewModel : BaseViewModel() {
 
     private fun tryEmitErrorAction(error: IOErrorType?, message: String? = null) {
         val value = if (error != null) IOErrorState(error, message) else null
-        ioErrorAction.tryEmit(value)
-    }
-
-    fun tryEmitIOErrorEmptyCache() {
-        tryEmitErrorAction(IOErrorType.EMPTY_CACHE)
+        ioErrorState.tryEmit(value)
     }
 }

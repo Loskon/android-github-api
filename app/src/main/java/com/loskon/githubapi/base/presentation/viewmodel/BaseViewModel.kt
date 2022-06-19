@@ -19,10 +19,10 @@ open class BaseViewModel : ViewModel() {
     protected fun launchErrorJob(
         dispatcher: CoroutineDispatcher = Dispatchers.Default,
         error: MutableStateFlow<Throwable?>? = errorState,
-        onErrorBlock: ((Throwable) -> Unit)? = null,
+        errorFunction: ((Throwable) -> Unit)? = null,
         block: suspend () -> Unit
     ): Job {
-        return viewModelScope.launch(dispatcher + getExceptionHandler(error, onErrorBlock)) {
+        return viewModelScope.launch(dispatcher + getExceptionHandler(error, errorFunction)) {
             try {
                 error?.tryEmit(null)
                 block()
@@ -34,11 +34,11 @@ open class BaseViewModel : ViewModel() {
 
     private fun getExceptionHandler(
         error: MutableStateFlow<Throwable?>?,
-        onErrorBlock: ((Throwable) -> Unit)? = null
+        errorFunction: ((Throwable) -> Unit)? = null
     ): CoroutineExceptionHandler {
         return CoroutineExceptionHandler { _, throwable ->
             Timber.e(throwable)
-            onErrorBlock?.invoke(throwable)
+            errorFunction?.invoke(throwable)
             error?.tryEmit(throwable)
         }
     }

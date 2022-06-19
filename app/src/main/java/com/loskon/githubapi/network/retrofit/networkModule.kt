@@ -24,7 +24,7 @@ const val CACHE_DIR_NAME = "users"
 
 private fun provideCache(context: Context): Cache {
     val cacheDir = File(context.cacheDir, CACHE_DIR_NAME)
-    val cacheSize = 5 * 1024 * 1024L // 5 MB
+    val cacheSize = 2 * 1024 * 1024L // 2 MB
     return Cache(cacheDir, cacheSize)
 }
 

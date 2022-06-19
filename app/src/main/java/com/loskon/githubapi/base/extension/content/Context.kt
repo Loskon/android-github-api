@@ -22,3 +22,13 @@ fun Context.getThemeMaterialColorKtx(@AttrRes attrRes: Int): Int {
 fun Context.getThemeColorKtx(@AttrRes attrRes: Int): Int = TypedValue()
     .apply { theme.resolveAttribute(attrRes, this, true) }
     .data
+
+@ColorInt
+fun Context.getColorPrimaryKtx(): Int {
+    return getThemeMaterialColorKtx(android.R.attr.colorPrimary)
+}
+
+@ColorInt
+fun Context.getColorAccentKtx(): Int {
+    return getThemeMaterialColorKtx(android.R.attr.colorAccent)
+}

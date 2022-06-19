@@ -42,7 +42,7 @@ class UserListViewModel(
 
     private fun getUsersAsFlow() {
         job?.cancel()
-        job = launchErrorJob(dispatcher = Dispatchers.IO, onErrorBlock = { handleErrors(it) }) {
+        job = launchErrorJob(dispatcher = Dispatchers.IO, errorFunction = { handleErrors(it) }) {
             userListInteractor.getUsersAsFlow().collectLatest { setUserListState(it) }
         }
     }

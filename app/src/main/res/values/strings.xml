@@ -2,7 +2,7 @@
     <!--App -->
     <string name="app_name">GitHub</string>
 
-    <string name="no_internet_connection">No internet connection</string>
+    <string name="no_internet_connection">You need to connect with internet!</string>
     <string name="problems_get_data">Problems with getting data. Error code: %1$s</string>
     <string name="unknown_error">Unknown error</string>
     <string name="public_repositories">Public repositories:</string>
