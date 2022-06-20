@@ -1,12 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Base Splash screen application theme. -->
-    <style name="StartingAppTheme" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">@color/github</item>
-        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_frame_7__7_dark</item>
-        <item name="postSplashScreenTheme">@style/AppTheme</item>
-    </style>
-
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->

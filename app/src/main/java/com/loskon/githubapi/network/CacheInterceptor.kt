@@ -1,7 +1,7 @@
-package com.loskon.githubapi.network.retrofit
+package com.loskon.githubapi.network
 
 import android.content.Context
-import com.loskon.githubapi.network.retrofit.exception.EmptyCacheException
+import com.loskon.githubapi.network.exception.EmptyCacheException
 import com.loskon.githubapi.utils.NetworkUtil
 import okhttp3.CacheControl
 import okhttp3.Interceptor

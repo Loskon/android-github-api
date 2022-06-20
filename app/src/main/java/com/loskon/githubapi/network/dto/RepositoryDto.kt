@@ -1,9 +1,9 @@
-package com.loskon.githubapi.network.retrofit.dto
+package com.loskon.githubapi.network.dto
 
 import com.google.gson.annotations.SerializedName
 import com.loskon.githubapi.base.datetime.toLocalDateTime
-import com.loskon.githubapi.network.retrofit.model.LicenseModel
-import com.loskon.githubapi.network.retrofit.model.RepositoryModel
+import com.loskon.githubapi.network.model.LicenseModel
+import com.loskon.githubapi.network.model.RepositoryModel
 import java.time.LocalDateTime
 import java.util.Date
 

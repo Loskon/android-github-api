@@ -1,7 +1,7 @@
-package com.loskon.githubapi.network.retrofit
+package com.loskon.githubapi.network
 
-import com.loskon.githubapi.network.retrofit.dto.RepositoryDto
-import com.loskon.githubapi.network.retrofit.dto.UserDto
+import com.loskon.githubapi.network.dto.RepositoryDto
+import com.loskon.githubapi.network.dto.UserDto
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -17,7 +17,4 @@ interface GithubApi {
 
     @GET("users/{username}/repos")
     suspend fun getRepositories(@Path("username") username: String): Response<List<RepositoryDto>>
-
-    @GET("repos/{username}/{repo}")
-    suspend fun getRepository(@Path("username") username: String, @Path("repo") repo: String): Response<RepositoryDto>
 }

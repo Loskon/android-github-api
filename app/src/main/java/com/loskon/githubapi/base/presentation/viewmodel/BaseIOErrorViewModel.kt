@@ -1,7 +1,7 @@
 package com.loskon.githubapi.base.presentation.viewmodel
 
-import com.loskon.githubapi.network.retrofit.exception.EmptyCacheException
-import com.loskon.githubapi.network.retrofit.exception.NoSuccessfulException
+import com.loskon.githubapi.network.exception.EmptyCacheException
+import com.loskon.githubapi.network.exception.NoSuccessfulException
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -51,17 +51,25 @@ open class IOErrorViewModel : BaseViewModel() {
 
     private fun handleErrors(throwable: Throwable?) {
         when (throwable) {
-            null -> tryEmitErrorAction(null)
-            is EmptyCacheException -> tryEmitErrorAction(IOErrorType.EMPTY_CACHE)
-            is NoSuccessfulException -> tryEmitErrorAction(IOErrorType.NO_SUCCESSFUL, throwable.message)
-            is UnknownHostException -> tryEmitErrorAction(IOErrorType.TIMEOUT)
-            is SocketTimeoutException -> tryEmitErrorAction(IOErrorType.UNKNOWN_HOST)
-            else -> tryEmitErrorAction(IOErrorType.OTHER, throwable.message)
+            null -> tryEmitErrorState(null)
+            is EmptyCacheException -> tryEmitErrorState(IOErrorType.EMPTY_CACHE)
+            is NoSuccessfulException -> tryEmitErrorState(IOErrorType.NO_SUCCESSFUL, throwable.message)
+            is UnknownHostException -> tryEmitErrorState(IOErrorType.TIMEOUT)
+            is SocketTimeoutException -> tryEmitErrorState(IOErrorType.UNKNOWN_HOST)
+            else -> tryEmitErrorState(IOErrorType.OTHER, throwable.message)
         }
     }
 
-    private fun tryEmitErrorAction(error: IOErrorType?, message: String? = null) {
-        val value = if (error != null) IOErrorState(error, message) else null
+    private fun tryEmitErrorState(error: IOErrorType?, message: String? = null) {
+        val value = getStateValue(error, message)
         ioErrorState.tryEmit(value)
+    }
+
+    private fun getStateValue(error: IOErrorType?, message: String?): IOErrorState? {
+        return if (error != null) {
+            IOErrorState(error, message)
+        } else {
+            null
+        }
     }
 }

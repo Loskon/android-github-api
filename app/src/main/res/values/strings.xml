@@ -18,4 +18,7 @@
     <string name="link_to_repository_header">Link to repository</string>
     <string name="timeout">Bad internet connection. Try again!</string>
     <string name="unknown_host">Server connection problems. Try again!</string>
+    <string name="offline_mode">Offline mode</string>
+
+    <string name="retry">Retry</string>
 </resources>

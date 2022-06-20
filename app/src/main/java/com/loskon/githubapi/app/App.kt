@@ -5,7 +5,7 @@ import com.loskon.githubapi.BuildConfig
 import com.loskon.githubapi.app.features.repositoryinfo.repoInfoModule
 import com.loskon.githubapi.app.features.userlist.userListModule
 import com.loskon.githubapi.app.features.userprofile.userProfileModule
-import com.loskon.githubapi.network.retrofit.networkModule
+import com.loskon.githubapi.network.networkModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import timber.log.Timber

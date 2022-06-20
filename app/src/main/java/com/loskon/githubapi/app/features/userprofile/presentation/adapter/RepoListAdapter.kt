@@ -7,7 +7,7 @@ import com.loskon.githubapi.base.extension.view.setDebounceClickListener
 import com.loskon.githubapi.base.extension.view.textWithGone
 import com.loskon.githubapi.base.widget.recyclerview.RecyclerDiffUtil
 import com.loskon.githubapi.databinding.ItemRepositoryCardBinding
-import com.loskon.githubapi.network.retrofit.model.RepositoryModel
+import com.loskon.githubapi.network.model.RepositoryModel
 import com.loskon.githubapi.viewbinding.viewBinding
 
 /**

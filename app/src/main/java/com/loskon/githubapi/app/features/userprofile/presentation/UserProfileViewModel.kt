@@ -3,7 +3,7 @@ package com.loskon.githubapi.app.features.userprofile.presentation
 import com.loskon.githubapi.app.features.userprofile.domain.UserProfileInteractor
 import com.loskon.githubapi.app.features.userprofile.presentation.state.UserProfileState
 import com.loskon.githubapi.base.presentation.viewmodel.IOErrorViewModel
-import com.loskon.githubapi.network.retrofit.model.UserModel
+import com.loskon.githubapi.network.model.UserModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

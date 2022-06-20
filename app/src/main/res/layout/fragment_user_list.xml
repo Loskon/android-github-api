@@ -21,12 +21,13 @@
             android:background="@android:color/darker_gray"
             android:gravity="center"
             android:padding="2dp"
-            android:text="offline"
+            android:text="@string/offline_mode"
             android:textColor="@android:color/white"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="TextContrastCheck"
             tools:visibility="visible" />
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout

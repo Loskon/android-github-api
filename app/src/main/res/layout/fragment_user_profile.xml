@@ -8,7 +8,7 @@
     tools:context=".app.features.userprofile.presentation.UserProfileFragment">
 
     <LinearLayout
-        android:id="@+id/ll"
+        android:id="@+id/lin_layout_user_profile"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="@dimen/bottom_bar_height"
@@ -22,12 +22,13 @@
             android:background="@android:color/darker_gray"
             android:gravity="center"
             android:padding="2dp"
-            android:text="offline"
+            android:text="@string/offline_mode"
             android:textColor="@android:color/white"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="TextContrastCheck"
             tools:visibility="visible" />
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout

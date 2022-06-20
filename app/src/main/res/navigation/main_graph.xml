@@ -35,7 +35,7 @@
 
         <argument
             android:name="repository"
-            app:argType="com.loskon.githubapi.network.retrofit.model.RepositoryModel" />
+            app:argType="com.loskon.githubapi.network.model.RepositoryModel" />
     </dialog>
 
 </navigation>

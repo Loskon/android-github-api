@@ -3,19 +3,17 @@ package com.loskon.githubapi.app.features.userlist.presentation
 import android.animation.LayoutTransition
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.SimpleItemAnimator
-import com.google.android.material.snackbar.Snackbar
 import com.loskon.githubapi.R
 import com.loskon.githubapi.app.features.userlist.presentation.adapter.UserListAdapter
-import com.loskon.githubapi.app.features.userlist.presentation.state.ErrorTypeUserList
-import com.loskon.githubapi.app.features.userlist.presentation.state.UserListAction
+import com.loskon.githubapi.app.features.userlist.presentation.state.UserListState
 import com.loskon.githubapi.base.extension.flow.observe
 import com.loskon.githubapi.base.extension.fragment.getColorPrimary
 import com.loskon.githubapi.base.extension.view.setGoneVisibleKtx
-import com.loskon.githubapi.base.extension.view.setVisibleKtx
+import com.loskon.githubapi.base.presentation.dialogfragment.BaseSnackbarFragment
+import com.loskon.githubapi.base.presentation.viewmodel.IOErrorType
 import com.loskon.githubapi.base.widget.recyclerview.AddAnimationItemAnimator
 import com.loskon.githubapi.databinding.FragmentUserListBinding
 import com.loskon.githubapi.utils.AppPreference
@@ -23,7 +21,7 @@ import com.loskon.githubapi.utils.ColorUtil
 import com.loskon.githubapi.viewbinding.viewBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class UserListFragment : Fragment(R.layout.fragment_user_list) {
+class UserListFragment : BaseSnackbarFragment(R.layout.fragment_user_list) {
 
     private val viewModel: UserListViewModel by viewModel()
     private val binding by viewBinding(FragmentUserListBinding::bind)
@@ -60,7 +58,7 @@ class UserListFragment : Fragment(R.layout.fragment_user_list) {
                 viewModel.performUsersRequest()
                 isRefreshing = false
             }
-            setColorSchemeColors(getColorPrimary())
+            setColorSchemeColors(getColorPrimary)
         }
     }
 
@@ -82,36 +80,40 @@ class UserListFragment : Fragment(R.layout.fragment_user_list) {
     }
 
     private fun installObservers() {
-        viewModel.getUsersState.observe(viewLifecycleOwner) { users ->
-            users?.let { usersAdapter.setUsers(it) }
+        viewModel.getUserListState.observe(viewLifecycleOwner) { userListState ->
+            displayViews(userListState)
+            userListState.users?.let { usersAdapter.setUsers(it) }
         }
 
-        viewModel.geuUsersAction.observe(viewLifecycleOwner) { action ->
-            when (action) {
-                is UserListAction.ShowLoadingIndicator -> showLoadingIndicator(action.loading)
-                is UserListAction.ShowError -> showError(action.type, action.message)
-            }
+        viewModel.getIoErrorState.observe(viewLifecycleOwner) { ioErrorState ->
+            if (ioErrorState?.type != null) showError(ioErrorState.type, ioErrorState.message)
         }
     }
 
-    private fun showLoadingIndicator(loading: Boolean) {
-        binding.indicatorUserList.setVisibleKtx(loading)
-        if (loading.not()) binding.tvNoInternetUserList.setGoneVisibleKtx(false)
+    private fun displayViews(userProfileState: UserListState) {
+        with(binding) {
+            indicatorUserList.setGoneVisibleKtx(userProfileState.loading)
+            tvNoInternetUserList.setGoneVisibleKtx(userProfileState.fromCache)
+        }
     }
 
-    private fun showError(errorType: ErrorTypeUserList, message: String?) {
-        binding.indicatorUserList.setVisibleKtx(false)
+    private fun showError(errorType: IOErrorType, message: String?) {
         when (errorType) {
-            ErrorTypeUserList.EMPTY_CACHE -> binding.tvNoInternetUserList.setGoneVisibleKtx(true)
-            ErrorTypeUserList.NO_SUCCESSFUL -> showSnackbar(getString(R.string.problems_get_data, message))
-            ErrorTypeUserList.TIMEOUT -> showSnackbar(getString(R.string.timeout))
-            ErrorTypeUserList.UNKNOWN_HOST -> showSnackbar(getString(R.string.unknown_host))
-            ErrorTypeUserList.OTHER -> showSnackbar(message)
+            IOErrorType.EMPTY_CACHE -> showTextSnackbar(getString(R.string.no_internet_connection))
+            IOErrorType.NO_SUCCESSFUL -> showTextSnackbar(getString(R.string.problems_get_data, message))
+            IOErrorType.TIMEOUT -> showActionSnackbar(getString(R.string.timeout))
+            IOErrorType.UNKNOWN_HOST -> showActionSnackbar(getString(R.string.unknown_host))
+            IOErrorType.OTHER -> showTextSnackbar(message)
         }
     }
 
-    private fun showSnackbar(errorMessage: String?) {
-        val message = errorMessage ?: getString(R.string.unknown_error)
-        Snackbar.make(binding.root, message, Snackbar.LENGTH_LONG).setAnchorView(binding.bottomBarUsersList).show()
+    private fun showTextSnackbar(message: String?) {
+        showTextSnackbar(binding.root, binding.bottomBarUsersList, message)
+    }
+
+    private fun showActionSnackbar(message: String?) {
+        showActionSnackbar(binding.root, binding.bottomBarUsersList, message) {
+            viewModel.performUsersRequest()
+        }
     }
 }

@@ -2,12 +2,10 @@ package com.loskon.githubapi.app.features.userprofile.presentation
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.SimpleItemAnimator
-import com.google.android.material.snackbar.Snackbar
 import com.loskon.githubapi.R
 import com.loskon.githubapi.app.features.userprofile.presentation.adapter.RepoListAdapter
 import com.loskon.githubapi.app.features.userprofile.presentation.state.UserProfileState
@@ -15,17 +13,18 @@ import com.loskon.githubapi.base.extension.flow.observe
 import com.loskon.githubapi.base.extension.fragment.getColorPrimary
 import com.loskon.githubapi.base.extension.view.setGoneVisibleKtx
 import com.loskon.githubapi.base.extension.view.textWithGone
+import com.loskon.githubapi.base.presentation.dialogfragment.BaseSnackbarFragment
 import com.loskon.githubapi.base.presentation.viewmodel.IOErrorType
 import com.loskon.githubapi.base.widget.recyclerview.AddAnimationItemAnimator
 import com.loskon.githubapi.databinding.FragmentUserProfileBinding
-import com.loskon.githubapi.network.glide.ImageLoader
-import com.loskon.githubapi.network.retrofit.model.UserModel
+import com.loskon.githubapi.network.model.UserModel
+import com.loskon.githubapi.utils.ImageLoader
+import com.loskon.githubapi.utils.NetworkUtil
 import com.loskon.githubapi.viewbinding.viewBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
-import timber.log.Timber
 
-class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
+class UserProfileFragment : BaseSnackbarFragment(R.layout.fragment_user_profile) {
 
     private val viewModel: UserProfileViewModel by viewModel(parameters = { parametersOf(args.username) })
     private val binding by viewBinding(FragmentUserProfileBinding::bind)
@@ -49,7 +48,7 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
                 viewModel.performUserRequest()
                 isRefreshing = false
             }
-            setColorSchemeColors(getColorPrimary())
+            setColorSchemeColors(getColorPrimary)
         }
     }
 
@@ -79,14 +78,13 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
             userProfileState.user?.let { setUser(it) }
         }
 
-        viewModel.getIoErrorState.observe(viewLifecycleOwner) {
-            if (it != null) showError(it.type, it.message)
+        viewModel.getIoErrorState.observe(viewLifecycleOwner) { ioErrorState ->
+            if (ioErrorState?.type != null) showError(ioErrorState.type, ioErrorState.message)
         }
     }
 
     private fun displayViews(userProfileState: UserProfileState) {
         with(binding) {
-            //Timber.d(userProfileState.loading.toString())
             incUserProfile.root.setGoneVisibleKtx(userProfileState.user != null)
             indicatorUserProfile.setGoneVisibleKtx(userProfileState.loading)
             tvOfflineModeUserProfile.setGoneVisibleKtx(userProfileState.fromCache)
@@ -106,20 +104,40 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
         }
     }
 
-    private fun showError(errorType: IOErrorType?, message: String?) {
-        Timber.d(errorType.toString())
+    private fun showError(errorType: IOErrorType, message: String?) {
         when (errorType) {
-            IOErrorType.EMPTY_CACHE -> showSnackbar(getString(R.string.no_internet_connection))
-            IOErrorType.NO_SUCCESSFUL -> showSnackbar(getString(R.string.problems_get_data, message))
-            IOErrorType.TIMEOUT -> showSnackbar(getString(R.string.timeout))
-            IOErrorType.UNKNOWN_HOST -> showSnackbar(getString(R.string.unknown_host))
-            IOErrorType.OTHER -> showSnackbar(message)
-            null -> {}
+            IOErrorType.EMPTY_CACHE -> showTextSnackbar(getString(R.string.no_internet_connection))
+            IOErrorType.NO_SUCCESSFUL -> showTextSnackbar(getString(R.string.problems_get_data, message))
+            IOErrorType.TIMEOUT -> showTimeoutSnackbar()
+            IOErrorType.UNKNOWN_HOST -> showUnknownHostSnackbar()
+            IOErrorType.OTHER -> showActionSnackbar(message)
         }
     }
 
-    private fun showSnackbar(errorMessage: String?) {
-        val message = errorMessage ?: getString(R.string.unknown_error)
-        Snackbar.make(binding.root, message, Snackbar.LENGTH_LONG).setAnchorView(binding.bottomBarUserProfile).show()
+    // TODO
+    private fun showTimeoutSnackbar() {
+        if (NetworkUtil.hasConnected(requireContext()).not()) {
+            showTextSnackbar(getString(R.string.no_internet_connection))
+        } else {
+            showActionSnackbar(getString(R.string.timeout))
+        }
+    }
+
+    private fun showUnknownHostSnackbar() {
+        if (NetworkUtil.hasConnected(requireContext()).not()) {
+            showTextSnackbar(getString(R.string.no_internet_connection))
+        } else {
+            showActionSnackbar(getString(R.string.unknown_host))
+        }
+    }
+
+    private fun showActionSnackbar(message: String?) {
+        showActionSnackbar(binding.root, binding.bottomBarUserProfile, message) {
+            viewModel.performUserRequest()
+        }
+    }
+
+    private fun showTextSnackbar(message: String?) {
+        showTextSnackbar(binding.root, binding.bottomBarUserProfile, message)
     }
 }

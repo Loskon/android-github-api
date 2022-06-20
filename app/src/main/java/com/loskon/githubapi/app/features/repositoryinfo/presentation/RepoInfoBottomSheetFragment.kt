@@ -10,7 +10,7 @@ import com.loskon.githubapi.base.extension.view.setDebounceClickListener
 import com.loskon.githubapi.base.extension.view.setGoneVisibleKtx
 import com.loskon.githubapi.base.presentation.dialogfragment.BaseBottomSheetDialogFragment
 import com.loskon.githubapi.databinding.SheetRepositoryInfoBinding
-import com.loskon.githubapi.network.retrofit.model.RepositoryModel
+import com.loskon.githubapi.network.model.RepositoryModel
 import com.loskon.githubapi.viewbinding.viewBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf

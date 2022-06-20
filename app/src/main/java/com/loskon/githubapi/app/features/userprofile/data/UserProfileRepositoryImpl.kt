@@ -1,11 +1,11 @@
 package com.loskon.githubapi.app.features.userprofile.data
 
 import com.loskon.githubapi.app.features.userprofile.domain.UserProfileRepository
-import com.loskon.githubapi.network.retrofit.NetworkDataSource
-import com.loskon.githubapi.network.retrofit.dto.toRepositoryModel
-import com.loskon.githubapi.network.retrofit.dto.toUserModel
-import com.loskon.githubapi.network.retrofit.model.RepositoryModel
-import com.loskon.githubapi.network.retrofit.model.UserModel
+import com.loskon.githubapi.network.NetworkDataSource
+import com.loskon.githubapi.network.dto.toRepositoryModel
+import com.loskon.githubapi.network.dto.toUserModel
+import com.loskon.githubapi.network.model.RepositoryModel
+import com.loskon.githubapi.network.model.UserModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 

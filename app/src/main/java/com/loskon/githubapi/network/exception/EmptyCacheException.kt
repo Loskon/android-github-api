@@ -1,4 +1,4 @@
-package com.loskon.githubapi.network.retrofit.exception
+package com.loskon.githubapi.network.exception
 
 import java.io.IOException
 

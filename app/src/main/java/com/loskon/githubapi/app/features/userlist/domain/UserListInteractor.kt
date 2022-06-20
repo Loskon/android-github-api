@@ -1,6 +1,6 @@
 package com.loskon.githubapi.app.features.userlist.domain
 
-import com.loskon.githubapi.network.retrofit.model.UserModel
+import com.loskon.githubapi.network.model.UserModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 

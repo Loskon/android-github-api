@@ -46,11 +46,6 @@ android {
     buildFeatures {
         viewBinding true
     }
-
-    sourceSets {
-        main.java.srcDirs += 'src/main/kotlin'
-        test.java.srcDirs += 'src/test/kotlin'
-    }
 }
 
 dependencies {
@@ -74,6 +69,7 @@ dependencies {
     implementation deps.core
     // DI
     implementation deps.koin
+    implementation deps.bundles.koinTest
     // Timber
     implementation deps.timber
     // Misc

@@ -1,4 +1,4 @@
-package com.loskon.githubapi.network.retrofit.model
+package com.loskon.githubapi.network.model
 
 import java.time.LocalDateTime
 

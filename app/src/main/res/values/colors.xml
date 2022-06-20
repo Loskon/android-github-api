@@ -15,4 +15,10 @@
     <color name="sienna2">#0D9C4247</color>
     <color name="github">#1c2128</color>
     <color name="github2">#0D1C2128</color>
+    <color name="github_back">#22272e</color>
+    <!-- Background -->
+    <color name="widget_search_view">#15000000</color>
+    <color name="window_background_dark">#121212</color>
+    <color name="black_light">#272727</color>
+    <color name="widget_backup_image">#DFDFDF</color>
 </resources>

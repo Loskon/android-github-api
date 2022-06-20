@@ -1,34 +1,39 @@
 package com.loskon.githubapi.base.extension.content
 
 import android.content.Context
+import android.graphics.Typeface
 import android.util.TypedValue
 import androidx.annotation.AttrRes
-import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
+import androidx.annotation.FontRes
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import com.google.android.material.color.MaterialColors
 
-@ColorInt
-fun Context.getColorCtx(@ColorRes color: Int): Int {
-    return ContextCompat.getColor(this, color)
+fun Context.getColorCtx(@ColorRes colorId: Int): Int {
+    return ContextCompat.getColor(this, colorId)
 }
 
-@ColorInt
+fun Context.getFontKtx(@FontRes fontId: Int): Typeface? {
+    return ResourcesCompat.getFont(this, fontId)
+}
+
 fun Context.getThemeMaterialColorKtx(@AttrRes attrRes: Int): Int {
     return MaterialColors.getColor(this, attrRes, 0)
 }
 
-@ColorInt
 fun Context.getThemeColorKtx(@AttrRes attrRes: Int): Int = TypedValue()
     .apply { theme.resolveAttribute(attrRes, this, true) }
     .data
 
-@ColorInt
+fun Context.getColorControlHighlightKtx(): Int {
+    return getThemeMaterialColorKtx(android.R.attr.colorControlHighlight)
+}
+
 fun Context.getColorPrimaryKtx(): Int {
     return getThemeMaterialColorKtx(android.R.attr.colorPrimary)
 }
 
-@ColorInt
 fun Context.getColorAccentKtx(): Int {
     return getThemeMaterialColorKtx(android.R.attr.colorAccent)
 }

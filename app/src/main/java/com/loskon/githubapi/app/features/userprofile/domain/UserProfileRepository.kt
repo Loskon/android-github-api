@@ -1,7 +1,7 @@
 package com.loskon.githubapi.app.features.userprofile.domain
 
-import com.loskon.githubapi.network.retrofit.model.RepositoryModel
-import com.loskon.githubapi.network.retrofit.model.UserModel
+import com.loskon.githubapi.network.model.RepositoryModel
+import com.loskon.githubapi.network.model.UserModel
 import kotlinx.coroutines.flow.Flow
 
 interface UserProfileRepository {

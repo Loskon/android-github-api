@@ -1,9 +1,9 @@
-package com.loskon.githubapi.network.retrofit
+package com.loskon.githubapi.network
 
-import com.loskon.githubapi.network.retrofit.CacheInterceptor.Companion.CACHE_HEADER
-import com.loskon.githubapi.network.retrofit.dto.RepositoryDto
-import com.loskon.githubapi.network.retrofit.dto.UserDto
-import com.loskon.githubapi.network.retrofit.exception.NoSuccessfulException
+import com.loskon.githubapi.network.CacheInterceptor.Companion.CACHE_HEADER
+import com.loskon.githubapi.network.dto.RepositoryDto
+import com.loskon.githubapi.network.dto.UserDto
+import com.loskon.githubapi.network.exception.NoSuccessfulException
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
@@ -16,7 +16,7 @@ class NetworkDataSource(
             val response = githubApi.getUsers(pageSize)
 
             if (response.isSuccessful) {
-                val fromCache = response.headers().get(CACHE_HEADER).toBoolean()
+                val fromCache = response.headers()[CACHE_HEADER].toBoolean()
                 emit(fromCache to (response.body() ?: emptyList()))
             } else {
                 throw NoSuccessfulException(response.code())
@@ -29,7 +29,7 @@ class NetworkDataSource(
             val response = githubApi.getUser(username)
 
             if (response.isSuccessful) {
-                val fromCache = response.headers().get(CACHE_HEADER).toBoolean()
+                val fromCache = response.headers()[CACHE_HEADER].toBoolean()
                 emit(fromCache to (response.body() ?: UserDto()))
             } else {
                 throw NoSuccessfulException(response.code())
@@ -42,7 +42,7 @@ class NetworkDataSource(
             val response = githubApi.getRepositories(username)
 
             if (response.isSuccessful) {
-                val fromCache = response.headers().get(CACHE_HEADER).toBoolean()
+                val fromCache = response.headers()[CACHE_HEADER].toBoolean()
                 emit(fromCache to (response.body() ?: emptyList()))
             } else {
                 throw NoSuccessfulException(response.code())

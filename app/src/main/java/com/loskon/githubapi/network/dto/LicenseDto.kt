@@ -1,7 +1,7 @@
-package com.loskon.githubapi.network.retrofit.dto
+package com.loskon.githubapi.network.dto
 
 import com.google.gson.annotations.SerializedName
-import com.loskon.githubapi.network.retrofit.model.LicenseModel
+import com.loskon.githubapi.network.model.LicenseModel
 
 data class LicenseDto(
     @SerializedName("key") val key: String? = null,
