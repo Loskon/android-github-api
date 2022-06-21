@@ -3,58 +3,58 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/card_view_repository"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="@dimen/margin_xsmall"
     app:cardBackgroundColor="@color/card_view_background"
     app:cardCornerRadius="@dimen/margin_xsmall"
     app:cardUseCompatPadding="true"
-    app:rippleColor="?attr/colorControlHighlight">
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
 
     <LinearLayout
-        android:id="@+id/lin_layout_repository_card"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:paddingHorizontal="@dimen/margin_xmedium"
         android:paddingVertical="@dimen/margin_xmedium">
 
+        <ImageView
+            android:id="@+id/iv_user_profile_avatar"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center_horizontal"
+            tools:ignore="ContentDescription"
+            tools:src="@android:mipmap/sym_def_app_icon" />
+
         <TextView
-            android:id="@+id/tv_repository_card_name"
+            android:id="@+id/tv_user_profile_login"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:ellipsize="end"
-            android:gravity="start"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:gravity="center"
             android:textColor="@color/primary_text"
             android:textSize="@dimen/txt_medium"
             android:textStyle="bold"
-            tools:text="fullName" />
+            tools:text="login" />
 
         <TextView
-            android:id="@+id/tv_repository_description_card"
+            android:id="@+id/tv_user_profile_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_xsmall"
-            android:ellipsize="end"
-            android:gravity="start"
-            android:maxLines="2"
+            android:gravity="center"
             android:textColor="@color/secondary_text"
-            android:textSize="@dimen/txt_small"
-            tools:ignore="TextContrastCheck"
-            tools:text="description" />
+            tools:text="name" />
 
         <TextView
-            android:id="@+id/tv_repository_language_card"
+            android:id="@+id/tv_user_profile_location"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_xsmall"
-            android:ellipsize="end"
-            android:gravity="start"
+            android:gravity="center"
             android:textColor="@color/secondary_text"
-            android:textSize="@dimen/txt_small"
-            tools:ignore="TextContrastCheck"
-            tools:text="language" />
-
+            tools:text="location" />
     </LinearLayout>
+
 </com.google.android.material.card.MaterialCardView>

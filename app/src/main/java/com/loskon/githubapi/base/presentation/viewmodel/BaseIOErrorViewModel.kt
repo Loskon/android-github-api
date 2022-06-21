@@ -61,8 +61,9 @@ open class IOErrorViewModel : BaseViewModel() {
     }
 
     private fun tryEmitErrorState(error: IOErrorType?, message: String? = null) {
-        val value = getStateValue(error, message)
-        ioErrorState.tryEmit(value)
+        ioErrorState.tryEmit(
+            getStateValue(error, message)
+        )
     }
 
     private fun getStateValue(error: IOErrorType?, message: String?): IOErrorState? {

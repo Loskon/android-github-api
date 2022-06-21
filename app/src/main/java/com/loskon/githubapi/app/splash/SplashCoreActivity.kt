@@ -5,21 +5,20 @@ import android.os.CountDownTimer
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.loskon.githubapi.app.main.MainActivity
-import com.loskon.githubapi.utils.AppPreference
+import com.loskon.githubapi.sharedpreference.AppPreference
 import com.loskon.githubapi.utils.ColorUtil
 import com.loskon.template.base.countdowntimer.SplashCountDownTimer
 
 class SplashCoreActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        ColorUtil.installDarkTheme(AppPreference.hasDarkMode(this))
+        ColorUtil.toggleDarkMode(AppPreference.hasDarkMode(this))
         val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
-        splashScreen.setKeepOnScreenCondition { true }
+        splashScreen.setKeepOnScreenCondition { true } // TODO
     }
 
     override fun onStart() {
-        ColorUtil.installColorTaskDescription(this, AppPreference.hasDarkMode(this))
         super.onStart()
         createSplashTimer().start()
     }

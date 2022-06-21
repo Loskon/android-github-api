@@ -8,6 +8,7 @@
     android:layout_height="wrap_content"
     android:layout_marginStart="@dimen/margin_xsmall"
     android:layout_marginEnd="@dimen/margin_xsmall"
+    app:cardBackgroundColor="@color/card_view_background"
     app:cardCornerRadius="@dimen/margin_xsmall"
     app:cardUseCompatPadding="true"
     app:rippleColor="?attr/colorControlHighlight">
@@ -35,12 +36,13 @@
             android:layout_marginStart="@dimen/margin_xmedium"
             android:ellipsize="end"
             android:gravity="start"
-            android:textColor="@android:color/black"
+            android:textColor="@color/primary_text"
             android:textSize="@dimen/txt_medium"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/ivUserCard"
             app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="TextContrastCheck"
             tools:text="login" />
 
         <TextView
@@ -51,7 +53,7 @@
             android:layout_marginTop="@dimen/margin_xsmall"
             android:ellipsize="end"
             android:gravity="start"
-            android:textColor="@android:color/darker_gray"
+            android:textColor="@color/secondary_text"
             android:textSize="@dimen/txt_small"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

@@ -1,4 +1,4 @@
-package com.loskon.githubapi.base.extension.content
+package com.loskon.githubapi.base.extension.context
 
 import android.content.Context
 import android.graphics.Typeface

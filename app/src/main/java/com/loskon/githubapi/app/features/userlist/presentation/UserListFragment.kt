@@ -16,7 +16,7 @@ import com.loskon.githubapi.base.presentation.dialogfragment.BaseSnackbarFragmen
 import com.loskon.githubapi.base.presentation.viewmodel.IOErrorType
 import com.loskon.githubapi.base.widget.recyclerview.AddAnimationItemAnimator
 import com.loskon.githubapi.databinding.FragmentUserListBinding
-import com.loskon.githubapi.utils.AppPreference
+import com.loskon.githubapi.sharedpreference.AppPreference
 import com.loskon.githubapi.utils.ColorUtil
 import com.loskon.githubapi.viewbinding.viewBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -43,7 +43,7 @@ class UserListFragment : BaseSnackbarFragment(R.layout.fragment_user_list) {
         binding.bottomBarUsersList.setNavigationOnClickListener {
             val theme = AppPreference.hasDarkMode(requireContext()).not()
             AppPreference.setDarkMode(requireContext(), theme)
-            ColorUtil.toggleDarkTheme(theme)
+            ColorUtil.toggleDarkMode(theme)
         }
     }
 

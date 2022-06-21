@@ -16,7 +16,7 @@ import com.loskon.githubapi.base.extension.view.textWithGone
 import com.loskon.githubapi.base.presentation.dialogfragment.BaseSnackbarFragment
 import com.loskon.githubapi.base.presentation.viewmodel.IOErrorType
 import com.loskon.githubapi.base.widget.recyclerview.AddAnimationItemAnimator
-import com.loskon.githubapi.databinding.FragmentUserProfileBinding
+import com.loskon.githubapi.databinding.FragmentUserProfile2Binding
 import com.loskon.githubapi.network.model.UserModel
 import com.loskon.githubapi.utils.ImageLoader
 import com.loskon.githubapi.utils.NetworkUtil
@@ -24,10 +24,10 @@ import com.loskon.githubapi.viewbinding.viewBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-class UserProfileFragment : BaseSnackbarFragment(R.layout.fragment_user_profile) {
+class UserProfileFragment : BaseSnackbarFragment(R.layout.fragment_user_profile2) {
 
     private val viewModel: UserProfileViewModel by viewModel(parameters = { parametersOf(args.username) })
-    private val binding by viewBinding(FragmentUserProfileBinding::bind)
+    private val binding by viewBinding(FragmentUserProfile2Binding::bind)
     private val args: UserProfileFragmentArgs by navArgs()
 
     private val repositoriesAdapter = RepoListAdapter()
@@ -60,7 +60,7 @@ class UserProfileFragment : BaseSnackbarFragment(R.layout.fragment_user_profile)
     }
 
     private fun configureRecyclerView() {
-        with(binding.incUserProfile.rvRepositories) {
+        with(binding.rvRepositories) {
             (itemAnimator as? SimpleItemAnimator)?.supportsChangeAnimations = false
             layoutManager = LinearLayoutManager(requireContext())
             itemAnimator = AddAnimationItemAnimator()
@@ -85,20 +85,22 @@ class UserProfileFragment : BaseSnackbarFragment(R.layout.fragment_user_profile)
 
     private fun displayViews(userProfileState: UserProfileState) {
         with(binding) {
-            incUserProfile.root.setGoneVisibleKtx(userProfileState.user != null)
+            appBar.setGoneVisibleKtx(userProfileState.user != null)
+            ll2.setGoneVisibleKtx(userProfileState.user != null)
             indicatorUserProfile.setGoneVisibleKtx(userProfileState.loading)
             tvOfflineModeUserProfile.setGoneVisibleKtx(userProfileState.fromCache)
+            // (collBar.layoutParams as AppBarLayout.LayoutParams).scrollFlags = 0
         }
     }
 
     private fun setUser(user: UserModel) {
-        with(binding.incUserProfile) {
+        with(binding.incUserProfileCard) {
             user.apply {
                 ImageLoader.loadImage(avatarUrl, ivUserProfileAvatar)
                 tvUserProfileLogin.text = login
                 tvUserProfileName.textWithGone(name)
                 tvUserProfileLocation.textWithGone(location)
-                tvRepositoriesEmpty.setGoneVisibleKtx(repositories.isEmpty())
+                //tvRepositoriesEmpty.setGoneVisibleKtx(repositories.isEmpty())
                 repositoriesAdapter.setRepositories(repositories)
             }
         }

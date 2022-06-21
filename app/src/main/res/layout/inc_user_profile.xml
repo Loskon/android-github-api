@@ -1,21 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent">
+    android:orientation="vertical">
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/materialCardView"
+        android:id="@+id/card_view_user_profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/margin_xsmall"
+        app:cardBackgroundColor="@color/card_view_background"
         app:cardCornerRadius="@dimen/margin_xsmall"
         app:cardUseCompatPadding="true"
         app:layout_constraintEnd_toEndOf="parent"
@@ -42,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_small"
                 android:gravity="center"
-                android:textColor="@android:color/black"
+                android:textColor="@color/primary_text"
                 android:textSize="@dimen/txt_medium"
                 android:textStyle="bold"
                 tools:text="login" />
@@ -53,7 +50,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_xsmall"
                 android:gravity="center"
-                android:textColor="@android:color/darker_gray"
+                android:textColor="@color/secondary_text"
                 tools:ignore="TextContrastCheck"
                 tools:text="name" />
 
@@ -63,7 +60,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_xsmall"
                 android:gravity="center"
-                android:textColor="@android:color/darker_gray"
+                android:textColor="@color/secondary_text"
                 tools:ignore="TextContrastCheck"
                 tools:text="location" />
         </LinearLayout>
@@ -81,13 +78,13 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/materialCardView"
+        app:layout_constraintTop_toBottomOf="@+id/card_view_user_profile"
         tools:ignore="TextContrastCheck" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_repositories"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -96,7 +93,7 @@
 
     <TextView
         android:id="@+id/tv_repositories_empty"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@string/repositories_empty"
@@ -108,4 +105,4 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_public_repositories"
         tools:visibility="visible" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

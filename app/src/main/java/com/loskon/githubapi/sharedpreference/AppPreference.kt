@@ -1,4 +1,4 @@
-package com.loskon.githubapi.utils
+package com.loskon.githubapi.sharedpreference
 
 import android.content.Context
 import androidx.preference.PreferenceManager

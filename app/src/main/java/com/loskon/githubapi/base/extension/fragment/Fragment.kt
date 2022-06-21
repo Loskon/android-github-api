@@ -3,10 +3,10 @@ package com.loskon.githubapi.base.extension.fragment
 import androidx.annotation.ColorRes
 import androidx.annotation.FontRes
 import androidx.fragment.app.Fragment
-import com.loskon.githubapi.base.extension.content.getColorControlHighlightKtx
-import com.loskon.githubapi.base.extension.content.getColorCtx
-import com.loskon.githubapi.base.extension.content.getColorPrimaryKtx
-import com.loskon.githubapi.base.extension.content.getFontKtx
+import com.loskon.githubapi.base.extension.context.getColorControlHighlightKtx
+import com.loskon.githubapi.base.extension.context.getColorCtx
+import com.loskon.githubapi.base.extension.context.getColorPrimaryKtx
+import com.loskon.githubapi.base.extension.context.getFontKtx
 
 val Fragment.getColorPrimary: Int get() = requireContext().getColorPrimaryKtx()
 

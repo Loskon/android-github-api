@@ -3,11 +3,10 @@
 
     <!-- Base Splash screen application theme -->
     <style name="StartingAppTheme" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">@color/github</item>
+        <item name="windowSplashScreenBackground">@color/black_dark</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_frame_7__7_dark</item>
         <item name="postSplashScreenTheme">@style/AppTheme</item>
     </style>
-
 
     <!-- Button Icon -->
     <style name="ButtonIconStyle" parent="Widget.MaterialComponents.Button.OutlinedButton.Icon">
@@ -31,6 +30,7 @@
 
     <!-- RoundedSheetDialogStyle -->
     <style name="RoundedSheetDialogStyle" parent="Theme.MaterialComponents.DayNight.BottomSheetDialog">
+        <item name="colorPrimary">@color/primary_app_color</item>
         <item name="bottomSheetStyle">@style/RoundBackgroundStyle</item>
         <item name="android:windowIsFloating">false</item>
         <item name="android:windowSoftInputMode">adjustResize</item>
@@ -41,10 +41,4 @@
     <style name="RoundBackgroundStyle" parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@drawable/sheet_round_corner</item>
     </style>
-
-    <!-- RoundedSheetDialogStyle -->
-    <style name="BottomAppBarColor">
-        <item name="colorControlNormal">@android:color/holo_red_dark</item>
-    </style>
-
 </resources>
