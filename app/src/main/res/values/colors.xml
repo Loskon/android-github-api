@@ -7,8 +7,11 @@
     <color name="slateblue">#6750a4</color>
     <color name="sienna">#9c4247</color>
     <color name="sienna2">#0D9C4247</color>
+
+    <color name="accent_on_grey">#E8ECF1</color>
     <!-- Light -->
     <color name="blue_light">#0969DA</color>
+    <color name="error_red_light">#D73A49</color>
     <color name="primary_text_light">#2C3137</color>
     <color name="secondary_text_light">#606872</color>
     <color name="item_background_light">#F6F8FA</color>
@@ -23,10 +26,14 @@
     <color name="secondary_text_dark">#707D89</color>
     <!-- Views -->
     <color name="primary_app_color">@color/blue_light</color>
-    <color name="task_description">@android:color/white</color>
-    <color name="sheet_background">@android:color/white</color>
-    <color name="primary_text">@color/primary_text_light</color>
-    <color name="secondary_text">@color/secondary_text_light</color>
-    <color name="card_view_background">@color/item_background_light</color>
-    <color name="bottom_bar_background">@color/item_background_light</color>
+    <color name="task_description_color">@android:color/white</color>
+    <color name="sheet_background_color">@android:color/white</color>
+    <color name="primary_text_color">@color/primary_text_light</color>
+    <color name="secondary_text_color">@color/secondary_text_light</color>
+    <color name="card_view_background_color">@color/item_background_light</color>
+    <color name="bottom_bar_background_color">@color/item_background_light</color>
+    <color name="error_color">@color/error_red_light</color>
+
+    <color name="txtxt">@color/secondary_text_light</color>
+    <color name="bgbg">@color/accent_on_grey</color>
 </resources>

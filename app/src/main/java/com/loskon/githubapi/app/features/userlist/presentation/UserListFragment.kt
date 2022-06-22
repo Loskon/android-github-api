@@ -1,6 +1,5 @@
 package com.loskon.githubapi.app.features.userlist.presentation
 
-import android.animation.LayoutTransition
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
@@ -31,7 +30,6 @@ class UserListFragment : BaseSnackbarFragment(R.layout.fragment_user_list) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        configureParentLayout()
         configureRefreshLayout()
         configureUserListAdapter()
         configureRecyclerView()
@@ -45,11 +43,6 @@ class UserListFragment : BaseSnackbarFragment(R.layout.fragment_user_list) {
             AppPreference.setDarkMode(requireContext(), theme)
             ColorUtil.toggleDarkMode(theme)
         }
-    }
-
-    private fun configureParentLayout() {
-        // To disable flickering animation
-        binding.linLayoutUserList.layoutTransition.disableTransitionType(LayoutTransition.APPEARING)
     }
 
     private fun configureRefreshLayout() {
@@ -70,7 +63,7 @@ class UserListFragment : BaseSnackbarFragment(R.layout.fragment_user_list) {
     }
 
     private fun configureRecyclerView() {
-        with(binding.rvUsers) {
+        with(binding.rvUserList) {
             (itemAnimator as? SimpleItemAnimator)?.supportsChangeAnimations = false
             layoutManager = LinearLayoutManager(requireContext())
             itemAnimator = AddAnimationItemAnimator()

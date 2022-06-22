@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardBackgroundColor="@color/card_view_background"
+    app:cardBackgroundColor="@color/card_view_background_color"
     app:cardCornerRadius="@dimen/margin_xsmall"
     app:cardUseCompatPadding="true"
     app:layout_constraintEnd_toEndOf="parent"
@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_small"
             android:gravity="center"
-            android:textColor="@color/primary_text"
+            android:textColor="@color/primary_text_color"
             android:textSize="@dimen/txt_medium"
             android:textStyle="bold"
             tools:text="login" />
@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_xsmall"
             android:gravity="center"
-            android:textColor="@color/secondary_text"
+            android:textColor="@color/secondary_text_color"
             tools:text="name" />
 
         <TextView
@@ -53,7 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_xsmall"
             android:gravity="center"
-            android:textColor="@color/secondary_text"
+            android:textColor="@color/secondary_text_color"
             tools:text="location" />
     </LinearLayout>
 

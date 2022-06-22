@@ -42,7 +42,7 @@ open class BaseSnackbarFragment(contentLayoutId: Int) : Fragment(contentLayoutId
         return CustomSnackbar().create {
             make(view, message, length)
             setAnchorView(anchorView)
-            setBackgroundTintList(getColor(R.color.sienna))
+            setBackgroundTintList(getColor(R.color.error_color))
             setTextColor(Color.WHITE)
             setFont(getFont(R.font.roboto_light))
         }

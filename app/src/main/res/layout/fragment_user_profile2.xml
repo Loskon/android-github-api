@@ -4,99 +4,71 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
+    android:layout_height="match_parent">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
-        android:fitsSystemWindows="true"
         app:elevation="0dp">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/coll_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fitsSystemWindows="true"
-            app:layout_scrollFlags="scroll">
+            app:layout_scrollFlags="scroll"
+            app:statusBarScrim="@android:color/transparent">
 
             <include
                 android:id="@+id/inc_user_profile_card"
                 layout="@layout/inc_user_profile_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/margin_xsmall"
-                android:fitsSystemWindows="true" />
+                android:layout_marginHorizontal="@dimen/margin_xsmall" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <LinearLayout
-        android:id="@+id/lin_layout_user_profile"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/refresh_layout_user_profile"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="@dimen/bottom_bar_height"
-        android:animateLayoutChanges="true"
-        android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <TextView
-            android:id="@+id/tv_offline_mode_user_profile"
+        <LinearLayout
+            android:id="@+id/ll2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/darker_gray"
-            android:gravity="center"
-            android:padding="2dp"
-            android:text="@string/offline_mode"
-            android:textColor="@android:color/white"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="TextContrastCheck"
-            tools:visibility="visible" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/refresh_layout_user_profile"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/tv_public_repositories2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="@dimen/margin_small"
+                android:text="@string/public_repositories"
+                android:textColor="?android:colorPrimary"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/card_view_user_profile"
+                tools:ignore="TextContrastCheck" />
 
-            <LinearLayout
-                android:id="@+id/ll2"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_repositories"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_public_repositories"
+                tools:listitem="@layout/item_repository_card" />
+        </LinearLayout>
 
-                <TextView
-                    android:id="@+id/tv_public_repositories2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:padding="@dimen/margin_small"
-                    android:text="@string/public_repositories"
-                    android:textColor="?android:colorPrimary"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/card_view_user_profile"
-                    tools:ignore="TextContrastCheck" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_repositories"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_public_repositories"
-                    tools:listitem="@layout/item_repository_card" />
-            </LinearLayout>
-
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-    </LinearLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <com.google.android.material.progressindicator.LinearProgressIndicator
         android:id="@+id/indicator_user_profile"
@@ -115,8 +87,25 @@
         android:layout_height="@dimen/bottom_bar_height"
         android:layout_gravity="bottom"
         android:layout_marginTop="@dimen/margin_xsmall"
-        app:backgroundTint="@color/bottom_bar_background"
+        app:backgroundTint="@color/bottom_bar_background_color"
         app:navigationIcon="@drawable/baseline_navigate_before_black_24"
-        app:navigationIconTint="?android:colorPrimary" />
+        app:navigationIconTint="?android:colorPrimary">
+
+        <TextView
+            android:id="@+id/tv_offline_mode_user_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/bg"
+            android:gravity="center"
+            android:paddingStart="@dimen/margin_xmedium"
+            android:paddingTop="@dimen/margin_tiny"
+            android:paddingEnd="@dimen/margin_xmedium"
+            android:paddingBottom="@dimen/margin_tiny"
+            android:text="@string/offline_mode"
+            android:textColor="@color/txtxt"
+            android:visibility="gone"
+            tools:visibility="visible" />
+    </com.google.android.material.bottomappbar.BottomAppBar>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
