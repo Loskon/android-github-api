@@ -49,7 +49,7 @@ android {
 }
 
 dependencies {
-    // Desugaring
+    // Desugar
     coreLibraryDesugaring deps.desugar
     // Android
     implementation deps.appcompat

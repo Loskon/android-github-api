@@ -2,6 +2,7 @@ package com.loskon.githubapi.sharedpreference
 
 import android.content.Context
 import androidx.preference.PreferenceManager
+import com.loskon.githubapi.R
 
 object AppPreference {
 
@@ -52,6 +53,7 @@ object AppPreference {
     }
 
     fun hasDarkMode(context: Context): Boolean {
-        return getBooleanPreference(context, PREF_KEY_DARK_MODE, false)
+        val key: String = context.getString(R.string.dark_mode_key)
+        return getBooleanPreference(context, key, false)
     }
 }

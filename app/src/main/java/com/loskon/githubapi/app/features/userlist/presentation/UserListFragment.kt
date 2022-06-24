@@ -9,15 +9,13 @@ import com.loskon.githubapi.R
 import com.loskon.githubapi.app.features.userlist.presentation.adapter.UserListAdapter
 import com.loskon.githubapi.app.features.userlist.presentation.state.UserListState
 import com.loskon.githubapi.base.extension.flow.observe
-import com.loskon.githubapi.base.extension.fragment.getColor
 import com.loskon.githubapi.base.extension.fragment.colorPrimary
+import com.loskon.githubapi.base.extension.fragment.getColor
 import com.loskon.githubapi.base.extension.view.setGoneVisibleKtx
 import com.loskon.githubapi.base.presentation.dialogfragment.BaseSnackbarFragment
 import com.loskon.githubapi.base.presentation.viewmodel.IOErrorType
 import com.loskon.githubapi.base.widget.recyclerview.AddAnimationItemAnimator
 import com.loskon.githubapi.databinding.FragmentUserListBinding
-import com.loskon.githubapi.sharedpreference.AppPreference
-import com.loskon.githubapi.utils.ColorUtil
 import com.loskon.githubapi.viewbinding.viewBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -40,9 +38,8 @@ class UserListFragment : BaseSnackbarFragment(R.layout.fragment_user_list) {
 
     private fun setupViewsListener() {
         binding.bottomBarUsersList.setNavigationOnClickListener {
-            val theme = AppPreference.hasDarkMode(requireContext()).not()
-            AppPreference.setDarkMode(requireContext(), theme)
-            ColorUtil.toggleDarkMode(theme)
+            val action = UserListFragmentDirections.openSettingsFragment()
+            findNavController().navigate(action)
         }
     }
 
@@ -59,7 +56,7 @@ class UserListFragment : BaseSnackbarFragment(R.layout.fragment_user_list) {
 
     private fun configureUserListAdapter() {
         usersAdapter.setItemClickListener { user ->
-            val action = UserListFragmentDirections.goUserProfileFragment(user.login)
+            val action = UserListFragmentDirections.openUserProfileFragment(user.login)
             findNavController().navigate(action)
         }
     }

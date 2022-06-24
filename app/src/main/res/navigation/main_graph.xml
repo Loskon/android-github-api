@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     app:startDestination="@id/userListFragment">
 
@@ -10,8 +10,11 @@
         android:label="UsersFragment"
         tools:layout="@layout/fragment_user_list">
         <action
-            android:id="@+id/goUserProfileFragment"
+            android:id="@+id/openUserProfileFragment"
             app:destination="@id/userProfileFragment" />
+        <action
+            android:id="@+id/openSettingsFragment"
+            app:destination="@id/openSettingsFragment" />
     </fragment>
 
     <fragment
@@ -23,7 +26,7 @@
             android:name="username"
             app:argType="string" />
         <action
-            android:id="@+id/goRepositoryInfoBottomSheetFragment"
+            android:id="@+id/openRepositoryInfoBottomSheetFragment"
             app:destination="@id/repositoryInfo" />
     </fragment>
 
@@ -37,5 +40,11 @@
             android:name="repository"
             app:argType="com.loskon.githubapi.network.model.RepositoryModel" />
     </dialog>
+
+    <fragment
+        android:id="@+id/openSettingsFragment"
+        android:name="com.loskon.githubapi.app.features.settings.OpenSettingsFragment"
+        android:label="OpenSettingsFragment"
+        tools:layout="@layout/fragment_settings" />
 
 </navigation>

@@ -59,7 +59,7 @@ class UserProfileFragment : BaseSnackbarFragment(R.layout.fragment_user_profile3
 
     private fun configureRepoListAdapter() {
         repositoriesAdapter.setItemClickListener { repository ->
-            val action = UserProfileFragmentDirections.goRepositoryInfoBottomSheetFragment(repository)
+            val action = UserProfileFragmentDirections.openRepositoryInfoBottomSheetFragment(repository)
             findNavController().navigate(action)
         }
     }
