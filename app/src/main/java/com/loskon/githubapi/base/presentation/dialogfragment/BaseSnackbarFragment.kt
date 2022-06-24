@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 import com.loskon.githubapi.R
 import com.loskon.githubapi.base.extension.fragment.getColor
-import com.loskon.githubapi.base.extension.fragment.getColorControlHighlight
+import com.loskon.githubapi.base.extension.fragment.controlHighlight
 import com.loskon.githubapi.base.extension.fragment.getFont
 import com.loskon.githubapi.base.widget.snackbar.CustomSnackbar
 
@@ -56,7 +56,7 @@ open class BaseSnackbarFragment(contentLayoutId: Int) : Fragment(contentLayoutId
     ): CustomSnackbar {
         return createStylizedSnackbar(view, anchorView, message, Snackbar.LENGTH_INDEFINITE).apply {
             setAction(getString(R.string.retry)) { action() }
-            setActionRippleColor(getColorControlHighlight)
+            setActionRippleColor(controlHighlight)
             setActionStroke(2, Color.WHITE)
         }
     }

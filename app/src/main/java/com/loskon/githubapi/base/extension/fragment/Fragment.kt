@@ -8,9 +8,9 @@ import com.loskon.githubapi.base.extension.context.getColorCtx
 import com.loskon.githubapi.base.extension.context.getColorPrimaryKtx
 import com.loskon.githubapi.base.extension.context.getFontKtx
 
-val Fragment.getColorPrimary: Int get() = requireContext().getColorPrimaryKtx()
+val Fragment.colorPrimary: Int get() = requireContext().getColorPrimaryKtx()
 
-val Fragment.getColorControlHighlight: Int get() = requireContext().getColorControlHighlightKtx()
+val Fragment.controlHighlight: Int get() = requireContext().getColorControlHighlightKtx()
 
 fun Fragment.getColor(@ColorRes colorId: Int): Int = requireContext().getColorCtx(colorId)
 

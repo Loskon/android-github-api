@@ -9,7 +9,8 @@ import com.loskon.githubapi.R
 import com.loskon.githubapi.app.features.userlist.presentation.adapter.UserListAdapter
 import com.loskon.githubapi.app.features.userlist.presentation.state.UserListState
 import com.loskon.githubapi.base.extension.flow.observe
-import com.loskon.githubapi.base.extension.fragment.getColorPrimary
+import com.loskon.githubapi.base.extension.fragment.getColor
+import com.loskon.githubapi.base.extension.fragment.colorPrimary
 import com.loskon.githubapi.base.extension.view.setGoneVisibleKtx
 import com.loskon.githubapi.base.presentation.dialogfragment.BaseSnackbarFragment
 import com.loskon.githubapi.base.presentation.viewmodel.IOErrorType
@@ -47,11 +48,12 @@ class UserListFragment : BaseSnackbarFragment(R.layout.fragment_user_list) {
 
     private fun configureRefreshLayout() {
         with(binding.refreshLayoutUserList) {
+            setProgressBackgroundColorSchemeColor(getColor(R.color.swipe_background_color))
+            setColorSchemeColors(colorPrimary)
             setOnRefreshListener {
                 viewModel.performUsersRequest()
                 isRefreshing = false
             }
-            setColorSchemeColors(getColorPrimary)
         }
     }
 

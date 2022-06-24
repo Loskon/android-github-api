@@ -6,6 +6,7 @@
     <string name="problems_get_data">Problems with getting data. Error code: %1$s</string>
     <string name="unknown_error">Unknown error</string>
     <string name="public_repositories">Public repositories:</string>
+    <string name="no_public_repositories">No public repositories</string>
 
     <string name="to_close">To close</string>
     <string name="repositories_empty">No public repositories :(</string>
@@ -19,6 +20,8 @@
     <string name="timeout">Bad internet connection. Try again!</string>
     <string name="unknown_host">Server connection problems. Try again!</string>
     <string name="offline_mode">Offline mode</string>
+
+    <string name="created_date">Created date: %1$s</string>
 
     <string name="retry">Retry</string>
 </resources>

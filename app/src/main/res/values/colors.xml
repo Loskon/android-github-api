@@ -32,6 +32,7 @@
     <color name="secondary_text_color">@color/secondary_text_light</color>
     <color name="card_view_background_color">@color/item_background_light</color>
     <color name="bottom_bar_background_color">@color/item_background_light</color>
+    <color name="swipe_background_color">@android:color/white</color>
     <color name="error_color">@color/error_red_light</color>
 
     <color name="txtxt">@color/secondary_text_light</color>

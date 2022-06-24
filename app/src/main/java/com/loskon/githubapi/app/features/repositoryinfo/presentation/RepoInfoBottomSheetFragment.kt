@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.navArgs
 import com.loskon.githubapi.R
-import com.loskon.githubapi.base.datetime.toFormattedString
+import com.loskon.githubapi.base.datetime.toFormatString
 import com.loskon.githubapi.base.extension.flow.observe
 import com.loskon.githubapi.base.extension.view.setDebounceClickListener
 import com.loskon.githubapi.base.extension.view.setGoneVisibleKtx
@@ -58,9 +58,9 @@ class RepoInfoBottomSheetFragment : BaseBottomSheetDialogFragment(R.layout.sheet
                 }
 
                 tvRepositorySize.text = size.toString()
-                tvRepositoryCreatedDate.text = createdAt.toFormattedString()
-                tvRepositoryUpdatedDate.text = updatedAt.toFormattedString()
-                tvRepositoryPushedDate.text = pushedAt.toFormattedString()
+                tvRepositoryCreatedDate.text = createdAt.toFormatString()
+                tvRepositoryUpdatedDate.text = updatedAt.toFormatString()
+                tvRepositoryPushedDate.text = pushedAt.toFormatString()
                 tvRepositoryUrl.text = htmlUrl
             }
         }

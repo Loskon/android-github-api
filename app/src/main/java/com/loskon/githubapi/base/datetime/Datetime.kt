@@ -25,11 +25,11 @@ fun LocalDateTime.toDate(): Date {
     return Date(atZone(ZoneId.systemDefault()).toInstant().toEpochMilli())
 }
 
-fun LocalDateTime.toFormattedString(): String {
+fun LocalDateTime.toFormatString(): String {
     return format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT, FormatStyle.SHORT))
 }
 
-fun LocalDateTime.toFormattedString(pattern: String = FULL_DATE_TIME): String {
+fun LocalDateTime.toFormatString(pattern: String = FULL_DATE_TIME): String {
     return format(
         when (pattern) {
             FULL_DATE_TIME -> DateTimeFormatter.ofPattern(FULL_DATE_TIME)

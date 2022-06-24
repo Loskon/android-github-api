@@ -1,7 +1,9 @@
 package com.loskon.githubapi.network.dto
 
 import com.google.gson.annotations.SerializedName
+import com.loskon.githubapi.base.datetime.toLocalDateTime
 import com.loskon.githubapi.network.model.UserModel
+import java.time.LocalDateTime
 import java.util.Date
 
 data class UserDto(
@@ -48,6 +50,7 @@ fun UserDto.toUserModel(fromCache: Boolean = false): UserModel {
         type = type ?: "",
         name = name ?: "",
         location = location ?: "",
+        createdAt = createdAt?.toLocalDateTime() ?: LocalDateTime.now(),
         fromCache = fromCache
     )
 }

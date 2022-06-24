@@ -41,4 +41,12 @@
     <style name="RoundBackgroundStyle" parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@drawable/sheet_round_corner</item>
     </style>
+
+    <!-- Toolbar Font -->
+    <style name="ToolbarTextFont">
+        <item name="android:textColor">?android:colorPrimary</item>
+        <item name="android:fontFamily">@font/roboto_light</item>
+        <item name="android:textSize">@dimen/txt_medium</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>

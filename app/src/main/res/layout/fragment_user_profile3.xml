@@ -6,59 +6,61 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/app_bar_user_profile"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        app:elevation="0dp"
-        app:layout_behavior=".base.widget.appbarlayout.AppBarLayoutDragBehavior">
-
-        <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/coll_bar_user_profile"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:collapsedTitleTextAppearance="@style/ToolbarTextFont"
-            app:contentScrim="@color/task_description_color"
-            app:expandedTitleTextColor="@android:color/transparent"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
-            app:scrimAnimationDuration="200"
-            app:statusBarScrim="@android:color/transparent">
-
-            <include
-                android:id="@+id/inc_user_profile_card"
-                layout="@layout/inc_user_profile_card2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/toolbar_user_profile"
-                android:layout_width="match_parent"
-                android:layout_height="38dp" />
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
-    </com.google.android.material.appbar.AppBarLayout>
-
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/refreshLayoutUserProfile"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:layout_marginBottom="@dimen/bottom_bar_height">
 
-        <androidx.core.widget.NestedScrollView
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
+
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/app_bar_user_profile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                app:elevation="0dp"
+                app:layout_behavior=".base.widget.appbarlayout.AppBarLayoutDragBehavior">
+
+                <com.google.android.material.appbar.CollapsingToolbarLayout
+                    android:id="@+id/coll_bar_user_profile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:collapsedTitleTextAppearance="@style/ToolbarTextFont"
+                    app:contentScrim="@color/task_description_color"
+                    app:expandedTitleTextColor="@android:color/transparent"
+                    app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+                    app:scrimAnimationDuration="200"
+                    app:statusBarScrim="@android:color/transparent">
+
+                    <include
+                        android:id="@+id/inc_user_profile_card"
+                        layout="@layout/inc_user_profile_card2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <com.google.android.material.appbar.MaterialToolbar
+                        android:id="@+id/toolbar_user_profile"
+                        android:layout_width="match_parent"
+                        android:layout_height="38dp" />
+                </com.google.android.material.appbar.CollapsingToolbarLayout>
+            </com.google.android.material.appbar.AppBarLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_repositories"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
 
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_public_repositories"
                 tools:listitem="@layout/item_repository_card" />
-        </androidx.core.widget.NestedScrollView>
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
