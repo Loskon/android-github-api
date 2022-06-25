@@ -16,15 +16,19 @@ import com.loskon.githubapi.base.presentation.dialogfragment.BaseSnackbarFragmen
 import com.loskon.githubapi.base.presentation.viewmodel.IOErrorType
 import com.loskon.githubapi.base.widget.recyclerview.AddAnimationItemAnimator
 import com.loskon.githubapi.databinding.FragmentUserListBinding
+import com.loskon.githubapi.sharedpreference.AppPreference
 import com.loskon.githubapi.viewbinding.viewBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class UserListFragment : BaseSnackbarFragment(R.layout.fragment_user_list) {
 
-    private val viewModel: UserListViewModel by viewModel()
+    private val viewModel: UserListViewModel by viewModel(parameters = { parametersOf(pageSize) })
     private val binding by viewBinding(FragmentUserListBinding::bind)
 
     private val usersAdapter = UserListAdapter()
+
+    private val pageSize: Int get() = AppPreference.getPageSize(requireContext())
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -48,7 +52,7 @@ class UserListFragment : BaseSnackbarFragment(R.layout.fragment_user_list) {
             setProgressBackgroundColorSchemeColor(getColor(R.color.swipe_background_color))
             setColorSchemeColors(colorPrimary)
             setOnRefreshListener {
-                viewModel.performUsersRequest()
+                viewModel.performUsersRequest(pageSize)
                 isRefreshing = false
             }
         }
@@ -105,7 +109,7 @@ class UserListFragment : BaseSnackbarFragment(R.layout.fragment_user_list) {
 
     private fun showActionSnackbar(message: String?) {
         showActionSnackbar(binding.root, binding.bottomBarUsersList, message) {
-            viewModel.performUsersRequest()
+            viewModel.performUsersRequest(pageSize)
         }
     }
 }

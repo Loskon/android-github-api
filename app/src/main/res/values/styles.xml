@@ -4,7 +4,7 @@
     <!-- Base Splash screen application theme -->
     <style name="StartingAppTheme" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/black_dark</item>
-        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_frame_7__7_dark</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_app_logo</item>
         <item name="postSplashScreenTheme">@style/AppTheme</item>
     </style>
 
@@ -39,7 +39,7 @@
     </style>
 
     <style name="RoundBackgroundStyle" parent="Widget.Design.BottomSheet.Modal">
-        <item name="android:background">@drawable/sheet_round_corner</item>
+        <item name="android:background">@drawable/sheet_bg_round_corner</item>
     </style>
 
     <!-- Toolbar Font -->

@@ -5,5 +5,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface UserListRepository {
 
-    suspend fun getUsersAsFlow(): Flow<List<UserModel>>
+    suspend fun getUsersAsFlow(pageSize: Int): Flow<List<UserModel>>
 }

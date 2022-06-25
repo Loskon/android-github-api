@@ -10,44 +10,16 @@
             app:key="@string/dark_mode_key"
             app:title="@string/dark_mode_title" />
 
-        <EditTextPreference
-            app:iconSpaceReserved="false"
-            app:key="signature"
-            app:title="@string/signature_title"
-            app:useSimpleSummaryProvider="true" />
-
-        <ListPreference
-            app:defaultValue="reply"
-            app:entries="@array/reply_entries"
-            app:entryValues="@array/reply_values"
-            app:iconSpaceReserved="false"
-            app:key="reply"
-            app:title="@string/reply_title"
-            app:useSimpleSummaryProvider="true" />
-
     </PreferenceCategory>
 
     <PreferenceCategory
         app:iconSpaceReserved="false"
-        app:title="@string/sync_header">
+        app:title="@string/number_of_results">
 
-        <com.loskon.githubapi.app.features.settings.SliderPreference
+        <com.loskon.githubapi.base.widget.preference.SliderPreference
             app:defaultValue="30"
             app:iconSpaceReserved="false"
-            app:key="slider" />
-
-        <SwitchPreferenceCompat
-            app:iconSpaceReserved="false"
-            app:key="sync"
-            app:title="@string/sync_title" />
-
-        <SwitchPreferenceCompat
-            app:dependency="sync"
-            app:iconSpaceReserved="false"
-            app:key="attachment"
-            app:summaryOff="@string/attachment_summary_off"
-            app:summaryOn="@string/attachment_summary_on"
-            app:title="@string/attachment_title" />
+            app:key="@string/number_of_results_key" />
 
     </PreferenceCategory>
 

@@ -36,5 +36,5 @@
     <color name="error_color">@color/error_red_light</color>
 
     <color name="txtxt">@color/secondary_text_light</color>
-    <color name="bgbg">@color/accent_on_grey</color>
+    <color name="bg_tv_color">@color/accent_on_grey</color>
 </resources>

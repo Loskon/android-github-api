@@ -6,54 +6,53 @@ import com.loskon.githubapi.R
 
 object AppPreference {
 
-    const val PREF_KEY_DARK_MODE = "dark_mode_pref_key"
-
-    fun setStringPreference(context: Context, key: String, value: String) {
+    fun setPreference(context: Context, key: String, value: String) {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
         sharedPreferences.edit().putString(key, value).apply()
     }
 
-    fun getStringPreference(context: Context, key: String, def: String = ""): String {
+    fun getPreference(context: Context, key: String, def: String = ""): String {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
         return sharedPreferences.getString(key, def) ?: ""
     }
 
-    fun setIntPreference(context: Context, key: String, value: Int) {
+    fun setPreference(context: Context, key: String, value: Int) {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
         sharedPreferences.edit().putInt(key, value).apply()
     }
 
-    fun getIntPreference(context: Context, key: String, def: Int = 0): Int {
+    fun getPreference(context: Context, key: String, def: Int = 0): Int {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
         return sharedPreferences.getInt(key, def)
     }
 
-    fun setLongPreference(context: Context, key: String, value: Long) {
+    fun setPreference(context: Context, key: String, value: Long) {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
         sharedPreferences.edit().putLong(key, value).apply()
     }
 
-    fun getLongPreference(context: Context, key: String, def: Long = 0): Long {
+    fun getPreference(context: Context, key: String, def: Long = 0): Long {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
         return sharedPreferences.getLong(key, def)
     }
 
-    fun setBooleanPreference(context: Context, key: String, value: Boolean) {
+    fun setPreference(context: Context, key: String, value: Boolean) {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
         sharedPreferences.edit().putBoolean(key, value).apply()
     }
 
-    fun getBooleanPreference(context: Context, key: String, def: Boolean = true): Boolean {
+    fun getPreference(context: Context, key: String, def: Boolean = true): Boolean {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
         return sharedPreferences.getBoolean(key, def)
     }
 
-    fun setDarkMode(context: Context, mode: Boolean) {
-        setBooleanPreference(context, PREF_KEY_DARK_MODE, mode)
+    fun getHasDarkMode(context: Context): Boolean {
+        val key = context.getString(R.string.dark_mode_key)
+        return getPreference(context, key, false)
     }
 
-    fun hasDarkMode(context: Context): Boolean {
-        val key: String = context.getString(R.string.dark_mode_key)
-        return getBooleanPreference(context, key, false)
+    fun getPageSize(context: Context): Int {
+        val key = context.getString(R.string.number_of_results_key)
+        return getPreference(context, key, 30)
     }
 }

@@ -7,7 +7,7 @@
     android:layout_height="wrap_content">
 
     <com.google.android.material.slider.Slider
-        android:id="@+id/slider"
+        android:id="@+id/slider_preference"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_xsmall"
@@ -17,7 +17,7 @@
         app:haloRadius="14dp"
         app:labelBehavior="gone"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/tv_slider_value"
+        app:layout_constraintEnd_toStartOf="@+id/tv_value_slider_preference"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:thumbRadius="6dp"
@@ -25,13 +25,13 @@
         tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
-        android:id="@+id/tv_slider_value"
+        android:id="@+id/tv_value_slider_preference"
         android:layout_width="40dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/margin_medium"
-        android:background="@drawable/bg2"
+        android:layout_marginEnd="@dimen/margin_large"
+        android:background="@drawable/bg_tv_slider"
         android:gravity="center"
-        android:padding="4dp"
+        android:padding="@dimen/margin_xsmall"
         android:text="10"
         android:textColor="@color/txtxt"
         app:layout_constraintBottom_toBottomOf="parent"

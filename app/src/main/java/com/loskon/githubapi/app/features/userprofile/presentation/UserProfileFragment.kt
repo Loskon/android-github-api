@@ -20,7 +20,7 @@ import com.loskon.githubapi.base.presentation.viewmodel.IOErrorType
 import com.loskon.githubapi.base.widget.appbarlayout.AppBarLayoutState
 import com.loskon.githubapi.base.widget.appbarlayout.OnAppBarLayoutStateChangeListener
 import com.loskon.githubapi.base.widget.recyclerview.AddAnimationItemAnimator
-import com.loskon.githubapi.databinding.FragmentUserProfile3Binding
+import com.loskon.githubapi.databinding.FragmentUserProfileBinding
 import com.loskon.githubapi.network.model.UserModel
 import com.loskon.githubapi.utils.ImageLoader
 import com.loskon.githubapi.utils.NetworkUtil
@@ -28,10 +28,10 @@ import com.loskon.githubapi.viewbinding.viewBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-class UserProfileFragment : BaseSnackbarFragment(R.layout.fragment_user_profile3) {
+class UserProfileFragment : BaseSnackbarFragment(R.layout.fragment_user_profile) {
 
     private val viewModel: UserProfileViewModel by viewModel(parameters = { parametersOf(args.username) })
-    private val binding by viewBinding(FragmentUserProfile3Binding::bind)
+    private val binding by viewBinding(FragmentUserProfileBinding::bind)
     private val args: UserProfileFragmentArgs by navArgs()
 
     private val repositoriesAdapter = RepoListAdapter()
@@ -119,13 +119,13 @@ class UserProfileFragment : BaseSnackbarFragment(R.layout.fragment_user_profile3
     private fun setUser(user: UserModel) {
         with(binding.incUserProfileCard) {
             user.apply {
-                binding.toolbarUserProfile.title = login
                 ImageLoader.loadImage(avatarUrl, ivUserProfileAvatar)
                 tvUserProfileLogin.text = login
                 tvUserProfileName.textWithGone(name)
                 tvUserProfileLocation.textWithGone(location)
                 tvUserProfileCreatedDate.text = getString(R.string.created_date, createdAt.toFormatString())
-                repositoriesAdapter.setRepositories(repositories.take(10))
+                repositoriesAdapter.setRepositories(repositories)
+                binding.toolbarUserProfile.title = login
             }
         }
     }

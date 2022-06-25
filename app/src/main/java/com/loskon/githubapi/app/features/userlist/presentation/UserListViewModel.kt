@@ -10,7 +10,8 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 
 class UserListViewModel(
-    private val userListInteractor: UserListInteractor
+    private val userListInteractor: UserListInteractor,
+    pageSize: Int
 ) : IOErrorViewModel() {
 
     private val userListState = MutableStateFlow(UserListState())
@@ -19,12 +20,12 @@ class UserListViewModel(
     private var job: Job? = null
 
     init {
-        performUsersRequest()
+        performUsersRequest(pageSize)
     }
 
-    fun performUsersRequest() {
+    fun performUsersRequest(perPage: Int) {
         setLoadingStatus(true)
-        getUsersAsFlow()
+        getUsersAsFlow(perPage)
     }
 
     private fun setLoadingStatus(loading: Boolean) {
@@ -33,10 +34,10 @@ class UserListViewModel(
         )
     }
 
-    private fun getUsersAsFlow() {
+    private fun getUsersAsFlow(perPage: Int) {
         job?.cancel()
         job = launchIOErrorJob(errorFunction = { setLoadingStatus(false) }) {
-            userListInteractor.getUsersAsFlow().collectLatest { setUserListState(it) }
+            userListInteractor.getUsersAsFlow(perPage).collectLatest { setUserListState(it) }
         }
     }
 

@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <declare-styleable name="SliderPreference">
-        <attr name="defaultValue1" format="integer" />
-    </declare-styleable>
-
-</resources>

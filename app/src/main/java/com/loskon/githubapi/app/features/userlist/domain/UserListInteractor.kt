@@ -8,8 +8,8 @@ class UserListInteractor(
     private val userListRepository: UserListRepository
 ) {
 
-    suspend fun getUsersAsFlow(): Flow<List<UserModel>> {
-        return userListRepository.getUsersAsFlow().map { users ->
+    suspend fun getUsersAsFlow(pageSize: Int): Flow<List<UserModel>> {
+        return userListRepository.getUsersAsFlow(pageSize).map { users ->
             users.filter { it.type == USER_TYPE }.sortedBy { it.id }
         }
     }

@@ -1,15 +1,21 @@
 <resources>
-    <!--App -->
+    <!-- App -->
     <string name="app_name">GitHub</string>
 
+    <!-- Snackbar -->
     <string name="no_internet_connection">You need to connect with internet!</string>
     <string name="problems_get_data">Problems with getting data. Error code: %1$s</string>
+    <string name="timeout">Bad internet connection. Try again!</string>
+    <string name="unknown_host">Server connection problems. Try again!</string>
     <string name="unknown_error">Unknown error</string>
+    <string name="retry">Retry</string>
+
+    <!-- User Profile Screen -->
+    <string name="created_date">Created date: %1$s</string>
     <string name="public_repositories">Public repositories:</string>
     <string name="no_public_repositories">No public repositories</string>
 
-    <string name="to_close">To close</string>
-    <string name="repositories_empty">No public repositories :(</string>
+    <!-- Repository Info Screen -->
     <string name="description_header">Description</string>
     <string name="language_header">Language</string>
     <string name="size_header">Size</string>
@@ -17,31 +23,22 @@
     <string name="updated_date_header">Updated date</string>
     <string name="pushed_date_header">Pushed date</string>
     <string name="link_to_repository_header">Link to repository</string>
-    <string name="timeout">Bad internet connection. Try again!</string>
-    <string name="unknown_host">Server connection problems. Try again!</string>
+    <string name="to_close">To close</string>
+
+    <!-- User Card -->
+    <string name="user_id">id: %1$d</string>
+
+    <!-- Other -->
     <string name="offline_mode">Offline mode</string>
-
-    <string name="created_date">Created date: %1$s</string>
-
-    <string name="retry">Retry</string>
-
 
     <!-- Preference Titles -->
     <string name="settings_app_header">Appearance settings</string>
-    <string name="sync_header">Sync</string>
-
+    <string name="number_of_results">Number of results</string>
     <!-- Messages Preferences -->
     <string name="dark_mode_title">Dark mode</string>
-
-    <string name="signature_title">Your signature</string>
-    <string name="reply_title">Default reply action</string>
-
+    <string name="sorting_title">Sorting</string>
     <!-- Preference Keys  -->
     <string name="dark_mode_key">dark_mode_key</string>
+    <string name="number_of_results_key">number_of_results_key</string>
 
-    <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails</string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
 </resources>

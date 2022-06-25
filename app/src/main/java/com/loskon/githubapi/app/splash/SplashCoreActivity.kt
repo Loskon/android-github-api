@@ -12,7 +12,7 @@ import com.loskon.template.base.countdowntimer.SplashCountDownTimer
 class SplashCoreActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        ColorUtil.toggleDarkMode(AppPreference.hasDarkMode(this))
+        ColorUtil.toggleDarkMode(AppPreference.getHasDarkMode(this))
         val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
         splashScreen.setKeepOnScreenCondition { true } // TODO

@@ -12,5 +12,5 @@
     <color name="error_color">@color/error_red_dark</color>
 
     <color name="txtxt">@color/secondary_text_dark</color>
-    <color name="bgbg">@color/item_background_dark</color>
+    <color name="bg_tv_color">@color/item_background_dark</color>
 </resources>

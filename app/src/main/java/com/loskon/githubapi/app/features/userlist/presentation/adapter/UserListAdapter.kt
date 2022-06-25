@@ -3,11 +3,12 @@ package com.loskon.githubapi.app.features.userlist.presentation.adapter
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.loskon.githubapi.R
 import com.loskon.githubapi.base.extension.view.setDebounceClickListener
 import com.loskon.githubapi.base.widget.recyclerview.RecyclerDiffUtil
 import com.loskon.githubapi.databinding.ItemUserCardBinding
-import com.loskon.githubapi.utils.ImageLoader
 import com.loskon.githubapi.network.model.UserModel
+import com.loskon.githubapi.utils.ImageLoader
 import com.loskon.githubapi.viewbinding.viewBinding
 
 /**
@@ -28,7 +29,7 @@ class UserListAdapter : RecyclerView.Adapter<UserListAdapter.UserListViewHolder>
         with(holder.binding) {
             ImageLoader.loadImage(user.avatarUrl, ivUserCard)
             tvUserCardLogin.text = user.login
-            tvUserCardGrade.text = user.id.toString()
+            tvUserCardGrade.text = tvUserCardGrade.context.getString(R.string.user_id, user.id)
             cardViewUser.setDebounceClickListener { clickListener?.invoke(user) }
         }
     }
