@@ -7,8 +7,6 @@ import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 import java.util.Date
 
-const val FULL_DATE_TIME = "yyyy-MM-dd HH:mm"
-
 fun Date.toLocalDate(): LocalDate {
     return toInstant().atZone(ZoneId.systemDefault()).toLocalDate()
 }
@@ -27,13 +25,4 @@ fun LocalDateTime.toDate(): Date {
 
 fun LocalDateTime.toFormatString(): String {
     return format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT, FormatStyle.SHORT))
-}
-
-fun LocalDateTime.toFormatString(pattern: String = FULL_DATE_TIME): String {
-    return format(
-        when (pattern) {
-            FULL_DATE_TIME -> DateTimeFormatter.ofPattern(FULL_DATE_TIME)
-            else -> DateTimeFormatter.ofPattern(pattern)
-        }
-    )
 }

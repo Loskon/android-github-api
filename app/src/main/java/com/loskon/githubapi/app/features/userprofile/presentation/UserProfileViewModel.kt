@@ -10,8 +10,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 
 class UserProfileViewModel(
-    private val userProfileInteractor: UserProfileInteractor,
-    private val username: String
+    private val userProfileInteractor: UserProfileInteractor
 ) : IOErrorViewModel() {
 
     private val userProfileState = MutableStateFlow(UserProfileState())
@@ -19,13 +18,9 @@ class UserProfileViewModel(
 
     private var job: Job? = null
 
-    init {
-        performUserRequest()
-    }
-
-    fun performUserRequest() {
+    fun performUserRequest(username: String) {
         setLoadingStatus(true)
-        getUsersAsFlow()
+        getUsersAsFlow(username)
     }
 
     private fun setLoadingStatus(loading: Boolean) {
@@ -34,9 +29,9 @@ class UserProfileViewModel(
         )
     }
 
-    private fun getUsersAsFlow() {
+    private fun getUsersAsFlow(username: String) {
         job?.cancel()
-        job = launchIOErrorJob(errorFunction = { setLoadingStatus(false) }) {
+        job = launchIOErrorJob(errorBlock = { setLoadingStatus(false) }) {
             userProfileInteractor.getUser(username).collectLatest { setUserListState(it) }
         }
     }

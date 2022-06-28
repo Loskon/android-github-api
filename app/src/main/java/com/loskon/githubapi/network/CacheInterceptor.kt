@@ -16,11 +16,11 @@ class CacheInterceptor(private val context: Context) : Interceptor {
         val request = chain.request()
 
         return if (NetworkUtil.hasConnected(context)) {
-            val onlineRequest = request.onlineCacheControl()
+            val onlineRequest = onlineCacheControl(request)
             chain.proceed(onlineRequest).addCacheHeader(false)
         } else {
             if (hasCacheDir()) {
-                val offlineRequest = request.offlineCacheControl()
+                val offlineRequest = offlineCacheControl(request)
                 chain.proceed(offlineRequest).addCacheHeader(true)
             } else {
                 throw EmptyCacheException()
@@ -33,14 +33,14 @@ class CacheInterceptor(private val context: Context) : Interceptor {
         return File(path).exists()
     }
 
-    private fun Request.onlineCacheControl(): Request {
-        val cacheControl = CacheControl.Builder().maxAge(10, TimeUnit.SECONDS).build()
-        return newBuilder().header(CACHE_CONTROL, cacheControl.toString()).build()
+    private fun onlineCacheControl(request: Request): Request {
+        val cacheControl = CacheControl.Builder().maxAge(MAX_AGE_CACHE, TimeUnit.SECONDS).build()
+        return request.newBuilder().header(CACHE_CONTROL, cacheControl.toString()).build()
     }
 
-    private fun Request.offlineCacheControl(): Request {
-        val cacheControl = CacheControl.Builder().maxStale(1, TimeUnit.DAYS).build()
-        return newBuilder().cacheControl(cacheControl).build()
+    private fun offlineCacheControl(request: Request): Request {
+        val cacheControl = CacheControl.Builder().maxStale(MAX_STALE_CACHE, TimeUnit.DAYS).build()
+        return request.newBuilder().cacheControl(cacheControl).build()
     }
 
     private fun Response.addCacheHeader(fromCache: Boolean): Response {
@@ -49,6 +49,8 @@ class CacheInterceptor(private val context: Context) : Interceptor {
 
     companion object {
         private const val CACHE_CONTROL = "Cache-Control"
+        private const val MAX_AGE_CACHE = 10
+        private const val MAX_STALE_CACHE = 11
         const val CACHE_HEADER = "Cache-Header"
     }
 }

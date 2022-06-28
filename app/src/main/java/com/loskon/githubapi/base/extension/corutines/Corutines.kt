@@ -1,4 +1,4 @@
-package com.loskon.template.base.extension.corutines
+package com.loskon.githubapi.base.extension.corutines
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job

@@ -1,6 +1,7 @@
 plugins {
     alias deps.plugins.androidApplication
     alias deps.plugins.kotlin
+    alias deps.plugins.kapt
     alias deps.plugins.navigation
     alias deps.plugins.parcelize
 }
@@ -65,16 +66,19 @@ dependencies {
     // Network
     implementation deps.bundles.retrofit.gson
     implementation deps.glide
+    kapt deps.glide.compiler
     // Kotlin
     implementation deps.core
     // DI
     implementation deps.koin
-    implementation deps.bundles.koinTest
+    testImplementation deps.bundles.koinTest
     // Timber
     implementation deps.timber
     // Misc
     implementation deps.splashscreen
     // Test
+    testImplementation deps.mockito
     testImplementation deps.junit4
     androidTestImplementation deps.extJunit
+    androidTestImplementation deps.espresso
 }

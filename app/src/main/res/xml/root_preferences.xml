@@ -17,7 +17,7 @@
         app:title="@string/number_of_results">
 
         <com.loskon.githubapi.base.widget.preference.SliderPreference
-            app:defaultValue="30"
+            app:defaultValue="@integer/number_of_results"
             app:iconSpaceReserved="false"
             app:key="@string/number_of_results_key" />
 

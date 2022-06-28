@@ -39,3 +39,9 @@ class OnAppBarLayoutStateChangeListener(
         }
     }
 }
+
+fun AppBarLayout.setOnOffsetChangedListener(
+    onStateChanged: (appBarLayout: AppBarLayout?, appBarLayoutState: AppBarLayoutState?) -> Unit
+) {
+    addOnOffsetChangedListener(OnAppBarLayoutStateChangeListener(onStateChanged))
+}

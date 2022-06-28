@@ -1,5 +1,6 @@
 package com.loskon.githubapi.app.features.userprofile.presentation
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
@@ -18,7 +19,7 @@ import com.loskon.githubapi.base.extension.view.textWithGone
 import com.loskon.githubapi.base.presentation.dialogfragment.BaseSnackbarFragment
 import com.loskon.githubapi.base.presentation.viewmodel.IOErrorType
 import com.loskon.githubapi.base.widget.appbarlayout.AppBarLayoutState
-import com.loskon.githubapi.base.widget.appbarlayout.OnAppBarLayoutStateChangeListener
+import com.loskon.githubapi.base.widget.appbarlayout.setOnOffsetChangedListener
 import com.loskon.githubapi.base.widget.recyclerview.AddAnimationItemAnimator
 import com.loskon.githubapi.databinding.FragmentUserProfileBinding
 import com.loskon.githubapi.network.model.UserModel
@@ -26,15 +27,19 @@ import com.loskon.githubapi.utils.ImageLoader
 import com.loskon.githubapi.utils.NetworkUtil
 import com.loskon.githubapi.viewbinding.viewBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.koin.core.parameter.parametersOf
 
 class UserProfileFragment : BaseSnackbarFragment(R.layout.fragment_user_profile) {
 
-    private val viewModel: UserProfileViewModel by viewModel(parameters = { parametersOf(args.username) })
+    private val viewModel: UserProfileViewModel by viewModel()
     private val binding by viewBinding(FragmentUserProfileBinding::bind)
     private val args: UserProfileFragmentArgs by navArgs()
 
     private val repositoriesAdapter = RepoListAdapter()
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        viewModel.performUserRequest(args.username)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -51,7 +56,7 @@ class UserProfileFragment : BaseSnackbarFragment(R.layout.fragment_user_profile)
             setProgressBackgroundColorSchemeColor(getColor(R.color.swipe_background_color))
             setColorSchemeColors(colorPrimary)
             setOnRefreshListener {
-                viewModel.performUserRequest()
+                viewModel.performUserRequest(args.username)
                 isRefreshing = false
             }
         }
@@ -74,13 +79,13 @@ class UserProfileFragment : BaseSnackbarFragment(R.layout.fragment_user_profile)
     }
 
     private fun setupViewsListener() {
-        binding.appBarUserProfile.addOnOffsetChangedListener(OnAppBarLayoutStateChangeListener { _, state ->
+        binding.appBarUserProfile.setOnOffsetChangedListener { _, state ->
             if (state == AppBarLayoutState.EXPANDED) {
                 binding.refreshLayoutUserProfile.isEnabled = true
             } else if (state == AppBarLayoutState.COLLAPSED) {
                 binding.refreshLayoutUserProfile.isEnabled = false
             }
-        })
+        }
         binding.bottomBarUserProfile.setNavigationOnClickListener { requireActivity().onBackPressed() }
     }
 
@@ -158,7 +163,7 @@ class UserProfileFragment : BaseSnackbarFragment(R.layout.fragment_user_profile)
 
     private fun showActionSnackbar(message: String?) {
         showActionSnackbar(binding.root, binding.bottomBarUserProfile, message) {
-            viewModel.performUserRequest()
+            viewModel.performUserRequest(args.username)
         }
     }
 

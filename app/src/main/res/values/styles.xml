@@ -42,7 +42,7 @@
         <item name="android:background">@drawable/sheet_bg_round_corner</item>
     </style>
 
-    <!-- Toolbar Font -->
+    <!-- Toolbar Text Font -->
     <style name="ToolbarTextFont">
         <item name="android:textColor">?android:colorPrimary</item>
         <item name="android:fontFamily">@font/roboto_light</item>

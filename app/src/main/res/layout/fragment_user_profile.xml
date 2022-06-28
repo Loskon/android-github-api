@@ -98,6 +98,7 @@
             android:paddingBottom="@dimen/margin_tiny"
             android:text="@string/offline_mode"
             android:textColor="@color/txtxt"
+            android:textStyle="bold"
             android:visibility="gone"
             tools:visibility="visible" />
     </com.google.android.material.bottomappbar.BottomAppBar>

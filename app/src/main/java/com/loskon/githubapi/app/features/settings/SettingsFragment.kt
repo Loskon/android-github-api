@@ -7,7 +7,6 @@ import androidx.fragment.app.commit
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreferenceCompat
 import com.loskon.githubapi.R
-import com.loskon.githubapi.base.widget.preference.SliderPreference
 import com.loskon.githubapi.databinding.FragmentSettingsBinding
 import com.loskon.githubapi.utils.ColorUtil
 import com.loskon.githubapi.viewbinding.viewBinding
@@ -47,11 +46,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
         darkModeSwitch?.setOnPreferenceChangeListener { _, newValue ->
             ColorUtil.toggleDarkMode(newValue as Boolean)
             true
-        }
-
-        val sliderPreference: SliderPreference? = findPreference("slider")
-        sliderPreference?.setOnChangeListenerListener {
-
         }
     }
 }

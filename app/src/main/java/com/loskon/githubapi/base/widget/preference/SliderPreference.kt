@@ -36,12 +36,14 @@ class SliderPreference constructor(
         slider.value = savedValue.toFloat()
         tvSliderValue.text = savedValue.toString()
 
-        slider.addOnChangeListener(Slider.OnChangeListener { _, value: Float, _ ->
-            val currentValue = value.toInt()
-            sharedPreferences?.edit()?.putInt(key, currentValue)?.apply()
-            tvSliderValue.text = currentValue.toString()
-            onChangeListener?.invoke(currentValue)
-        })
+        slider.addOnChangeListener(
+            Slider.OnChangeListener { _, value: Float, _ ->
+                val currentValue = value.toInt()
+                sharedPreferences?.edit()?.putInt(key, currentValue)?.apply()
+                tvSliderValue.text = currentValue.toString()
+                onChangeListener?.invoke(currentValue)
+            }
+        )
     }
 
     fun setOnChangeListenerListener(onChangeListener: ((Int) -> Unit)?) {

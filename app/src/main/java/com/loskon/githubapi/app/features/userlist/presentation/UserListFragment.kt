@@ -1,5 +1,6 @@
 package com.loskon.githubapi.app.features.userlist.presentation
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
@@ -19,16 +20,23 @@ import com.loskon.githubapi.databinding.FragmentUserListBinding
 import com.loskon.githubapi.sharedpreference.AppPreference
 import com.loskon.githubapi.viewbinding.viewBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.koin.core.parameter.parametersOf
 
 class UserListFragment : BaseSnackbarFragment(R.layout.fragment_user_list) {
 
-    private val viewModel: UserListViewModel by viewModel(parameters = { parametersOf(pageSize) })
+    private val viewModel: UserListViewModel by viewModel()
     private val binding by viewBinding(FragmentUserListBinding::bind)
 
     private val usersAdapter = UserListAdapter()
 
-    private val pageSize: Int get() = AppPreference.getPageSize(requireContext())
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        performUsersRequest()
+    }
+
+    private fun performUsersRequest() {
+        val pageSize = AppPreference.getPageSize(requireContext())
+        viewModel.performUsersRequest(pageSize)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -52,7 +60,7 @@ class UserListFragment : BaseSnackbarFragment(R.layout.fragment_user_list) {
             setProgressBackgroundColorSchemeColor(getColor(R.color.swipe_background_color))
             setColorSchemeColors(colorPrimary)
             setOnRefreshListener {
-                viewModel.performUsersRequest(pageSize)
+                performUsersRequest()
                 isRefreshing = false
             }
         }
@@ -108,8 +116,6 @@ class UserListFragment : BaseSnackbarFragment(R.layout.fragment_user_list) {
     }
 
     private fun showActionSnackbar(message: String?) {
-        showActionSnackbar(binding.root, binding.bottomBarUsersList, message) {
-            viewModel.performUsersRequest(pageSize)
-        }
+        showActionSnackbar(binding.root, binding.bottomBarUsersList, message) { performUsersRequest() }
     }
 }

@@ -15,7 +15,7 @@ class SplashCoreActivity : AppCompatActivity() {
         ColorUtil.toggleDarkMode(AppPreference.getHasDarkMode(this))
         val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
-        splashScreen.setKeepOnScreenCondition { true } // TODO
+        splashScreen.setKeepOnScreenCondition { true }
     }
 
     override fun onStart() {

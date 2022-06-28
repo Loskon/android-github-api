@@ -5,8 +5,8 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 import com.loskon.githubapi.R
-import com.loskon.githubapi.base.extension.fragment.getColor
 import com.loskon.githubapi.base.extension.fragment.controlHighlight
+import com.loskon.githubapi.base.extension.fragment.getColor
 import com.loskon.githubapi.base.extension.fragment.getFont
 import com.loskon.githubapi.base.widget.snackbar.CustomSnackbar
 

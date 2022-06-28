@@ -10,6 +10,6 @@ import org.koin.dsl.module
 val userListModule = module {
 
     single<UserListRepository> { UserListRepositoryImpl(get()) }
-    viewModel { params -> UserListViewModel(get(), params[0]) }
+    viewModel { UserListViewModel(get()) }
     factory { UserListInteractor(get()) }
 }

@@ -30,12 +30,12 @@ open class IOErrorViewModel : BaseViewModel() {
 
     fun launchIOErrorJob(
         dispatcher: CoroutineDispatcher = Dispatchers.IO,
-        errorFunction: ((Throwable) -> Unit)? = null,
+        errorBlock: ((Throwable) -> Unit)? = null,
         function: suspend () -> Unit
     ): Job {
         return launchErrorJob(
             dispatcher,
-            errorFunction = { throwable -> handleErrorFunction(throwable, errorFunction) }
+            errorBlock = { throwable -> handleErrorFunction(throwable, errorBlock) }
         ) {
             function()
         }
@@ -43,9 +43,9 @@ open class IOErrorViewModel : BaseViewModel() {
 
     private fun handleErrorFunction(
         throwable: Throwable,
-        errorFunction: ((Throwable) -> Unit)? = null
+        errorBlock: ((Throwable) -> Unit)? = null
     ) {
-        errorFunction?.invoke(throwable)
+        errorBlock?.invoke(throwable)
         handleErrors(throwable)
     }
 
@@ -61,12 +61,11 @@ open class IOErrorViewModel : BaseViewModel() {
     }
 
     private fun tryEmitErrorState(error: IOErrorType?, message: String? = null) {
-        ioErrorState.tryEmit(
-            getStateValue(error, message)
-        )
+        val errorStateValue = getErrorStateValue(error, message)
+        ioErrorState.tryEmit(errorStateValue)
     }
 
-    private fun getStateValue(error: IOErrorType?, message: String?): IOErrorState? {
+    private fun getErrorStateValue(error: IOErrorType?, message: String?): IOErrorState? {
         return if (error != null) {
             IOErrorState(error, message)
         } else {

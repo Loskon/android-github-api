@@ -22,7 +22,12 @@ class App : Application() {
     private fun initializeKoin(application: Application) {
         startKoin {
             androidContext(application)
-            modules(listOf(networkModule, userListModule, userProfileModule, repoInfoModule))
+            modules(
+                listOf(
+                    networkModule, userListModule,
+                    userProfileModule, repoInfoModule
+                )
+            )
         }
     }
 }

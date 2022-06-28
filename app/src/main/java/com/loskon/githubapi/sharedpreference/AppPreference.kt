@@ -46,6 +46,11 @@ object AppPreference {
         return sharedPreferences.getBoolean(key, def)
     }
 
+    fun removePreference(context: Context, key: String) {
+        val preference = PreferenceManager.getDefaultSharedPreferences(context)
+        preference.edit().remove(key).apply()
+    }
+
     fun getHasDarkMode(context: Context): Boolean {
         val key = context.getString(R.string.dark_mode_key)
         return getPreference(context, key, false)
@@ -53,6 +58,7 @@ object AppPreference {
 
     fun getPageSize(context: Context): Int {
         val key = context.getString(R.string.number_of_results_key)
-        return getPreference(context, key, 30)
+        val def = context.resources.getInteger(R.integer.number_of_results)
+        return getPreference(context, key, def)
     }
 }

@@ -1,22 +1,38 @@
 package com.loskon.githubapi
 
+import android.content.Context
+import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.platform.app.InstrumentationRegistry
-import org.junit.Assert.assertEquals
+import com.loskon.githubapi.sharedpreference.AppPreference
+import com.loskon.githubapi.utils.NetworkUtil
+import junit.framework.TestCase.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Test
 import org.junit.runner.RunWith
 
-/**
- * Instrumented test, which will execute on an Android device.
- *
- * See [testing documentation](http://d.android.com/tools/testing).
- */
 @RunWith(AndroidJUnit4::class)
 class ExampleInstrumentedTest {
+
+    private val context: Context = ApplicationProvider.getApplicationContext()
+
     @Test
-    fun useAppContext() {
-        // Context of the app under test.
-        val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.loskon.githubapi", appContext.packageName)
+    fun testAppPreference() {
+        val key = "test_key"
+        val testValue = "test_value"
+        val defValue = "test_def_value"
+
+        AppPreference.setPreference(context, key, testValue)
+        val insertedValue = AppPreference.getPreference(context, key, defValue)
+        assertEquals(insertedValue, testValue)
+
+        AppPreference.removePreference(context, key)
+        val removedValue = AppPreference.getPreference(context, key, defValue)
+        assertEquals(removedValue, defValue)
+    }
+
+    @Test
+    fun testInternetConnection() {
+        val hasConnected = NetworkUtil.hasConnected(context)
+        assertTrue("No Internet connection", hasConnected)
     }
 }
