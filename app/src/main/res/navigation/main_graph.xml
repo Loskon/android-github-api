@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/userListFragment"
-        android:name="com.loskon.githubapi.app.features.userlist.presentation.UserListFragment"
+        android:name="com.loskon.githubapi.app.presentation.screens.userlist.UserListFragment"
         android:label="UsersFragment"
         tools:layout="@layout/fragment_user_list">
         <action
@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/userProfileFragment"
-        android:name="com.loskon.githubapi.app.features.userprofile.presentation.UserProfileFragment"
+        android:name="com.loskon.githubapi.app.presentation.screens.userprofile.UserProfileFragment"
         android:label="fragment_user_profile"
         tools:layout="@layout/fragment_user_profile">
         <argument
@@ -32,18 +32,18 @@
 
     <dialog
         android:id="@+id/repositoryInfo"
-        android:name="com.loskon.githubapi.app.features.repositoryinfo.presentation.RepoInfoBottomSheetFragment"
+        android:name="com.loskon.githubapi.app.presentation.screens.repositoryinfo.RepoInfoBottomSheetFragment"
         android:label="RepositoryInfoBottomSheetFragment"
         tools:layout="@layout/sheet_repository_info">
 
         <argument
             android:name="repository"
-            app:argType="com.loskon.githubapi.network.model.RepositoryModel" />
+            app:argType="com.loskon.githubapi.domain.model.RepositoryModel" />
     </dialog>
 
     <fragment
         android:id="@+id/openSettingsFragment"
-        android:name="com.loskon.githubapi.app.features.settings.OpenSettingsFragment"
+        android:name="com.loskon.githubapi.app.presentation.screens.settings.OpenSettingsFragment"
         android:label="OpenSettingsFragment"
         tools:layout="@layout/fragment_settings" />
 

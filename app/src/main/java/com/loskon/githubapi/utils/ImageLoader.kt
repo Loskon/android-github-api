@@ -5,8 +5,7 @@ import com.loskon.githubapi.app.GlideApp
 
 object ImageLoader {
 
-    fun loadImage(url: String?, view: ImageView) {
-        if (url.isNullOrEmpty()) return
+    fun loadImage(url: String, view: ImageView) {
         GlideApp.with(view)
             .load(url)
             .circleCrop()

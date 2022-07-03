@@ -106,6 +106,6 @@ subprojects {
     }
 
     task checkBeforePush(group: 'verification', description: 'Deep inspect code before push') {
-        dependsOn 'checkstyle', 'detekt', 'ktlint', 'lintDebug'
+        dependsOn 'checkstyle', 'detektCode', 'ktlint', 'lintDebug'
     }
 }

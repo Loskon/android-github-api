@@ -5,7 +5,7 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 
 /**
- * Проверка интернет соединения
+ * Проверка подключения к интернету
  */
 object NetworkUtil {
 

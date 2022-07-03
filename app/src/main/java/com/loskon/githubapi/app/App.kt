@@ -2,10 +2,12 @@ package com.loskon.githubapi.app
 
 import android.app.Application
 import com.loskon.githubapi.BuildConfig
-import com.loskon.githubapi.app.features.repositoryinfo.repoInfoModule
-import com.loskon.githubapi.app.features.userlist.userListModule
-import com.loskon.githubapi.app.features.userprofile.userProfileModule
-import com.loskon.githubapi.network.networkModule
+import com.loskon.githubapi.app.presentation.screens.repositoryinfo.repoInfoModule
+import com.loskon.githubapi.di.userListModule
+import com.loskon.githubapi.di.userProfileModule
+import com.loskon.githubapi.di.networkModule
+import com.loskon.githubapi.utils.AppPreference
+import com.loskon.githubapi.utils.ColorUtil
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import timber.log.Timber
@@ -17,6 +19,7 @@ class App : Application() {
         super.onCreate()
         if (BuildConfig.DEBUG) Timber.plant(Timber.DebugTree())
         initializeKoin(this)
+        ColorUtil.toggleDarkMode(AppPreference.getHasDarkMode(this))
     }
 
     private fun initializeKoin(application: Application) {
