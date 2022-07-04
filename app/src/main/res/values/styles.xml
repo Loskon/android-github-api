@@ -1,32 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <!-- Base Splash screen application theme -->
-    <style name="StartingAppTheme" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">@color/black_dark</item>
-        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_app_logo</item>
-        <item name="postSplashScreenTheme">@style/AppTheme</item>
-    </style>
-
-    <!-- Button Icon -->
-    <style name="ButtonIconStyle" parent="Widget.MaterialComponents.Button.OutlinedButton.Icon">
-        <item name="cornerRadius">36dp</item>
-        <item name="iconGravity">textStart</item>
-        <item name="iconPadding">-6dp</item>
-        <item name="strokeColor">@android:color/transparent</item>
-        <item name="rippleColor">?attr/colorControlHighlight</item>
-    </style>
-
-    <!-- SheetDialogStatusBarStyle -->
-    <style name="SheetDialogStatusBarStyle" parent="Theme.Design.Light.BottomSheetDialog">
-        <item name="bottomSheetStyle">@style/DefaultBackgroundStyle</item>
-        <item name="android:windowIsFloating">false</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
-    </style>
-
-    <style name="DefaultBackgroundStyle" parent="@style/Widget.Design.BottomSheet.Modal">
-        <item name="android:background">@android:color/transparent</item>
-    </style>
 
     <!-- RoundedSheetDialogStyle -->
     <style name="RoundedSheetDialogStyle" parent="Theme.MaterialComponents.DayNight.BottomSheetDialog">
@@ -49,4 +21,5 @@
         <item name="android:textSize">@dimen/txt_medium</item>
         <item name="android:textStyle">bold</item>
     </style>
+
 </resources>

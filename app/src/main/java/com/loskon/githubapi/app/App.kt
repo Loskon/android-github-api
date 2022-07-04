@@ -2,7 +2,7 @@ package com.loskon.githubapi.app
 
 import android.app.Application
 import com.loskon.githubapi.BuildConfig
-import com.loskon.githubapi.app.presentation.screens.repositoryinfo.repoInfoModule
+import com.loskon.githubapi.di.repoInfoModule
 import com.loskon.githubapi.di.userListModule
 import com.loskon.githubapi.di.userProfileModule
 import com.loskon.githubapi.di.networkModule

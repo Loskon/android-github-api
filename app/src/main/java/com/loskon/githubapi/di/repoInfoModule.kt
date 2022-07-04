@@ -1,5 +1,6 @@
-package com.loskon.githubapi.app.presentation.screens.repositoryinfo
+package com.loskon.githubapi.di
 
+import com.loskon.githubapi.app.presentation.screens.repositoryinfo.RepoInfoViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 

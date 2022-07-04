@@ -2,6 +2,9 @@ package com.loskon.githubapi.app.base.widget.recyclerview
 
 import androidx.recyclerview.widget.DiffUtil
 
+/**
+ * DiffUtil for items comparisons
+ */
 class RecyclerDiffUtil<T : Any>(
     private val oldList: List<T>,
     private val newList: List<T>,

@@ -2,7 +2,6 @@ package com.loskon.githubapi.app.base.extension.context
 
 import android.content.Context
 import android.graphics.Typeface
-import android.util.TypedValue
 import androidx.annotation.AttrRes
 import androidx.annotation.ColorRes
 import androidx.annotation.FontRes
@@ -18,22 +17,14 @@ fun Context.getFontKtx(@FontRes fontId: Int): Typeface? {
     return ResourcesCompat.getFont(this, fontId)
 }
 
-fun Context.getThemeMaterialColorKtx(@AttrRes attrRes: Int): Int {
+fun Context.getMaterialColorKtx(@AttrRes attrRes: Int): Int {
     return MaterialColors.getColor(this, attrRes, 0)
 }
 
-fun Context.getThemeColorKtx(@AttrRes attrRes: Int): Int = TypedValue()
-    .apply { theme.resolveAttribute(attrRes, this, true) }
-    .data
-
 fun Context.getColorControlHighlightKtx(): Int {
-    return getThemeMaterialColorKtx(android.R.attr.colorControlHighlight)
+    return getMaterialColorKtx(android.R.attr.colorControlHighlight)
 }
 
 fun Context.getColorPrimaryKtx(): Int {
-    return getThemeMaterialColorKtx(android.R.attr.colorPrimary)
-}
-
-fun Context.getColorAccentKtx(): Int {
-    return getThemeMaterialColorKtx(android.R.attr.colorAccent)
+    return getMaterialColorKtx(android.R.attr.colorPrimary)
 }

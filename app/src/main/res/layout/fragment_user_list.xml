@@ -52,7 +52,7 @@
             android:paddingEnd="@dimen/margin_xmedium"
             android:paddingBottom="@dimen/margin_tiny"
             android:text="@string/offline_mode"
-            android:textColor="@color/txtxt"
+            android:textColor="@color/secondary_text_color"
             android:textStyle="bold"
             android:visibility="gone"
             tools:visibility="visible" />

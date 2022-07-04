@@ -15,9 +15,8 @@ open class BaseBottomSheetDialogFragment(
     @LayoutRes val layoutId: Int = 0
 ) : BottomSheetDialogFragment() {
 
-    open val skipCollapsedState = true
-    open val isDraggableState = true
-    open val isHideableState = true
+    open val isDraggableStatus = true
+    open val isHideableStatus = true
 
     override fun getTheme(): Int = R.style.RoundedSheetDialogStyle
 
@@ -26,9 +25,9 @@ open class BaseBottomSheetDialogFragment(
 
         bottomSheetDialog.behavior.apply {
             state = BottomSheetBehavior.STATE_EXPANDED
-            skipCollapsed = skipCollapsedState
-            isDraggable = isDraggableState
-            isHideable = isHideableState
+            skipCollapsed = true
+            isDraggable = isDraggableStatus
+            isHideable = isHideableStatus
         }
 
         return bottomSheetDialog

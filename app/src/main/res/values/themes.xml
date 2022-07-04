@@ -1,28 +1,36 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- Primary brand color. -->
+    <!-- Base Splash Screen application theme -->
+    <style name="StartingAppTheme" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/black_dark</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_app_logo</item>
+        <item name="postSplashScreenTheme">@style/AppTheme</item>
+    </style>
+
+    <!-- Base application theme -->
+    <style name="BaseAppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- App Font -->
+        <item name="android:fontFamily">@font/roboto_light</item>
+        <!-- Disable overScrollMode -->
+        <item name="android:overScrollMode">never</item>
+    </style>
+
+    <!-- Light application theme -->
+    <style name="AppTheme" parent="BaseAppTheme">
+        <!-- Primary brand color -->
         <item name="colorPrimary">@color/primary_app_color</item>
         <item name="colorPrimaryVariant">@color/primary_app_color</item>
         <item name="colorOnPrimary">@color/white</item>
-        <!-- Secondary brand color. -->
+        <!-- Secondary brand color -->
         <item name="colorSecondary">@color/primary_app_color</item>
         <item name="colorSecondaryVariant">@color/primary_app_color</item>
         <item name="colorOnSecondary">@color/black</item>
-
-        <!-- Status bar color. -->
+        <!-- Status bar color -->
         <item name="android:statusBarColor">@android:color/white</item>
         <item name="android:windowLightStatusBar">true</item>
-
-        <!-- Window background color.-->
+        <!-- Window background color -->
         <item name="android:windowBackground">@android:color/white</item>
         <item name="android:colorBackground">@android:color/white</item>
-
-        <!-- Customize your theme here. -->
-        <item name="android:fontFamily">@font/roboto_light</item>
-        <!-- Disable overScrollMode.  -->
-        <item name="android:overScrollMode">never</item>
     </style>
 
 </resources>
