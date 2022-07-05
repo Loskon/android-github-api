@@ -1,6 +1,5 @@
 package com.loskon.githubapi.app.base.widget.preference
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.widget.TextView
@@ -9,7 +8,6 @@ import androidx.preference.PreferenceViewHolder
 import com.google.android.material.slider.Slider
 import com.loskon.githubapi.R
 
-@SuppressLint("PrivateResource")
 class SliderPreference constructor(
     context: Context,
     attrs: AttributeSet

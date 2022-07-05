@@ -35,7 +35,8 @@ class UserListFragment : BaseSnackbarFragment(R.layout.fragment_user_list) {
 
     private fun performUsersRequest() {
         val pageSize = AppPreference.getPageSize(requireContext())
-        viewModel.performUsersRequest(pageSize)
+        val since = AppPreference.getSince(requireContext())
+        viewModel.performUsersRequest(pageSize, since)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -31,6 +31,18 @@
         <!-- Window background color -->
         <item name="android:windowBackground">@android:color/white</item>
         <item name="android:colorBackground">@android:color/white</item>
+
+        <item name="alertDialogTheme">@style/MyAlertDialogStyle</item>
+    </style>
+
+    <style name="MyAlertDialogStyle" parent="Theme.MaterialComponents.DayNight.Dialog.Alert">
+        <item name="buttonBarButtonStyle">@style/MyButtonBar</item>
+        <item name="android:windowSoftInputMode">stateUnchanged</item>
+    </style>
+
+    <style name="MyButtonBar" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textColor">@color/primary_app_color</item>
+        <item name="rippleColor">?attr/colorControlHighlight</item>
     </style>
 
 </resources>

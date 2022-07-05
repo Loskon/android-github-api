@@ -18,9 +18,9 @@ class UserListViewModel(
 
     private var job: Job? = null
 
-    fun performUsersRequest(perPage: Int) {
+    fun performUsersRequest(perPage: Int, since: Int) {
         setLoadingStatus(true)
-        getUsersAsFlow(perPage)
+        getUsersAsFlow(perPage, since)
     }
 
     private fun setLoadingStatus(loading: Boolean) {
@@ -29,10 +29,10 @@ class UserListViewModel(
         )
     }
 
-    private fun getUsersAsFlow(perPage: Int) {
+    private fun getUsersAsFlow(perPage: Int, since: Int) {
         job?.cancel()
         job = launchIOErrorJob(errorBlock = { setLoadingStatus(false) }) {
-            userListInteractor.getUsersAsFlow(perPage).collectLatest { setUserListState(it) }
+            userListInteractor.getUsersAsFlow(perPage, since).collectLatest { setUserListState(it) }
         }
     }
 

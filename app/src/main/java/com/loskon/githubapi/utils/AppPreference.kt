@@ -61,4 +61,10 @@ object AppPreference {
         val def = context.resources.getInteger(R.integer.number_of_results)
         return load(context, key, def)
     }
+
+    fun getSince(context: Context): Int {
+        val key = context.getString(R.string.since_key)
+        val def = context.resources.getInteger(R.integer.since)
+        return load(context, key, def)
+    }
 }
