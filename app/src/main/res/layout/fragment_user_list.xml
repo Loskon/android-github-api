@@ -6,11 +6,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    <com.loskon.githubapi.app.base.widget.swiprerefreshlayout.CustomSwipeRefreshLayout
         android:id="@+id/refresh_layout_user_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="@dimen/bottom_bar_height">
+        android:layout_marginBottom="@dimen/bottom_bar_height"
+        app:progressBackgroundColor="@color/swipe_background_color"
+        app:schemeColors="?android:colorPrimary">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_user_list"
@@ -18,7 +20,7 @@
             android:layout_height="match_parent"
             tools:listitem="@layout/item_user_card" />
 
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </com.loskon.githubapi.app.base.widget.swiprerefreshlayout.CustomSwipeRefreshLayout>
 
     <com.google.android.material.progressindicator.LinearProgressIndicator
         android:id="@+id/indicator_user_list"

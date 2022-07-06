@@ -6,6 +6,9 @@ import android.util.AttributeSet
 import androidx.preference.EditTextPreference
 import com.loskon.githubapi.app.base.extension.view.setFilterKtx
 
+/**
+ * EditTextPreference to enter and save only integers
+ */
 class NumberEditTextPreference(
     context: Context,
     attrs: AttributeSet
@@ -34,11 +37,11 @@ class NumberEditTextPreference(
         return persistInt(savedValue)
     }
 
-    override fun getSummary(): CharSequence? {
+    override fun getSummary(): CharSequence {
         return if (super.getSummary() == "Not set") {
             "0"
         } else {
-            super.getSummary()
+            super.getSummary().toString().toInt().toString()
         }
     }
 }

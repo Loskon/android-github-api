@@ -8,8 +8,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.SimpleItemAnimator
 import com.loskon.githubapi.R
 import com.loskon.githubapi.app.base.extension.flow.observe
-import com.loskon.githubapi.app.base.extension.fragment.colorPrimary
-import com.loskon.githubapi.app.base.extension.fragment.getColor
 import com.loskon.githubapi.app.base.extension.view.setGoneVisibleKtx
 import com.loskon.githubapi.app.base.presentation.dialogfragment.BaseSnackbarFragment
 import com.loskon.githubapi.app.base.presentation.viewmodel.IOErrorType
@@ -42,29 +40,10 @@ class UserListFragment : BaseSnackbarFragment(R.layout.fragment_user_list) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        configureRefreshLayout()
         configureUserListAdapter()
         configureRecyclerView()
         setupViewsListener()
         installObservers()
-    }
-
-    private fun setupViewsListener() {
-        binding.bottomBarUsersList.setNavigationOnClickListener {
-            val action = UserListFragmentDirections.openSettingsFragment()
-            findNavController().navigate(action)
-        }
-    }
-
-    private fun configureRefreshLayout() {
-        with(binding.refreshLayoutUserList) {
-            setProgressBackgroundColorSchemeColor(getColor(R.color.swipe_background_color))
-            setColorSchemeColors(colorPrimary)
-            setOnRefreshListener {
-                performUsersRequest()
-                isRefreshing = false
-            }
-        }
     }
 
     private fun configureUserListAdapter() {
@@ -81,6 +60,18 @@ class UserListFragment : BaseSnackbarFragment(R.layout.fragment_user_list) {
             itemAnimator = AddAnimationItemAnimator()
             adapter = usersAdapter
             setHasFixedSize(true)
+        }
+    }
+
+    private fun setupViewsListener() {
+        binding.refreshLayoutUserList.setOnRefreshListener {
+            performUsersRequest()
+            binding.refreshLayoutUserList.isRefreshing = false
+        }
+
+        binding.bottomBarUsersList.setNavigationOnClickListener {
+            val action = UserListFragmentDirections.openSettingsFragment()
+            findNavController().navigate(action)
         }
     }
 

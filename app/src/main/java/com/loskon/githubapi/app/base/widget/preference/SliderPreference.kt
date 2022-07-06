@@ -8,6 +8,9 @@ import androidx.preference.PreferenceViewHolder
 import com.google.android.material.slider.Slider
 import com.loskon.githubapi.R
 
+/**
+ * Preference with slider
+ */
 class SliderPreference constructor(
     context: Context,
     attrs: AttributeSet

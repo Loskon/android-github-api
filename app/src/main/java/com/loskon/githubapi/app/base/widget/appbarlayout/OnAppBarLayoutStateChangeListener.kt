@@ -11,28 +11,28 @@ enum class AppBarLayoutState {
 }
 
 class OnAppBarLayoutStateChangeListener(
-    val onStateChanged: (appBarLayout: AppBarLayout?, appBarLayoutState: AppBarLayoutState?) -> Unit
+    val onStateChanged: (appBarLayoutState: AppBarLayoutState?) -> Unit
 ) : OnOffsetChangedListener {
 
-    private var currentState = AppBarLayoutState.IDLE
+    private var state = AppBarLayoutState.IDLE
 
     override fun onOffsetChanged(appBarLayout: AppBarLayout, offset: Int) {
-        currentState = when {
+        state = when {
             offset == 0 -> {
-                if (currentState != AppBarLayoutState.EXPANDED) {
-                    onStateChanged(appBarLayout, AppBarLayoutState.EXPANDED)
+                if (state != AppBarLayoutState.EXPANDED) {
+                    onStateChanged(AppBarLayoutState.EXPANDED)
                 }
                 AppBarLayoutState.EXPANDED
             }
             abs(offset) >= appBarLayout.totalScrollRange -> {
-                if (currentState != AppBarLayoutState.COLLAPSED) {
-                    onStateChanged(appBarLayout, AppBarLayoutState.COLLAPSED)
+                if (state != AppBarLayoutState.COLLAPSED) {
+                    onStateChanged(AppBarLayoutState.COLLAPSED)
                 }
                 AppBarLayoutState.COLLAPSED
             }
             else -> {
-                if (currentState != AppBarLayoutState.IDLE) {
-                    onStateChanged(appBarLayout, AppBarLayoutState.IDLE)
+                if (state != AppBarLayoutState.IDLE) {
+                    onStateChanged(AppBarLayoutState.IDLE)
                 }
                 AppBarLayoutState.IDLE
             }
@@ -40,8 +40,8 @@ class OnAppBarLayoutStateChangeListener(
     }
 }
 
-fun AppBarLayout.setOnOffsetChangedListener(
-    onStateChanged: (appBarLayout: AppBarLayout?, appBarLayoutState: AppBarLayoutState?) -> Unit
+fun AppBarLayout.setOnStateChangedListener(
+    onStateChanged: (appBarLayoutState: AppBarLayoutState?) -> Unit
 ) {
     addOnOffsetChangedListener(OnAppBarLayoutStateChangeListener(onStateChanged))
 }

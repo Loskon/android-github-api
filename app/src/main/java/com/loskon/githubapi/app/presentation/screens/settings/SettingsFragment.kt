@@ -23,7 +23,9 @@ class OpenSettingsFragment : Fragment(R.layout.fragment_settings) {
     }
 
     private fun setupViewsListener() {
-        binding.bottomBarSettings.setNavigationOnClickListener { requireActivity().onBackPressed() }
+        binding.bottomBarSettings.setNavigationOnClickListener {
+            requireActivity().onBackPressed()
+        }
     }
 }
 

@@ -8,8 +8,6 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.SimpleItemAnimator
 import com.loskon.githubapi.R
-import com.loskon.githubapi.app.presentation.screens.userprofile.adapter.RepoListAdapter
-import com.loskon.githubapi.app.presentation.screens.userprofile.state.UserProfileState
 import com.loskon.githubapi.app.base.datetime.toFormatString
 import com.loskon.githubapi.app.base.extension.flow.observe
 import com.loskon.githubapi.app.base.extension.fragment.colorPrimary
@@ -19,8 +17,10 @@ import com.loskon.githubapi.app.base.extension.view.textWithGone
 import com.loskon.githubapi.app.base.presentation.dialogfragment.BaseSnackbarFragment
 import com.loskon.githubapi.app.base.presentation.viewmodel.IOErrorType
 import com.loskon.githubapi.app.base.widget.appbarlayout.AppBarLayoutState
-import com.loskon.githubapi.app.base.widget.appbarlayout.setOnOffsetChangedListener
+import com.loskon.githubapi.app.base.widget.appbarlayout.setOnStateChangedListener
 import com.loskon.githubapi.app.base.widget.recyclerview.AddAnimationItemAnimator
+import com.loskon.githubapi.app.presentation.screens.userprofile.adapter.RepoListAdapter
+import com.loskon.githubapi.app.presentation.screens.userprofile.state.UserProfileState
 import com.loskon.githubapi.databinding.FragmentUserProfileBinding
 import com.loskon.githubapi.domain.model.UserModel
 import com.loskon.githubapi.utils.ImageLoader
@@ -44,22 +44,10 @@ class UserProfileFragment : BaseSnackbarFragment(R.layout.fragment_user_profile)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        configureRefreshLayout()
         configureRepoListAdapter()
         configureRecyclerView()
         setupViewsListener()
         installObserver()
-    }
-
-    private fun configureRefreshLayout() {
-        with(binding.refreshLayoutUserProfile) {
-            setProgressBackgroundColorSchemeColor(getColor(R.color.swipe_background_color))
-            setColorSchemeColors(colorPrimary)
-            setOnRefreshListener {
-                viewModel.performUserRequest(args.username)
-                isRefreshing = false
-            }
-        }
     }
 
     private fun configureRepoListAdapter() {
@@ -79,14 +67,20 @@ class UserProfileFragment : BaseSnackbarFragment(R.layout.fragment_user_profile)
     }
 
     private fun setupViewsListener() {
-        binding.appBarUserProfile.setOnOffsetChangedListener { _, state ->
+        binding.refreshLayoutUserProfile.setOnRefreshListener {
+            viewModel.performUserRequest(args.username)
+            binding.refreshLayoutUserProfile.isRefreshing = false
+        }
+        binding.appBarUserProfile.setOnStateChangedListener { state ->
             if (state == AppBarLayoutState.EXPANDED) {
                 binding.refreshLayoutUserProfile.isEnabled = true
             } else if (state == AppBarLayoutState.COLLAPSED) {
                 binding.refreshLayoutUserProfile.isEnabled = false
             }
         }
-        binding.bottomBarUserProfile.setNavigationOnClickListener { requireActivity().onBackPressed() }
+        binding.bottomBarUserProfile.setNavigationOnClickListener {
+            requireActivity().onBackPressed()
+        }
     }
 
     private fun installObserver() {

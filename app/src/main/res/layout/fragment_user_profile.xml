@@ -6,11 +6,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    <com.loskon.githubapi.app.base.widget.swiprerefreshlayout.CustomSwipeRefreshLayout
         android:id="@+id/refreshLayoutUserProfile"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="@dimen/bottom_bar_height">
+        android:layout_marginBottom="@dimen/bottom_bar_height"
+        app:progressBackgroundColor="@color/swipe_background_color"
+        app:schemeColors="?android:colorPrimary">
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
@@ -62,7 +64,7 @@
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </com.loskon.githubapi.app.base.widget.swiprerefreshlayout.CustomSwipeRefreshLayout>
 
     <com.google.android.material.progressindicator.LinearProgressIndicator
         android:id="@+id/indicator_user_profile"
