@@ -11,7 +11,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.moshi.MoshiConverterFactory
 import java.io.File
 import java.util.concurrent.TimeUnit
 
@@ -39,11 +39,11 @@ private fun getCache(context: Context): Cache {
 
 private fun provideOkHttp(context: Context): OkHttpClient {
     return OkHttpClient.Builder().apply {
-        if (BuildConfig.DEBUG) addInterceptor(getLoggingInterceptor())
         connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)
         readTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)
         writeTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)
         addInterceptor(CacheInterceptor(context))
+        if (BuildConfig.DEBUG) addInterceptor(getLoggingInterceptor())
         cache(getCache(context))
     }.build()
 }
@@ -52,7 +52,7 @@ private fun provideRetrofit(okHttp: OkHttpClient): Retrofit {
     return Retrofit.Builder()
         .client(okHttp)
         .baseUrl(BuildConfig.API_BASE_URL)
-        .addConverterFactory(GsonConverterFactory.create())
+        .addConverterFactory(MoshiConverterFactory.create())
         .build()
 }
 
