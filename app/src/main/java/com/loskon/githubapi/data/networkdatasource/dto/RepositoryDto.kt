@@ -1,12 +1,10 @@
 package com.loskon.githubapi.data.networkdatasource.dto
 
-import com.loskon.githubapi.app.base.datetime.toLocalDateTime
 import com.loskon.githubapi.domain.model.LicenseModel
 import com.loskon.githubapi.domain.model.RepositoryModel
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import java.time.LocalDateTime
-import java.util.Date
 
 @JsonClass(generateAdapter = true)
 data class RepositoryDto(
@@ -103,11 +101,11 @@ data class RepositoryDto(
     @Json(name = "deployments_url")
     val deploymentsUrl: String? = null,
     @Json(name = "created_at")
-    val createdAt: Date? = null,
+    val createdAt: LocalDateTime? = null,
     @Json(name = "updated_at")
-    val updatedAt: Date? = null,
+    val updatedAt: LocalDateTime? = null,
     @Json(name = "pushed_at")
-    val pushedAt: Date? = null,
+    val pushedAt: LocalDateTime? = null,
     @Json(name = "git_url")
     val gitUrl: String? = null,
     @Json(name = "ssh_url")
@@ -173,9 +171,9 @@ fun RepositoryDto.toRepositoryModel(): RepositoryModel {
         fullName = fullName ?: "",
         htmlUrl = htmlUrl ?: "",
         description = description ?: "",
-        createdAt = createdAt?.toLocalDateTime() ?: LocalDateTime.now(),
-        updatedAt = updatedAt?.toLocalDateTime() ?: LocalDateTime.now(),
-        pushedAt = pushedAt?.toLocalDateTime() ?: LocalDateTime.now(),
+        createdAt = createdAt ?: LocalDateTime.now(),
+        updatedAt = updatedAt ?: LocalDateTime.now(),
+        pushedAt = pushedAt ?: LocalDateTime.now(),
         size = size ?: 0L,
         language = language ?: "",
         license = license?.toLicenseModel() ?: LicenseModel(),

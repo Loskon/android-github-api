@@ -1,11 +1,9 @@
 package com.loskon.githubapi.data.networkdatasource.dto
 
-import com.loskon.githubapi.app.base.datetime.toLocalDateTime
 import com.loskon.githubapi.domain.model.UserModel
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import java.time.LocalDateTime
-import java.util.Date
 
 @JsonClass(generateAdapter = true)
 data class UserDto(
@@ -70,9 +68,9 @@ data class UserDto(
     @Json(name = "following")
     val following: Int? = null,
     @Json(name = "created_at")
-    val createdAt: Date? = null,
+    val createdAt: LocalDateTime? = null,
     @Json(name = "updated_at")
-    val updatedAt: Date? = null
+    val updatedAt: LocalDateTime? = null
 )
 
 fun UserDto.toUserModel(fromCache: Boolean = false): UserModel {
@@ -84,7 +82,7 @@ fun UserDto.toUserModel(fromCache: Boolean = false): UserModel {
         type = type ?: "",
         name = name ?: "",
         location = location ?: "",
-        createdAt = createdAt?.toLocalDateTime() ?: LocalDateTime.now(),
+        createdAt = createdAt ?: LocalDateTime.now(),
         fromCache = fromCache
     )
 }

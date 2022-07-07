@@ -2,9 +2,11 @@ package com.loskon.githubapi.di
 
 import android.content.Context
 import com.loskon.githubapi.BuildConfig
+import com.loskon.githubapi.app.base.moshi.LocalDateTimeMoshiAdapter
 import com.loskon.githubapi.data.networkdatasource.NetworkDataSource
 import com.loskon.githubapi.data.networkdatasource.api.GithubApi
 import com.loskon.githubapi.data.networkdatasource.interceptor.CacheInterceptor
+import com.squareup.moshi.Moshi
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -12,47 +14,51 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import java.io.File
 import java.util.concurrent.TimeUnit
 
 val networkModule = module {
 
-    single { provideOkHttp(androidContext()) }
-    single { provideRetrofit(get()) }
+    single { provideLoggingInterceptor() }
+    single { provideCache(androidContext()) }
+    single { provideOkHttp(androidContext(), get(), get()) }
+    single { provideMoshi() }
+    single { provideRetrofit(get(), get()) }
     single { provideGithubApi(get()) }
 
     single { NetworkDataSource(get()) }
 }
 
-const val CACHE_DIR_NAME = "users"
 private const val CACHE_SIZE = 2 * 1024 * 1024L
-private const val CONNECT_TIMEOUT = 30L
+private const val TIMEOUT = 30L
 
-private fun getLoggingInterceptor(): HttpLoggingInterceptor {
+private fun provideLoggingInterceptor(): HttpLoggingInterceptor {
     return HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
 }
 
-private fun getCache(context: Context): Cache {
-    val cacheDir = File(context.cacheDir, CACHE_DIR_NAME)
-    return Cache(cacheDir, CACHE_SIZE)
+private fun provideCache(context: Context): Cache {
+    return Cache(context.cacheDir, CACHE_SIZE)
 }
 
-private fun provideOkHttp(context: Context): OkHttpClient {
+private fun provideOkHttp(context: Context, cache: Cache, logging: HttpLoggingInterceptor): OkHttpClient {
     return OkHttpClient.Builder().apply {
-        connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)
-        readTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)
-        writeTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)
+        connectTimeout(TIMEOUT, TimeUnit.SECONDS)
+        readTimeout(TIMEOUT, TimeUnit.SECONDS)
+        writeTimeout(TIMEOUT, TimeUnit.SECONDS)
         addInterceptor(CacheInterceptor(context))
-        if (BuildConfig.DEBUG) addInterceptor(getLoggingInterceptor())
-        cache(getCache(context))
+        if (BuildConfig.DEBUG) addInterceptor(logging)
+        cache(cache)
     }.build()
 }
 
-private fun provideRetrofit(okHttp: OkHttpClient): Retrofit {
+private fun provideMoshi(): Moshi {
+    return Moshi.Builder().add(LocalDateTimeMoshiAdapter()).build()
+}
+
+private fun provideRetrofit(okHttp: OkHttpClient, moshi: Moshi): Retrofit {
     return Retrofit.Builder()
         .client(okHttp)
         .baseUrl(BuildConfig.API_BASE_URL)
-        .addConverterFactory(MoshiConverterFactory.create())
+        .addConverterFactory(MoshiConverterFactory.create(moshi))
         .build()
 }
 

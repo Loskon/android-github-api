@@ -65,6 +65,8 @@ dependencies {
     implementation deps.bundles.navigation
     // Network
     implementation deps.bundles.retrofit.moshi
+    implementation deps.moshi
+    kapt deps.moshiCodegen
     implementation deps.glide
     kapt deps.glide.compiler
     // Kotlin
@@ -76,9 +78,9 @@ dependencies {
     // Misc
     implementation deps.splashscreen
     // Test
-    testImplementation deps.bundles.koinTest
     testImplementation deps.mockito
     testImplementation deps.junit4
+    testImplementation deps.bundles.koinTest
     androidTestImplementation deps.extJunit
     androidTestImplementation deps.espresso
 }
