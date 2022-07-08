@@ -10,7 +10,7 @@ import com.squareup.moshi.Moshi
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -19,8 +19,8 @@ import java.util.concurrent.TimeUnit
 val networkModule = module {
 
     single { provideLoggingInterceptor() }
-    single { provideCache(androidContext()) }
-    single { provideOkHttp(androidContext(), get(), get()) }
+    single { provideCache(androidApplication()) }
+    single { provideOkHttp(androidApplication(), get(), get()) }
     single { provideMoshi() }
     single { provideRetrofit(get(), get()) }
     single { provideGithubApi(get()) }
