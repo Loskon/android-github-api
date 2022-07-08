@@ -83,6 +83,7 @@
         android:layout_height="@dimen/bottom_bar_height"
         android:layout_gravity="bottom"
         android:layout_marginTop="@dimen/margin_xsmall"
+        android:animateLayoutChanges="true"
         app:backgroundTint="@color/bottom_bar_background_color"
         app:navigationIcon="@drawable/baseline_navigate_before_black_24"
         app:navigationIconTint="?android:colorPrimary">
