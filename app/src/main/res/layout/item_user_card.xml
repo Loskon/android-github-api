@@ -46,7 +46,7 @@
             tools:text="login" />
 
         <TextView
-            android:id="@+id/tvUserCardGrade"
+            android:id="@+id/tv_user_card_id"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_xmedium"
