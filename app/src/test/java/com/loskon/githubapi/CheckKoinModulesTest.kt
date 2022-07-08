@@ -3,10 +3,7 @@ package com.loskon.githubapi
 import android.app.Application
 import android.content.SharedPreferences
 import com.loskon.githubapi.app.presentation.screens.repositoryinfo.RepoInfoViewModel
-import com.loskon.githubapi.di.userListModule
-import com.loskon.githubapi.di.userProfileModule
 import com.loskon.githubapi.domain.model.RepositoryModel
-import com.loskon.githubapi.di.networkModule
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -34,12 +31,7 @@ class CheckKoinModulesTest : KoinTest {
     fun testKoinModules() {
         val koinApp = koinApplication {
             androidContext(context)
-            modules(
-                listOf(
-                    networkModule, userListModule,
-                    userProfileModule, repoInfoModuleTest
-                )
-            )
+            modules(listOf(repoInfoModuleTest))
         }
         koinApp.koin.declareMock<SharedPreferences>()
         koinApp.checkModules()
