@@ -1,14 +1,15 @@
 package com.loskon.githubapi.utils
 
 import android.widget.ImageView
-import com.loskon.githubapi.app.GlideApp
+import coil.load
+import coil.transform.CircleCropTransformation
 
 object ImageLoader {
 
-    fun loadImage(url: String, view: ImageView) {
-        GlideApp.with(view)
-            .load(url)
-            .circleCrop()
-            .into(view)
+    fun loadImage(view: ImageView, url: String) {
+        view.load(url) {
+            crossfade(true)
+            transformations(CircleCropTransformation())
+        }
     }
 }

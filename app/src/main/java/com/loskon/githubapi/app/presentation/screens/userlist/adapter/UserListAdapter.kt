@@ -27,10 +27,12 @@ class UserListAdapter : RecyclerView.Adapter<UserListAdapter.UserListViewHolder>
         val user = list[position]
 
         with(holder.binding) {
-            ImageLoader.loadImage(user.avatarUrl, ivUserCard)
-            tvUserCardLogin.text = user.login
-            tvUserCardGrade.text = tvUserCardGrade.context.getString(R.string.user_id, user.id)
-            cardViewUser.setDebounceClickListener { clickListener?.invoke(user) }
+            user.apply {
+                ImageLoader.loadImage(ivUserCard, avatarUrl)
+                tvUserCardLogin.text = login
+                tvUserCardId.text = tvUserCardId.context.getString(R.string.user_id, id)
+                cardViewUser.setDebounceClickListener { clickListener?.invoke(this) }
+            }
         }
     }
 

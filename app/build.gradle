@@ -66,14 +66,14 @@ dependencies {
     // Network
     implementation deps.bundles.retrofit.moshi
     implementation deps.moshi
-    kapt deps.moshiCodegen
-    implementation deps.glide
-    kapt deps.glide.compiler
+    kapt deps.moshi.codegen
+    // ImageLoader
+    implementation deps.coil
     // Kotlin
     implementation deps.core
     // DI
     implementation deps.koin
-    // Timber
+    // Logs
     implementation deps.timber
     // Misc
     implementation deps.splashscreen
