@@ -64,14 +64,15 @@ dependencies {
     implementation deps.bundles.lifecycle
     implementation deps.bundles.navigation
     // Network
-    implementation deps.bundles.retrofit.gson
+    implementation deps.bundles.retrofit.moshi
+    implementation deps.moshi
+    kapt deps.moshiCodegen
     implementation deps.glide
     kapt deps.glide.compiler
     // Kotlin
     implementation deps.core
     // DI
     implementation deps.koin
-    testImplementation deps.bundles.koinTest
     // Timber
     implementation deps.timber
     // Misc
@@ -79,6 +80,7 @@ dependencies {
     // Test
     testImplementation deps.mockito
     testImplementation deps.junit4
+    testImplementation deps.bundles.koinTest
     androidTestImplementation deps.extJunit
     androidTestImplementation deps.espresso
 }

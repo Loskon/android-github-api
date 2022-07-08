@@ -1,7 +1,6 @@
 package com.loskon.githubapi.data.networkdatasource.interceptor
 
 import android.content.Context
-import com.loskon.githubapi.di.CACHE_DIR_NAME
 import com.loskon.githubapi.domain.exception.EmptyCacheException
 import com.loskon.githubapi.utils.NetworkUtil
 import okhttp3.CacheControl
@@ -29,10 +28,7 @@ class CacheInterceptor(private val context: Context) : Interceptor {
         }
     }
 
-    private fun hasCacheDir(): Boolean {
-        val path = context.cacheDir.path + File.separator + CACHE_DIR_NAME
-        return File(path).exists()
-    }
+    private fun hasCacheDir(): Boolean = File(context.cacheDir.path).exists()
 
     private fun onlineCacheControl(request: Request): Request {
         val cacheControl = CacheControl.Builder().maxAge(MAX_AGE_CACHE, TimeUnit.SECONDS).build()
