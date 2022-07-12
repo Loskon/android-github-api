@@ -10,7 +10,7 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.snackbar.SnackbarContentLayout
 
-class CustomSnackbar {
+class BaseCustomSnackbar {
 
     private var snackbar: Snackbar? = null
     private var textView: TextView? = null
@@ -67,7 +67,7 @@ class CustomSnackbar {
 
     private fun Int.toPx(): Int = (this * getSystem().displayMetrics.density).toInt()
 
-    inline fun create(functions: CustomSnackbar.() -> Unit): CustomSnackbar {
+    inline fun create(functions: BaseCustomSnackbar.() -> Unit): BaseCustomSnackbar {
         this.functions()
         return this
     }

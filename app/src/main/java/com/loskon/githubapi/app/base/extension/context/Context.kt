@@ -9,7 +9,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import com.google.android.material.color.MaterialColors
 
-fun Context.getColorCtx(@ColorRes colorId: Int): Int {
+fun Context.getColorKtx(@ColorRes colorId: Int): Int {
     return ContextCompat.getColor(this, colorId)
 }
 

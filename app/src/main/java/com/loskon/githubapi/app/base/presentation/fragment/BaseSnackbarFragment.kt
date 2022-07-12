@@ -1,4 +1,4 @@
-package com.loskon.githubapi.app.base.presentation.dialogfragment
+package com.loskon.githubapi.app.base.presentation.fragment
 
 import android.graphics.Color
 import android.view.View
@@ -8,11 +8,11 @@ import com.loskon.githubapi.R
 import com.loskon.githubapi.app.base.extension.fragment.controlHighlight
 import com.loskon.githubapi.app.base.extension.fragment.getColor
 import com.loskon.githubapi.app.base.extension.fragment.getFont
-import com.loskon.githubapi.app.base.widget.snackbar.CustomSnackbar
+import com.loskon.githubapi.app.base.widget.snackbar.BaseCustomSnackbar
 
 open class BaseSnackbarFragment(contentLayoutId: Int) : Fragment(contentLayoutId) {
 
-    private var snackbar: CustomSnackbar? = null
+    private var snackbar: BaseCustomSnackbar? = null
 
     fun showTextSnackbar(
         view: View,
@@ -38,8 +38,8 @@ open class BaseSnackbarFragment(contentLayoutId: Int) : Fragment(contentLayoutId
         anchorView: View,
         message: String?,
         length: Int
-    ): CustomSnackbar {
-        return CustomSnackbar().create {
+    ): BaseCustomSnackbar {
+        return BaseCustomSnackbar().create {
             make(view, message, length)
             setAnchorView(anchorView)
             setBackgroundTintList(getColor(R.color.error_color))
@@ -53,7 +53,7 @@ open class BaseSnackbarFragment(contentLayoutId: Int) : Fragment(contentLayoutId
         anchorView: View,
         message: String?,
         action: () -> Unit
-    ): CustomSnackbar {
+    ): BaseCustomSnackbar {
         return createStylizedSnackbar(view, anchorView, message, Snackbar.LENGTH_INDEFINITE).apply {
             setAction(getString(R.string.retry)) { action() }
             setActionRippleColor(controlHighlight)

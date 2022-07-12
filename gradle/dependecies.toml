@@ -1,9 +1,9 @@
-## versions ############################################################################################################
+## versions ##
 [versions]
 ## SDK
 minSdk = "23"
-targetSdk = "31"
-compileSdk = "31"
+targetSdk = "32"
+compileSdk = "32"
 ## Debug
 debugVersionCode = "1"
 debugVersionName = "1.0.0"
@@ -53,7 +53,7 @@ espresso = "3.4.0"
 ## Misc
 splashscreen = "1.0.0-rc01"
 
-## libraries ###########################################################################################################
+## libraries ##
 [libraries]
 ## Desugar
 desugar = { module = "com.android.tools:desugar_jdk_libs", version.ref = "desugar" }
@@ -101,7 +101,7 @@ koinJUnit4 = { module = "io.insert-koin:koin-test-junit4", version.ref = "koin" 
 ## Misc
 splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "splashscreen" }
 
-## bundles #############################################################################################################
+## bundles ##
 [bundles]
 ## Android
 android = ["appcompat", "material", "constraintlayout"]
@@ -113,7 +113,7 @@ retrofit-gson = ["retrofit", "retrofit-converter-gson", "okHttp", "okHttpLogging
 ## DI
 koinTest = ["koinTest", "koinJUnit4"]
 
-## plugins #############################################################################################################
+## plugins ##
 [plugins]
 ## Android
 androidApplication = { id = "com.android.application", version.ref = "gradle" }

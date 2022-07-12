@@ -22,8 +22,8 @@
 
         <ImageView
             android:id="@+id/ivUserCard"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="68dp"
+            android:layout_height="68dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -39,7 +39,9 @@
             android:textColor="@color/primary_text_color"
             android:textSize="@dimen/txt_medium"
             android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/tv_user_card_id"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@id/ivUserCard"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="TextContrastCheck"
@@ -50,17 +52,17 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_xmedium"
-            android:layout_marginTop="@dimen/margin_xsmall"
             android:ellipsize="end"
             android:gravity="start"
             android:textColor="@color/secondary_text_color"
             android:textSize="@dimen/txt_small"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@id/ivUserCard"
-            app:layout_constraintTop_toBottomOf="@id/tv_user_card_login"
+            app:layout_constraintTop_toBottomOf="@+id/tv_user_card_login"
             tools:ignore="TextContrastCheck"
-            tools:text="23" />
+            tools:text="id" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

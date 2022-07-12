@@ -14,7 +14,7 @@ import com.loskon.githubapi.app.base.extension.fragment.colorPrimary
 import com.loskon.githubapi.app.base.extension.fragment.getColor
 import com.loskon.githubapi.app.base.extension.view.setGoneVisibleKtx
 import com.loskon.githubapi.app.base.extension.view.textWithGone
-import com.loskon.githubapi.app.base.presentation.dialogfragment.BaseSnackbarFragment
+import com.loskon.githubapi.app.base.presentation.fragment.BaseSnackbarFragment
 import com.loskon.githubapi.app.base.presentation.viewmodel.IOErrorType
 import com.loskon.githubapi.app.base.widget.appbarlayout.AppBarLayoutState
 import com.loskon.githubapi.app.base.widget.appbarlayout.setOnStateChangedListener

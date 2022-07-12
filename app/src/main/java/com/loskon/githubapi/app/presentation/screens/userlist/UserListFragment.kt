@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.SimpleItemAnimator
 import com.loskon.githubapi.R
 import com.loskon.githubapi.app.base.extension.flow.observe
 import com.loskon.githubapi.app.base.extension.view.setGoneVisibleKtx
-import com.loskon.githubapi.app.base.presentation.dialogfragment.BaseSnackbarFragment
+import com.loskon.githubapi.app.base.presentation.fragment.BaseSnackbarFragment
 import com.loskon.githubapi.app.base.presentation.viewmodel.IOErrorType
 import com.loskon.githubapi.app.base.widget.recyclerview.AddAnimationItemAnimator
 import com.loskon.githubapi.app.presentation.screens.userlist.adapter.UserListAdapter
