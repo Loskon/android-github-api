@@ -2,8 +2,6 @@
 
 Приложение для просмотра списка пользователей GitHub.
 
-[сервера]: https://hp-api.herokuapp.com/
-
 ## Скриншоты 
 
 <div align="left">
@@ -16,14 +14,12 @@
 
 ## Стек технологий
 
-* Clean Architecture + MVVM
-* Koin
+* MVVM + Clean Architecture
 * Retrofit2
-* Glide
-* ViewBinding
-* JUnit-тесты
+* Koin
+* Coil
+* JUnit
 
 ## Контакты
 
-[![Telegram](https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/loskon)
-[![Email](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:andreyrochev23@gmail.com)
+[![Telegram](https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/andrejrochev)
