@@ -14,7 +14,8 @@
 
 ## Стек технологий
 
-* MVVM + Clean Architecture
+* MVVM, Clean Architecture
+* Coroutines, Flow
 * Retrofit2
 * Koin
 * Coil
