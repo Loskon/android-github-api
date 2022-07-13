@@ -2,7 +2,7 @@ package com.loskon.githubapi.app.base.countdowntimer
 
 import android.os.CountDownTimer
 
-open class SplashCountDownTimer(
+open class ShortCountDownTimer(
     millis: Long,
     val onFinishTimer: () -> Unit
 ) : CountDownTimer(millis, millis) {
