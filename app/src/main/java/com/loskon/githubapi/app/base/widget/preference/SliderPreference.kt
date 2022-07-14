@@ -18,11 +18,17 @@ class SliderPreference constructor(
 
     private var onChangeListener: ((Int) -> Unit)? = null
     private var defaultValue: Int = 0
+    private var min: Int = 0
+    private var max: Int = 100
 
     init {
         layoutResource = R.layout.preference_slider
         context.theme.obtainStyledAttributes(attrs, androidx.preference.R.styleable.Preference, 0, 0).apply {
             defaultValue = getInt(androidx.preference.R.styleable.Preference_defaultValue, 0)
+        }
+        context.theme.obtainStyledAttributes(attrs, R.styleable.SliderPreference, 0, 0).apply {
+            min = getInt(R.styleable.SliderPreference_sliderMinValue, 0)
+            max = getInt(R.styleable.SliderPreference_sliderMaxValue, 100)
         }
     }
 
@@ -30,11 +36,14 @@ class SliderPreference constructor(
         super.onBindViewHolder(holder)
         holder.itemView.isClickable = false
 
+        val savedValue = sharedPreferences?.getInt(key, defaultValue) ?: 0
+
         val slider = holder.findViewById(R.id.slider_preference) as Slider
         val tvSliderValue = holder.findViewById(R.id.tv_value_slider_preference) as TextView
 
-        val savedValue = sharedPreferences?.getInt(key, defaultValue) ?: 0
         slider.value = savedValue.toFloat()
+        slider.valueFrom = min.toFloat()
+        slider.valueTo = max.toFloat()
         tvSliderValue.text = savedValue.toString()
 
         slider.addOnChangeListener(
@@ -47,7 +56,7 @@ class SliderPreference constructor(
         )
     }
 
-    fun setOnChangeListenerListener(onChangeListener: ((Int) -> Unit)?) {
+    fun setOnChangeListener(onChangeListener: ((Int) -> Unit)?) {
         this.onChangeListener = onChangeListener
     }
 }

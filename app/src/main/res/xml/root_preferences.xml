@@ -20,7 +20,9 @@
         <com.loskon.githubapi.app.base.widget.preference.SliderPreference
             app:defaultValue="@integer/number_of_results"
             app:iconSpaceReserved="false"
-            app:key="@string/number_of_results_key" />
+            app:key="@string/number_of_results_key"
+            app:sliderMaxValue="100"
+            app:sliderMinValue="10" />
 
     </PreferenceCategory>
 

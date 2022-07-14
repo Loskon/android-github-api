@@ -4,4 +4,9 @@
         <attr name="progressBackgroundColor" format="color" />
         <attr name="schemeColors" format="color" />
     </declare-styleable>
+
+    <declare-styleable name="SliderPreference">
+        <attr name="sliderMinValue" format="integer" />
+        <attr name="sliderMaxValue" format="integer" />
+    </declare-styleable>
 </resources>
