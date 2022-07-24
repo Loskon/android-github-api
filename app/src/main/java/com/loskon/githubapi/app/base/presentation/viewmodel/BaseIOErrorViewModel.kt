@@ -31,13 +31,13 @@ open class IOErrorViewModel : BaseViewModel() {
     fun launchIOErrorJob(
         dispatcher: CoroutineDispatcher = Dispatchers.IO,
         errorBlock: ((Throwable) -> Unit)? = null,
-        function: suspend () -> Unit
+        block: suspend () -> Unit
     ): Job {
         return launchErrorJob(
             dispatcher,
             errorBlock = { throwable -> handleErrorFunction(throwable, errorBlock) }
         ) {
-            function()
+            block()
         }
     }
 

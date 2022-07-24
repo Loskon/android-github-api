@@ -1,4 +1,4 @@
-package com.loskon.githubapi.app.base.presentation.dialogfragment
+package com.loskon.githubapi.app.base.presentation.sheetdialogfragment
 
 import android.app.Dialog
 import android.os.Bundle

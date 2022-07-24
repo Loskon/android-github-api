@@ -16,8 +16,9 @@ import com.loskon.githubapi.viewbinding.viewBinding
  */
 class UserListAdapter : RecyclerView.Adapter<UserListAdapter.UserListViewHolder>() {
 
-    private var clickListener: ((UserModel) -> Unit)? = null
     private var list: List<UserModel> = emptyList()
+
+    private var onItemClickListener: ((UserModel) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserListViewHolder {
         return UserListViewHolder(parent.viewBinding(ItemUserCardBinding::inflate))
@@ -31,23 +32,23 @@ class UserListAdapter : RecyclerView.Adapter<UserListAdapter.UserListViewHolder>
                 ImageLoader.loadImage(ivUserCard, avatarUrl)
                 tvUserCardLogin.text = login
                 tvUserCardId.text = tvUserCardId.context.getString(R.string.user_id, id)
-                cardViewUser.setDebounceClickListener { clickListener?.invoke(this) }
+                cardViewUser.setDebounceClickListener { onItemClickListener?.invoke(this) }
             }
         }
     }
 
     override fun getItemCount(): Int = list.size
 
-    fun setUsers(newList: List<UserModel>) {
-        val diffUtil = RecyclerDiffUtil(list, newList, userListDiffUtil)
+    fun setUsers(list: List<UserModel>) {
+        val diffUtil = RecyclerDiffUtil(this.list, list, userListDiffUtil)
         val diffResult = DiffUtil.calculateDiff(diffUtil, false)
-        list = newList
+        this.list = list
         diffResult.dispatchUpdatesTo(this)
     }
 
-    fun setItemClickListener(newClickListener: ((UserModel) -> Unit)?) {
-        clickListener = newClickListener
+    fun setOnItemClickListener(onItemClickListener: ((UserModel) -> Unit)?) {
+        this.onItemClickListener = onItemClickListener
     }
 
-    inner class UserListViewHolder(val binding: ItemUserCardBinding) : RecyclerView.ViewHolder(binding.root)
+    class UserListViewHolder(val binding: ItemUserCardBinding) : RecyclerView.ViewHolder(binding.root)
 }

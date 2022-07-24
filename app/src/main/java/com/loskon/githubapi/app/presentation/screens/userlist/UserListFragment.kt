@@ -47,7 +47,7 @@ class UserListFragment : BaseSnackbarFragment(R.layout.fragment_user_list) {
     }
 
     private fun configureUserListAdapter() {
-        usersAdapter.setItemClickListener { user ->
+        usersAdapter.setOnItemClickListener { user ->
             val action = UserListFragmentDirections.openUserProfileFragment(user.login)
             findNavController().navigate(action)
         }

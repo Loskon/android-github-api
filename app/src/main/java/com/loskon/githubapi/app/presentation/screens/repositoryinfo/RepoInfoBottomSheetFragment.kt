@@ -8,7 +8,7 @@ import com.loskon.githubapi.app.base.datetime.toFormatString
 import com.loskon.githubapi.app.base.extension.flow.observe
 import com.loskon.githubapi.app.base.extension.view.setDebounceClickListener
 import com.loskon.githubapi.app.base.extension.view.setGoneVisibleKtx
-import com.loskon.githubapi.app.base.presentation.dialogfragment.BaseBottomSheetDialogFragment
+import com.loskon.githubapi.app.base.presentation.sheetdialogfragment.BaseBottomSheetDialogFragment
 import com.loskon.githubapi.databinding.SheetRepositoryInfoBinding
 import com.loskon.githubapi.domain.model.RepositoryModel
 import com.loskon.githubapi.viewbinding.viewBinding
