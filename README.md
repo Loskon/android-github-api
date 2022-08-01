@@ -16,7 +16,7 @@
 
 * MVVM, Clean Architecture
 * Coroutines, Flow
-* Retrofit2
+* Retrofit2, OkHttp3, Moshi
 * Koin
 * Coil
 * JUnit
