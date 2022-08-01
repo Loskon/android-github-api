@@ -19,7 +19,6 @@
 * Retrofit2, OkHttp3, Moshi
 * Koin
 * Coil
-* JUnit
 
 ## Контакты
 
