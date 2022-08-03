@@ -19,21 +19,15 @@ class UserListViewModel(
     private var job: Job? = null
 
     fun performUsersRequest(perPage: Int, since: Int) {
-        setLoadingStatus(true)
-        getUsersAsFlow(perPage, since)
-    }
-
-    private fun setLoadingStatus(loading: Boolean) {
-        userListState.tryEmit(
-            userListState.value.copy(loading = loading)
-        )
-    }
-
-    private fun getUsersAsFlow(perPage: Int, since: Int) {
         job?.cancel()
-        job = launchIOErrorJob(errorBlock = { setLoadingStatus(false) }) {
+        job = launchIOErrorJob(errorBlock = { disableLoading() }) {
+            userListState.emit(userListState.value.copy(loading = true))
             userListInteractor.getUsersAsFlow(perPage, since).collectLatest { setUserListState(it) }
         }
+    }
+
+    private fun disableLoading() {
+        userListState.tryEmit(userListState.value.copy(loading = false))
     }
 
     private suspend fun setUserListState(users: List<UserModel>) {
