@@ -18,7 +18,7 @@
     <style name="ToolbarTextFont">
         <item name="android:textColor">?android:colorPrimary</item>
         <item name="android:fontFamily">@font/roboto_light</item>
-        <item name="android:textSize">@dimen/txt_medium</item>
+        <item name="android:textSize">@dimen/text_medium</item>
         <item name="android:textStyle">bold</item>
     </style>
 

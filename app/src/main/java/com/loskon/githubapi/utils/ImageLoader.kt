@@ -6,7 +6,7 @@ import coil.transform.CircleCropTransformation
 
 object ImageLoader {
 
-    fun loadImage(view: ImageView, url: String) {
+    fun load(view: ImageView, url: String) {
         view.load(url) {
             crossfade(true)
             transformations(CircleCropTransformation())

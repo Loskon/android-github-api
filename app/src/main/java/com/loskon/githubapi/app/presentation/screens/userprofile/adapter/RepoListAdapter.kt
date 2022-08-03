@@ -10,9 +10,6 @@ import com.loskon.githubapi.databinding.ItemRepositoryCardBinding
 import com.loskon.githubapi.domain.model.RepositoryModel
 import com.loskon.githubapi.viewbinding.viewBinding
 
-/**
- * Адаптер для работы со списком репозиториев
- */
 class RepoListAdapter : RecyclerView.Adapter<RepoListAdapter.RepositoryViewHolder>() {
 
     private var clickListener: ((RepositoryModel) -> Unit)? = null

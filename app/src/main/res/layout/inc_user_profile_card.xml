@@ -40,7 +40,7 @@
                 android:layout_marginTop="@dimen/margin_small"
                 android:gravity="center"
                 android:textColor="@color/primary_text_color"
-                android:textSize="@dimen/txt_medium"
+                android:textSize="@dimen/text_medium"
                 android:textStyle="bold"
                 tools:text="login" />
 

@@ -118,7 +118,7 @@ class UserProfileFragment : BaseSnackbarFragment(R.layout.fragment_user_profile)
     private fun setUser(user: UserModel) {
         with(binding.incUserProfileCard) {
             user.apply {
-                ImageLoader.loadImage(ivUserProfileAvatar, avatarUrl)
+                ImageLoader.load(ivUserProfileAvatar, avatarUrl)
                 tvUserProfileLogin.text = login
                 tvUserProfileName.textWithGone(name)
                 tvUserProfileLocation.textWithGone(location)

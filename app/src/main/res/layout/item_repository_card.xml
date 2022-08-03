@@ -27,7 +27,7 @@
             android:ellipsize="end"
             android:gravity="start"
             android:textColor="@color/primary_text_color"
-            android:textSize="@dimen/txt_medium"
+            android:textSize="@dimen/text_medium"
             android:textStyle="bold"
             tools:text="fullName" />
 
@@ -40,7 +40,7 @@
             android:gravity="start"
             android:maxLines="2"
             android:textColor="@color/secondary_text_color"
-            android:textSize="@dimen/txt_small"
+            android:textSize="@dimen/text_small"
             tools:ignore="TextContrastCheck"
             tools:text="description" />
 
@@ -52,7 +52,7 @@
             android:ellipsize="end"
             android:gravity="start"
             android:textColor="@color/secondary_text_color"
-            android:textSize="@dimen/txt_small"
+            android:textSize="@dimen/text_small"
             tools:ignore="TextContrastCheck"
             tools:text="language" />
 

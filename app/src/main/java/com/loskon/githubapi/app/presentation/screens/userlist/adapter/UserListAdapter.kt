@@ -11,9 +11,6 @@ import com.loskon.githubapi.domain.model.UserModel
 import com.loskon.githubapi.utils.ImageLoader
 import com.loskon.githubapi.viewbinding.viewBinding
 
-/**
- * Адаптер для работы со списком пользователей
- */
 class UserListAdapter : RecyclerView.Adapter<UserListAdapter.UserListViewHolder>() {
 
     private var list: List<UserModel> = emptyList()
@@ -29,7 +26,7 @@ class UserListAdapter : RecyclerView.Adapter<UserListAdapter.UserListViewHolder>
 
         with(holder.binding) {
             user.apply {
-                ImageLoader.loadImage(ivUserCard, avatarUrl)
+                ImageLoader.load(ivUserCard, avatarUrl)
                 tvUserCardLogin.text = login
                 tvUserCardId.text = tvUserCardId.context.getString(R.string.user_id, id)
                 cardViewUser.setDebounceClickListener { onItemClickListener?.invoke(this) }

@@ -1,6 +1,5 @@
 package com.loskon.githubapi.app.presentation.screens.userlist
 
-import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
@@ -26,14 +25,15 @@ class UserListFragment : BaseSnackbarFragment(R.layout.fragment_user_list) {
 
     private val usersAdapter = UserListAdapter()
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        performUsersRequest()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if (savedInstanceState == null) performUsersRequest()
     }
 
     private fun performUsersRequest() {
         val pageSize = AppPreference.getPageSize(requireContext())
         val since = AppPreference.getSince(requireContext())
+
         viewModel.performUsersRequest(pageSize, since)
     }
 
@@ -68,7 +68,6 @@ class UserListFragment : BaseSnackbarFragment(R.layout.fragment_user_list) {
             performUsersRequest()
             binding.refreshLayoutUserList.isRefreshing = false
         }
-
         binding.bottomBarUsersList.setNavigationOnClickListener {
             val action = UserListFragmentDirections.openSettingsFragment()
             findNavController().navigate(action)
@@ -80,7 +79,6 @@ class UserListFragment : BaseSnackbarFragment(R.layout.fragment_user_list) {
             displayViews(userListState)
             userListState.users?.let { usersAdapter.setUsers(it) }
         }
-
         viewModel.getIoErrorState.observe(viewLifecycleOwner) { ioErrorState ->
             if (ioErrorState?.type != null) showError(ioErrorState.type, ioErrorState.message)
         }

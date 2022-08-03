@@ -17,11 +17,11 @@ class CacheInterceptor(private val context: Context) : Interceptor {
 
         return if (NetworkUtil.hasConnected(context)) {
             val onlineRequest = onlineCacheControl(request)
-            chain.proceed(onlineRequest).addCacheHeader(false)
+            chain.proceed(onlineRequest).addCacheHeader(fromCache = false)
         } else {
             if (hasCacheDir()) {
                 val offlineRequest = offlineCacheControl(request)
-                chain.proceed(offlineRequest).addCacheHeader(true)
+                chain.proceed(offlineRequest).addCacheHeader(fromCache = true)
             } else {
                 throw EmptyCacheException()
             }
