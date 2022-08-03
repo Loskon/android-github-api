@@ -14,7 +14,7 @@ import timber.log.Timber
 open class BaseViewModel : ViewModel() {
 
     private val errorState = MutableStateFlow<Throwable?>(null)
-    open val errorStateFlow get() = errorState.asStateFlow()
+    open val getErrorState get() = errorState.asStateFlow()
 
     protected fun launchErrorJob(
         dispatcher: CoroutineDispatcher = Dispatchers.Default,
