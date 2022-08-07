@@ -27,8 +27,8 @@ class SliderPreference constructor(
             defaultValue = getInt(androidx.preference.R.styleable.Preference_defaultValue, 0)
         }
         context.theme.obtainStyledAttributes(attrs, R.styleable.SliderPreference, 0, 0).apply {
-            min = getInt(R.styleable.SliderPreference_sliderMinValue, 0)
-            max = getInt(R.styleable.SliderPreference_sliderMaxValue, 100)
+            min = getInt(R.styleable.SliderPreference_sliderMinValue, MIN_VALUE)
+            max = getInt(R.styleable.SliderPreference_sliderMaxValue, MAX_VALUE)
         }
     }
 
@@ -58,5 +58,10 @@ class SliderPreference constructor(
 
     fun setOnChangeListener(onChangeListener: ((Int) -> Unit)?) {
         this.onChangeListener = onChangeListener
+    }
+
+    companion object {
+        private const val MIN_VALUE = 0
+        private const val MAX_VALUE = 100
     }
 }
