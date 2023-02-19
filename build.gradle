@@ -15,22 +15,9 @@ task clean(type: Delete) {
 }
 
 subprojects {
-    apply plugin: "org.jlleitschuh.gradle.ktlint"
+    apply plugin: "org.jmailen.kotlinter"
     apply plugin: "io.gitlab.arturbosch.detekt"
     apply plugin: "checkstyle"
-
-    task ktlint(type: JavaExec) {
-        group = "verification"
-        description = "Check Kotlin code style."
-
-        classpath = configurations.ktlint
-        mainClass.set("com.pinterest.ktlint.Main")
-
-        args "--reporter=plain"
-        args "--reporter=checkstyle,output=$projectDir/build/reports/ktlint/ktlint-report.xml"
-        args "--reporter=checkstyle,output=$projectDir/build/reports/ktlint/ktlint-report.html"
-        args "src/**/*.kt"
-    }
 
     // noinspection UnnecessaryQualifiedReference
     task detektCode(type: io.gitlab.arturbosch.detekt.Detekt) {

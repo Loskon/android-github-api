@@ -36,12 +36,12 @@ android {
     compileOptions {
         coreLibraryDesugaringEnabled true
 
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_18
+        targetCompatibility JavaVersion.VERSION_18
     }
 
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '18'
     }
 
     buildFeatures {
@@ -64,9 +64,9 @@ dependencies {
     implementation deps.bundles.lifecycle
     implementation deps.bundles.navigation
     // Network
-    implementation deps.bundles.retrofit.moshi
+    implementation deps.bundles.retrofitMoshi
     implementation deps.moshi
-    kapt deps.moshi.codegen
+    kapt deps.moshiCodegen
     // ImageLoader
     implementation deps.coil
     // Kotlin
