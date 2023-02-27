@@ -3,10 +3,8 @@ package com.loskon.githubapi
 import android.content.Context
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.loskon.githubapi.utils.AppPreference
-import com.loskon.githubapi.utils.NetworkUtil
+import com.loskon.features.utils.AppPreference
 import junit.framework.TestCase.assertEquals
-import org.junit.Assert.assertTrue
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -28,11 +26,5 @@ class SomeTest {
         AppPreference.remove(context, key)
         val removedValue = AppPreference.get(context, key, defValue)
         assertEquals(removedValue, defValue)
-    }
-
-    @Test
-    fun testInternetConnection() {
-        val hasConnected = NetworkUtil.hasConnected(context)
-        assertTrue("No Internet connection", hasConnected)
     }
 }

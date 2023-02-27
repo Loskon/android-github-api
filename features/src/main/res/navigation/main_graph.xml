@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/userListFragment">
+
+    <fragment
+        android:id="@+id/userListFragment"
+        android:name="com.loskon.features.userlist.presentation.UserListFragment"
+        android:label="UsersFragment"
+        tools:layout="@layout/fragment_user_list">
+        <action
+            android:id="@+id/openUserProfileFragment"
+            app:destination="@id/userProfileFragment" />
+        <action
+            android:id="@+id/openSettingsFragment"
+            app:destination="@id/openSettingsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/userProfileFragment"
+        android:name="com.loskon.features.userprofile.presentation.UserProfileFragment"
+        android:label="fragment_user_profile"
+        tools:layout="@layout/fragment_user_profile">
+        <argument
+            android:name="username"
+            app:argType="string" />
+        <action
+            android:id="@+id/openRepositoryInfoBottomSheetFragment"
+            app:destination="@id/repositoryInfo" />
+    </fragment>
+
+    <dialog
+        android:id="@+id/repositoryInfo"
+        android:name="com.loskon.features.repositoryinfo.presentation.RepoInfoSheetFragment"
+        android:label="RepositoryInfoBottomSheetFragment"
+        tools:layout="@layout/sheet_repository_info">
+
+        <argument
+            android:name="repository"
+            app:argType="com.loskon.features.model.RepositoryModel" />
+    </dialog>
+
+    <fragment
+        android:id="@+id/openSettingsFragment"
+        android:name="com.loskon.features.settings.OpenSettingsFragment"
+        android:label="OpenSettingsFragment"
+        tools:layout="@layout/fragment_settings" />
+
+</navigation>
