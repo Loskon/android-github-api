@@ -1,0 +1,44 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory
+        app:iconSpaceReserved="false"
+        app:title="@string/settings_app_header">
+
+        <SwitchPreferenceCompat
+            app:defaultValue="false"
+            app:iconSpaceReserved="false"
+            app:key="@string/dark_mode_key"
+            app:title="@string/dark_mode_title" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:iconSpaceReserved="false"
+        app:title="@string/number_of_results_header">
+
+        <com.loskon.base.widget.preference.SliderPreference
+            app:defaultValue="@integer/number_of_results"
+            app:iconSpaceReserved="false"
+            app:key="@string/number_of_results_key"
+            app:sliderMaxValue="100"
+            app:sliderMinValue="10" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:iconSpaceReserved="false"
+        app:title="@string/since_header">
+
+        <com.loskon.base.widget.preference.NumberEditTextPreference
+            android:defaultValue="@integer/since"
+            android:dialogTitle="@string/since_header"
+            android:key="@string/since_key"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            app:iconSpaceReserved="false"
+            app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_xsmall"
+        app:cardBackgroundColor="@color/card_view_background_color"
+        app:cardCornerRadius="@dimen/margin_xsmall"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/margin_xmedium"
+            android:paddingVertical="@dimen/margin_xmedium">
+
+            <ImageView
+                android:id="@+id/iv_user_profile_avatar"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_gravity="center_horizontal"
+                tools:ignore="ContentDescription,ImageContrastCheck"
+                tools:src="@android:mipmap/sym_def_app_icon" />
+
+            <TextView
+                android:id="@+id/tv_user_profile_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_small"
+                android:gravity="center"
+                android:textColor="@color/primary_text_color"
+                android:textSize="@dimen/text_medium"
+                android:textStyle="bold"
+                tools:text="mojombo" />
+
+            <TextView
+                android:id="@+id/tv_user_profile_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_xsmall"
+                android:gravity="center"
+                android:textColor="@color/secondary_text_color"
+                tools:text="Tom Preston-Werner" />
+
+            <TextView
+                android:id="@+id/tv_user_profile_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_xsmall"
+                android:gravity="center"
+                android:textColor="@color/secondary_text_color"
+                tools:text="San Francisco" />
+
+            <TextView
+                android:id="@+id/tv_user_profile_created_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_xsmall"
+                android:gravity="center"
+                android:textColor="@color/secondary_text_color"
+                tools:text="Created: 10/20/07" />
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:id="@+id/tv_public_repositories_header"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_height"
+        android:gravity="center"
+        android:padding="@dimen/margin_small"
+        android:text="@string/public_repositories"
+        android:textColor="?android:colorPrimary"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/card_view_user_profile"
+        tools:ignore="TextContrastCheck" />
+
+</LinearLayout>

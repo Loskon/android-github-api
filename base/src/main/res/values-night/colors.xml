@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Views -->
+    <color name="primary_app_color">@color/blue_dark</color>
+    <color name="sheet_background_color">@color/window_background_dark</color>
+    <color name="primary_text_color">@color/primary_text_dark</color>
+    <color name="secondary_text_color">@color/secondary_text_dark</color>
+    <color name="card_view_background_color">@color/item_background_dark</color>
+    <color name="bottom_bar_background_color">@color/bottom_bar_dark</color>
+    <color name="swipe_background_color">@color/bottom_bar_dark</color>
+    <color name="bg_tv_color">@color/item_background_dark</color>
+</resources>
