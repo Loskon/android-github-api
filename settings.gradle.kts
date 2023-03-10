@@ -1,8 +1,5 @@
 @file:Suppress("UnstableApiUsage")
 
-include(":features")
-
-
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
@@ -30,3 +27,4 @@ rootProject.name = "GitHubApi"
 include(":app")
 include(":network")
 include(":base")
+include(":features")
