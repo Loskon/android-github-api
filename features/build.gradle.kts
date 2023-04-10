@@ -32,12 +32,17 @@ android {
         targetCompatibility = JavaVersion.VERSION_18
     }
 
+    composeOptions {
+        kotlinCompilerExtensionVersion = deps.versions.compose.get()
+    }
+
     kotlinOptions {
         jvmTarget = "18"
     }
 
     buildFeatures {
         viewBinding = true
+        compose = true
     }
 }
 
@@ -47,6 +52,9 @@ dependencies {
     implementation(projects.base)
     // Desugar
     coreLibraryDesugaring(deps.desugar)
+    // Compose
+    implementation(deps.composeUi)
+    implementation(deps.composeUiToolingPreview)
     // Kotlin
     implementation(deps.core)
     // Android
@@ -59,6 +67,11 @@ dependencies {
     implementation(deps.preference)
     implementation(deps.bundles.lifecycle)
     implementation(deps.bundles.navigation)
+    // Android Compose
+    implementation(deps.accompanistSystemuicontroller)
+    implementation(deps.activityCompose)
+    implementation(deps.materialCompose)
+    implementation(deps.constraintlayoutCompose)
     // DI
     implementation(deps.koin)
     // Logs

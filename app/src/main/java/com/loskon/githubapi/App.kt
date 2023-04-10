@@ -23,6 +23,7 @@ class App : Application() {
 
     private fun initializeKoin(application: Application) {
         startKoin {
+            if (BuildConfig.DEBUG) printLogger()
             androidContext(application)
             modules(
                 listOf(
