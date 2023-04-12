@@ -123,7 +123,7 @@ runtimeCompose = { module = "androidx.lifecycle:lifecycle-runtime-compose", vers
 lifecycleLivedataKtx = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "lifecycle" }
 accompanistSystemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanist" }
 accompanistInsets = { module = "com.google.accompanist:accompanist-insets", version.ref = "accompanist" }
-accompanistNaviagation= { module = "com.google.accompanist:accompanist-navigation-animation", version.ref = "accompanist" }
+accompanistNaviagation = { module = "com.google.accompanist:accompanist-navigation-animation", version.ref = "accompanist" }
 ## Test
 composeJunit4 = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "composeUi" }
 composeUiTooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "composeUi" }
@@ -141,7 +141,7 @@ retrofitGson = ["retrofit", "retrofitConverterGson", "okHttp", "okHttpLogging"]
 ## DI
 koinTest = ["koinTest", "koinJUnit4"]
 ## Compose ##
-lifecycleCompose = ["runtimeCompose", "viewmodelCompose"  ]
+lifecycleCompose = ["runtimeCompose", "viewmodelCompose"]
 
 ## plugins ##
 [plugins]

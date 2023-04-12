@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/userProfileFragment"
-        android:name="com.loskon.features.userprofile.presentation.UserProfileFragment"
+        android:name="com.loskon.features.userprofile.UserProfileCompose"
         android:label="fragment_user_profile"
         tools:layout="@layout/fragment_user_profile">
         <argument

@@ -38,6 +38,12 @@ android {
 
     kotlinOptions {
         jvmTarget = "18"
+        freeCompilerArgs = listOf (
+            "-opt-in=androidx.compose.material.ExperimentalMaterialApi",
+            "-opt-in=androidx.compose.ui.ExperimentalComposeUiApi",
+            "-opt-in=androidx.compose.foundation.ExperimentalFoundationApi",
+            "-opt-in=androidx.compose.animation.ExperimentalAnimationApi"
+        )
     }
 
     buildFeatures {
@@ -72,6 +78,7 @@ dependencies {
     implementation(deps.activityCompose)
     implementation(deps.materialCompose)
     implementation(deps.constraintlayoutCompose)
+    implementation(deps.runtimeCompose)
     // DI
     implementation(deps.koin)
     // Logs

@@ -6,7 +6,6 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.SimpleItemAnimator
 import com.loskon.base.datetime.toFormatString
@@ -29,13 +28,13 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
 
     private val viewModel: UserProfileViewModel by viewModel()
     private val binding by viewBinding(FragmentUserProfileBinding::bind)
-    private val args: UserProfileFragmentArgs by navArgs()
+    //private val args: UserProfileFragmentArgs by navArgs()
 
     private val repositoriesAdapter = RepoListAdapter()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        viewModel.getUser(args.username)
+        //viewModel.getUser(args.username)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -49,8 +48,8 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
 
     private fun configureRepoListAdapter() {
         repositoriesAdapter.setItemClickListener { repository ->
-            val action = UserProfileFragmentDirections.openRepositoryInfoBottomSheetFragment(repository)
-            findNavController().navigate(action)
+           // val action = UserProfileFragmentDirections.openRepositoryInfoBottomSheetFragment(repository)
+            //findNavController().navigate(action)
         }
     }
 
@@ -65,7 +64,7 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
 
     private fun setupViewsListener() {
         binding.refreshLayoutUserProfile.setOnRefreshListener {
-            viewModel.getUser(args.username)
+            //viewModel.getUser(args.username)
             binding.refreshLayoutUserProfile.isRefreshing = false
         }
         binding.appBarUserProfile.setOnStateChangedListener { state ->
@@ -89,8 +88,8 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
                 is UserProfileState.Success -> {
                     binding.indicatorUserProfile.isVisible = false
                     binding.appBarUserProfile.isVisible = true
-                    setRepositoriesHeader(it.user.repositories.isEmpty())
-                    setUser(it.user)
+                    //setRepositoriesHeader(it.user.repositories.isEmpty())
+                    //setUser(it.user)
                 }
                 is UserProfileState.Failure -> {
                     binding.indicatorUserProfile.isVisible = false
