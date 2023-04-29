@@ -37,6 +37,10 @@ android {
     kotlinOptions {
         jvmTarget = "18"
     }
+
+    buildFeatures {
+        buildConfig = true
+    }
 }
 
 dependencies {
