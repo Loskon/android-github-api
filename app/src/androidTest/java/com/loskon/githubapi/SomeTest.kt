@@ -3,7 +3,7 @@ package com.loskon.githubapi
 import android.content.Context
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.loskon.features.utils.AppPreference
+import com.loskon.features.util.preference.AppPreference
 import junit.framework.TestCase.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith

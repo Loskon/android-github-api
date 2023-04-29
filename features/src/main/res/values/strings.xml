@@ -1,11 +1,7 @@
 <resources>
     <!-- Snackbar -->
-    <string name="no_internet_connection">You need to connect with internet!</string>
-    <string name="problems_get_data">Problems with getting data. Error code: %1$s</string>
-    <string name="timeout">Bad internet connection. Try again!</string>
-    <string name="unknown_host">Server connection problems. Try again!</string>
-    <string name="unknown_error">Unknown error</string>
-    <string name="retry">Retry</string>
+    <string name="no_internet_connection">No internet connection</string>
+    <string name="error_loading">Error loading!</string>
     <!-- User Profile Screen -->
     <string name="created_date">Created: %1$s</string>
     <string name="public_repositories">Public repositories:</string>
@@ -30,5 +26,4 @@
     <string name="dark_mode_key">dark_mode_key</string>
     <string name="number_of_results_key">number_of_results_key</string>
     <string name="since_key">since_key</string>
-    <string name="error_loading">Error loading!</string>
 </resources>

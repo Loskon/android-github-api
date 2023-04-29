@@ -6,4 +6,5 @@ sealed class UserListState {
     data class Success(val users: List<UserModel>) : UserListState()
     object Loading : UserListState()
     object Failure : UserListState()
+    object ConnectionFailure : UserListState()
 }

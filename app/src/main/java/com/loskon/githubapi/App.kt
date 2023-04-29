@@ -5,7 +5,8 @@ import com.loskon.base.utils.ColorUtil
 import com.loskon.features.repositoryinfo.repoInfoModule
 import com.loskon.features.userlist.userListModule
 import com.loskon.features.userprofile.userProfileModule
-import com.loskon.features.utils.AppPreference
+import com.loskon.features.util.network.connectionManagerModule
+import com.loskon.features.util.preference.AppPreference
 import com.loskon.network.networkModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
@@ -26,8 +27,11 @@ class App : Application() {
             androidContext(application)
             modules(
                 listOf(
-                    networkModule, userListModule,
-                    userProfileModule, repoInfoModule
+                    networkModule,
+                    userListModule,
+                    userProfileModule,
+                    repoInfoModule,
+                    connectionManagerModule
                 )
             )
         }

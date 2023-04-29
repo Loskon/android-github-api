@@ -1,4 +1,4 @@
-package com.loskon.features.utils
+package com.loskon.features.util.preference
 
 import android.content.Context
 import androidx.preference.PreferenceManager

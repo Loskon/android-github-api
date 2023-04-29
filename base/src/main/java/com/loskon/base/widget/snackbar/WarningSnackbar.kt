@@ -7,14 +7,14 @@ import com.loskon.base.R
 import com.loskon.base.extension.context.getColorKtx
 import com.loskon.base.extension.context.getFontKtx
 
-class AppSnackbar : BaseSnackbar() {
+class WarningSnackbar : BaseSnackbar() {
 
     fun make(
         view: View,
         anchorView: View?,
         message: String?,
         success: Boolean,
-    ): AppSnackbar {
+    ): WarningSnackbar {
         make(view, message, Snackbar.LENGTH_LONG)
         if (anchorView != null) setAnchorView(anchorView)
         setBackgroundTintList(view.context.getColorKtx(getSuccessColorId(success)))

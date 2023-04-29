@@ -8,8 +8,7 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val userListModule = module {
-
     single<UserListRepository> { UserListRepositoryImpl(get()) }
-    viewModel { UserListViewModel(get()) }
+    viewModel { UserListViewModel(get(), get()) }
     factory { UserListInteractor(get()) }
 }

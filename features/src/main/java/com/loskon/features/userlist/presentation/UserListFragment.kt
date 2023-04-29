@@ -10,10 +10,10 @@ import androidx.recyclerview.widget.SimpleItemAnimator
 import com.loskon.base.extension.coroutines.observe
 import com.loskon.base.viewbinding.viewBinding
 import com.loskon.base.widget.recyclerview.AddAnimationItemAnimator
-import com.loskon.base.widget.snackbar.AppSnackbar
+import com.loskon.base.widget.snackbar.WarningSnackbar
 import com.loskon.features.R
 import com.loskon.features.databinding.FragmentUserListBinding
-import com.loskon.features.utils.AppPreference
+import com.loskon.features.util.preference.AppPreference
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class UserListFragment : Fragment(R.layout.fragment_user_list) {
@@ -38,17 +38,9 @@ class UserListFragment : Fragment(R.layout.fragment_user_list) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        configureUserListAdapter()
         configureRecyclerView()
         setupViewsListener()
         installObservers()
-    }
-
-    private fun configureUserListAdapter() {
-        userListAdapter.setOnItemClickListener { user ->
-            val action = UserListFragmentDirections.openUserProfileFragment(user.login)
-            findNavController().navigate(action)
-        }
     }
 
     private fun configureRecyclerView() {
@@ -66,6 +58,10 @@ class UserListFragment : Fragment(R.layout.fragment_user_list) {
             getUsers()
             binding.refreshLayoutUserList.isRefreshing = false
         }
+        userListAdapter.setOnItemClickListener { user ->
+            val action = UserListFragmentDirections.openUserProfileFragment(user.login)
+            findNavController().navigate(action)
+        }
         binding.bottomBarUsersList.setNavigationOnClickListener {
             val action = UserListFragmentDirections.openSettingsFragment()
             findNavController().navigate(action)
@@ -78,19 +74,26 @@ class UserListFragment : Fragment(R.layout.fragment_user_list) {
                 is UserListState.Loading -> {
                     binding.indicatorUserList.isVisible = true
                 }
+
                 is UserListState.Success -> {
                     binding.indicatorUserList.isVisible = false
                     userListAdapter.setUsers(it.users)
                 }
+
                 is UserListState.Failure -> {
                     binding.indicatorUserList.isVisible = false
-                    showMessageSnackbar(getString(R.string.error_loading))
+                    showWarningSnackbar(getString(R.string.error_loading))
+                }
+
+                is UserListState.ConnectionFailure -> {
+                    binding.indicatorUserList.isVisible = false
+                    showWarningSnackbar(getString(R.string.no_internet_connection))
                 }
             }
         }
     }
 
-    private fun showMessageSnackbar(message: String) {
-        AppSnackbar().make(binding.root, binding.bottomBarUsersList, message, false).show()
+    private fun showWarningSnackbar(message: String) {
+        WarningSnackbar().make(binding.root, binding.bottomBarUsersList, message, success = false).show()
     }
 }

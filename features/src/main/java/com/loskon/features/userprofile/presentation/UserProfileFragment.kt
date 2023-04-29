@@ -18,7 +18,7 @@ import com.loskon.base.viewbinding.viewBinding
 import com.loskon.base.widget.appbarlayout.AppBarLayoutState
 import com.loskon.base.widget.appbarlayout.setOnStateChangedListener
 import com.loskon.base.widget.recyclerview.AddAnimationItemAnimator
-import com.loskon.base.widget.snackbar.AppSnackbar
+import com.loskon.base.widget.snackbar.WarningSnackbar
 import com.loskon.features.R
 import com.loskon.features.databinding.FragmentUserProfileBinding
 import com.loskon.features.model.UserModel
@@ -94,7 +94,11 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
                 }
                 is UserProfileState.Failure -> {
                     binding.indicatorUserProfile.isVisible = false
-                    showMessageSnackbar(getString(R.string.error_loading))
+                    showWarningSnackbar(getString(R.string.error_loading))
+                }
+                is UserProfileState.ConnectionFailure -> {
+                    binding.indicatorUserProfile.isVisible = false
+                    showWarningSnackbar(getString(R.string.no_internet_connection))
                 }
             }
         }
@@ -126,7 +130,7 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
         }
     }
 
-    private fun showMessageSnackbar(message: String) {
-        AppSnackbar().make(binding.root, binding.bottomBarUserProfile, message, false).show()
+    private fun showWarningSnackbar(message: String) {
+        WarningSnackbar().make(binding.root, binding.bottomBarUserProfile, message, success = false).show()
     }
 }
