@@ -61,6 +61,8 @@ dependencies {
     implementation(deps.bundles.navigation)
     // DI
     implementation(deps.koin)
+    // AdMob
+    implementation(deps.playServicesAds)
     // Logs
     implementation(deps.timber)
     // Test

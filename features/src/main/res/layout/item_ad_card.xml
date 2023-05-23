@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_view_user"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/margin_xsmall"
+    android:layout_marginEnd="@dimen/margin_xsmall"
+    app:cardBackgroundColor="@color/card_view_background_color"
+    app:cardCornerRadius="@dimen/margin_xsmall"
+    app:cardUseCompatPadding="true"
+    app:rippleColor="?attr/colorControlHighlight">
+
+    <com.google.android.gms.ads.nativead.NativeAdView
+        android:id="@+id/view_ad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/top_ad_card_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/margin_xmedium"
+            android:paddingVertical="@dimen/margin_xmedium">
+
+            <ImageView
+                android:id="@+id/iv_ad"
+                android:layout_width="68dp"
+                android:layout_height="68dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription,ImageContrastCheck"
+                tools:src="@android:mipmap/sym_def_app_icon"
+                tools:visibility="visible" />
+
+            <TextView
+                android:id="@+id/tv_headline_ad"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_xmedium"
+                android:ellipsize="end"
+                android:gravity="start"
+                android:textColor="@color/primary_text_color"
+                android:textSize="@dimen/text_medium"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/tv_body_ad"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@id/iv_ad"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Headline" />
+
+            <TextView
+                android:id="@+id/tv_body_ad"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_xmedium"
+                android:ellipsize="end"
+                android:gravity="start"
+                android:textColor="@color/primary_text_color"
+                android:textSize="@dimen/text_medium"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@id/iv_ad"
+                app:layout_constraintTop_toBottomOf="@+id/tv_headline_ad"
+                tools:text="Body" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.gms.ads.nativead.NativeAdView>
+
+</com.google.android.material.card.MaterialCardView>

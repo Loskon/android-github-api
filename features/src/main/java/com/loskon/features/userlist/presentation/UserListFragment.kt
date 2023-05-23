@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.SimpleItemAnimator
+import com.google.android.gms.ads.AdLoader
 import com.loskon.base.extension.coroutines.observe
 import com.loskon.base.viewbinding.viewBinding
 import com.loskon.base.widget.recyclerview.AddAnimationItemAnimator
@@ -41,6 +42,8 @@ class UserListFragment : Fragment(R.layout.fragment_user_list) {
         configureRecyclerView()
         setupViewsListener()
         installObservers()
+
+        val builder = AdLoader.Builder(requireContext(), "<your ad unit ID>").forNativeAd { nativeAd -> }
     }
 
     private fun configureRecyclerView() {

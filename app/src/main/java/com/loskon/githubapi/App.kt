@@ -1,6 +1,7 @@
 package com.loskon.githubapi
 
 import android.app.Application
+import com.google.android.gms.ads.MobileAds
 import com.loskon.base.utils.ColorUtil
 import com.loskon.features.repositoryinfo.repoInfoModule
 import com.loskon.features.userlist.userListModule
@@ -20,6 +21,7 @@ class App : Application() {
         if (BuildConfig.DEBUG) Timber.plant(Timber.DebugTree())
         initializeKoin(this)
         ColorUtil.toggleDarkMode(AppPreference.getHasDarkMode(this))
+        MobileAds.initialize(this)
     }
 
     private fun initializeKoin(application: Application) {

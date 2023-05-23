@@ -65,6 +65,8 @@ dependencies {
     implementation(deps.bundles.navigation)
     // DI
     implementation(deps.koin)
+    // AdMob
+    implementation(deps.playServicesAds)
     // Misc
     implementation(deps.splashscreen)
     // Logs
