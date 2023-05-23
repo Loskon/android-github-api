@@ -7,6 +7,7 @@ plugins {
     alias(deps.plugins.kapt).apply(false)
     alias(deps.plugins.navigation).apply(false)
     alias(deps.plugins.parcelize).apply(false)
+    alias(deps.plugins.ksp).apply(false)
     alias(deps.plugins.ktlint).apply(false)
     alias(deps.plugins.detekt).apply(false)
     alias(deps.plugins.gradlevers).apply(false)

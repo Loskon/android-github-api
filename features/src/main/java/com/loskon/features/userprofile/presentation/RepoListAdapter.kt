@@ -1,12 +1,11 @@
 package com.loskon.features.userprofile.presentation
 
+import android.annotation.SuppressLint
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.loskon.base.extension.view.setDebounceClickListener
 import com.loskon.base.extension.view.textWithGone
 import com.loskon.base.viewbinding.viewBinding
-import com.loskon.base.widget.recyclerview.RecyclerDiffUtil
 import com.loskon.features.databinding.ItemRepositoryCardBinding
 import com.loskon.features.model.RepositoryModel
 
@@ -34,11 +33,10 @@ class RepoListAdapter : RecyclerView.Adapter<RepoListAdapter.RepositoryViewHolde
 
     override fun getItemCount(): Int = list.size
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setRepositories(newList: List<RepositoryModel>) {
-        val diffUtil = RecyclerDiffUtil(list, newList, repoListDiffUtil)
-        val diffResult = DiffUtil.calculateDiff(diffUtil, false)
         list = newList
-        diffResult.dispatchUpdatesTo(this)
+        notifyDataSetChanged()
     }
 
     fun setItemClickListener(newClickListener: ((RepositoryModel) -> Unit)?) {

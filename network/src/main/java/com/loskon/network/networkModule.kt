@@ -3,6 +3,7 @@ package com.loskon.network
 import com.loskon.network.moshiadapter.LocalDateTimeMoshiAdapter
 import com.loskon.network.source.NetworkDataSource
 import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
@@ -35,7 +36,7 @@ private fun provideOkHttp(logging: HttpLoggingInterceptor): OkHttpClient {
 }
 
 private fun provideMoshi(): Moshi {
-    return Moshi.Builder().add(LocalDateTimeMoshiAdapter()).build()
+    return Moshi.Builder().addLast(KotlinJsonAdapterFactory()).add(LocalDateTimeMoshiAdapter()).build()
 }
 
 private fun provideRetrofit(okHttp: OkHttpClient, moshi: Moshi): Retrofit {

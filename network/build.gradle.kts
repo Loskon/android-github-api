@@ -3,7 +3,7 @@
 plugins {
     alias(deps.plugins.androidLibrary)
     alias(deps.plugins.kotlin)
-    alias(deps.plugins.kapt)
+    alias(deps.plugins.ksp)
 }
 
 android {
@@ -51,7 +51,7 @@ dependencies {
     // Network
     implementation(deps.bundles.retrofitMoshi)
     implementation(deps.moshi)
-    kapt(deps.moshiCodegen)
+    ksp(deps.moshiCodegen)
     // ImageLoader
     implementation(deps.coil)
     // DI

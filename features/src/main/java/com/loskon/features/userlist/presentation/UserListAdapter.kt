@@ -1,11 +1,10 @@
 package com.loskon.features.userlist.presentation
 
+import android.annotation.SuppressLint
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.loskon.base.extension.view.setDebounceClickListener
 import com.loskon.base.viewbinding.viewBinding
-import com.loskon.base.widget.recyclerview.RecyclerDiffUtil
 import com.loskon.features.databinding.ItemUserCardBinding
 import com.loskon.features.model.UserModel
 import com.loskon.network.imageloader.ImageLoader
@@ -34,11 +33,10 @@ class UserListAdapter : RecyclerView.Adapter<UserListAdapter.UserListViewHolder>
 
     override fun getItemCount(): Int = list.size
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setUsers(list: List<UserModel>) {
-        val diffUtil = RecyclerDiffUtil(this.list, list, userListDiffUtil)
-        val diffResult = DiffUtil.calculateDiff(diffUtil, false)
         this.list = list
-        diffResult.dispatchUpdatesTo(this)
+        notifyDataSetChanged()
     }
 
     fun setOnItemClickListener(onItemClickListener: ((UserModel) -> Unit)?) {

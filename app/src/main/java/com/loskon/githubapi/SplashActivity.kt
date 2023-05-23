@@ -12,7 +12,7 @@ class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
-        splashScreen.setKeepVisibleCondition { true }
+        splashScreen.setKeepOnScreenCondition { true }
     }
 
     override fun onStart() {

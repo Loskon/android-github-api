@@ -12,6 +12,7 @@ android {
 
     defaultConfig {
         applicationId = "com.loskon.githubapi"
+        compileSdkPreview = "UpsideDownCake"
 
         minSdk = deps.versions.minSdk.get().toInt()
         targetSdk = deps.versions.targetSdk.get().toInt()
