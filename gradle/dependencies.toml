@@ -10,6 +10,7 @@ debugVersionName = "1.0.0"
 ## App
 gradle = "8.0.2"
 kotlin = "1.8.21"
+ksp = "1.8.21-1.0.11"
 ## Desugar
 desugar = "2.0.3"
 ## Kotlin
@@ -32,11 +33,12 @@ preference = "1.2.0"
 lifecycle = "2.6.1"
 navigation = "2.5.3"
 parcelize = "1.4.30"
+## DB
+room = "2.5.1"
 ## Network
 retrofit = "2.9.0"
 okHttp = "4.11.0"
 moshi = "1.15.0"
-ksp = "1.8.21-1.0.11"
 ## ImageLoader
 picasso = "2.71828"
 glide = "4.14.2"
@@ -75,6 +77,10 @@ lifecycleRuntime = { module = "androidx.lifecycle:lifecycle-runtime-ktx", versio
 lifecycleViewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
 navigationFragment = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigation" }
 navigationUi = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigation" }
+## DB
+roomRuntime = { module = "androidx.room:room-runtime", version.ref = "room" }
+roomCompiler = { module = "androidx.room:room-compiler", version.ref = "room" }
+roomKtx = { module = "androidx.room:room-ktx", version.ref = "room" }
 ## Network
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 retrofitConverterMoshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "retrofit" }

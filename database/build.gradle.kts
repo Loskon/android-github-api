@@ -1,24 +1,19 @@
 @file:Suppress("DSL_SCOPE_VIOLATION", "UnstableApiUsage")
 
 plugins {
-    alias(deps.plugins.androidApplication)
+    alias(deps.plugins.androidLibrary)
     alias(deps.plugins.kotlin)
-    alias(deps.plugins.navigation)
+    alias(deps.plugins.ksp)
 }
 
 android {
-    namespace = "com.loskon.githubapi"
+    namespace = "com.loskon.database"
     compileSdk = deps.versions.compileSdk.get().toInt()
 
     defaultConfig {
-        applicationId = "com.loskon.githubapi"
-        compileSdkPreview = "UpsideDownCake"
-
         minSdk = deps.versions.minSdk.get().toInt()
-        targetSdk = deps.versions.targetSdk.get().toInt()
 
-        versionCode = deps.versions.debugVersionCode.get().toInt()
-        versionName = deps.versions.debugVersionName.get()
+        buildConfigField("String", "API_BASE_URL", "\"https://api.github.com/\"")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -49,26 +44,17 @@ android {
 }
 
 dependencies {
-    // Module
-    implementation(projects.network)
-    implementation(projects.base)
-    implementation(projects.features)
-    implementation(projects.database)
     // Desugar
     coreLibraryDesugaring(deps.desugar)
     // Kotlin
     implementation(deps.core)
-    // Android
-    implementation(deps.appcompat)
-    implementation(deps.material)
-    implementation(deps.activity)
-    implementation(deps.constraintlayout)
-    implementation(deps.fragment)
-    implementation(deps.bundles.navigation)
+    // DB
+    implementation(deps.roomRuntime)
+    implementation(deps.roomKtx)
+    annotationProcessor(deps.roomCompiler)
+    ksp(deps.roomCompiler)
     // DI
     implementation(deps.koin)
-    // Misc
-    implementation(deps.splashscreen)
     // Logs
     implementation(deps.timber)
     // Test
