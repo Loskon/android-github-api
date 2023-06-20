@@ -10,6 +10,14 @@ class UserListInteractor(
         return userListRepository.getUsers(pageSize, since).filter { it.type == USER_TYPE }.sortedBy { it.id }
     }
 
+    suspend fun getCachedUsers(): List<UserModel>? {
+        return userListRepository.getCachedUsers()
+    }
+
+    suspend fun setUsers(users: List<UserModel>) {
+        userListRepository.setUsers(users)
+    }
+
     companion object {
         private const val USER_TYPE = "User"
     }

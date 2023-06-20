@@ -44,6 +44,7 @@ android {
 dependencies {
     // Module
     implementation(projects.network)
+    implementation(projects.database)
     implementation(projects.base)
     // Desugar
     coreLibraryDesugaring(deps.desugar)

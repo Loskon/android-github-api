@@ -1,20 +1,18 @@
 <resources>
-
     <!-- Dark application theme -->
     <style name="AppTheme" parent="BaseAppTheme">
         <!-- Primary brand color -->
         <item name="colorPrimary">@color/primary_app_color</item>
         <item name="colorPrimaryVariant">@color/primary_app_color</item>
-        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorOnPrimary">@android:color/black</item>
         <!-- Secondary brand color -->
         <item name="colorSecondary">@color/primary_app_color</item>
         <item name="colorSecondaryVariant">@color/primary_app_color</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorOnSecondary">@android:color/black</item>
         <!-- Status bar color -->
-        <item name="android:statusBarColor">@color/window_background_dark</item>
+        <item name="android:statusBarColor">@color/window_background_color</item>
         <!-- Window background color -->
-        <item name="android:windowBackground">@color/window_background_dark</item>
-        <item name="android:colorBackground">@color/window_background_dark</item>
+        <item name="android:windowBackground">@color/window_background_color</item>
+        <item name="android:colorBackground">@color/window_background_color</item>
     </style>
-
 </resources>

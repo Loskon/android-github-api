@@ -88,17 +88,23 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
                 }
                 is UserProfileState.Success -> {
                     binding.indicatorUserProfile.isVisible = false
-                    binding.appBarUserProfile.isVisible = true
-                    setRepositoriesHeader(it.user.repositories.isEmpty())
+                    binding.coordLayoutUserProfile.isVisible = true
+                    binding.tvNoInternetUserProfile.isVisible = false
                     setUser(it.user)
                 }
                 is UserProfileState.Failure -> {
                     binding.indicatorUserProfile.isVisible = false
+                    binding.tvNoInternetUserProfile.isVisible = false
                     showWarningSnackbar(getString(R.string.error_loading))
                 }
                 is UserProfileState.ConnectionFailure -> {
                     binding.indicatorUserProfile.isVisible = false
-                    showWarningSnackbar(getString(R.string.no_internet_connection))
+                    binding.tvNoInternetUserProfile.isVisible = true
+
+                    if (it.user != null) {
+                        binding.coordLayoutUserProfile.isVisible = true
+                        setUser(it.user)
+                    }
                 }
             }
         }
@@ -108,7 +114,7 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
         with(binding.incUserProfileCard.tvPublicRepositoriesHeader) {
             if (emptyRepositories) {
                 text = getString(R.string.no_public_repositories)
-                setTextColor(getColor(R.color.error_color))
+                setTextColor(getColor(R.color.repositories_text_color))
             } else {
                 text = getString(R.string.public_repositories)
                 setTextColor(primaryColor)
@@ -126,6 +132,7 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
                 tvUserProfileLocation.textWithGone(location)
                 tvUserProfileCreatedDate.text = getString(R.string.created_date, createdAt.toFormatString())
                 repositoriesAdapter.setRepositories(repositories)
+                setRepositoriesHeader(repositories.isEmpty())
             }
         }
     }

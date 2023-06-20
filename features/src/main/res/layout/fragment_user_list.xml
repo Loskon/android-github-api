@@ -41,6 +41,22 @@
         android:animateLayoutChanges="true"
         app:backgroundTint="@color/bottom_bar_background_color"
         app:navigationIcon="@drawable/baseline_settings_black_24"
-        app:navigationIconTint="?android:colorPrimary"/>
+        app:navigationIconTint="?android:colorPrimary">
+
+        <TextView
+            android:id="@+id/tv_no_internet_user_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/bg_tv_no_internet"
+            android:gravity="center"
+            android:paddingStart="@dimen/margin_medium"
+            android:paddingTop="@dimen/margin_xsmall"
+            android:paddingEnd="@dimen/margin_medium"
+            android:paddingBottom="@dimen/margin_xsmall"
+            android:text="@string/no_internet_connection"
+            android:textColor="@color/error_color"
+            android:textSize="@dimen/text_medium" />
+    </com.google.android.material.bottomappbar.BottomAppBar>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

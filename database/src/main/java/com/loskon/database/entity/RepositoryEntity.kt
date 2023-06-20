@@ -25,5 +25,7 @@ data class RepositoryEntity(
     @ColumnInfo(name = "size")
     val size: Long? = null,
     @ColumnInfo(name = "language")
-    val language: String? = null
+    val language: String? = null,
+    @ColumnInfo(name = "login")
+    val login: String? = null
 )

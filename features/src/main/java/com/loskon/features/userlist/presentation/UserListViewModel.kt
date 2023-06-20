@@ -24,9 +24,11 @@ class UserListViewModel(
             errorBlock = { userListState.tryEmit(UserListState.Failure) }
         ) {
             if (connectionManager.hasConnected()) {
-                userListState.emit(UserListState.Success(userListInteractor.getUsers(perPage, since)))
+                val users = userListInteractor.getUsers(perPage, since)
+                userListState.emit(UserListState.Success(users))
+                userListInteractor.setUsers(users)
             } else {
-                userListState.emit(UserListState.ConnectionFailure)
+                userListState.emit(UserListState.ConnectionFailure(userListInteractor.getCachedUsers()))
             }
         }.onStart {
             userListState.tryEmit(UserListState.Loading)

@@ -1,6 +1,7 @@
 package com.loskon.features.model
 
 import android.os.Parcelable
+import com.loskon.database.entity.RepositoryEntity
 import com.loskon.network.dto.RepositoryDto
 import kotlinx.parcelize.Parcelize
 import java.time.LocalDateTime
@@ -29,5 +30,34 @@ fun RepositoryDto.toRepositoryModel(): RepositoryModel {
         pushedAt = pushedAt ?: LocalDateTime.now(),
         size = size ?: 0L,
         language = language ?: ""
+    )
+}
+
+fun RepositoryEntity.toRepositoryModel(): RepositoryModel {
+    return RepositoryModel(
+        id = id ?: 0L,
+        fullName = fullName ?: "",
+        htmlUrl = htmlUrl ?: "",
+        description = description ?: "",
+        createdAt = createdAt ?: LocalDateTime.now(),
+        updatedAt = updatedAt ?: LocalDateTime.now(),
+        pushedAt = pushedAt ?: LocalDateTime.now(),
+        size = size ?: 0L,
+        language = language ?: ""
+    )
+}
+
+fun RepositoryModel.toRepositoryEntity(login: String): RepositoryEntity {
+    return RepositoryEntity(
+        id = id,
+        fullName = fullName,
+        htmlUrl = htmlUrl,
+        description = description,
+        createdAt = createdAt,
+        updatedAt = updatedAt,
+        pushedAt = pushedAt,
+        size = size,
+        language = language,
+        login = login
     )
 }

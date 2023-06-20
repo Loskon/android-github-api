@@ -23,5 +23,7 @@ data class UserEntity(
     @ColumnInfo(name = "location")
     val location: String? = null,
     @ColumnInfo(name = "created_at")
-    val createdAt: LocalDateTime? = null
+    val createdAt: LocalDateTime? = null,
+    @ColumnInfo(name = "fromCache")
+    val fromCache: Boolean? = null
 )

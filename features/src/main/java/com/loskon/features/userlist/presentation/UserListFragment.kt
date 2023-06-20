@@ -74,20 +74,20 @@ class UserListFragment : Fragment(R.layout.fragment_user_list) {
                 is UserListState.Loading -> {
                     binding.indicatorUserList.isVisible = true
                 }
-
                 is UserListState.Success -> {
                     binding.indicatorUserList.isVisible = false
+                    binding.tvNoInternetUserList.isVisible = false
                     userListAdapter.setUsers(it.users)
                 }
-
                 is UserListState.Failure -> {
                     binding.indicatorUserList.isVisible = false
+                    binding.tvNoInternetUserList.isVisible = false
                     showWarningSnackbar(getString(R.string.error_loading))
                 }
-
                 is UserListState.ConnectionFailure -> {
                     binding.indicatorUserList.isVisible = false
-                    showWarningSnackbar(getString(R.string.no_internet_connection))
+                    binding.tvNoInternetUserList.isVisible = true
+                    if (it.users?.isNotEmpty() == true) userListAdapter.setUsers(it.users)
                 }
             }
         }

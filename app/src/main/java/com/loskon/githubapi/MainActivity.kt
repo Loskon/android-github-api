@@ -8,7 +8,7 @@ import com.loskon.base.extension.activity.setTaskDescriptionColor
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     override fun onAttachedToWindow() {
-        setTaskDescriptionColor(getColor(R.color.task_description_color))
+        setTaskDescriptionColor(getColor(R.color.bg_task_description_color))
         super.onAttachedToWindow()
     }
 

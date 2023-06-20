@@ -18,15 +18,17 @@ class UserProfileViewModel(
 
     private var job: Job? = null
 
-    fun getUser(username: String) {
+    fun getUser(login: String) {
         job?.cancel()
         job = launchErrorJob(
             errorBlock = { userProfileState.tryEmit(UserProfileState.Failure) }
         ) {
             if (connectionManager.hasConnected()) {
-                userProfileState.emit(UserProfileState.Success(userProfileInteractor.getUser(username)))
+                val user = userProfileInteractor.getUser(login)
+                userProfileState.emit(UserProfileState.Success(user))
+                userProfileInteractor.setUser(user)
             } else {
-                userProfileState.emit(UserProfileState.ConnectionFailure)
+                userProfileState.emit(UserProfileState.ConnectionFailure(userProfileInteractor.getCachedUser(login)))
             }
         }.onStart {
             userProfileState.tryEmit(UserProfileState.Loading)

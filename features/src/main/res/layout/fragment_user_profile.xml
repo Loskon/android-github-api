@@ -15,18 +15,19 @@
         app:schemeColors="?android:colorPrimary">
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/coord_layout_user_profile"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            tools:visibility="visible">
 
             <com.google.android.material.appbar.AppBarLayout
                 android:id="@+id/app_bar_user_profile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
-                android:visibility="gone"
                 app:elevation="0dp"
-                app:layout_behavior="com.loskon.base.widget.appbarlayout.AppBarLayoutDragBehavior"
-                tools:visibility="visible">
+                app:layout_behavior="com.loskon.base.widget.appbarlayout.AppBarLayoutDragBehavior">
 
                 <com.google.android.material.appbar.CollapsingToolbarLayout
                     android:id="@+id/coll_bar_user_profile"
@@ -87,5 +88,18 @@
         android:animateLayoutChanges="true"
         app:backgroundTint="@color/bottom_bar_background_color"
         app:navigationIcon="@drawable/baseline_navigate_before_black_24"
-        app:navigationIconTint="?android:colorPrimary" />
+        app:navigationIconTint="?android:colorPrimary">
+
+        <TextView
+            android:id="@+id/tv_no_internet_user_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/bg_tv_slider"
+            android:gravity="center"
+            android:padding="@dimen/margin_xsmall"
+            android:text="@string/no_internet_connection"
+            android:textColor="@color/error_color"
+            android:textSize="@dimen/text_medium" />
+    </com.google.android.material.bottomappbar.BottomAppBar>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
