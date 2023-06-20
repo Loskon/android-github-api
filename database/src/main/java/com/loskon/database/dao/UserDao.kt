@@ -1,12 +1,11 @@
 package com.loskon.database.dao
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
 import com.loskon.database.entity.RepositoryEntity
 import com.loskon.database.entity.UserEntity
-
-/**
- * Profile Dao
- */
 
 @Dao
 interface UserDao {

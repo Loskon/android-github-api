@@ -6,5 +6,5 @@ sealed class UserProfileState {
     data class Success(val user: UserModel) : UserProfileState()
     object Loading : UserProfileState()
     object Failure : UserProfileState()
-    data class ConnectionFailure(val user: UserModel?)  : UserProfileState()
+    data class ConnectionFailure(val user: UserModel?) : UserProfileState()
 }

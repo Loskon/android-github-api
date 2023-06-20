@@ -85,7 +85,6 @@
         android:layout_height="@dimen/bottom_bar_height"
         android:layout_gravity="bottom"
         android:layout_marginTop="@dimen/margin_xsmall"
-        android:animateLayoutChanges="true"
         app:backgroundTint="@color/bottom_bar_background_color"
         app:navigationIcon="@drawable/baseline_navigate_before_black_24"
         app:navigationIconTint="?android:colorPrimary">
@@ -95,11 +94,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@drawable/bg_tv_slider"
+            android:background="@drawable/bg_tv_no_internet"
             android:gravity="center"
             android:padding="@dimen/margin_xsmall"
+            android:paddingStart="@dimen/margin_medium"
+            android:paddingTop="@dimen/margin_xsmall"
+            android:paddingEnd="@dimen/margin_medium"
+            android:paddingBottom="@dimen/margin_xsmall"
             android:text="@string/no_internet_connection"
             android:textColor="@color/error_color"
-            android:textSize="@dimen/text_medium" />
+            android:textSize="@dimen/text_medium"
+            android:visibility="gone"
+            tools:visibility="visible" />
     </com.google.android.material.bottomappbar.BottomAppBar>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

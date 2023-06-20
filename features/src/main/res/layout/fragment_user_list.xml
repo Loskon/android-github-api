@@ -38,7 +38,6 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/bottom_bar_height"
         android:layout_gravity="bottom"
-        android:animateLayoutChanges="true"
         app:backgroundTint="@color/bottom_bar_background_color"
         app:navigationIcon="@drawable/baseline_settings_black_24"
         app:navigationIconTint="?android:colorPrimary">
@@ -56,7 +55,9 @@
             android:paddingBottom="@dimen/margin_xsmall"
             android:text="@string/no_internet_connection"
             android:textColor="@color/error_color"
-            android:textSize="@dimen/text_medium" />
+            android:textSize="@dimen/text_medium"
+            android:visibility="gone"
+            tools:visibility="visible" />
     </com.google.android.material.bottomappbar.BottomAppBar>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

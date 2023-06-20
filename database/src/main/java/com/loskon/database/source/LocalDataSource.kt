@@ -28,7 +28,7 @@ class LocalDataSource(
         userDao.insertUser(user)
     }
 
-    suspend fun setRepositories(repositories:  List<RepositoryEntity> ) {
+    suspend fun setRepositories(repositories: List<RepositoryEntity>) {
         userDao.insertRepositories(repositories)
     }
 }
