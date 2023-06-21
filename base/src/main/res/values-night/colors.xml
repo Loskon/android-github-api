@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Views -->
     <color name="task_description_color">#22272E</color>
     <color name="primary_app_color">#539BF4</color>
     <color name="window_background_color">#22272E</color>

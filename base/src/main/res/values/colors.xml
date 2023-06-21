@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Common -->
     <color name="material_blue">#0288D1</color>
     <color name="accent_on_grey">#E8ECF1</color>
-    <!-- Views -->
     <color name="bg_splash_screen_color">#1C2128</color>
     <color name="window_background_color">@android:color/white</color>
     <color name="primary_app_color">#0969DA</color>
