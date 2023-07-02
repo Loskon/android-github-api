@@ -8,8 +8,8 @@ import java.time.LocalDateTime
 data class RepositoryDto(
     @Json(name = "id")
     val id: Long? = null,
-    @Json(name = "full_name")
-    val fullName: String? = null,
+    @Json(name = "name")
+    val name: String? = null,
     @Json(name = "html_url")
     val htmlUrl: String? = null,
     @Json(name = "description")

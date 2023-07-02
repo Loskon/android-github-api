@@ -46,7 +46,7 @@ class RepoInfoSheetFragment : BaseBottomSheetDialogFragment(R.layout.sheet_repos
     private fun setRepository(repository: RepositoryModel) {
         with(binding) {
             repository.apply {
-                tvRepositoryName.text = fullName
+                tvRepositoryName.text = name
 
                 if (description.isNotEmpty()) {
                     tvRepositoryDescreption.text = description

@@ -10,14 +10,14 @@ class UserProfileInteractor(
         val user = userProfileRepository.getUser(login)
         val repositories = userProfileRepository.getRepositories(login)
 
-        return user.copy(repositories = repositories.sortedBy { it.fullName })
+        return user.copy(repositories = repositories.sortedBy { it.name })
     }
 
     suspend fun getCachedUser(login: String): UserModel? {
         val user = userProfileRepository.getCachedUser(login)
         val repositories = userProfileRepository.getCachedRepositories(login)
 
-        return user?.copy(repositories = repositories?.sortedBy { it.fullName } ?: emptyList())
+        return user?.copy(repositories = repositories?.sortedBy { it.name } ?: emptyList())
     }
 
     suspend fun setUser(user: UserModel) {

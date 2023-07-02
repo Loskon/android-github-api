@@ -34,7 +34,7 @@ lifecycle = "2.6.1"
 navigation = "2.6.0"
 parcelize = "1.4.30"
 ## DB
-room = "2.5.1"
+room = "2.5.2"
 ## Network
 retrofit = "2.9.0"
 okHttp = "4.11.0"

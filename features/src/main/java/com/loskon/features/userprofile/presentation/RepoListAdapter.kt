@@ -23,7 +23,7 @@ class RepoListAdapter : RecyclerView.Adapter<RepoListAdapter.RepositoryViewHolde
 
         with(holder.binding) {
             repository.apply {
-                tvRepositoryNameCard.text = fullName
+                tvRepositoryNameCard.text = name
                 tvRepositoryDescriptionCard.textWithGone(description)
                 tvRepositoryLanguageCard.textWithGone(language)
                 cardViewRepository.setDebounceClickListener { clickListener?.invoke(this) }

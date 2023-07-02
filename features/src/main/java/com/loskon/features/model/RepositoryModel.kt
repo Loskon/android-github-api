@@ -9,7 +9,7 @@ import java.time.LocalDateTime
 @Parcelize
 data class RepositoryModel(
     val id: Long = 0L,
-    val fullName: String = "",
+    val name: String = "",
     val htmlUrl: String = "",
     val description: String = "",
     val createdAt: LocalDateTime = LocalDateTime.now(),
@@ -22,7 +22,7 @@ data class RepositoryModel(
 fun RepositoryDto.toRepositoryModel(): RepositoryModel {
     return RepositoryModel(
         id = id ?: 0L,
-        fullName = fullName ?: "",
+        name = name ?: "",
         htmlUrl = htmlUrl ?: "",
         description = description ?: "",
         createdAt = createdAt ?: LocalDateTime.now(),
@@ -36,7 +36,7 @@ fun RepositoryDto.toRepositoryModel(): RepositoryModel {
 fun RepositoryEntity.toRepositoryModel(): RepositoryModel {
     return RepositoryModel(
         id = id ?: 0L,
-        fullName = fullName ?: "",
+        name = fullName ?: "",
         htmlUrl = htmlUrl ?: "",
         description = description ?: "",
         createdAt = createdAt ?: LocalDateTime.now(),
@@ -50,7 +50,7 @@ fun RepositoryEntity.toRepositoryModel(): RepositoryModel {
 fun RepositoryModel.toRepositoryEntity(login: String): RepositoryEntity {
     return RepositoryEntity(
         id = id,
-        fullName = fullName,
+        fullName = name,
         htmlUrl = htmlUrl,
         description = description,
         createdAt = createdAt,

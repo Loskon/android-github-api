@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Base Splash Screen application theme -->
-    <style name="AppStartingTheme" parent="Theme.SplashScreen">
+    <style name="SplashScreenTheme" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/bg_splash_screen_color</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_app_logo</item>
         <item name="postSplashScreenTheme">@style/AppTheme</item>

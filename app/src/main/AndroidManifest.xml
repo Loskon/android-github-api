@@ -20,11 +20,10 @@
             android:name="com.loskon.githubapi.SplashActivity"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@style/AppStartingTheme"
+            android:theme="@style/SplashScreenTheme"
             tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
