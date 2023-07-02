@@ -1,10 +1,14 @@
 package com.loskon.features.repositoryinfo.presentation
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.navArgs
+import com.loskon.base.customtab.CustomTab
 import com.loskon.base.datetime.toFormatString
 import com.loskon.base.extension.coroutines.observe
+import com.loskon.base.extension.view.setClickListener
 import com.loskon.base.extension.view.setDebounceClickListener
 import com.loskon.base.extension.view.setGoneVisibleKtx
 import com.loskon.base.presentation.sheetdialogfragment.BaseBottomSheetDialogFragment
@@ -18,7 +22,7 @@ class RepoInfoSheetFragment : BaseBottomSheetDialogFragment(R.layout.sheet_repos
 
     private val viewModel by viewModel<RepoInfoViewModel>()
     private val binding by viewBinding(SheetRepositoryInfoBinding::bind)
-    private val args: RepoInfoSheetFragmentArgs by navArgs()
+    private val args by navArgs<RepoInfoSheetFragmentArgs>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +39,16 @@ class RepoInfoSheetFragment : BaseBottomSheetDialogFragment(R.layout.sheet_repos
 
     private fun setupViewsListener() {
         binding.btnSheetRepositoryInfoClose.setDebounceClickListener { dismiss() }
+        binding.tvRepositoryUrl.setClickListener { openUrl(it) }
+    }
+
+    private fun openUrl(url: String) {
+        if (CustomTab.isAvailableCustomTab(requireContext())) {
+            CustomTab.launchCustomTab(requireContext(), url)
+        } else {
+            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            requireContext().startActivity(browserIntent)
+        }
     }
 
     private fun installObserver() {

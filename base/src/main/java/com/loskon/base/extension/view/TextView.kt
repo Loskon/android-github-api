@@ -10,3 +10,5 @@ fun TextView.textWithGone(text: String) {
         setGoneVisibleKtx(false)
     }
 }
+
+fun TextView.setClickListener(action: (text: String) -> Unit) = setDebounceClickListener { action(text.toString()) }

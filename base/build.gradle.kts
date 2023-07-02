@@ -51,6 +51,8 @@ dependencies {
     implementation(deps.swiperefreshlayout)
     implementation(deps.preference)
     implementation(deps.bundles.lifecycle)
+    // Misc
+    implementation(deps.browser)
     // Logs
     implementation(deps.timber)
     // Test
