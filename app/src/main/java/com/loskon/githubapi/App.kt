@@ -3,6 +3,7 @@ package com.loskon.githubapi
 import android.app.Application
 import com.loskon.base.utils.ColorUtil
 import com.loskon.database.databaseModule
+import com.loskon.features.repolist.repoListModule
 import com.loskon.features.repositoryinfo.repoInfoModule
 import com.loskon.features.userlist.userListModule
 import com.loskon.features.userprofile.userProfileModule
@@ -33,7 +34,8 @@ class App : Application() {
                     userProfileModule,
                     repoInfoModule,
                     connectionManagerModule,
-                    databaseModule
+                    databaseModule,
+                    repoListModule
                 )
             )
         }

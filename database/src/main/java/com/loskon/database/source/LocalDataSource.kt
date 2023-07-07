@@ -1,7 +1,7 @@
 package com.loskon.database.source
 
 import com.loskon.database.dao.UserDao
-import com.loskon.database.entity.RepositoryEntity
+import com.loskon.database.entity.RepoEntity
 import com.loskon.database.entity.UserEntity
 
 class LocalDataSource(
@@ -20,7 +20,7 @@ class LocalDataSource(
         return userDao.getUser(login)
     }
 
-    suspend fun getCachedRepositories(login: String): List<RepositoryEntity>? {
+    suspend fun getCachedRepositories(login: String): List<RepoEntity>? {
         return userDao.getCachedRepositories(login)
     }
 
@@ -28,7 +28,7 @@ class LocalDataSource(
         userDao.insertUser(user)
     }
 
-    suspend fun setRepositories(repositories: List<RepositoryEntity>) {
+    suspend fun setRepositories(repositories: List<RepoEntity>) {
         userDao.insertRepositories(repositories)
     }
 }

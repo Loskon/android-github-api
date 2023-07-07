@@ -29,7 +29,7 @@
             android:textColor="@color/primary_text_color"
             android:textSize="@dimen/text_medium"
             android:textStyle="bold"
-            tools:text="mojombo/asteroids" />
+            tools:text="asteroids" />
 
         <TextView
             android:id="@+id/tv_repository_description_card"

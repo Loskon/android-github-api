@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 import java.time.LocalDateTime
 
 @Entity(tableName = "repositories")
-data class RepositoryEntity(
+data class RepoEntity(
     @PrimaryKey
     @ColumnInfo(name = "id")
     val id: Long? = null,

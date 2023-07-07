@@ -62,8 +62,9 @@ class UserListFragment : Fragment(R.layout.fragment_user_list) {
             val action = UserListFragmentDirections.openUserProfileFragment(user.login)
             findNavController().navigate(action)
         }
-        binding.bottomBarUsersList.setNavigationOnClickListener {
-            val action = UserListFragmentDirections.openSettingsFragment()
+        binding.bottomBarUserList.setNavigationOnClickListener {
+            //val action = UserListFragmentDirections.openSettingsFragment()
+            val action = UserListFragmentDirections.openRepoFragment()
             findNavController().navigate(action)
         }
     }
@@ -94,6 +95,6 @@ class UserListFragment : Fragment(R.layout.fragment_user_list) {
     }
 
     private fun showWarningSnackbar(message: String) {
-        WarningSnackbar().make(binding.root, binding.bottomBarUsersList, message, success = false).show()
+        WarningSnackbar().make(binding.root, binding.bottomBarUserList, message, success = false).show()
     }
 }

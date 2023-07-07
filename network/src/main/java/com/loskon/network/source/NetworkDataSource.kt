@@ -1,7 +1,7 @@
 package com.loskon.network.source
 
 import com.loskon.network.api.GithubApi
-import com.loskon.network.dto.RepositoryDto
+import com.loskon.network.dto.RepoDto
 import com.loskon.network.dto.UserDto
 
 class NetworkDataSource(
@@ -28,7 +28,7 @@ class NetworkDataSource(
         }
     }
 
-    suspend fun getRepositories(username: String): List<RepositoryDto> {
+    suspend fun getRepositories(username: String): List<RepoDto> {
         val response = githubApi.getRepositories(username)
 
         return if (response.isSuccessful) {

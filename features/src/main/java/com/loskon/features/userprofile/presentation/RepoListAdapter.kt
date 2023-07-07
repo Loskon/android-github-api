@@ -7,12 +7,12 @@ import com.loskon.base.extension.view.setDebounceClickListener
 import com.loskon.base.extension.view.textWithGone
 import com.loskon.base.viewbinding.viewBinding
 import com.loskon.features.databinding.ItemRepositoryCardBinding
-import com.loskon.features.model.RepositoryModel
+import com.loskon.features.model.RepoModel
 
 class RepoListAdapter : RecyclerView.Adapter<RepoListAdapter.RepositoryViewHolder>() {
 
-    private var clickListener: ((RepositoryModel) -> Unit)? = null
-    private var list: List<RepositoryModel> = emptyList()
+    private var clickListener: ((RepoModel) -> Unit)? = null
+    private var list: List<RepoModel> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepositoryViewHolder {
         return RepositoryViewHolder(parent.viewBinding(ItemRepositoryCardBinding::inflate))
@@ -34,12 +34,12 @@ class RepoListAdapter : RecyclerView.Adapter<RepoListAdapter.RepositoryViewHolde
     override fun getItemCount(): Int = list.size
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setRepositories(newList: List<RepositoryModel>) {
+    fun setRepositories(newList: List<RepoModel>) {
         list = newList
         notifyDataSetChanged()
     }
 
-    fun setItemClickListener(newClickListener: ((RepositoryModel) -> Unit)?) {
+    fun setItemClickListener(newClickListener: ((RepoModel) -> Unit)?) {
         clickListener = newClickListener
     }
 

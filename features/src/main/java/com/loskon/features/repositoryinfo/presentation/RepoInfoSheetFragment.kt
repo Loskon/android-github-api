@@ -15,7 +15,7 @@ import com.loskon.base.presentation.sheetdialogfragment.BaseBottomSheetDialogFra
 import com.loskon.base.viewbinding.viewBinding
 import com.loskon.features.R
 import com.loskon.features.databinding.SheetRepositoryInfoBinding
-import com.loskon.features.model.RepositoryModel
+import com.loskon.features.model.RepoModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RepoInfoSheetFragment : BaseBottomSheetDialogFragment(R.layout.sheet_repository_info) {
@@ -57,7 +57,7 @@ class RepoInfoSheetFragment : BaseBottomSheetDialogFragment(R.layout.sheet_repos
         }
     }
 
-    private fun setRepository(repository: RepositoryModel) {
+    private fun setRepository(repository: RepoModel) {
         with(binding) {
             repository.apply {
                 tvRepositoryName.text = name

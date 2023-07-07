@@ -60,6 +60,8 @@ dependencies {
     implementation(deps.preference)
     implementation(deps.bundles.lifecycle)
     implementation(deps.bundles.navigation)
+    // Misc
+    implementation(deps.paging)
     // DI
     implementation(deps.koin)
     // Logs

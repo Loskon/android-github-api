@@ -1,13 +1,13 @@
 package com.loskon.features.model
 
 import android.os.Parcelable
-import com.loskon.database.entity.RepositoryEntity
-import com.loskon.network.dto.RepositoryDto
+import com.loskon.database.entity.RepoEntity
+import com.loskon.network.dto.RepoDto
 import kotlinx.parcelize.Parcelize
 import java.time.LocalDateTime
 
 @Parcelize
-data class RepositoryModel(
+data class RepoModel(
     val id: Long = 0L,
     val name: String = "",
     val htmlUrl: String = "",
@@ -19,8 +19,8 @@ data class RepositoryModel(
     val language: String = ""
 ) : Parcelable
 
-fun RepositoryDto.toRepositoryModel(): RepositoryModel {
-    return RepositoryModel(
+fun RepoDto.toRepositoryModel(): RepoModel {
+    return RepoModel(
         id = id ?: 0L,
         name = name ?: "",
         htmlUrl = htmlUrl ?: "",
@@ -33,8 +33,8 @@ fun RepositoryDto.toRepositoryModel(): RepositoryModel {
     )
 }
 
-fun RepositoryEntity.toRepositoryModel(): RepositoryModel {
-    return RepositoryModel(
+fun RepoEntity.toRepositoryModel(): RepoModel {
+    return RepoModel(
         id = id ?: 0L,
         name = fullName ?: "",
         htmlUrl = htmlUrl ?: "",
@@ -47,8 +47,8 @@ fun RepositoryEntity.toRepositoryModel(): RepositoryModel {
     )
 }
 
-fun RepositoryModel.toRepositoryEntity(login: String): RepositoryEntity {
-    return RepositoryEntity(
+fun RepoModel.toRepositoryEntity(login: String): RepoEntity {
+    return RepoEntity(
         id = id,
         fullName = name,
         htmlUrl = htmlUrl,

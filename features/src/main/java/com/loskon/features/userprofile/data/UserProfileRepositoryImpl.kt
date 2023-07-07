@@ -1,7 +1,7 @@
 package com.loskon.features.userprofile.data
 
 import com.loskon.database.source.LocalDataSource
-import com.loskon.features.model.RepositoryModel
+import com.loskon.features.model.RepoModel
 import com.loskon.features.model.UserModel
 import com.loskon.features.model.toRepositoryEntity
 import com.loskon.features.model.toRepositoryModel
@@ -19,7 +19,7 @@ class UserProfileRepositoryImpl(
         return networkDataSource.getUser(login).toUserModel()
     }
 
-    override suspend fun getRepositories(login: String): List<RepositoryModel> {
+    override suspend fun getRepositories(login: String): List<RepoModel> {
         return networkDataSource.getRepositories(login).map { it.toRepositoryModel() }
     }
 
@@ -27,7 +27,7 @@ class UserProfileRepositoryImpl(
         localDataSource.setUser(user.toUserEntity(fromCache = true))
     }
 
-    override suspend fun setRepositories(login: String, repositories: List<RepositoryModel>) {
+    override suspend fun setRepositories(login: String, repositories: List<RepoModel>) {
         localDataSource.setRepositories(repositories.map { it.toRepositoryEntity(login) })
     }
 
@@ -41,7 +41,7 @@ class UserProfileRepositoryImpl(
         }
     }
 
-    override suspend fun getCachedRepositories(login: String): List<RepositoryModel>? {
+    override suspend fun getCachedRepositories(login: String): List<RepoModel>? {
         return localDataSource.getCachedRepositories(login)?.map { it.toRepositoryModel() }
     }
 }

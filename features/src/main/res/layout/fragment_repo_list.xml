@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <com.loskon.base.widget.swiprerefreshlayout.CustomSwipeRefreshLayout
-        android:id="@+id/refresh_layout_user_list"
+        android:id="@+id/refresh_layout_repo_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="@dimen/bottom_bar_height"
@@ -15,16 +15,16 @@
         app:schemeColors="?android:colorPrimary">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_user_list"
+            android:id="@+id/rv_repo_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scrollbars="vertical"
-            tools:listitem="@layout/item_user_card" />
+            tools:listitem="@layout/item_repository_card" />
 
     </com.loskon.base.widget.swiprerefreshlayout.CustomSwipeRefreshLayout>
 
     <com.google.android.material.progressindicator.LinearProgressIndicator
-        android:id="@+id/indicator_user_list"
+        android:id="@+id/indicator_repo_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
@@ -35,7 +35,7 @@
         app:trackThickness="2dp" />
 
     <com.google.android.material.bottomappbar.BottomAppBar
-        android:id="@+id/bottom_bar_user_list"
+        android:id="@+id/bottom_bar_repo_list"
         android:layout_width="match_parent"
         android:layout_height="@dimen/bottom_bar_height"
         android:layout_gravity="bottom"
@@ -44,7 +44,7 @@
         app:navigationIconTint="?android:colorPrimary">
 
         <TextView
-            android:id="@+id/tv_no_internet_user_list"
+            android:id="@+id/tv_no_internet_repo_list"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

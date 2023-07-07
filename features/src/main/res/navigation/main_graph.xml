@@ -15,6 +15,9 @@
         <action
             android:id="@+id/openSettingsFragment"
             app:destination="@id/openSettingsFragment" />
+        <action
+            android:id="@+id/openRepoFragment"
+            app:destination="@id/repoListFragment" />
     </fragment>
 
     <fragment
@@ -38,7 +41,7 @@
 
         <argument
             android:name="repository"
-            app:argType="com.loskon.features.model.RepositoryModel" />
+            app:argType="com.loskon.features.model.RepoModel" />
     </dialog>
 
     <fragment
@@ -46,5 +49,11 @@
         android:name="com.loskon.features.settings.OpenSettingsFragment"
         android:label="OpenSettingsFragment"
         tools:layout="@layout/fragment_settings" />
+
+    <fragment
+        android:id="@+id/repoListFragment"
+        android:name="com.loskon.features.repolist.presentation.RepoListFragment"
+        android:label="RepoListFragment"
+        tools:layout="@layout/fragment_repo_list"/>
 
 </navigation>

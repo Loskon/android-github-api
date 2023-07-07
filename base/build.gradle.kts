@@ -53,6 +53,7 @@ dependencies {
     implementation(deps.bundles.lifecycle)
     // Misc
     implementation(deps.browser)
+    implementation(deps.paging)
     // Logs
     implementation(deps.timber)
     // Test

@@ -14,6 +14,7 @@ android {
         minSdk = deps.versions.minSdk.get().toInt()
 
         buildConfigField("String", "API_BASE_URL", "\"https://api.github.com/\"")
+        buildConfigField("String", "ACCESS_TOKEN", "\"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\"")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -56,6 +57,8 @@ dependencies {
     implementation(deps.coil)
     // DI
     implementation(deps.koin)
+    // Misc
+    implementation(deps.paging)
     // Logs
     implementation(deps.timber)
     // Test

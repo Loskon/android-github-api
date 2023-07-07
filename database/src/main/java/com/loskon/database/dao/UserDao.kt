@@ -4,7 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.loskon.database.entity.RepositoryEntity
+import com.loskon.database.entity.RepoEntity
 import com.loskon.database.entity.UserEntity
 
 @Dao
@@ -16,7 +16,7 @@ interface UserDao {
     suspend fun getUser(login: String): UserEntity?
 
     @Query("SELECT * FROM repositories WHERE login = (:login)")
-    suspend fun getCachedRepositories(login: String): List<RepositoryEntity>?
+    suspend fun getCachedRepositories(login: String): List<RepoEntity>?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertUsers(users: List<UserEntity>)
@@ -25,5 +25,5 @@ interface UserDao {
     suspend fun insertUser(user: UserEntity)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertRepositories(repository: List<RepositoryEntity>)
+    suspend fun insertRepositories(repository: List<RepoEntity>)
 }
