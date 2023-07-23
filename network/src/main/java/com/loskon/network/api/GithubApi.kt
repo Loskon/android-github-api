@@ -2,6 +2,7 @@ package com.loskon.network.api
 
 import com.loskon.network.BuildConfig
 import com.loskon.network.dto.RepoDto
+import com.loskon.network.dto.SearchUserDto
 import com.loskon.network.dto.UserDto
 import retrofit2.Response
 import retrofit2.http.GET
@@ -21,6 +22,10 @@ interface GithubApi {
     suspend fun getRepositories(@Path("username") username: String): Response<List<RepoDto>>
 
     @Headers("Authorization: ${BuildConfig.ACCESS_TOKEN}")
-    @GET("users")
-    suspend fun getPagingUsers(@Query("since") since: Int, @Query("per_page") pageSize: Int): Response<List<UserDto>>
+    @GET("search/users")
+    suspend fun getSearchUsers(
+        @Query("q") since: String = "type:user",
+        @Query("page") page: Int,
+        @Query("per_page") perPage: Int,
+    ): Response<SearchUserDto>
 }
