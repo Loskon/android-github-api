@@ -5,7 +5,7 @@ import com.loskon.features.model.RepositoryModel
 import com.loskon.features.model.UserModel
 import com.loskon.features.model.toRepositoryEntity
 import com.loskon.features.model.toRepositoryModel
-import com.loskon.features.model.toUserEntity
+import com.loskon.features.model.toUserInfoEntity
 import com.loskon.features.model.toUserModel
 import com.loskon.features.userprofile.domain.UserProfileRepository
 import com.loskon.network.source.NetworkDataSource
@@ -24,7 +24,7 @@ class UserProfileRepositoryImpl(
     }
 
     override suspend fun setUser(user: UserModel) {
-        localDataSource.setUser(user.toUserEntity(fromCache = true))
+        localDataSource.setUser(user.toUserInfoEntity())
     }
 
     override suspend fun setRepositories(login: String, repositories: List<RepositoryModel>) {
@@ -32,13 +32,7 @@ class UserProfileRepositoryImpl(
     }
 
     override suspend fun getCachedUser(login: String): UserModel? {
-        val user = localDataSource.getCachedUser(login)
-
-        return if (user?.fromCache == false) {
-            null
-        } else {
-            localDataSource.getCachedUser(login)?.toUserModel()
-        }
+        return localDataSource.getCachedUser(login)?.toUserModel()
     }
 
     override suspend fun getCachedRepositories(login: String): List<RepositoryModel>? {

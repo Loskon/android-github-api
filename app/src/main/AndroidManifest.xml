@@ -31,7 +31,6 @@
         <activity
             android:name="com.loskon.githubapi.MainActivity"
             android:exported="false"
-            android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
 
     </application>

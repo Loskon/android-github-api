@@ -26,7 +26,7 @@
             android:name="username"
             app:argType="string" />
         <action
-            android:id="@+id/openRepositoryInfoBottomSheetFragment"
+            android:id="@+id/openRepositoryInfoSheetFragment"
             app:destination="@id/repositoryInfo" />
     </fragment>
 
@@ -43,8 +43,8 @@
 
     <fragment
         android:id="@+id/openSettingsFragment"
-        android:name="com.loskon.features.settings.OpenSettingsFragment"
+        android:name="com.loskon.features.settings.presentation.SettingsFragment"
         android:label="OpenSettingsFragment"
-        tools:layout="@layout/fragment_settings" />
+        tools:layout="@layout/fragment_settings2" />
 
 </navigation>

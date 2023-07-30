@@ -5,8 +5,8 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.time.LocalDateTime
 
-@Entity(tableName = "users")
-data class UserEntity(
+@Entity(tableName = "users_info")
+data class UserInfoEntity(
     @PrimaryKey
     @ColumnInfo(name = "id")
     val id: Long? = null,
@@ -18,6 +18,10 @@ data class UserEntity(
     val htmlUrl: String? = null,
     @ColumnInfo(name = "type")
     val type: String? = null,
+    @ColumnInfo(name = "name")
+    val name: String? = null,
+    @ColumnInfo(name = "location")
+    val location: String? = null,
     @ColumnInfo(name = "created_at")
     val createdAt: LocalDateTime? = null
 )

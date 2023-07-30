@@ -12,8 +12,8 @@ class UserListRepositoryImpl(
     private val localDataSource: LocalDataSource
 ) : UserListRepository {
 
-    override suspend fun getUsers(pageSize: Int, since: Int): List<UserModel> {
-        return networkDataSource.getUsers(pageSize, since).map { it.toUserModel() }
+    override suspend fun getUsers(): List<UserModel> {
+        return networkDataSource.getUsers().map { it.toUserModel() }
     }
 
     override suspend fun getCachedUsers(): List<UserModel>? {

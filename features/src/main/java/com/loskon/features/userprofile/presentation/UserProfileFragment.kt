@@ -1,6 +1,5 @@
 package com.loskon.features.userprofile.presentation
 
-import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
@@ -16,7 +15,7 @@ import com.loskon.base.extension.fragment.primaryColor
 import com.loskon.base.extension.view.textWithGone
 import com.loskon.base.viewbinding.viewBinding
 import com.loskon.base.widget.appbarlayout.AppBarLayoutState
-import com.loskon.base.widget.appbarlayout.setOnStateChangedListener
+import com.loskon.base.widget.appbarlayout.setChangeStateListener
 import com.loskon.base.widget.recyclerview.AddAnimationItemAnimator
 import com.loskon.base.widget.snackbar.WarningSnackbar
 import com.loskon.features.R
@@ -33,25 +32,17 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
 
     private val repositoriesAdapter = RepoListAdapter()
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        viewModel.getUser(args.username)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if (savedInstanceState == null) viewModel.getUser(args.username)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        configureRepoListAdapter()
         configureRecyclerView()
         setupViewsListener()
         installObserver()
-    }
-
-    private fun configureRepoListAdapter() {
-        repositoriesAdapter.setItemClickListener { repository ->
-            val action = UserProfileFragmentDirections.openRepositoryInfoBottomSheetFragment(repository)
-            findNavController().navigate(action)
-        }
     }
 
     private fun configureRecyclerView() {
@@ -68,12 +59,16 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
             viewModel.getUser(args.username)
             binding.refreshLayoutUserProfile.isRefreshing = false
         }
-        binding.appBarUserProfile.setOnStateChangedListener { state ->
+        binding.appBarUserProfile.setChangeStateListener { state ->
             if (state == AppBarLayoutState.EXPANDED) {
                 binding.refreshLayoutUserProfile.isEnabled = true
             } else if (state == AppBarLayoutState.COLLAPSED) {
                 binding.refreshLayoutUserProfile.isEnabled = false
             }
+        }
+        repositoriesAdapter.setItemClickListener { repository ->
+            val action = UserProfileFragmentDirections.openRepositoryInfoSheetFragment(repository)
+            findNavController().navigate(action)
         }
         binding.bottomBarUserProfile.setNavigationOnClickListener {
             findNavController().popBackStack()
@@ -86,17 +81,20 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
                 is UserProfileState.Loading -> {
                     binding.indicatorUserProfile.isVisible = true
                 }
+
                 is UserProfileState.Success -> {
                     binding.indicatorUserProfile.isVisible = false
                     binding.coordLayoutUserProfile.isVisible = true
                     binding.tvNoInternetUserProfile.isVisible = false
                     setUser(it.user)
                 }
+
                 is UserProfileState.Failure -> {
                     binding.indicatorUserProfile.isVisible = false
                     binding.tvNoInternetUserProfile.isVisible = false
                     showWarningSnackbar(getString(R.string.error_loading))
                 }
+
                 is UserProfileState.ConnectionFailure -> {
                     binding.indicatorUserProfile.isVisible = false
                     binding.tvNoInternetUserProfile.isVisible = true

@@ -15,30 +15,12 @@
 
     <PreferenceCategory
         app:iconSpaceReserved="false"
-        app:title="@string/number_of_results_header">
+        app:title="@string/data_header">
 
-        <com.loskon.base.widget.preference.SliderPreference
-            app:defaultValue="@integer/number_of_results"
-            app:iconSpaceReserved="false"
-            app:key="@string/number_of_results_key"
-            app:sliderMaxValue="100"
-            app:sliderMinValue="10" />
-
-    </PreferenceCategory>
-
-    <PreferenceCategory
-        app:iconSpaceReserved="false"
-        app:title="@string/since_header">
-
-        <com.loskon.base.widget.preference.NumberEditTextPreference
-            android:defaultValue="@integer/since"
-            android:dialogTitle="@string/since_header"
-            android:key="@string/since_key"
-            android:selectAllOnFocus="true"
-            android:singleLine="true"
-            app:iconSpaceReserved="false"
-            app:useSimpleSummaryProvider="true" />
-
+        <Preference
+            android:key="@string/clear_data_key"
+            android:title="@string/clear_data_title"
+            app:iconSpaceReserved="false" />
     </PreferenceCategory>
 
 </PreferenceScreen>

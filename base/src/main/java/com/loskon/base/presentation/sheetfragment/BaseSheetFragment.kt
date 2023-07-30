@@ -1,4 +1,4 @@
-package com.loskon.base.presentation.sheetdialogfragment
+package com.loskon.base.presentation.sheetfragment
 
 import android.app.Dialog
 import android.os.Bundle
@@ -11,14 +11,14 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.loskon.base.R
 
-open class BaseBottomSheetDialogFragment(
+open class BaseSheetFragment(
     @LayoutRes val layoutId: Int = 0
 ) : BottomSheetDialogFragment() {
 
     open val isDraggableStatus = true
     open val isHideableStatus = true
 
-    override fun getTheme(): Int = R.style.RoundedSheetDialogStyle
+    override fun getTheme(): Int = R.style.RoundedBottomSheetStyle
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val bottomSheetDialog = super.onCreateDialog(savedInstanceState) as BottomSheetDialog

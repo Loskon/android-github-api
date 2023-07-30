@@ -13,7 +13,6 @@ import com.loskon.base.widget.recyclerview.AddAnimationItemAnimator
 import com.loskon.base.widget.snackbar.WarningSnackbar
 import com.loskon.features.R
 import com.loskon.features.databinding.FragmentUserListBinding
-import com.loskon.features.util.preference.AppPreference
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class UserListFragment : Fragment(R.layout.fragment_user_list) {
@@ -25,14 +24,7 @@ class UserListFragment : Fragment(R.layout.fragment_user_list) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (savedInstanceState == null) getUsers()
-    }
-
-    private fun getUsers() {
-        val pageSize = AppPreference.getPageSize(requireContext())
-        val since = AppPreference.getSince(requireContext())
-
-        viewModel.getUsers(pageSize, since)
+        if (savedInstanceState == null) viewModel.getUsers()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -55,7 +47,7 @@ class UserListFragment : Fragment(R.layout.fragment_user_list) {
 
     private fun setupViewsListener() {
         binding.refreshLayoutUserList.setOnRefreshListener {
-            getUsers()
+            viewModel.getUsers()
             binding.refreshLayoutUserList.isRefreshing = false
         }
         userListAdapter.setOnItemClickListener { user ->
@@ -74,16 +66,19 @@ class UserListFragment : Fragment(R.layout.fragment_user_list) {
                 is UserListState.Loading -> {
                     binding.indicatorUserList.isVisible = true
                 }
+
                 is UserListState.Success -> {
                     binding.indicatorUserList.isVisible = false
                     binding.tvNoInternetUserList.isVisible = false
                     userListAdapter.setUsers(it.users)
                 }
+
                 is UserListState.Failure -> {
                     binding.indicatorUserList.isVisible = false
                     binding.tvNoInternetUserList.isVisible = false
                     showWarningSnackbar(getString(R.string.error_loading))
                 }
+
                 is UserListState.ConnectionFailure -> {
                     binding.indicatorUserList.isVisible = false
                     binding.tvNoInternetUserList.isVisible = true

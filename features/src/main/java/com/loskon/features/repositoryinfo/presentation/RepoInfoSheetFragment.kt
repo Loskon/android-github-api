@@ -11,14 +11,14 @@ import com.loskon.base.extension.coroutines.observe
 import com.loskon.base.extension.view.setClickListener
 import com.loskon.base.extension.view.setDebounceClickListener
 import com.loskon.base.extension.view.setGoneVisibleKtx
-import com.loskon.base.presentation.sheetdialogfragment.BaseBottomSheetDialogFragment
+import com.loskon.base.presentation.sheetfragment.BaseSheetFragment
 import com.loskon.base.viewbinding.viewBinding
 import com.loskon.features.R
 import com.loskon.features.databinding.SheetRepositoryInfoBinding
 import com.loskon.features.model.RepositoryModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class RepoInfoSheetFragment : BaseBottomSheetDialogFragment(R.layout.sheet_repository_info) {
+class RepoInfoSheetFragment : BaseSheetFragment(R.layout.sheet_repository_info) {
 
     private val viewModel by viewModel<RepoInfoViewModel>()
     private val binding by viewBinding(SheetRepositoryInfoBinding::bind)

@@ -1,6 +1,7 @@
 package com.loskon.features.model
 
 import com.loskon.database.entity.UserEntity
+import com.loskon.database.entity.UserInfoEntity
 import com.loskon.network.dto.UserDto
 import java.time.LocalDateTime
 
@@ -38,16 +39,35 @@ fun UserEntity.toUserModel(): UserModel {
         avatarUrl = avatarUrl ?: "",
         htmlUrl = htmlUrl ?: "",
         type = type ?: "",
+        createdAt = createdAt ?: LocalDateTime.now()
+    )
+}
+
+fun UserModel.toUserEntity(): UserEntity {
+    return UserEntity(
+        login = login,
+        id = id,
+        avatarUrl = avatarUrl,
+        htmlUrl = htmlUrl,
+        type = type,
+        createdAt = createdAt
+    )
+}
+
+fun UserInfoEntity.toUserModel(): UserModel {
+    return UserModel(
+        login = login ?: "",
+        id = id ?: 0,
+        avatarUrl = avatarUrl ?: "",
+        htmlUrl = htmlUrl ?: "",
+        type = type ?: "",
         name = name ?: "",
         location = location ?: "",
         createdAt = createdAt ?: LocalDateTime.now()
     )
 }
-
-fun UserModel.toUserEntity(
-    fromCache: Boolean = false
-): UserEntity {
-    return UserEntity(
+fun UserModel.toUserInfoEntity(): UserInfoEntity {
+    return UserInfoEntity(
         login = login,
         id = id,
         avatarUrl = avatarUrl,
@@ -55,7 +75,6 @@ fun UserModel.toUserEntity(
         type = type,
         name = name,
         location = location,
-        createdAt = createdAt,
-        fromCache = fromCache
+        createdAt = createdAt
     )
 }

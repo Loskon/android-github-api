@@ -18,13 +18,13 @@ class UserListViewModel(
 
     private var job: Job? = null
 
-    fun getUsers(perPage: Int, since: Int) {
+    fun getUsers() {
         job?.cancel()
         job = launchErrorJob(
             errorBlock = { userListState.tryEmit(UserListState.Failure) }
         ) {
             if (connectionManager.hasConnected()) {
-                val users = userListInteractor.getUsers(perPage, since)
+                val users = userListInteractor.getUsers()
                 userListState.emit(UserListState.Success(users))
                 userListInteractor.setUsers(users)
             } else {

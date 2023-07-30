@@ -7,8 +7,17 @@ import com.loskon.database.convertor.DateTimeConverter
 import com.loskon.database.dao.UserDao
 import com.loskon.database.entity.RepositoryEntity
 import com.loskon.database.entity.UserEntity
+import com.loskon.database.entity.UserInfoEntity
 
-@Database(entities = [UserEntity::class, RepositoryEntity::class], version = 1, exportSchema = false)
+@Database(
+    entities = [
+        UserEntity::class,
+        UserInfoEntity::class,
+        RepositoryEntity::class
+    ],
+    version = 1,
+    exportSchema = false
+)
 @TypeConverters(DateTimeConverter::class)
 abstract class UserDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao

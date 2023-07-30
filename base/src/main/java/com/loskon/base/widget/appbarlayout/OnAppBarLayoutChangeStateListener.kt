@@ -10,8 +10,8 @@ enum class AppBarLayoutState {
     IDLE
 }
 
-class OnAppBarLayoutStateChangeListener(
-    val onStateChanged: (appBarLayoutState: AppBarLayoutState?) -> Unit
+class OnAppBarLayoutChangeStateListener(
+    val onChangeState: (appBarLayoutState: AppBarLayoutState?) -> Unit
 ) : OnOffsetChangedListener {
 
     private var state = AppBarLayoutState.IDLE
@@ -19,29 +19,23 @@ class OnAppBarLayoutStateChangeListener(
     override fun onOffsetChanged(appBarLayout: AppBarLayout, offset: Int) {
         state = when {
             offset == 0 -> {
-                if (state != AppBarLayoutState.EXPANDED) {
-                    onStateChanged(AppBarLayoutState.EXPANDED)
-                }
+                if (state != AppBarLayoutState.EXPANDED) onChangeState(AppBarLayoutState.EXPANDED)
                 AppBarLayoutState.EXPANDED
             }
             abs(offset) >= appBarLayout.totalScrollRange -> {
-                if (state != AppBarLayoutState.COLLAPSED) {
-                    onStateChanged(AppBarLayoutState.COLLAPSED)
-                }
+                if (state != AppBarLayoutState.COLLAPSED) onChangeState(AppBarLayoutState.COLLAPSED)
                 AppBarLayoutState.COLLAPSED
             }
             else -> {
-                if (state != AppBarLayoutState.IDLE) {
-                    onStateChanged(AppBarLayoutState.IDLE)
-                }
+                if (state != AppBarLayoutState.IDLE) onChangeState(AppBarLayoutState.IDLE)
                 AppBarLayoutState.IDLE
             }
         }
     }
 }
 
-fun AppBarLayout.setOnStateChangedListener(
-    onStateChanged: (appBarLayoutState: AppBarLayoutState?) -> Unit
+fun AppBarLayout.setChangeStateListener(
+    onChangeState: (appBarLayoutState: AppBarLayoutState?) -> Unit
 ) {
-    addOnOffsetChangedListener(OnAppBarLayoutStateChangeListener(onStateChanged))
+    addOnOffsetChangedListener(OnAppBarLayoutChangeStateListener(onChangeState))
 }

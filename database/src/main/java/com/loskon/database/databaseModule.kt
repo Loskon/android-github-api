@@ -12,7 +12,7 @@ val databaseModule = module {
     single { provideDatabase(androidContext()) }
     single { provideDao(get()) }
 
-    single { LocalDataSource(get()) }
+    single { LocalDataSource(get(), get()) }
 }
 
 private const val DATABASE_NAME = "github_database"
