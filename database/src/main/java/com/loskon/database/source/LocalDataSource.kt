@@ -38,6 +38,7 @@ class LocalDataSource(
         userDao.insertRepositories(repositories)
     }
 
+    @Suppress("TooGenericExceptionCaught")
     suspend fun clearData() {
         suspendCoroutine { cont ->
             try {

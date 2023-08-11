@@ -4,6 +4,8 @@ plugins {
     alias(deps.plugins.androidApplication).apply(false)
     alias(deps.plugins.androidLibrary).apply(false)
     alias(deps.plugins.kotlin).apply(false)
+    alias(deps.plugins.gms).apply(false)
+    alias(deps.plugins.firebaseCrashlytics).apply(false)
     alias(deps.plugins.kapt).apply(false)
     alias(deps.plugins.navigation).apply(false)
     alias(deps.plugins.parcelize).apply(false)

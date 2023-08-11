@@ -45,6 +45,6 @@
         android:id="@+id/openSettingsFragment"
         android:name="com.loskon.features.settings.presentation.SettingsFragment"
         android:label="OpenSettingsFragment"
-        tools:layout="@layout/fragment_settings2" />
+        tools:layout="@layout/fragment_settings" />
 
 </navigation>

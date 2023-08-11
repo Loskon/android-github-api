@@ -30,7 +30,6 @@
         <item name="rippleColor">?attr/colorControlHighlight</item>
     </style>
 
-
     <style name="PreferenceScreenTheme" parent="PreferenceThemeOverlay.v14.Material">
         <item name="android:divider">@null</item>
         <item name="android:dividerHeight">0dp</item>

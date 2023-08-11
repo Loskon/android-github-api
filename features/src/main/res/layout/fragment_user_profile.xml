@@ -107,4 +107,5 @@
             android:visibility="gone"
             tools:visibility="visible" />
     </com.google.android.material.bottomappbar.BottomAppBar>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

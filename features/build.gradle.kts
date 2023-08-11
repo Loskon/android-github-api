@@ -42,12 +42,12 @@ android {
 }
 
 dependencies {
+    // Desugar
+    coreLibraryDesugaring(deps.desugar)
     // Module
     implementation(projects.network)
     implementation(projects.database)
     implementation(projects.base)
-    // Desugar
-    coreLibraryDesugaring(deps.desugar)
     // Kotlin
     implementation(deps.core)
     // Android

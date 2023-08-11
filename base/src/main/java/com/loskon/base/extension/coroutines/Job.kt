@@ -6,8 +6,3 @@ fun Job.onStart(start: () -> Unit): Job {
     if (isActive) start()
     return this
 }
-
-fun Job.onStart2(end: () -> Unit): Job {
-    if (isCompleted) end()
-    return this
-}

@@ -3,6 +3,8 @@
 plugins {
     alias(deps.plugins.androidApplication)
     alias(deps.plugins.kotlin)
+    alias(deps.plugins.gms)
+    alias(deps.plugins.firebaseCrashlytics)
     alias(deps.plugins.navigation)
 }
 
@@ -49,13 +51,17 @@ android {
 }
 
 dependencies {
+    // Desugar
+    coreLibraryDesugaring(deps.desugar)
     // Module
     implementation(projects.network)
     implementation(projects.base)
     implementation(projects.features)
     implementation(projects.database)
-    // Desugar
-    coreLibraryDesugaring(deps.desugar)
+    // Firebase
+    implementation(platform(deps.firebaseBom))
+    implementation(deps.firebaseAnalytics)
+    implementation(deps.firebaseCrashlytics)
     // Kotlin
     implementation(deps.core)
     // Android
