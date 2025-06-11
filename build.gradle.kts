@@ -1,18 +1,16 @@
-@file:Suppress("DSL_SCOPE_VIOLATION")
-
 plugins {
-    alias(deps.plugins.androidApplication).apply(false)
-    alias(deps.plugins.androidLibrary).apply(false)
-    alias(deps.plugins.kotlin).apply(false)
-    alias(deps.plugins.gms).apply(false)
-    alias(deps.plugins.firebaseCrashlytics).apply(false)
-    alias(deps.plugins.kapt).apply(false)
-    alias(deps.plugins.navigation).apply(false)
-    alias(deps.plugins.parcelize).apply(false)
-    alias(deps.plugins.ksp).apply(false)
-    alias(deps.plugins.ktlint).apply(false)
-    alias(deps.plugins.detekt).apply(false)
-    alias(deps.plugins.gradlevers).apply(false)
+    alias(libs.plugins.androidApplication).apply(false)
+    alias(libs.plugins.androidLibrary).apply(false)
+    alias(libs.plugins.kotlin).apply(false)
+    alias(libs.plugins.gms).apply(false)
+    alias(libs.plugins.firebaseCrashlytics).apply(false)
+    alias(libs.plugins.kapt).apply(false)
+    alias(libs.plugins.navigation).apply(false)
+    alias(libs.plugins.parcelize).apply(false)
+    alias(libs.plugins.ksp).apply(false)
+    alias(libs.plugins.ktlint).apply(false)
+    alias(libs.plugins.detekt).apply(false)
+    alias(libs.plugins.gradlevers).apply(false)
 }
 
 subprojects {

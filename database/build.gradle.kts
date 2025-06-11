@@ -1,17 +1,15 @@
-@file:Suppress("DSL_SCOPE_VIOLATION", "UnstableApiUsage")
-
 plugins {
-    alias(deps.plugins.androidLibrary)
-    alias(deps.plugins.kotlin)
-    alias(deps.plugins.ksp)
+    alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.kotlin)
+    alias(libs.plugins.ksp)
 }
 
 android {
     namespace = "com.loskon.database"
-    compileSdk = deps.versions.compileSdk.get().toInt()
+    compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
-        minSdk = deps.versions.minSdk.get().toInt()
+        minSdk = libs.versions.minSdk.get().toInt()
 
         buildConfigField("String", "API_BASE_URL", "\"https://api.github.com/\"")
 
@@ -45,21 +43,21 @@ android {
 
 dependencies {
     // Desugar
-    coreLibraryDesugaring(deps.desugar)
+    coreLibraryDesugaring(libs.desugar)
     // Kotlin
-    implementation(deps.core)
+    implementation(libs.core)
     // DB
-    implementation(deps.roomRuntime)
-    implementation(deps.roomKtx)
-    annotationProcessor(deps.roomCompiler)
-    ksp(deps.roomCompiler)
+    implementation(libs.roomRuntime)
+    implementation(libs.roomKtx)
+    annotationProcessor(libs.roomCompiler)
+    ksp(libs.roomCompiler)
     // DI
-    implementation(deps.koin)
+    implementation(libs.koin)
     // Logs
-    implementation(deps.timber)
+    implementation(libs.timber)
     // Test
-    testImplementation(deps.mockito)
-    testImplementation(deps.junit4)
-    androidTestImplementation(deps.extJunit)
-    androidTestImplementation(deps.espresso)
+    testImplementation(libs.mockito)
+    testImplementation(libs.junit4)
+    androidTestImplementation(libs.extJunit)
+    androidTestImplementation(libs.espresso)
 }

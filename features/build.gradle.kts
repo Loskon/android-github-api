@@ -1,18 +1,16 @@
-@file:Suppress("DSL_SCOPE_VIOLATION", "UnstableApiUsage")
-
 plugins {
-    alias(deps.plugins.androidLibrary)
-    alias(deps.plugins.kotlin)
-    alias(deps.plugins.parcelize)
-    alias(deps.plugins.navigation)
+    alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.kotlin)
+    alias(libs.plugins.parcelize)
+    alias(libs.plugins.navigation)
 }
 
 android {
     namespace = "com.loskon.features"
-    compileSdk = deps.versions.compileSdk.get().toInt()
+    compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
-        minSdk = deps.versions.minSdk.get().toInt()
+        minSdk = libs.versions.minSdk.get().toInt()
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -43,30 +41,30 @@ android {
 
 dependencies {
     // Desugar
-    coreLibraryDesugaring(deps.desugar)
+    coreLibraryDesugaring(libs.desugar)
     // Module
     implementation(projects.network)
     implementation(projects.database)
     implementation(projects.base)
     // Kotlin
-    implementation(deps.core)
+    implementation(libs.core)
     // Android
-    implementation(deps.appcompat)
-    implementation(deps.material)
-    implementation(deps.constraintlayout)
-    implementation(deps.recyclerview)
-    implementation(deps.fragment)
-    implementation(deps.swiperefreshlayout)
-    implementation(deps.preference)
-    implementation(deps.bundles.lifecycle)
-    implementation(deps.bundles.navigation)
+    implementation(libs.appcompat)
+    implementation(libs.material)
+    implementation(libs.constraintlayout)
+    implementation(libs.recyclerview)
+    implementation(libs.fragment)
+    implementation(libs.swiperefreshlayout)
+    implementation(libs.preference)
+    implementation(libs.bundles.lifecycle)
+    implementation(libs.bundles.navigation)
     // DI
-    implementation(deps.koin)
+    implementation(libs.koin)
     // Logs
-    implementation(deps.timber)
+    implementation(libs.timber)
     // Test
-    testImplementation(deps.mockito)
-    testImplementation(deps.junit4)
-    androidTestImplementation(deps.extJunit)
-    androidTestImplementation(deps.espresso)
+    testImplementation(libs.mockito)
+    testImplementation(libs.junit4)
+    androidTestImplementation(libs.extJunit)
+    androidTestImplementation(libs.espresso)
 }

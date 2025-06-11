@@ -1,26 +1,22 @@
-@file:Suppress("DSL_SCOPE_VIOLATION", "UnstableApiUsage")
-
 plugins {
-    alias(deps.plugins.androidApplication)
-    alias(deps.plugins.kotlin)
-    alias(deps.plugins.gms)
-    alias(deps.plugins.firebaseCrashlytics)
-    alias(deps.plugins.navigation)
+    alias(libs.plugins.androidApplication)
+    alias(libs.plugins.kotlin)
+    alias(libs.plugins.gms)
+    alias(libs.plugins.firebaseCrashlytics)
+    alias(libs.plugins.navigation)
 }
 
 android {
     namespace = "com.loskon.githubapi"
-    compileSdk = deps.versions.compileSdk.get().toInt()
+    compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
         applicationId = "com.loskon.githubapi"
-        compileSdkPreview = "UpsideDownCake"
+        minSdk = libs.versions.minSdk.get().toInt()
+        targetSdk = libs.versions.targetSdk.get().toInt()
 
-        minSdk = deps.versions.minSdk.get().toInt()
-        targetSdk = deps.versions.targetSdk.get().toInt()
-
-        versionCode = deps.versions.debugVersionCode.get().toInt()
-        versionName = deps.versions.debugVersionName.get()
+        versionCode = libs.versions.versionCode.get().toInt()
+        versionName = libs.versions.versionName.get()
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -52,34 +48,34 @@ android {
 
 dependencies {
     // Desugar
-    coreLibraryDesugaring(deps.desugar)
+    coreLibraryDesugaring(libs.desugar)
     // Module
     implementation(projects.network)
     implementation(projects.base)
     implementation(projects.features)
     implementation(projects.database)
     // Firebase
-    implementation(platform(deps.firebaseBom))
-    implementation(deps.firebaseAnalytics)
-    implementation(deps.firebaseCrashlytics)
+    implementation(platform(libs.firebaseBom))
+    implementation(libs.firebaseAnalytics)
+    implementation(libs.firebaseCrashlytics)
     // Kotlin
-    implementation(deps.core)
+    implementation(libs.core)
     // Android
-    implementation(deps.appcompat)
-    implementation(deps.material)
-    implementation(deps.activity)
-    implementation(deps.constraintlayout)
-    implementation(deps.fragment)
-    implementation(deps.bundles.navigation)
+    implementation(libs.appcompat)
+    implementation(libs.material)
+    implementation(libs.activity)
+    implementation(libs.constraintlayout)
+    implementation(libs.fragment)
+    implementation(libs.bundles.navigation)
     // DI
-    implementation(deps.koin)
+    implementation(libs.koin)
     // Misc
-    implementation(deps.splashscreen)
+    implementation(libs.splashscreen)
     // Logs
-    implementation(deps.timber)
+    implementation(libs.timber)
     // Test
-    testImplementation(deps.mockito)
-    testImplementation(deps.junit4)
-    androidTestImplementation(deps.extJunit)
-    androidTestImplementation(deps.espresso)
+    testImplementation(libs.mockito)
+    testImplementation(libs.junit4)
+    androidTestImplementation(libs.extJunit)
+    androidTestImplementation(libs.espresso)
 }

@@ -1,16 +1,14 @@
-@file:Suppress("DSL_SCOPE_VIOLATION", "UnstableApiUsage")
-
 plugins {
-    alias(deps.plugins.androidLibrary)
-    alias(deps.plugins.kotlin)
+    alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.kotlin)
 }
 
 android {
     namespace = "com.loskon.base"
-    compileSdk = deps.versions.compileSdk.get().toInt()
+    compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
-        minSdk = deps.versions.minSdk.get().toInt()
+        minSdk = libs.versions.minSdk.get().toInt()
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -41,23 +39,23 @@ android {
 
 dependencies {
     // Desugar
-    coreLibraryDesugaring(deps.desugar)
+    coreLibraryDesugaring(libs.desugar)
     // Kotlin
-    implementation(deps.core)
+    implementation(libs.core)
     // Android
-    implementation(deps.appcompat)
-    implementation(deps.material)
-    implementation(deps.constraintlayout)
-    implementation(deps.swiperefreshlayout)
-    implementation(deps.preference)
-    implementation(deps.bundles.lifecycle)
+    implementation(libs.appcompat)
+    implementation(libs.material)
+    implementation(libs.constraintlayout)
+    implementation(libs.swiperefreshlayout)
+    implementation(libs.preference)
+    implementation(libs.bundles.lifecycle)
     // Misc
-    implementation(deps.browser)
+    implementation(libs.browser)
     // Logs
-    implementation(deps.timber)
+    implementation(libs.timber)
     // Test
-    testImplementation(deps.mockito)
-    testImplementation(deps.junit4)
-    androidTestImplementation(deps.extJunit)
-    androidTestImplementation(deps.espresso)
+    testImplementation(libs.mockito)
+    testImplementation(libs.junit4)
+    androidTestImplementation(libs.extJunit)
+    androidTestImplementation(libs.espresso)
 }

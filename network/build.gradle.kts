@@ -1,17 +1,15 @@
-@file:Suppress("DSL_SCOPE_VIOLATION", "UnstableApiUsage")
-
 plugins {
-    alias(deps.plugins.androidLibrary)
-    alias(deps.plugins.kotlin)
-    alias(deps.plugins.ksp)
+    alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.kotlin)
+    alias(libs.plugins.ksp)
 }
 
 android {
     namespace = "com.loskon.network"
-    compileSdk = deps.versions.compileSdk.get().toInt()
+    compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
-        minSdk = deps.versions.minSdk.get().toInt()
+        minSdk = libs.versions.minSdk.get().toInt()
 
         buildConfigField("String", "API_BASE_URL", "\"https://api.github.com/\"")
 
@@ -45,22 +43,22 @@ android {
 
 dependencies {
     // Desugar
-    coreLibraryDesugaring(deps.desugar)
+    coreLibraryDesugaring(libs.desugar)
     // Kotlin
-    implementation(deps.core)
+    implementation(libs.core)
     // Network
-    implementation(deps.bundles.retrofitMoshi)
-    implementation(deps.moshi)
-    ksp(deps.moshiCodegen)
+    implementation(libs.bundles.retrofitMoshi)
+    implementation(libs.moshi)
+    ksp(libs.moshiCodegen)
     // ImageLoader
-    implementation(deps.coil)
+    implementation(libs.coil)
     // DI
-    implementation(deps.koin)
+    implementation(libs.koin)
     // Logs
-    implementation(deps.timber)
+    implementation(libs.timber)
     // Test
-    testImplementation(deps.mockito)
-    testImplementation(deps.junit4)
-    androidTestImplementation(deps.extJunit)
-    androidTestImplementation(deps.espresso)
+    testImplementation(libs.mockito)
+    testImplementation(libs.junit4)
+    androidTestImplementation(libs.extJunit)
+    androidTestImplementation(libs.espresso)
 }
