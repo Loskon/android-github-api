@@ -8,15 +8,15 @@ versionCode = "1"
 versionName = "1.0.0"
 ## App
 agp = "8.10.1"
-kotlin = "1.9.25"
+kotlin = "2.1.21"
 core = "1.16.0"
-ksp = "1.9.25-1.0.20"
+ksp = "2.1.21-2.0.1"
 ## Desugar
 desugar = "2.1.5"
 ## Checks
-detekt = "1.23.0"
-ktlint = "3.5.0"
-gradlevers = "0.46.0"
+detekt = "1.23.8"
+ktlint = "5.1.1"
+gradlevers = "0.52.0"
 ## Android
 appcompat = "1.7.1"
 material = "1.12.0"
@@ -31,10 +31,10 @@ navigation = "2.9.0"
 parcelize = "1.4.30"
 ## Firebase
 firebaseCrashlytics = "3.0.4"
-firebaseBom = "32.2.2"
+firebaseBom = "33.15.0"
 gms = "4.4.2"
 ## DB
-room = "2.5.2"
+room = "2.7.1"
 ## Network
 retrofit = "2.9.0"
 okHttp = "4.11.0"
@@ -54,7 +54,6 @@ espresso = "3.6.1"
 splashscreen = "1.1.0-rc01"
 browser = "1.8.0"
 
-## libraries ##
 [libraries]
 ## Desugar
 desugar = { module = "com.android.tools:desugar_jdk_libs", version.ref = "desugar" }

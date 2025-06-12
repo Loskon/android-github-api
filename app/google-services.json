@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "619054695984",
+    "project_id": "github-94048",
+    "storage_bucket": "github-94048.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:619054695984:android:8c0baa73dbea3c1de04ff5",
+        "android_client_info": {
+          "package_name": "com.loskon.githubapi"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBSroXklM6bjq1wA5_y7wOXm2ZOcqOQnCI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
