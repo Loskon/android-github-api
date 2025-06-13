@@ -1,5 +1,6 @@
 package com.loskon.base.widget.snackbar
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Typeface
@@ -11,6 +12,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.snackbar.SnackbarContentLayout
 
 @Suppress("unused")
+@SuppressLint("RestrictedApi")
 open class BaseSnackbar {
 
     private var snackbar: Snackbar? = null

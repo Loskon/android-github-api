@@ -1,5 +1,6 @@
 package com.loskon.network
 
+import com.loskon.network.api.GithubApi
 import com.loskon.network.moshiadapter.LocalDateTimeMoshiAdapter
 import com.loskon.network.source.NetworkDataSource
 import com.squareup.moshi.Moshi
@@ -47,6 +48,6 @@ private fun provideRetrofit(okHttp: OkHttpClient, moshi: Moshi): Retrofit {
         .build()
 }
 
-private fun provideGithubApi(retrofit: Retrofit): com.loskon.network.api.GithubApi {
-    return retrofit.create(com.loskon.network.api.GithubApi::class.java)
+private fun provideGithubApi(retrofit: Retrofit): GithubApi {
+    return retrofit.create(GithubApi::class.java)
 }

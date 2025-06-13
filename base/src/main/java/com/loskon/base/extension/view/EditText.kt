@@ -7,7 +7,6 @@ fun EditText.setFilterKtx(
     pattern: String,
     maxLength: Int = -1
 ) {
-
     val characterFilter = InputFilter { source, start, end, _, _, _ ->
         source?.subSequence(start, end)?.replace(Regex(pattern), "")?.trim()
     }

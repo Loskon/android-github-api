@@ -66,6 +66,7 @@ fun UserInfoEntity.toUserModel(): UserModel {
         createdAt = createdAt ?: LocalDateTime.now()
     )
 }
+
 fun UserModel.toUserInfoEntity(): UserInfoEntity {
     return UserInfoEntity(
         login = login,

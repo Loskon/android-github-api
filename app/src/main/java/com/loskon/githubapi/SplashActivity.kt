@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.loskon.base.countdowntimer.ShortCountDownTimer
 
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
@@ -21,7 +22,7 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun createSplashTimer(): CountDownTimer {
-        return com.loskon.base.countdowntimer.ShortCountDownTimer(SPLASH_DURATION) {
+        return ShortCountDownTimer(SPLASH_DURATION) {
             startActivity(MainActivity.makeIntent(this))
             supportFinishAfterTransition()
         }

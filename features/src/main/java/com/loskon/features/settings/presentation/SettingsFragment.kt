@@ -36,6 +36,7 @@ class SettingsFragment : BasePreferenceFragment(R.xml.root_preferences) {
             }
         }
     }
+
     override fun onCreatePreferences(savedInstanceState: Bundle?) {
         findPreferences()
         setupPreferencesListeners()

@@ -1,3 +1,6 @@
+import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
+import io.gitlab.arturbosch.detekt.Detekt
+
 plugins {
     alias(libs.plugins.androidApplication).apply(false)
     alias(libs.plugins.androidLibrary).apply(false)
@@ -18,38 +21,40 @@ subprojects {
     apply(plugin = "io.gitlab.arturbosch.detekt")
     apply(plugin = "checkstyle")
 
-    tasks.register("ktlint", org.jmailen.gradle.kotlinter.tasks.LintTask::class) {
-        group = "verification"
-        description = "Check Kotlin code style."
-
-        source(files("src"))
+    fun isNonStable(version: String): Boolean {
+        val stableKeyword = listOf("RELEASE", "FINAL", "GA").any { version.uppercase().contains(it) }
+        val regex = "^[0-9,.v-]+(-r)?$".toRegex()
+        val isStable = stableKeyword || regex.matches(version)
+        return isStable.not()
     }
 
-    tasks.register("detektCode", io.gitlab.arturbosch.detekt.Detekt::class) {
+    tasks.register("checkDependenciesUpdates", DependencyUpdatesTask::class) {
+        group = "verification"
+        description = "Inspect dependecies updates."
+
+        rejectVersionIf {
+            isNonStable(candidate.version) && !isNonStable(currentVersion)
+        }
+    }
+
+    tasks.register("detektCode", Detekt::class) {
         group = "verification"
         description = "Runs code checks."
 
         buildUponDefaultConfig = true
-        setSource(files("$projectDir/src/main/"))
-        config.from(files("$rootDir/configs/detekt-config.yml"))
+        config.from(files("$rootDir/configs/detekt.yml"))
 
         include("**/*.kt")
         include("**/*.kts")
 
-        exclude(".*test.*")
         exclude(".*build.*")
         exclude("*/resources/.*")
         exclude(".*/tmp/.*")
         exclude("**/build/**")
-        exclude("**/test/**")
-        exclude(".*Test.kt")
-        exclude(".*Spec.kt")
 
         reports {
-            xml.required.set(true)
-            xml.outputLocation.set(file("$projectDir/build/reports/detekt/detekt-report.xml"))
             html.required.set(true)
-            html.outputLocation.set(file("$projectDir/build/reports/detekt/detekt-report.html"))
+            html.outputLocation.set(file("$projectDir/build/reports/detekt-report.html"))
         }
     }
 
@@ -58,7 +63,7 @@ subprojects {
         description = "Runs code style checks."
 
         source(files("src/main/"))
-        configFile = file("$rootDir/configs/checkstyle-config.xml")
+        configFile = file("$rootDir/configs/checkstyle.xml")
         classpath = files()
 
         include("**/*.xml")
@@ -69,38 +74,20 @@ subprojects {
         exclude("**/BuildConfig.java")
 
         reports {
-            xml.required.set(true)
-            xml.outputLocation.set(file("$projectDir/build/reports/checkstyle/checkstyle-report.xml"))
             html.required.set(true)
-            html.outputLocation.set(file("$projectDir/build/reports/checkstyle/checkstyle-report.html"))
-        }
-    }
-
-    fun isNonStable(version: String): Boolean {
-        val stableKeyword = listOf("RELEASE", "FINAL", "GA").any { version.uppercase().contains(it) }
-        val regex = "^[0-9,.v-]+(-r)?$".toRegex()
-        val isStable = stableKeyword || regex.matches(version)
-        return isStable.not()
-    }
-
-    tasks.register("checkDependenciesUpdates", com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask::class) {
-        group = "verification"
-        description = "Inspect dependecies updates."
-
-        rejectVersionIf {
-            isNonStable(candidate.version) && !isNonStable(currentVersion)
+            html.outputLocation.set(file("$projectDir/build/reports/checkstyle-report.html"))
         }
     }
 
     tasks.register("checkBeforePushFast") {
         group = "verification"
-        description = "Inspect code before push"
-        dependsOn("checkstyle", "detektCode", "ktlint")
+        description = "Fast inspect code before push."
+        dependsOn("checkstyle", "detektCode", "lintKotlin")
     }
 
     tasks.register("checkBeforePush") {
         group = "verification"
-        description = "Inspect code before push"
-        dependsOn("checkstyle", "detektCode", "ktlint", "lintDebug")
+        description = "Inspect code before push."
+        dependsOn("checkstyle", "detektCode", "lintKotlin", "lintDebug")
     }
 }
