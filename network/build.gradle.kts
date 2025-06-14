@@ -10,9 +10,7 @@ android {
 
     defaultConfig {
         minSdk = libs.versions.minSdk.get().toInt()
-
         buildConfigField("String", "API_BASE_URL", "\"https://api.github.com/\"")
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -42,21 +40,15 @@ android {
 }
 
 dependencies {
-    // Desugar
     coreLibraryDesugaring(libs.desugar)
-    // Kotlin
     implementation(libs.core)
-    // Network
     implementation(libs.bundles.retrofitMoshi)
     implementation(libs.moshi)
-    ksp(libs.moshiCodegen)
-    // ImageLoader
     implementation(libs.coil)
-    // DI
+    implementation(libs.paging3)
     implementation(libs.koin)
-    // Logs
     implementation(libs.timber)
-    // Test
+    ksp(libs.moshiCodegen)
     testImplementation(libs.mockito)
     testImplementation(libs.junit4)
     androidTestImplementation(libs.extJunit)

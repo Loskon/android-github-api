@@ -8,16 +8,6 @@ class NetworkDataSource(
     private val githubApi: GithubApi
 ) {
 
-    suspend fun getUsers(pageSize: Int = 60, since: Int = 0): List<UserDto> {
-        val response = githubApi.getUsers(pageSize, since)
-
-        return if (response.isSuccessful) {
-            response.body() ?: emptyList()
-        } else {
-            emptyList()
-        }
-    }
-
     suspend fun getUser(username: String): UserDto {
         val response = githubApi.getUser(username)
 

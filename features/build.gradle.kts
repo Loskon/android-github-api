@@ -40,15 +40,11 @@ android {
 }
 
 dependencies {
-    // Desugar
     coreLibraryDesugaring(libs.desugar)
-    // Module
+    implementation(projects.base)
     implementation(projects.network)
     implementation(projects.database)
-    implementation(projects.base)
-    // Kotlin
     implementation(libs.core)
-    // Android
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.constraintlayout)
@@ -58,11 +54,9 @@ dependencies {
     implementation(libs.preference)
     implementation(libs.bundles.lifecycle)
     implementation(libs.bundles.navigation)
-    // DI
+    implementation(libs.paging3)
     implementation(libs.koin)
-    // Logs
     implementation(libs.timber)
-    // Test
     testImplementation(libs.mockito)
     testImplementation(libs.junit4)
     androidTestImplementation(libs.extJunit)

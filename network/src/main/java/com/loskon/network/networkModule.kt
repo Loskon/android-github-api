@@ -3,6 +3,7 @@ package com.loskon.network
 import com.loskon.network.api.GithubApi
 import com.loskon.network.moshiadapter.LocalDateTimeMoshiAdapter
 import com.loskon.network.source.NetworkDataSource
+import com.loskon.network.source.NetworkPagingDataSource
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient
@@ -20,6 +21,7 @@ val networkModule = module {
     single { provideGithubApi(get()) }
 
     single { NetworkDataSource(get()) }
+    single { NetworkPagingDataSource(get()) }
 }
 
 private fun provideLoggingInterceptor(): HttpLoggingInterceptor {

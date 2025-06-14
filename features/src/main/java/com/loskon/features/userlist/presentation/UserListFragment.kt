@@ -6,10 +6,8 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.SimpleItemAnimator
 import com.loskon.base.extension.coroutines.observe
 import com.loskon.base.viewbinding.viewBinding
-import com.loskon.base.widget.recyclerview.AddAnimationItemAnimator
 import com.loskon.base.widget.snackbar.WarningSnackbar
 import com.loskon.features.R
 import com.loskon.features.databinding.FragmentUserListBinding
@@ -37,11 +35,9 @@ class UserListFragment : Fragment(R.layout.fragment_user_list) {
 
     private fun configureRecyclerView() {
         with(binding.rvUserList) {
-            (itemAnimator as? SimpleItemAnimator)?.supportsChangeAnimations = false
-            layoutManager = LinearLayoutManager(requireContext())
-            itemAnimator = AddAnimationItemAnimator()
-            adapter = userListAdapter
             setHasFixedSize(true)
+            adapter = userListAdapter
+            layoutManager = LinearLayoutManager(requireContext())
         }
     }
 
@@ -66,23 +62,20 @@ class UserListFragment : Fragment(R.layout.fragment_user_list) {
                 is UserListState.Loading -> {
                     binding.indicatorUserList.isVisible = true
                 }
-
                 is UserListState.Success -> {
                     binding.indicatorUserList.isVisible = false
                     binding.tvNoInternetUserList.isVisible = false
-                    userListAdapter.setUsers(it.users)
+                    userListAdapter.submitData(it.users)
                 }
-
                 is UserListState.Failure -> {
                     binding.indicatorUserList.isVisible = false
                     binding.tvNoInternetUserList.isVisible = false
                     showWarningSnackbar(getString(R.string.error_loading))
                 }
-
                 is UserListState.ConnectionFailure -> {
                     binding.indicatorUserList.isVisible = false
                     binding.tvNoInternetUserList.isVisible = true
-                    if (it.users?.isNotEmpty() == true) userListAdapter.setUsers(it.users)
+                    //if (it.users?.isNotEmpty() == true) userListAdapter.setUsers(it.users)
                 }
             }
         }

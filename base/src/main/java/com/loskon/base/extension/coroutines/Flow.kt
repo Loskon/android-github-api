@@ -8,7 +8,10 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 @Suppress("NOTHING_TO_INLINE")
-inline fun <T> Flow<T>.observe(lifecycle: LifecycleOwner, noinline block: suspend (T) -> Unit) {
+inline fun <T> Flow<T>.observe(
+    lifecycle: LifecycleOwner,
+    noinline block: suspend (T) -> Unit
+) {
     lifecycle.lifecycleScope.launch {
         lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
             collect(block)

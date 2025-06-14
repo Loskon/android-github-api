@@ -1,6 +1,7 @@
 package com.loskon.features.util.preference
 
 import android.content.Context
+import androidx.core.content.edit
 import androidx.preference.PreferenceManager
 import com.loskon.features.R
 
@@ -8,7 +9,7 @@ object AppPreference {
 
     fun set(context: Context, key: String, value: String) {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
-        sharedPreferences.edit().putString(key, value).apply()
+        sharedPreferences.edit { putString(key, value) }
     }
 
     fun get(context: Context, key: String, def: String): String {
@@ -18,7 +19,7 @@ object AppPreference {
 
     fun set(context: Context, key: String, value: Int) {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
-        sharedPreferences.edit().putInt(key, value).apply()
+        sharedPreferences.edit { putInt(key, value) }
     }
 
     fun get(context: Context, key: String, def: Int): Int {
@@ -28,7 +29,7 @@ object AppPreference {
 
     fun set(context: Context, key: String, value: Long) {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
-        sharedPreferences.edit().putLong(key, value).apply()
+        sharedPreferences.edit { putLong(key, value) }
     }
 
     fun get(context: Context, key: String, def: Long): Long {
@@ -38,7 +39,7 @@ object AppPreference {
 
     fun set(context: Context, key: String, value: Boolean) {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
-        sharedPreferences.edit().putBoolean(key, value).apply()
+        sharedPreferences.edit { putBoolean(key, value) }
     }
 
     fun get(context: Context, key: String, def: Boolean): Boolean {
@@ -48,23 +49,11 @@ object AppPreference {
 
     fun remove(context: Context, key: String) {
         val preference = PreferenceManager.getDefaultSharedPreferences(context)
-        preference.edit().remove(key).apply()
+        preference.edit { remove(key) }
     }
 
     fun getHasDarkMode(context: Context): Boolean {
         val key = context.getString(R.string.dark_mode_key)
         return get(context, key, false)
-    }
-
-    fun getPageSize(context: Context): Int {
-        val key = context.getString(R.string.number_of_results_key)
-        val def = context.resources.getInteger(R.integer.number_of_results)
-        return get(context, key, def)
-    }
-
-    fun getSince(context: Context): Int {
-        val key = context.getString(R.string.since_key)
-        val def = context.resources.getInteger(R.integer.since)
-        return get(context, key, def)
     }
 }
