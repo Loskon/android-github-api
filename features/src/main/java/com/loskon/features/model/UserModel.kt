@@ -79,3 +79,14 @@ fun UserModel.toUserInfoEntity(): UserInfoEntity {
         createdAt = createdAt
     )
 }
+
+fun UserDto.toUserEntity(): UserEntity {
+    return UserEntity(
+        login = login ?: "",
+        id = id ?: 0,
+        avatarUrl = avatarUrl ?: "",
+        htmlUrl = htmlUrl ?: "",
+        type = type ?: "",
+        createdAt = createdAt ?: LocalDateTime.now()
+    )
+}

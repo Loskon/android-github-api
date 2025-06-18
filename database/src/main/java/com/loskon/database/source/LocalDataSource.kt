@@ -1,7 +1,11 @@
 package com.loskon.database.source
 
+import androidx.paging.PagingSource
+import androidx.room.withTransaction
+import com.loskon.database.dao.RemoteKeyDao
 import com.loskon.database.dao.UserDao
 import com.loskon.database.db.UserDatabase
+import com.loskon.database.entity.RemoteKeyEntity
 import com.loskon.database.entity.RepositoryEntity
 import com.loskon.database.entity.UserEntity
 import com.loskon.database.entity.UserInfoEntity
@@ -11,6 +15,7 @@ import kotlin.coroutines.suspendCoroutine
 
 class LocalDataSource(
     private val userDao: UserDao,
+    private val remoteKeyDao: RemoteKeyDao,
     private val userDatabase: UserDatabase
 ) {
 
@@ -36,6 +41,26 @@ class LocalDataSource(
 
     suspend fun setRepositories(repositories: List<RepositoryEntity>) {
         userDao.insertRepositories(repositories)
+    }
+
+    suspend fun clearAll() {
+        userDatabase.withTransaction {
+                remoteKeyDao.clearRemoteKey()
+                userDao.clearUsers()
+        }
+    }
+
+    suspend fun insertAll(prevKey: Int?, nextKey: Int?, response: List<UserEntity>) {
+        userDatabase.withTransaction {
+            val key = response.map { RemoteKeyEntity(it.id, prevKey, nextKey) }
+
+            remoteKeyDao.insertKey(key)
+            userDao.insertUsers(response)
+        }
+    }
+
+    fun getUsers(): PagingSource<Int, UserEntity> {
+        return userDao.getUsers()
     }
 
     @Suppress("TooGenericExceptionCaught")

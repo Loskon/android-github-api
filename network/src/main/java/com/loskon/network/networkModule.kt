@@ -19,7 +19,6 @@ val networkModule = module {
     single { provideMoshi() }
     single { provideRetrofit(get(), get()) }
     single { provideGithubApi(get()) }
-
     single { NetworkDataSource(get()) }
     single { NetworkPagingDataSource(get()) }
 }

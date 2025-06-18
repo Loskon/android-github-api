@@ -3,18 +3,29 @@ package com.loskon.network.source
 import com.loskon.network.api.GithubApi
 import com.loskon.network.dto.RepositoryDto
 import com.loskon.network.dto.UserDto
+import java.io.IOException
 
 class NetworkDataSource(
     private val githubApi: GithubApi
 ) {
 
+    suspend fun getUsers(since: Int, pageSize: Int): List<UserDto> {
+        val response = githubApi.getUsers(since, pageSize)
+
+        return if (response.isSuccessful) {
+            response.body() ?: throw IOException("Empty body")
+        } else {
+            throw IOException("Http status code: " + response.code())
+        }
+    }
+
     suspend fun getUser(username: String): UserDto {
         val response = githubApi.getUser(username)
 
         return if (response.isSuccessful) {
-            response.body() ?: UserDto()
+            response.body() ?: throw IOException("Empty body")
         } else {
-            UserDto()
+            throw IOException("Http status code: " + response.code())
         }
     }
 
@@ -22,9 +33,9 @@ class NetworkDataSource(
         val response = githubApi.getRepositories(username)
 
         return if (response.isSuccessful) {
-            response.body() ?: emptyList()
+            response.body() ?: throw IOException("Empty body")
         } else {
-            emptyList()
+            throw IOException("Http status code: " + response.code())
         }
     }
 }

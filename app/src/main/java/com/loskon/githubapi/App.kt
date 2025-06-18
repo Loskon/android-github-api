@@ -7,7 +7,7 @@ import com.loskon.features.repositoryinfo.repoInfoModule
 import com.loskon.features.settings.settingsModule
 import com.loskon.features.userlist.userListModule
 import com.loskon.features.userprofile.userProfileModule
-import com.loskon.features.util.network.connectionManagerModule
+import com.loskon.features.util.network.connectManagerModule
 import com.loskon.features.util.preference.AppPreference
 import com.loskon.network.networkModule
 import org.koin.android.ext.koin.androidContext
@@ -33,7 +33,7 @@ class App : Application() {
                     userListModule,
                     userProfileModule,
                     repoInfoModule,
-                    connectionManagerModule,
+                    connectManagerModule,
                     databaseModule,
                     settingsModule
                 )

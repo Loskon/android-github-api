@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 /**
  * Bypassing the ripple effect bug for CardView
  */
-class AddAnimationItemAnimator : DefaultItemAnimator() {
+class AddItemAnimator : DefaultItemAnimator() {
 
     override fun animateAdd(holder: RecyclerView.ViewHolder): Boolean {
         val view = holder.itemView
@@ -17,13 +17,13 @@ class AddAnimationItemAnimator : DefaultItemAnimator() {
         view.alpha = 0f
 
         val animation = view.animate()
-        animation.alpha(1f).setDuration(0).setListener(object : AnimatorListenerAdapter() {
+        animation.alpha(1.0f).setDuration(0).setListener(object : AnimatorListenerAdapter() {
             override fun onAnimationStart(animator: Animator) {
                 dispatchAddStarting(holder)
             }
 
             override fun onAnimationCancel(animator: Animator) {
-                view.alpha = 1f
+                view.alpha = 1.0f
             }
 
             override fun onAnimationEnd(animator: Animator) {

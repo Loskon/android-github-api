@@ -42,20 +42,14 @@ android {
 }
 
 dependencies {
-    // Desugar
     coreLibraryDesugaring(libs.desugar)
-    // Kotlin
     implementation(libs.core)
-    // DB
-    implementation(libs.roomRuntime)
     implementation(libs.roomKtx)
+    implementation(libs.roomPaging)
     annotationProcessor(libs.roomCompiler)
     ksp(libs.roomCompiler)
-    // DI
     implementation(libs.koin)
-    // Logs
     implementation(libs.timber)
-    // Test
     testImplementation(libs.mockito)
     testImplementation(libs.junit4)
     androidTestImplementation(libs.extJunit)

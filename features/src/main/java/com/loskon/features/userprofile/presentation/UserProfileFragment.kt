@@ -16,7 +16,7 @@ import com.loskon.base.extension.view.textWithGone
 import com.loskon.base.viewbinding.viewBinding
 import com.loskon.base.widget.appbarlayout.AppBarLayoutState
 import com.loskon.base.widget.appbarlayout.setChangeStateListener
-import com.loskon.base.widget.recyclerview.AddAnimationItemAnimator
+import com.loskon.base.widget.recyclerview.AddItemAnimator
 import com.loskon.base.widget.snackbar.WarningSnackbar
 import com.loskon.features.R
 import com.loskon.features.databinding.FragmentUserProfileBinding
@@ -49,7 +49,7 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
         with(binding.rvRepositories) {
             (itemAnimator as? SimpleItemAnimator)?.supportsChangeAnimations = false
             layoutManager = LinearLayoutManager(requireContext())
-            itemAnimator = AddAnimationItemAnimator()
+            itemAnimator = AddItemAnimator()
             adapter = repositoriesAdapter
         }
     }

@@ -10,9 +10,9 @@ import com.loskon.features.databinding.ItemUserCardBinding
 import com.loskon.features.model.UserModel
 import com.loskon.network.imageloader.ImageLoader
 
-class UserListAdapter(
-    userDiffUtil: DiffUtil.ItemCallback<UserModel> = UserDiffUtil
-) : PagingDataAdapter<UserModel, UserListAdapter.UserListViewHolder>(userDiffUtil) {
+class UserListPagingAdapter(
+    userDiffUtil: DiffUtil.ItemCallback<UserModel> = UserListDiffUtil
+) : PagingDataAdapter<UserModel, UserListPagingAdapter.UserListViewHolder>(userDiffUtil) {
 
     private var onItemClickListener: ((UserModel) -> Unit)? = null
 
@@ -39,10 +39,10 @@ class UserListAdapter(
     class UserListViewHolder(val binding: ItemUserCardBinding) : RecyclerView.ViewHolder(binding.root)
 }
 
-object UserDiffUtil : DiffUtil.ItemCallback<UserModel>() {
+object UserListDiffUtil : DiffUtil.ItemCallback<UserModel>() {
 
     override fun areItemsTheSame(oldItem: UserModel, newItem: UserModel): Boolean {
-        return oldItem.id == newItem.id
+        return oldItem.login == newItem.login || oldItem.htmlUrl == newItem.htmlUrl
     }
 
     override fun areContentsTheSame(oldItem: UserModel, newItem: UserModel): Boolean {

@@ -4,8 +4,7 @@ import androidx.paging.PagingData
 import com.loskon.features.model.UserModel
 
 sealed class UserListState {
-    data class Success(val users: PagingData<UserModel>) : UserListState()
+    data class Success(val users: PagingData<UserModel>, val hasConnect: Boolean) : UserListState()
     object Loading : UserListState()
     object Failure : UserListState()
-    data class ConnectionFailure(val users: List<UserModel>?) : UserListState()
 }

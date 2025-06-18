@@ -80,9 +80,9 @@ firebaseCrashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx" 
 ## Paging
 paging3 = { module = "androidx.paging:paging-runtime", version.ref = "paging3" }
 ## DB
-roomRuntime = { module = "androidx.room:room-runtime", version.ref = "room" }
 roomCompiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 roomKtx = { module = "androidx.room:room-ktx", version.ref = "room" }
+roomPaging= { module = "androidx.room:room-paging", version.ref = "room" }
 ## Network
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 retrofitConverterMoshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "retrofit" }

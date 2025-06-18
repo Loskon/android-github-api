@@ -5,8 +5,12 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.SimpleItemAnimator
 import com.loskon.base.extension.coroutines.observe
+import com.loskon.base.extension.view.setOnCanceledRefreshListener
 import com.loskon.base.viewbinding.viewBinding
 import com.loskon.base.widget.snackbar.WarningSnackbar
 import com.loskon.features.R
@@ -18,7 +22,7 @@ class UserListFragment : Fragment(R.layout.fragment_user_list) {
     private val viewModel: UserListViewModel by viewModel()
     private val binding by viewBinding(FragmentUserListBinding::bind)
 
-    private val userListAdapter = UserListAdapter()
+    private val userListPagingAdapter = UserListPagingAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,18 +39,27 @@ class UserListFragment : Fragment(R.layout.fragment_user_list) {
 
     private fun configureRecyclerView() {
         with(binding.rvUserList) {
-            setHasFixedSize(true)
-            adapter = userListAdapter
+            (itemAnimator as? SimpleItemAnimator)?.supportsChangeAnimations = false
             layoutManager = LinearLayoutManager(requireContext())
+            //itemAnimator = itemAnimator2
+            adapter = userListPagingAdapter
+            //adapter?.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
+            setHasFixedSize(true)
+            //setItemAnimator(null)
+        }
+    }
+
+    val itemAnimator2: DefaultItemAnimator = object : DefaultItemAnimator() {
+        override fun canReuseUpdatedViewHolder(viewHolder: RecyclerView.ViewHolder): Boolean {
+            return true
         }
     }
 
     private fun setupViewsListener() {
-        binding.refreshLayoutUserList.setOnRefreshListener {
-            viewModel.getUsers()
-            binding.refreshLayoutUserList.isRefreshing = false
+        binding.refreshLayoutUserList.setOnCanceledRefreshListener {
+            userListPagingAdapter.refresh()
         }
-        userListAdapter.setOnItemClickListener { user ->
+        userListPagingAdapter.setOnItemClickListener { user ->
             val action = UserListFragmentDirections.openUserProfileFragment(user.login)
             findNavController().navigate(action)
         }
@@ -62,20 +75,17 @@ class UserListFragment : Fragment(R.layout.fragment_user_list) {
                 is UserListState.Loading -> {
                     binding.indicatorUserList.isVisible = true
                 }
+
                 is UserListState.Success -> {
+                    binding.tvNoInternetUserList.isVisible = it.hasConnect.not()
                     binding.indicatorUserList.isVisible = false
-                    binding.tvNoInternetUserList.isVisible = false
-                    userListAdapter.submitData(it.users)
+                    userListPagingAdapter.submitData(it.users)
                 }
+
                 is UserListState.Failure -> {
                     binding.indicatorUserList.isVisible = false
                     binding.tvNoInternetUserList.isVisible = false
                     showWarningSnackbar(getString(R.string.error_loading))
-                }
-                is UserListState.ConnectionFailure -> {
-                    binding.indicatorUserList.isVisible = false
-                    binding.tvNoInternetUserList.isVisible = true
-                    //if (it.users?.isNotEmpty() == true) userListAdapter.setUsers(it.users)
                 }
             }
         }

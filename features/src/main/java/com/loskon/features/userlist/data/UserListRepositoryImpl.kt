@@ -1,28 +1,50 @@
 package com.loskon.features.userlist.data
 
+import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.map
+import com.loskon.database.mediator.LocalRemoteMediator
 import com.loskon.database.source.LocalDataSource
 import com.loskon.features.model.UserModel
 import com.loskon.features.model.toUserEntity
 import com.loskon.features.model.toUserModel
 import com.loskon.features.userlist.domain.UserListRepository
-import com.loskon.network.source.NetworkPagingDataSource
+import com.loskon.network.source.NetworkDataSource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 class UserListRepositoryImpl(
-    private val networkPagingDataSource: NetworkPagingDataSource,
+    private val localRemoteMediator: LocalRemoteMediator,
+    private val networkDataSource: NetworkDataSource,
     private val localDataSource: LocalDataSource
 ) : UserListRepository {
 
+    @OptIn(ExperimentalPagingApi::class)
     override suspend fun getUsers(): Flow<PagingData<UserModel>> {
         return Pager(
-            config = PagingConfig(pageSize = PAGE_SIZE, enablePlaceholders = false),
-            pagingSourceFactory = { networkPagingDataSource }
+            config = PagingConfig(pageSize = SINCE_PAGE_SIZE, enablePlaceholders = false),
+            remoteMediator = getRemoteMediator(),
+            pagingSourceFactory = { localDataSource.getUsers() }
         ).flow.map { pagingData -> pagingData.map { it.toUserModel() } }
+    }
+
+    private fun getRemoteMediator(): LocalRemoteMediator {
+        return localRemoteMediator.apply {
+            setOnRefreshListener { since, pageSize, refresh ->
+                val users = networkDataSource.getUsers(since, pageSize).map { it.toUserEntity() }
+                val endPagination = users.isEmpty()
+
+                val prevKey = if (since == STARTING_PAGE_INDEX) null else since.minus(SINCE_PAGE_SIZE)
+                val nextKey = if (endPagination) null else since.plus(SINCE_PAGE_SIZE)
+
+                if (refresh) localDataSource.clearAll()
+                localDataSource.insertAll(prevKey, nextKey, users)
+
+                setEndPagination(endPagination)
+            }
+        }
     }
 
     override suspend fun getCachedUsers(): List<UserModel>? {
@@ -35,6 +57,7 @@ class UserListRepositoryImpl(
 
     companion object {
 
-        private const val PAGE_SIZE = 20
+        private const val STARTING_PAGE_INDEX = 1
+        private const val SINCE_PAGE_SIZE = 20
     }
 }
