@@ -9,6 +9,7 @@ import com.loskon.base.viewbinding.viewBinding
 import com.loskon.features.databinding.ItemUserCardBinding
 import com.loskon.features.model.UserModel
 import com.loskon.network.imageloader.ImageLoader
+import timber.log.Timber
 
 class UserListPagingAdapter(
     userDiffUtil: DiffUtil.ItemCallback<UserModel> = UserListDiffUtil
@@ -42,7 +43,8 @@ class UserListPagingAdapter(
 object UserListDiffUtil : DiffUtil.ItemCallback<UserModel>() {
 
     override fun areItemsTheSame(oldItem: UserModel, newItem: UserModel): Boolean {
-        return oldItem.login == newItem.login || oldItem.htmlUrl == newItem.htmlUrl
+        Timber.d("areItemsTheSame: %s", oldItem.id.toString() + "/" + newItem.id + " " + (oldItem.id == newItem.id))
+        return oldItem.id == newItem.id
     }
 
     override fun areContentsTheSame(oldItem: UserModel, newItem: UserModel): Boolean {

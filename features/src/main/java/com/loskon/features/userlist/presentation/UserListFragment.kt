@@ -5,17 +5,17 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SimpleItemAnimator
 import com.loskon.base.extension.coroutines.observe
 import com.loskon.base.extension.view.setOnCanceledRefreshListener
 import com.loskon.base.viewbinding.viewBinding
+import com.loskon.base.widget.recyclerview.AddItemAnimator
 import com.loskon.base.widget.snackbar.WarningSnackbar
 import com.loskon.features.R
 import com.loskon.features.databinding.FragmentUserListBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
 
 class UserListFragment : Fragment(R.layout.fragment_user_list) {
 
@@ -41,17 +41,10 @@ class UserListFragment : Fragment(R.layout.fragment_user_list) {
         with(binding.rvUserList) {
             (itemAnimator as? SimpleItemAnimator)?.supportsChangeAnimations = false
             layoutManager = LinearLayoutManager(requireContext())
-            //itemAnimator = itemAnimator2
-            adapter = userListPagingAdapter
-            //adapter?.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
+            itemAnimator = AddItemAnimator()
             setHasFixedSize(true)
-            //setItemAnimator(null)
-        }
-    }
 
-    val itemAnimator2: DefaultItemAnimator = object : DefaultItemAnimator() {
-        override fun canReuseUpdatedViewHolder(viewHolder: RecyclerView.ViewHolder): Boolean {
-            return true
+            adapter = userListPagingAdapter
         }
     }
 
@@ -80,6 +73,7 @@ class UserListFragment : Fragment(R.layout.fragment_user_list) {
                     binding.tvNoInternetUserList.isVisible = it.hasConnect.not()
                     binding.indicatorUserList.isVisible = false
                     userListPagingAdapter.submitData(it.users)
+                    Timber.d("submitData")
                 }
 
                 is UserListState.Failure -> {

@@ -19,6 +19,16 @@ class NetworkDataSource(
         }
     }
 
+    suspend fun getUserSearch(since: Int, pageSize: Int): List<UserDto> {
+        val response = githubApi.getUserSearch(page = since, perPage = pageSize)
+
+        return if (response.isSuccessful) {
+            response.body()?.items ?: throw IOException("Empty body")
+        } else {
+            throw IOException("Http status code: " + response.code())
+        }
+    }
+
     suspend fun getUser(username: String): UserDto {
         val response = githubApi.getUser(username)
 

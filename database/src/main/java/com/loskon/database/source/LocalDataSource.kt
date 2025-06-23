@@ -1,11 +1,9 @@
 package com.loskon.database.source
 
 import androidx.paging.PagingSource
-import androidx.room.withTransaction
 import com.loskon.database.dao.RemoteKeyDao
 import com.loskon.database.dao.UserDao
 import com.loskon.database.db.UserDatabase
-import com.loskon.database.entity.RemoteKeyEntity
 import com.loskon.database.entity.RepositoryEntity
 import com.loskon.database.entity.UserEntity
 import com.loskon.database.entity.UserInfoEntity
@@ -44,19 +42,22 @@ class LocalDataSource(
     }
 
     suspend fun clearAll() {
-        userDatabase.withTransaction {
+        userDao.clearUsers()
+
+/*        userDatabase.withTransaction {
                 remoteKeyDao.clearRemoteKey()
                 userDao.clearUsers()
-        }
+        }*/
     }
 
-    suspend fun insertAll(prevKey: Int?, nextKey: Int?, response: List<UserEntity>) {
-        userDatabase.withTransaction {
-            val key = response.map { RemoteKeyEntity(it.id, prevKey, nextKey) }
+    suspend fun insertAll(response: List<UserEntity>) {
+        userDao.insertUsers(response)
+/*        userDatabase.withTransaction {
+            val key = response.map { RemoteKeyEntity(it.id, it.id) }.last()
 
             remoteKeyDao.insertKey(key)
             userDao.insertUsers(response)
-        }
+        }*/
     }
 
     fun getUsers(): PagingSource<Int, UserEntity> {

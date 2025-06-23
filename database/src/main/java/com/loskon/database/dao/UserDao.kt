@@ -11,7 +11,7 @@ import com.loskon.database.entity.UserInfoEntity
 
 @Dao
 interface UserDao {
-    @Query("Select * From users ORDER BY id ASC")
+    @Query("SELECT * FROM users ORDER BY id ASC")
     fun getUsers(): PagingSource<Int, UserEntity>
 
     @Query("SELECT * FROM users")

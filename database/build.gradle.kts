@@ -54,4 +54,7 @@ dependencies {
     testImplementation(libs.junit4)
     androidTestImplementation(libs.extJunit)
     androidTestImplementation(libs.espresso)
+
+    implementation(libs.bundles.retrofitMoshi)
+    implementation(projects.network)
 }

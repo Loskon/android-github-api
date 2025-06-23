@@ -6,8 +6,8 @@ import com.loskon.network.dto.UserDto
 import java.time.LocalDateTime
 
 data class UserModel(
-    val login: String = "",
     val id: Long = 0L,
+    val login: String = "",
     val avatarUrl: String = "",
     val htmlUrl: String = "",
     val type: String = "",
@@ -21,8 +21,8 @@ data class UserModel(
 
 fun UserDto.toUserModel(): UserModel {
     return UserModel(
-        login = login ?: "",
         id = id ?: 0,
+        login = login ?: "",
         avatarUrl = avatarUrl ?: "",
         htmlUrl = htmlUrl ?: "",
         type = type ?: "",
@@ -34,8 +34,8 @@ fun UserDto.toUserModel(): UserModel {
 
 fun UserEntity.toUserModel(): UserModel {
     return UserModel(
-        login = login ?: "",
         id = id ?: 0,
+        login = login ?: "",
         avatarUrl = avatarUrl ?: "",
         htmlUrl = htmlUrl ?: "",
         type = type ?: "",
@@ -45,8 +45,8 @@ fun UserEntity.toUserModel(): UserModel {
 
 fun UserModel.toUserEntity(): UserEntity {
     return UserEntity(
-        login = login,
         id = id,
+        login = login,
         avatarUrl = avatarUrl,
         htmlUrl = htmlUrl,
         type = type,
@@ -56,8 +56,8 @@ fun UserModel.toUserEntity(): UserEntity {
 
 fun UserInfoEntity.toUserModel(): UserModel {
     return UserModel(
-        login = login ?: "",
         id = id ?: 0,
+        login = login ?: "",
         avatarUrl = avatarUrl ?: "",
         htmlUrl = htmlUrl ?: "",
         type = type ?: "",
@@ -69,8 +69,8 @@ fun UserInfoEntity.toUserModel(): UserModel {
 
 fun UserModel.toUserInfoEntity(): UserInfoEntity {
     return UserInfoEntity(
-        login = login,
         id = id,
+        login = login,
         avatarUrl = avatarUrl,
         htmlUrl = htmlUrl,
         type = type,
@@ -82,8 +82,8 @@ fun UserModel.toUserInfoEntity(): UserInfoEntity {
 
 fun UserDto.toUserEntity(): UserEntity {
     return UserEntity(
-        login = login ?: "",
         id = id ?: 0,
+        login = login ?: "",
         avatarUrl = avatarUrl ?: "",
         htmlUrl = htmlUrl ?: "",
         type = type ?: "",
