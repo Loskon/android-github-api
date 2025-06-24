@@ -1,25 +1,7 @@
 # GitHub
 
-Приложение для просмотра списка пользователей GitHub.
+Попытка создать бесконечную прокрутку списка пользователей и их кеширование в Room. Версия paging3 = 3.3.6.
 
-## Скриншоты 
-
-<div align="left">
-   
-| Список пользователей                            | Профиль пользователя                            | Информация о репозитории                        |
-| :---------------------------------------------: | :---------------------------------------------: | :---------------------------------------------: |   
-| <img src="screens/Screen1.png" width="250">     | <img src="screens/Screen2.png" width="250">     | <img src="screens/Screen3.png" width="250">     | 
-   
-</div>
-
-## Стек технологий
-
-* MVVM, Clean Architecture
-* Coroutines, Flow
-* Retrofit2, OkHttp3, Moshi
-* Koin
-* Coil
-
-## Контакты
-
-[![Telegram](https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/andrejrochev)
+## Проблемы
+* Remotemediator требует единый модуль, чтобы для базы данных и сети была одна data
+* Remotemediator передает данные в разном порядке из бд, либо часть данных пропадает вообще

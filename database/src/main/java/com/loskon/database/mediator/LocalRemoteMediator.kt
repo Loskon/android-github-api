@@ -37,7 +37,10 @@ class LocalRemoteMediator(
 /*                val remoteKey = getRemoteKeyByFirst(state)
                 Timber.d("RemoteKey PREPEND: " + remoteKey?.prevKey)
                 remoteKey?.prevKey ?: return MediatorResult.Success(remoteKey != null)*/
-                return MediatorResult.Success(true)
+                val firstItem = state.firstItemOrNull()
+                Timber.d("RemoteKey PREPEND: %s", firstItem?.id)
+                firstItem?.id ?: return MediatorResult.Success(true)
+                //return MediatorResult.Success(true)
             }
 
             LoadType.APPEND -> {
