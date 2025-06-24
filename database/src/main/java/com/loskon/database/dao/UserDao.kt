@@ -15,16 +15,16 @@ interface UserDao {
     fun getUsers(): PagingSource<Int, UserEntity>
 
     @Query("SELECT * FROM users")
-    suspend fun getCachedUsers(): List<UserEntity>?
+    suspend fun getCachedUsers(): List<UserEntity>
 
     @Query("SELECT * FROM users_info WHERE login = (:login)")
-    suspend fun getCachedUser(login: String): UserInfoEntity?
+    suspend fun getCachedUser(login: String): UserInfoEntity
 
     @Query("SELECT * FROM repositories WHERE login = (:login)")
-    suspend fun getCachedRepositories(login: String): List<RepositoryEntity>?
+    suspend fun getCachedRepositories(login: String): List<RepositoryEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertUsers(users: List<UserEntity>)
+    suspend fun setUsers(users: List<UserEntity>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertUser(user: UserInfoEntity)

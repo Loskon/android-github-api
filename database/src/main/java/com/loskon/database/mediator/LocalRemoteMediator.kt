@@ -5,7 +5,6 @@ import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import com.loskon.database.db.UserDatabase
-import com.loskon.database.entity.RemoteKeyEntity
 import com.loskon.database.entity.UserEntity
 import timber.log.Timber
 
@@ -37,7 +36,8 @@ class LocalRemoteMediator(
 /*                val remoteKey = getRemoteKeyByFirst(state)
                 Timber.d("RemoteKey PREPEND: " + remoteKey?.prevKey)
                 remoteKey?.prevKey ?: return MediatorResult.Success(remoteKey != null)*/
-                return MediatorResult.Success(true)
+                val firstItem = state.firstItemOrNull()
+                firstItem?.id ?: return MediatorResult.Success(true)
             }
 
             LoadType.APPEND -> {
@@ -61,23 +61,6 @@ class LocalRemoteMediator(
             Timber.e(exception)
             MediatorResult.Error(exception)
         }
-    }
-
-    private suspend fun getRemoteKeyClosestToCurrentPosition(
-        state: PagingState<Int, UserEntity>
-    ): RemoteKeyEntity? {
-        return state.anchorPosition?.let { position ->
-            state.closestItemToPosition(position)?.id?.let { userId ->
-                userDatabase.remoteKeyDao().remoteKeyUserId(userId)
-            }
-        }
-    }
-
-    private suspend fun getRemoteKeyByLast(
-        state: PagingState<Int, UserEntity>
-    ): RemoteKeyEntity? {
-        return state.pages.lastOrNull { it.data.isNotEmpty() }?.data?.lastOrNull()
-            ?.let { userDatabase.remoteKeyDao().remoteKeyUserId(it.id) }
     }
 
     fun setOnRefreshListener(onRefreshListener: (suspend (since: Int, pageSize: Int, refresh: Boolean) -> Unit)?) {
