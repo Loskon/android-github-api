@@ -7,7 +7,7 @@ import java.time.LocalDateTime
 @JsonClass(generateAdapter = true)
 data class UserDto(
     @Json(name = "id")
-    val id: Long? = null,
+    val id: Int? = null,
     @Json(name = "login")
     val login: String? = null,
     @Json(name = "avatar_url")

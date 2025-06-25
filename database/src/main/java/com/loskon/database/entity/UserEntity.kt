@@ -9,7 +9,7 @@ import java.time.LocalDateTime
 data class UserEntity(
     @PrimaryKey
     @ColumnInfo(name = "id")
-    var id: Long = 0,
+    var id: Int = 0,
     @ColumnInfo(name = "login")
     val login: String? = null,
     @ColumnInfo(name = "avatar_url")

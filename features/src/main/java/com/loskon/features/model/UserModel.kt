@@ -6,7 +6,7 @@ import com.loskon.network.dto.UserDto
 import java.time.LocalDateTime
 
 data class UserModel(
-    val id: Long = 0L,
+    val id: Int = 0,
     val login: String = "",
     val avatarUrl: String = "",
     val htmlUrl: String = "",

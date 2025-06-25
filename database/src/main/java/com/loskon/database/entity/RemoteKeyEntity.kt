@@ -8,7 +8,9 @@ import androidx.room.PrimaryKey
 data class RemoteKeyEntity(
     @PrimaryKey
     @ColumnInfo(name = "user_id")
-    val userId: Long,
+    val userId: Int,
+    @ColumnInfo(name = "prev_key")
+    val prevKey: Int? = null,
     @ColumnInfo(name = "next_key")
-    val nextKey: Long? = null
+    val nextKey: Int? = null
 )

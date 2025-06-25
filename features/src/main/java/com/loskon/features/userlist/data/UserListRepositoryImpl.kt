@@ -5,6 +5,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.map
+import com.loskon.database.entity.RemoteKeyEntity
 import com.loskon.database.mediator.LocalRemoteMediator
 import com.loskon.database.source.LocalDataSource
 import com.loskon.features.model.UserModel
@@ -47,12 +48,16 @@ class UserListRepositoryImpl(
             setOnRefreshListener { since, pageSize, refresh ->
                 val users = networkDataSource.getUsers(since, pageSize).map { it.toUserEntity() }
                 val endPagination = users.isEmpty()
+
                 Timber.d("apiusers: " + users)
                 Timber.d("endPagination: " + endPagination)
 
-                //val nextKey = if (endPagination) null else since.plus(SINCE_PAGE_SIZE)
+                val prevKey = if (since == STARTING_PAGE_INDEX) null else since
+                val nextKey = if (endPagination) null else users.lastOrNull()?.id
+                val key = users.map { RemoteKeyEntity(it.id, prevKey, nextKey) }.last()
+
                 if (refresh) localDataSource.clearAll()
-                localDataSource.insertAll(users)
+                localDataSource.insertUsersAndKey(key, users)
 
                 setEndPagination(endPagination)
             }

@@ -17,7 +17,7 @@ class LocalRemoteMediator(
     private var onRefreshListener: (suspend (since: Int, pageSize: Int, refresh: Boolean) -> Unit)? = null
     private var endPagination: Boolean? = null
 
-    //override suspend fun initialize() = InitializeAction.LAUNCH_INITIAL_REFRESH
+    override suspend fun initialize() = InitializeAction.LAUNCH_INITIAL_REFRESH
 
     override suspend fun load(
         loadType: LoadType, state: PagingState<Int, UserEntity>
@@ -25,31 +25,20 @@ class LocalRemoteMediator(
 
         val since = when (loadType) {
             LoadType.REFRESH -> {
-                Timber.d("RemoteKey REFRESH: " + 0)
-                0
-                /*                val remoteKey = getRemoteKeyClosestToCurrentPosition(state)
-                                Timber.d("RemoteKey REFRESH: " + remoteKey)
-                                Timber.d("RemoteKey REFRESH nextKey: " + remoteKey?.nextKey)
-                                remoteKey?.nextKey?.minus(SINCE_PAGE_SIZE) ?: STARTING_PAGE_INDEX*/
+                Timber.d("RemoteKey REFRESH: %s", STARTING_SINCE_INDEX)
+                STARTING_SINCE_INDEX
             }
 
             LoadType.PREPEND -> {
-/*                val remoteKey = getRemoteKeyByFirst(state)
-                Timber.d("RemoteKey PREPEND: " + remoteKey?.prevKey)
-                remoteKey?.prevKey ?: return MediatorResult.Success(remoteKey != null)*/
-                val firstItem = state.firstItemOrNull()
-                Timber.d("RemoteKey PREPEND: %s", firstItem?.id)
-                firstItem?.id ?: return MediatorResult.Success(true)
-                //return MediatorResult.Success(true)
+                val remoteKey = getRemoteKeyByFirst(state)
+                Timber.d("RemoteKey PREPEND: %s", remoteKey?.prevKey)
+                remoteKey?.prevKey ?: return MediatorResult.Success(remoteKey != null)
             }
 
             LoadType.APPEND -> {
-                /*                val remoteKey = getRemoteKeyByLast(state)
-                                Timber.d("RemoteKey APPEND: " + remoteKey?.nextKey)
-                                remoteKey?.nextKey ?: return MediatorResult.Success(remoteKey != null)*/
-                val lastItem = state.lastItemOrNull()
-                Timber.d("RemoteKey APPEND: %s", lastItem?.id)
-                lastItem?.id ?: return MediatorResult.Success(false)
+                val remoteKey = getRemoteKeyByLast(state)
+                Timber.d("RemoteKey APPEND: %s", remoteKey?.nextKey)
+                remoteKey?.nextKey ?: return MediatorResult.Success(remoteKey != null)
             }
         }
 
@@ -66,14 +55,11 @@ class LocalRemoteMediator(
         }
     }
 
-    private suspend fun getRemoteKeyClosestToCurrentPosition(
+    private suspend fun getRemoteKeyByFirst(
         state: PagingState<Int, UserEntity>
     ): RemoteKeyEntity? {
-        return state.anchorPosition?.let { position ->
-            state.closestItemToPosition(position)?.id?.let { userId ->
-                userDatabase.remoteKeyDao().remoteKeyUserId(userId)
-            }
-        }
+        return state.pages.firstOrNull { it.data.isNotEmpty() }?.data?.firstOrNull()
+            ?.let { userDatabase.remoteKeyDao().remoteKeyUserId(it.id) }
     }
 
     private suspend fun getRemoteKeyByLast(
@@ -93,7 +79,7 @@ class LocalRemoteMediator(
 
     companion object {
 
-        private const val STARTING_PAGE_INDEX = 0
+        private const val STARTING_SINCE_INDEX = 0
         private const val SINCE_PAGE_SIZE = 20
     }
 }
