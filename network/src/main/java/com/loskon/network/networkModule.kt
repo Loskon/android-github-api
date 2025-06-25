@@ -20,7 +20,7 @@ val networkModule = module {
     single { provideRetrofit(get(), get()) }
     single { provideGithubApi(get()) }
     single { NetworkDataSource(get()) }
-    single { NetworkPagingDataSource(get()) }
+    factory { NetworkPagingDataSource(get()) }
 }
 
 private fun provideLoggingInterceptor(): HttpLoggingInterceptor {

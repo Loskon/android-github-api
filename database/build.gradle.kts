@@ -10,9 +10,7 @@ android {
 
     defaultConfig {
         minSdk = libs.versions.minSdk.get().toInt()
-
-        buildConfigField("String", "API_BASE_URL", "\"https://api.github.com/\"")
-
+        buildConfigField("String", "DATABASE_NAME", "\"github.db\"")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -54,7 +52,4 @@ dependencies {
     testImplementation(libs.junit4)
     androidTestImplementation(libs.extJunit)
     androidTestImplementation(libs.espresso)
-
-    implementation(libs.bundles.retrofitMoshi)
-    implementation(projects.network)
 }

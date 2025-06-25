@@ -12,13 +12,22 @@ class NetworkPagingDataSource(
 ) : PagingSource<Int, UserDto>() {
 
     private var usersLoadListener: (suspend (users: List<UserDto>) -> Unit)? = null
+    //    //override val keyReuseSupported: Boolean get() = true
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, UserDto> {
         return try {
             val since = params.key ?: STARTING_PAGE_INDEX
             val users = getUsers(since, params.loadSize)
-            val prevKey = if (since == STARTING_PAGE_INDEX) null else since.minus(PAGE_SIZE)
-            val nextKey = if (users.isEmpty()) null else since.plus(PAGE_SIZE)
+
+            val prevKey = if (since == STARTING_PAGE_INDEX) null else users.firstOrNull()?.id?.toInt()?.minus(1)
+            val nextKey = if (users.isEmpty()) null else users.lastOrNull()?.id?.toInt()
+
+            //val prevKey = users.firstOrNull()?.id?.toInt()?.minus(1)
+            // val nextKey = users.lastOrNull()?.id?.toInt()
+
+            Timber.d("RemoteKey since: " + since)
+            Timber.d("RemoteKey prevKey: " + prevKey)
+            Timber.d("RemoteKey nextKey: " + nextKey)
 
             LoadResult.Page(
                 data = users,
@@ -33,6 +42,8 @@ class NetworkPagingDataSource(
 
     override fun getRefreshKey(state: PagingState<Int, UserDto>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
+            Timber.d("anchorPosition prevKey" + state.closestPageToPosition(anchorPosition)?.prevKey)
+            Timber.d("anchorPosition nextKey" + state.closestPageToPosition(anchorPosition)?.nextKey)
             state.closestPageToPosition(anchorPosition)?.prevKey?.plus(PAGE_SIZE)
                 ?: state.closestPageToPosition(anchorPosition)?.nextKey?.minus(PAGE_SIZE)
         }

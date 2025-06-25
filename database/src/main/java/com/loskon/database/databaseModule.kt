@@ -12,12 +12,10 @@ val databaseModule = module {
     single { LocalDataSource(get()) }
 }
 
-private const val DATABASE_NAME = "github.db"
-
 private fun provideDatabase(context: Context): UserDatabase {
     return Room.databaseBuilder(
         context.applicationContext,
         UserDatabase::class.java,
-        DATABASE_NAME
+        BuildConfig.DATABASE_NAME
     ).build()
 }
