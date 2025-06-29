@@ -3,6 +3,7 @@
     <string name="no_internet_connection">No internet connection</string>
     <string name="error_loading">Error loading!</string>
     <string name="data_cleared">Data cleared</string>
+    <string name="retry">RETRY</string>
     <!-- User Profile Screen -->
     <string name="created_date">Created: %1$s</string>
     <string name="public_repositories">Public repositories:</string>

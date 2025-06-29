@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlin)
@@ -26,12 +28,14 @@ android {
 
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
-        sourceCompatibility = JavaVersion.VERSION_18
-        targetCompatibility = JavaVersion.VERSION_18
+        sourceCompatibility = JavaVersion.VERSION_24
+        targetCompatibility = JavaVersion.VERSION_24
     }
 
-    kotlinOptions {
-        jvmTarget = "18"
+    kotlin {
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_24)
+        }
     }
 
     buildFeatures {
@@ -40,15 +44,11 @@ android {
 }
 
 dependencies {
-    // Desugar
     coreLibraryDesugaring(libs.desugar)
-    // Module
     implementation(projects.network)
     implementation(projects.database)
     implementation(projects.base)
-    // Kotlin
     implementation(libs.core)
-    // Android
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.constraintlayout)
@@ -58,11 +58,9 @@ dependencies {
     implementation(libs.preference)
     implementation(libs.bundles.lifecycle)
     implementation(libs.bundles.navigation)
-    // DI
+    implementation(libs.bundles.coil)
     implementation(libs.koin)
-    // Logs
     implementation(libs.timber)
-    // Test
     testImplementation(libs.mockito)
     testImplementation(libs.junit4)
     androidTestImplementation(libs.extJunit)

@@ -5,21 +5,19 @@ import android.view.View
 import com.google.android.material.snackbar.Snackbar
 import com.loskon.base.R
 import com.loskon.base.extension.context.getColorKtx
-import com.loskon.base.extension.context.getFontKtx
 
 class WarningSnackbar : BaseSnackbar() {
 
     fun make(
         view: View,
-        anchorView: View?,
-        message: String?,
-        success: Boolean,
+        anchorView: View,
+        message: String,
+        success: Boolean
     ): WarningSnackbar {
         make(view, message, Snackbar.LENGTH_LONG)
-        if (anchorView != null) setAnchorView(anchorView)
-        setBackgroundTintList(view.context.getColorKtx(getSuccessColorId(success)))
-        setFont(view.context.getFontKtx(R.font.roboto_light))
+        setAnchorView(anchorView)
         setTextColor(Color.WHITE)
+        setBackgroundTintList(view.context.getColorKtx(getSuccessColorId(success)))
         return this
     }
 

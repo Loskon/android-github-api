@@ -13,7 +13,7 @@
     <color name="bottom_bar_background_color">#F6F8FA</color>
     <color name="swipe_background_color">@android:color/white</color>
     <color name="bg_tv_color">@color/accent_on_grey</color>
+    <color name="bg_no_internet_color">#E7E7E7</color>
     <color name="success_color">#2e7d32</color>
-    <color name="bg_no_internet_color">#DCDCDC</color>
     <color name="error_color">#D73A49</color>
 </resources>

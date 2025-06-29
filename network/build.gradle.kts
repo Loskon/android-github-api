@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlin)
@@ -10,9 +12,7 @@ android {
 
     defaultConfig {
         minSdk = libs.versions.minSdk.get().toInt()
-
-        buildConfigField("String", "API_BASE_URL", "\"https://api.github.com/\"")
-
+        buildConfigField("String", "API_URL", "\"https://api.github.com/\"")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -28,12 +28,15 @@ android {
 
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
-        sourceCompatibility = JavaVersion.VERSION_18
-        targetCompatibility = JavaVersion.VERSION_18
+        sourceCompatibility = JavaVersion.VERSION_24
+        targetCompatibility = JavaVersion.VERSION_24
     }
 
-    kotlinOptions {
-        jvmTarget = "18"
+    kotlin {
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_24)
+            freeCompilerArgs.add("-Xannotation-default-target=first-only")
+        }
     }
 
     buildFeatures {
@@ -42,21 +45,13 @@ android {
 }
 
 dependencies {
-    // Desugar
     coreLibraryDesugaring(libs.desugar)
-    // Kotlin
     implementation(libs.core)
-    // Network
-    implementation(libs.bundles.retrofitMoshi)
+    implementation(libs.bundles.retrofit)
     implementation(libs.moshi)
-    ksp(libs.moshiCodegen)
-    // ImageLoader
-    implementation(libs.coil)
-    // DI
     implementation(libs.koin)
-    // Logs
     implementation(libs.timber)
-    // Test
+    ksp(libs.moshiCodegen)
     testImplementation(libs.mockito)
     testImplementation(libs.junit4)
     androidTestImplementation(libs.extJunit)

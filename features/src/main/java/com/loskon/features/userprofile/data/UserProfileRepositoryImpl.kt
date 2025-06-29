@@ -20,7 +20,7 @@ class UserProfileRepositoryImpl(
     }
 
     override suspend fun getRepositories(login: String): List<RepositoryModel> {
-        return networkDataSource.getRepositories(login).map { it.toRepositoryModel() }
+        return networkDataSource.getRepos(login).map { it.toRepositoryModel() }
     }
 
     override suspend fun setUser(user: UserModel) {

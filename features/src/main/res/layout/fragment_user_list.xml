@@ -22,8 +22,18 @@
 
     </com.loskon.base.widget.swiprerefreshlayout.CustomSwipeRefreshLayout>
 
+    <ImageView
+        android:id="@+id/iv_user_list"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        app:srcCompat="@drawable/ic_warning"
+        app:tint="@android:color/darker_gray"
+        tools:ignore="ContentDescription" />
+
     <com.google.android.material.progressindicator.LinearProgressIndicator
-        android:id="@+id/indicator_user_list"
+        android:id="@+id/ind_user_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"

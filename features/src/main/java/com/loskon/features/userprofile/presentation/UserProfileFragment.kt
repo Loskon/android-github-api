@@ -12,6 +12,7 @@ import com.loskon.base.datetime.toFormatString
 import com.loskon.base.extension.coroutines.observe
 import com.loskon.base.extension.fragment.getColor
 import com.loskon.base.extension.fragment.primaryColor
+import com.loskon.base.extension.view.setOnCanceledRefreshListener
 import com.loskon.base.extension.view.textWithGone
 import com.loskon.base.viewbinding.viewBinding
 import com.loskon.base.widget.appbarlayout.AppBarLayoutState
@@ -21,7 +22,7 @@ import com.loskon.base.widget.snackbar.WarningSnackbar
 import com.loskon.features.R
 import com.loskon.features.databinding.FragmentUserProfileBinding
 import com.loskon.features.model.UserModel
-import com.loskon.network.imageloader.ImageLoader
+import com.loskon.features.util.imageloader.loadImage
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
@@ -30,7 +31,7 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
     private val binding by viewBinding(FragmentUserProfileBinding::bind)
     private val args: UserProfileFragmentArgs by navArgs()
 
-    private val repositoriesAdapter = RepoListAdapter()
+    private val repoAdapter = RepoListAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,14 +51,13 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
             (itemAnimator as? SimpleItemAnimator)?.supportsChangeAnimations = false
             layoutManager = LinearLayoutManager(requireContext())
             itemAnimator = AddAnimationItemAnimator()
-            adapter = repositoriesAdapter
+            adapter = repoAdapter
         }
     }
 
     private fun setupViewsListener() {
-        binding.refreshLayoutUserProfile.setOnRefreshListener {
+        binding.refreshLayoutUserProfile.setOnCanceledRefreshListener {
             viewModel.getUser(args.username)
-            binding.refreshLayoutUserProfile.isRefreshing = false
         }
         binding.appBarUserProfile.setChangeStateListener { state ->
             if (state == AppBarLayoutState.EXPANDED) {
@@ -66,7 +66,7 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
                 binding.refreshLayoutUserProfile.isEnabled = false
             }
         }
-        repositoriesAdapter.setItemClickListener { repository ->
+        repoAdapter.setItemClickListener { repository ->
             val action = UserProfileFragmentDirections.openRepositoryInfoSheetFragment(repository)
             findNavController().navigate(action)
         }
@@ -79,30 +79,36 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
         viewModel.getUserProfileState.observe(viewLifecycleOwner) {
             when (it) {
                 is UserProfileState.Loading -> {
-                    binding.indicatorUserProfile.isVisible = true
+                    binding.indUserProfile.isVisible = true
                 }
 
                 is UserProfileState.Success -> {
-                    binding.indicatorUserProfile.isVisible = false
+                    binding.indUserProfile.isVisible = false
+                    binding.ivUserProfile.isVisible = false
                     binding.coordLayoutUserProfile.isVisible = true
                     binding.tvNoInternetUserProfile.isVisible = false
                     setUser(it.user)
                 }
 
                 is UserProfileState.Failure -> {
-                    binding.indicatorUserProfile.isVisible = false
+                    binding.indUserProfile.isVisible = false
+                    binding.ivUserProfile.isVisible = true
                     binding.tvNoInternetUserProfile.isVisible = false
                     showWarningSnackbar(getString(R.string.error_loading))
                 }
 
                 is UserProfileState.ConnectionFailure -> {
-                    binding.indicatorUserProfile.isVisible = false
+                    binding.indUserProfile.isVisible = false
                     binding.tvNoInternetUserProfile.isVisible = true
 
                     if (it.user != null) {
                         binding.coordLayoutUserProfile.isVisible = true
                         setUser(it.user)
+                    } else {
+                        binding.ivUserProfile.isVisible = true
                     }
+
+                    showWarningSnackbar(getString(R.string.no_internet_connection))
                 }
             }
         }
@@ -124,18 +130,21 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
         with(binding.incUserProfileCard) {
             user.apply {
                 binding.toolbarUserProfile.title = login
-                ImageLoader.load(ivUserProfileAvatar, avatarUrl)
+                ivUserProfileAvatar.loadImage(avatarUrl)
                 tvUserProfileLogin.text = login
                 tvUserProfileName.textWithGone(name)
                 tvUserProfileLocation.textWithGone(location)
                 tvUserProfileCreatedDate.text = getString(R.string.created_date, createdAt.toFormatString())
-                repositoriesAdapter.setRepositories(repositories)
+                repoAdapter.setRepositories(repositories)
                 setRepositoriesHeader(repositories.isEmpty())
             }
         }
     }
 
     private fun showWarningSnackbar(message: String) {
-        WarningSnackbar().make(binding.root, binding.bottomBarUserProfile, message, success = false).show()
+        WarningSnackbar()
+            .make(binding.root, binding.bottomBarUserProfile, message, success = false)
+            .setAction(getString(R.string.retry)) { viewModel.getUser(args.username) }
+            .show()
     }
 }

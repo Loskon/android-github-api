@@ -7,7 +7,7 @@ import com.loskon.base.extension.view.setDebounceClickListener
 import com.loskon.base.viewbinding.viewBinding
 import com.loskon.features.databinding.ItemUserCardBinding
 import com.loskon.features.model.UserModel
-import com.loskon.network.imageloader.ImageLoader
+import com.loskon.features.util.imageloader.loadImage
 
 class UserListAdapter : RecyclerView.Adapter<UserListAdapter.UserListViewHolder>() {
 
@@ -24,7 +24,7 @@ class UserListAdapter : RecyclerView.Adapter<UserListAdapter.UserListViewHolder>
 
         with(holder.binding) {
             user.apply {
-                ImageLoader.load(ivUserCard, avatarUrl)
+                ivUserCard.loadImage(avatarUrl)
                 tvUserCardLogin.text = login
                 cardViewUser.setDebounceClickListener { onItemClickListener?.invoke(this) }
             }

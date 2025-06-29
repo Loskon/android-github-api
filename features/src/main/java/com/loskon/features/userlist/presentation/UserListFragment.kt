@@ -8,6 +8,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.SimpleItemAnimator
 import com.loskon.base.extension.coroutines.observe
+import com.loskon.base.extension.view.setOnCanceledRefreshListener
 import com.loskon.base.viewbinding.viewBinding
 import com.loskon.base.widget.recyclerview.AddAnimationItemAnimator
 import com.loskon.base.widget.snackbar.WarningSnackbar
@@ -19,7 +20,6 @@ class UserListFragment : Fragment(R.layout.fragment_user_list) {
 
     private val viewModel: UserListViewModel by viewModel()
     private val binding by viewBinding(FragmentUserListBinding::bind)
-
     private val userListAdapter = UserListAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,9 +46,8 @@ class UserListFragment : Fragment(R.layout.fragment_user_list) {
     }
 
     private fun setupViewsListener() {
-        binding.refreshLayoutUserList.setOnRefreshListener {
+        binding.refreshLayoutUserList.setOnCanceledRefreshListener {
             viewModel.getUsers()
-            binding.refreshLayoutUserList.isRefreshing = false
         }
         userListAdapter.setOnItemClickListener { user ->
             val action = UserListFragmentDirections.openUserProfileFragment(user.login)
@@ -64,31 +63,43 @@ class UserListFragment : Fragment(R.layout.fragment_user_list) {
         viewModel.getUserListState.observe(viewLifecycleOwner) {
             when (it) {
                 is UserListState.Loading -> {
-                    binding.indicatorUserList.isVisible = true
+                    binding.indUserList.isVisible = true
                 }
 
                 is UserListState.Success -> {
-                    binding.indicatorUserList.isVisible = false
+                    binding.indUserList.isVisible = false
+                    binding.ivUserList.isVisible = false
                     binding.tvNoInternetUserList.isVisible = false
                     userListAdapter.setUsers(it.users)
                 }
 
                 is UserListState.Failure -> {
-                    binding.indicatorUserList.isVisible = false
+                    binding.indUserList.isVisible = false
+                    binding.ivUserList.isVisible = true
                     binding.tvNoInternetUserList.isVisible = false
                     showWarningSnackbar(getString(R.string.error_loading))
                 }
 
                 is UserListState.ConnectionFailure -> {
-                    binding.indicatorUserList.isVisible = false
+                    binding.indUserList.isVisible = false
                     binding.tvNoInternetUserList.isVisible = true
-                    if (it.users?.isNotEmpty() == true) userListAdapter.setUsers(it.users)
+
+                    if (it.users?.isNotEmpty() == true) {
+                        userListAdapter.setUsers(it.users)
+                    } else {
+                        binding.ivUserList.isVisible = true
+                    }
+
+                    showWarningSnackbar(getString(R.string.no_internet_connection))
                 }
             }
         }
     }
 
     private fun showWarningSnackbar(message: String) {
-        WarningSnackbar().make(binding.root, binding.bottomBarUsersList, message, success = false).show()
+        WarningSnackbar()
+            .make(binding.root, binding.bottomBarUsersList, message, success = false)
+            .setAction(getString(R.string.retry)) { viewModel.getUsers() }
+            .show()
     }
 }

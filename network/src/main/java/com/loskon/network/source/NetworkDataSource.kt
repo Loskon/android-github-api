@@ -1,20 +1,24 @@
 package com.loskon.network.source
 
 import com.loskon.network.api.GithubApi
-import com.loskon.network.dto.RepositoryDto
+import com.loskon.network.dto.RepoDto
 import com.loskon.network.dto.UserDto
+import okio.IOException
 
 class NetworkDataSource(
     private val githubApi: GithubApi
 ) {
 
-    suspend fun getUsers(pageSize: Int = 60, since: Int = 0): List<UserDto> {
-        val response = githubApi.getUsers(pageSize, since)
+    suspend fun getUsers(
+        since: Int = 0,
+        pageSize: Int = 100
+    ): List<UserDto> {
+        val response = githubApi.getUsers(since, pageSize)
 
         return if (response.isSuccessful) {
-            response.body() ?: emptyList()
+            response.body() ?: throw IOException("Empty data")
         } else {
-            emptyList()
+            throw IOException("Http error code" + response.code())
         }
     }
 
@@ -22,19 +26,19 @@ class NetworkDataSource(
         val response = githubApi.getUser(username)
 
         return if (response.isSuccessful) {
-            response.body() ?: UserDto()
+            response.body() ?: throw IOException("Empty data")
         } else {
-            UserDto()
+            throw IOException("Http error code" + response.code())
         }
     }
 
-    suspend fun getRepositories(username: String): List<RepositoryDto> {
-        val response = githubApi.getRepositories(username)
+    suspend fun getRepos(username: String): List<RepoDto> {
+        val response = githubApi.getRepos(username)
 
         return if (response.isSuccessful) {
-            response.body() ?: emptyList()
+            response.body() ?: throw IOException("Empty data")
         } else {
-            emptyList()
+            throw IOException("Http error code" + response.code())
         }
     }
 }

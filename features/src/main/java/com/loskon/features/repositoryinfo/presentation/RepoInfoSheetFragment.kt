@@ -1,9 +1,9 @@
 package com.loskon.features.repositoryinfo.presentation
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import androidx.core.net.toUri
 import androidx.navigation.fragment.navArgs
 import com.loskon.base.customtab.CustomTab
 import com.loskon.base.datetime.toFormatString
@@ -46,7 +46,7 @@ class RepoInfoSheetFragment : BaseSheetFragment(R.layout.sheet_repository_info) 
         if (CustomTab.isAvailableCustomTab(requireContext())) {
             CustomTab.launchCustomTab(requireContext(), url)
         } else {
-            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            val browserIntent = Intent(Intent.ACTION_VIEW, url.toUri())
             requireContext().startActivity(browserIntent)
         }
     }

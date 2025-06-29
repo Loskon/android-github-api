@@ -2,7 +2,7 @@ package com.loskon.features.model
 
 import android.os.Parcelable
 import com.loskon.database.entity.RepositoryEntity
-import com.loskon.network.dto.RepositoryDto
+import com.loskon.network.dto.RepoDto
 import kotlinx.parcelize.Parcelize
 import java.time.LocalDateTime
 
@@ -19,7 +19,7 @@ data class RepositoryModel(
     val language: String = ""
 ) : Parcelable
 
-fun RepositoryDto.toRepositoryModel(): RepositoryModel {
+fun RepoDto.toRepositoryModel(): RepositoryModel {
     return RepositoryModel(
         id = id ?: 0L,
         name = name ?: "",

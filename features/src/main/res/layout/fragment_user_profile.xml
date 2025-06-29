@@ -33,7 +33,7 @@
                     android:id="@+id/coll_bar_user_profile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:collapsedTitleTextAppearance="@style/ToolbarTextFont"
+                    app:collapsedTitleTextAppearance="@style/ToolbarTextFontStyle"
                     app:contentScrim="@color/task_description_color"
                     app:expandedTitleTextColor="@android:color/transparent"
                     app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
@@ -68,8 +68,18 @@
 
     </com.loskon.base.widget.swiprerefreshlayout.CustomSwipeRefreshLayout>
 
+    <ImageView
+        android:id="@+id/iv_user_profile"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        app:srcCompat="@drawable/ic_warning"
+        app:tint="@android:color/darker_gray"
+        tools:ignore="ContentDescription" />
+
     <com.google.android.material.progressindicator.LinearProgressIndicator
-        android:id="@+id/indicator_user_profile"
+        android:id="@+id/ind_user_profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"

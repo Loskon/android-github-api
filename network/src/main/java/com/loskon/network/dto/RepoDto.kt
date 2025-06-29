@@ -5,7 +5,7 @@ import com.squareup.moshi.JsonClass
 import java.time.LocalDateTime
 
 @JsonClass(generateAdapter = true)
-data class RepositoryDto(
+data class RepoDto(
     @Json(name = "id")
     val id: Long? = null,
     @Json(name = "name")

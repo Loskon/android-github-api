@@ -2,10 +2,10 @@ package com.loskon.base.customtab
 
 import android.content.Context
 import android.graphics.Color
-import android.net.Uri
 import androidx.browser.customtabs.CustomTabColorSchemeParams
 import androidx.browser.customtabs.CustomTabsClient
 import androidx.browser.customtabs.CustomTabsIntent
+import androidx.core.net.toUri
 import com.loskon.base.R
 
 object CustomTab {
@@ -24,7 +24,7 @@ object CustomTab {
                 .setExitAnimations(this, R.anim.enter_slide_in_left, R.anim.exit_slide_out_right)
                 .build()
 
-            intent.launchUrl(this, Uri.parse(url))
+            intent.launchUrl(this, url.toUri())
         }
     }
 

@@ -16,18 +16,17 @@ import com.google.android.material.snackbar.SnackbarContentLayout
 open class BaseSnackbar {
 
     private var snackbar: Snackbar? = null
-
     private var onDismissedListener: (() -> Unit)? = null
     private var onShowListener: (() -> Unit)? = null
 
-    fun make(view: View, message: String?, length: Int): BaseSnackbar {
-        snackbar = Snackbar.make(view, message ?: UNKNOWN_ERROR_MESSAGE, length)
+    fun make(view: View, message: String, length: Int): BaseSnackbar {
+        snackbar = Snackbar.make(view, message, length)
         setupSnackbarTransientListener()
         return this
     }
 
-    fun make(context: Context, view: View, message: String?, length: Int): BaseSnackbar {
-        snackbar = Snackbar.make(context, view, message ?: UNKNOWN_ERROR_MESSAGE, length)
+    fun make(context: Context, view: View, message: String, length: Int): BaseSnackbar {
+        snackbar = Snackbar.make(context, view, message, length)
         setupSnackbarTransientListener()
         return this
     }
@@ -57,8 +56,12 @@ open class BaseSnackbar {
         return this
     }
 
-    fun setAction(text: String, action: () -> Unit) {
-        snackbar?.setAction(text) { action() }
+    fun setAction(text: String, action: () -> Unit): BaseSnackbar {
+        snackbar?.setAction(text) {
+            action()
+            dismiss()
+        }
+        return this
     }
 
     fun setActionRippleColor(color: Int) {
@@ -117,9 +120,5 @@ open class BaseSnackbar {
     inline fun create(functions: BaseSnackbar.() -> Unit): BaseSnackbar {
         this.functions()
         return this
-    }
-
-    companion object {
-        private const val UNKNOWN_ERROR_MESSAGE = "Unknown error"
     }
 }
