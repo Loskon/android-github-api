@@ -53,6 +53,10 @@ espresso = "3.6.1"
 ## Misc
 splashscreen = "1.1.0-rc01"
 browser = "1.8.0"
+## Compose
+compose = "1.8.3"
+composeMaterial2 = "1.8.3"
+composePreview = "1.8.3"
 
 [libraries]
 ## Desugar
@@ -102,6 +106,10 @@ espresso = { module = "androidx.test.espresso:espresso-core", version.ref = "esp
 ## Misc
 splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "splashscreen" }
 browser = { module = "androidx.browser:browser", version.ref = "browser" }
+## Compose
+compose = { module = "androidx.compose.ui:ui", version.ref = "compose" }
+composeMaterial2 = { module = "androidx.compose.material:material", version.ref = "composeMaterial2" }
+composePreview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "composePreview" }
 
 ## bundles ##
 [bundles]

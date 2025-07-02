@@ -40,6 +40,7 @@ android {
 
     buildFeatures {
         viewBinding = true
+        compose = true
     }
 }
 
@@ -61,6 +62,9 @@ dependencies {
     implementation(libs.bundles.coil)
     implementation(libs.koin)
     implementation(libs.timber)
+    implementation(libs.compose)
+    implementation(libs.composePreview)
+    implementation(libs.composeMaterial2)
     testImplementation(libs.mockito)
     testImplementation(libs.junit4)
     androidTestImplementation(libs.extJunit)
