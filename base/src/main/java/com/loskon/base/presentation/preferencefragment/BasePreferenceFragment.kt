@@ -10,6 +10,9 @@ import com.loskon.base.databinding.FragmentSettingsBinding
 import com.loskon.base.viewbinding.viewBinding
 import com.loskon.base.widget.snackbar.WarningSnackbar
 
+/**
+ * Custom Preference Fragment with bottom bar
+ */
 abstract class BasePreferenceFragment(
     @XmlRes val preferencesResId: Int
 ) : PreferenceFragmentCompat() {

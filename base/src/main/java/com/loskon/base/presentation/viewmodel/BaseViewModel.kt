@@ -2,6 +2,7 @@ package com.loskon.base.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.loskon.base.extension.coroutines.onStart
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
@@ -11,14 +12,19 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
+/**
+ * ViewModel with exception handler
+ */
+@Suppress("unused")
 open class BaseViewModel : ViewModel() {
 
     private val errorState = MutableStateFlow<Throwable?>(null)
-    open val getErrorState get() = errorState.asStateFlow()
+    open val errorStateFlow get() = errorState.asStateFlow()
 
     protected fun launchErrorJob(
         dispatcher: CoroutineDispatcher = Dispatchers.IO,
         error: MutableStateFlow<Throwable?>? = errorState,
+        startBlock: (() -> Unit)? = null,
         errorBlock: ((Throwable) -> Unit)? = null,
         block: suspend () -> Unit
     ): Job {
@@ -29,7 +35,7 @@ open class BaseViewModel : ViewModel() {
             } finally {
                 // Nothing
             }
-        }
+        }.onStart { startBlock?.invoke() }
     }
 
     private fun getExceptionHandler(

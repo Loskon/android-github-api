@@ -13,18 +13,18 @@
     app:layout_constraintTop_toTopOf="parent">
 
     <TextView
-        android:id="@+id/tv_repository_name"
+        android:id="@+id/tv_repo_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="start"
         android:paddingTop="@dimen/margin_medium"
-        android:textColor="@color/primary_text_color"
+        android:textColor="@color/primary_text"
         android:textSize="@dimen/text_medium"
         android:textStyle="bold"
         tools:text="fullName" />
 
     <TextView
-        android:id="@+id/tv_repository_descreption_header"
+        android:id="@+id/tv_repo_descreption_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="start"
@@ -34,25 +34,25 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_repository_name" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_repo_name" />
 
     <TextView
-        android:id="@+id/tv_repository_descreption"
+        android:id="@+id/tv_repo_descreption"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ellipsize="end"
         android:gravity="start"
         android:maxLines="4"
         android:paddingTop="@dimen/margin_xsmall"
-        android:textColor="@color/secondary_text_color"
+        android:textColor="@color/secondary_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_repository_name"
+        app:layout_constraintTop_toBottomOf="@+id/tv_repo_name"
         tools:text="description" />
 
     <TextView
-        android:id="@+id/tv_repository_language_header"
+        android:id="@+id/tv_repo_language_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="start"
@@ -62,19 +62,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_repository_name" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_repo_name" />
 
     <TextView
-        android:id="@+id/tv_repository_language"
+        android:id="@+id/tv_repo_language"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="start"
         android:paddingTop="@dimen/margin_xsmall"
-        android:textColor="@color/secondary_text_color"
+        android:textColor="@color/secondary_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_repository_descreption"
+        app:layout_constraintTop_toBottomOf="@+id/tv_repo_descreption"
         tools:text="language" />
 
     <TextView
@@ -87,19 +87,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_repository_name" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_repo_name" />
 
     <TextView
-        android:id="@+id/tv_repository_size"
+        android:id="@+id/tv_repo_size"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="start"
         android:paddingTop="@dimen/margin_xsmall"
-        android:textColor="@color/secondary_text_color"
+        android:textColor="@color/secondary_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_repository_language"
+        app:layout_constraintTop_toBottomOf="@+id/tv_repo_language"
         tools:text="size" />
 
     <TextView
@@ -112,19 +112,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_repository_name" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_repo_name" />
 
     <TextView
-        android:id="@+id/tv_repository_created_date"
+        android:id="@+id/tv_repo_created_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:autoLink="web"
         android:gravity="start"
         android:paddingTop="@dimen/margin_xsmall"
-        android:textColor="@color/secondary_text_color"
+        android:textColor="@color/secondary_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_repository_size"
+        app:layout_constraintTop_toBottomOf="@+id/tv_repo_size"
         tools:text="created date" />
 
     <TextView
@@ -137,19 +137,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_repository_name" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_repo_name" />
 
     <TextView
-        android:id="@+id/tv_repository_updated_date"
+        android:id="@+id/tv_repo_updated_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="start"
         android:paddingTop="@dimen/margin_xsmall"
-        android:textColor="@color/secondary_text_color"
+        android:textColor="@color/secondary_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_repository_size"
+        app:layout_constraintTop_toBottomOf="@+id/tv_repo_size"
         tools:text="updated date" />
 
     <TextView
@@ -162,18 +162,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_repository_name" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_repo_name" />
 
     <TextView
-        android:id="@+id/tv_repository_pushed_date"
+        android:id="@+id/tv_repo_pushed_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="start"
         android:paddingTop="@dimen/margin_xsmall"
-        android:textColor="@color/secondary_text_color"
+        android:textColor="@color/secondary_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_repository_size"
+        app:layout_constraintTop_toBottomOf="@+id/tv_repo_size"
         tools:text="pushed date" />
 
     <TextView
@@ -181,31 +181,31 @@
         android:layout_height="wrap_content"
         android:gravity="start"
         android:paddingTop="@dimen/margin_xmedium"
-        android:text="@string/link_to_repository_header"
+        android:text="@string/link_to_repo_header"
         android:textColor="?android:colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_repository_name" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_repo_name" />
 
     <TextView
-        android:id="@+id/tv_repository_url"
+        android:id="@+id/tv_repo_url"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:linksClickable="false"
         android:autoLink="web"
         android:gravity="start"
         android:paddingTop="@dimen/margin_xsmall"
-        android:textColor="@color/secondary_text_color"
+        android:textColor="@color/secondary_text"
         android:textColorLink="?android:colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_repository_size"
+        app:layout_constraintTop_toBottomOf="@+id/tv_repo_size"
         tools:text="url" />
 
     <Button
-        android:id="@+id/btn_sheet_repository_info_close"
+        android:id="@+id/btn_sheet_repo_info_close"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

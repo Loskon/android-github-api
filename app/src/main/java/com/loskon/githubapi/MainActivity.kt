@@ -20,12 +20,12 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         super.onCreate(savedInstanceState)
 
         Firebase.analytics.logEvent(FirebaseAnalytics.Event.APP_OPEN) {
-            param(FirebaseAnalytics.Param.ITEM_NAME, "my_item_name")
+            param(FirebaseAnalytics.Param.ITEM_NAME, "item_name")
         }
     }
 
     override fun onAttachedToWindow() {
-        setTaskDescriptionColor(getColor(R.color.bg_task_description_color))
+        setTaskDescriptionColor(getColor(com.loskon.base.R.color.task_description_color))
         super.onAttachedToWindow()
     }
 

@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.RecyclerView
 
 /**
- * Bypassing the ripple effect bug for CardView
+ * Bypass ripple effect bug for CardView
  */
 class AddAnimationItemAnimator : DefaultItemAnimator() {
 

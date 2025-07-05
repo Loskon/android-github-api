@@ -31,7 +31,7 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
     private val binding by viewBinding(FragmentUserProfileBinding::bind)
     private val args: UserProfileFragmentArgs by navArgs()
 
-    private val repoAdapter = RepoListAdapter()
+    private val repoListAdapter = RepoListAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,11 +47,11 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
     }
 
     private fun configureRecyclerView() {
-        with(binding.rvRepositories) {
+        with(binding.rvRepos) {
             (itemAnimator as? SimpleItemAnimator)?.supportsChangeAnimations = false
             layoutManager = LinearLayoutManager(requireContext())
             itemAnimator = AddAnimationItemAnimator()
-            adapter = repoAdapter
+            adapter = repoListAdapter
         }
     }
 
@@ -66,8 +66,8 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
                 binding.refreshLayoutUserProfile.isEnabled = false
             }
         }
-        repoAdapter.setItemClickListener { repository ->
-            val action = UserProfileFragmentDirections.openRepositoryInfoSheetFragment(repository)
+        repoListAdapter.setOnItemClickListener {
+            val action = UserProfileFragmentDirections.openRepoInfoSheetFragment(it)
             findNavController().navigate(action)
         }
         binding.bottomBarUserProfile.setNavigationOnClickListener {
@@ -76,7 +76,7 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
     }
 
     private fun installObserver() {
-        viewModel.getUserProfileState.observe(viewLifecycleOwner) {
+        viewModel.userProfileStateFlow.observe(viewLifecycleOwner) {
             when (it) {
                 is UserProfileState.Loading -> {
                     binding.indUserProfile.isVisible = true
@@ -102,26 +102,14 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
                     binding.tvNoInternetUserProfile.isVisible = true
 
                     if (it.user != null) {
-                        binding.coordLayoutUserProfile.isVisible = true
                         setUser(it.user)
+                        binding.coordLayoutUserProfile.isVisible = true
                     } else {
                         binding.ivUserProfile.isVisible = true
                     }
 
                     showWarningSnackbar(getString(R.string.no_internet_connection))
                 }
-            }
-        }
-    }
-
-    private fun setRepositoriesHeader(emptyRepositories: Boolean) {
-        with(binding.incUserProfileCard.tvPublicRepositoriesHeader) {
-            if (emptyRepositories) {
-                text = getString(R.string.no_public_repositories)
-                setTextColor(getColor(R.color.repositories_text_color))
-            } else {
-                text = getString(R.string.public_repositories)
-                setTextColor(primaryColor)
             }
         }
     }
@@ -135,8 +123,20 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
                 tvUserProfileName.textWithGone(name)
                 tvUserProfileLocation.textWithGone(location)
                 tvUserProfileCreatedDate.text = getString(R.string.created_date, createdAt.toFormatString())
-                repoAdapter.setRepositories(repositories)
-                setRepositoriesHeader(repositories.isEmpty())
+                repoListAdapter.setRepos(repos)
+                getCachedReposHeader(repos.isEmpty())
+            }
+        }
+    }
+
+    private fun getCachedReposHeader(emptyRepos: Boolean) {
+        with(binding.incUserProfileCard.tvPublicRepositoriesHeader) {
+            if (emptyRepos) {
+                text = getString(R.string.no_public_repos)
+                setTextColor(getColor(R.color.repos_text_color))
+            } else {
+                text = getString(R.string.public_repos)
+                setTextColor(primaryColor)
             }
         }
     }

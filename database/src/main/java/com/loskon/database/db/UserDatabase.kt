@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.loskon.database.convertor.DateTimeConverter
 import com.loskon.database.dao.UserDao
-import com.loskon.database.entity.RepositoryEntity
+import com.loskon.database.entity.RepoEntity
 import com.loskon.database.entity.UserEntity
 import com.loskon.database.entity.UserInfoEntity
 
@@ -13,7 +13,7 @@ import com.loskon.database.entity.UserInfoEntity
     entities = [
         UserEntity::class,
         UserInfoEntity::class,
-        RepositoryEntity::class
+        RepoEntity::class
     ],
     version = 1,
     exportSchema = false

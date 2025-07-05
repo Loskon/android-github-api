@@ -4,7 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.loskon.database.entity.RepositoryEntity
+import com.loskon.database.entity.RepoEntity
 import com.loskon.database.entity.UserEntity
 import com.loskon.database.entity.UserInfoEntity
 
@@ -16,15 +16,15 @@ interface UserDao {
     @Query("SELECT * FROM users_info WHERE login = (:login)")
     suspend fun getCachedUser(login: String): UserInfoEntity?
 
-    @Query("SELECT * FROM repositories WHERE login = (:login)")
-    suspend fun getCachedRepositories(login: String): List<RepositoryEntity>?
+    @Query("SELECT * FROM repos WHERE login = (:login)")
+    suspend fun getCachedRepos(login: String): List<RepoEntity>?
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertUsers(users: List<UserEntity>)
+    suspend fun setUsersInCache(users: List<UserEntity>)
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertUser(user: UserInfoEntity)
+    suspend fun setUserInCache(user: UserInfoEntity)
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertRepositories(repository: List<RepositoryEntity>)
+    suspend fun setReposInCache(repoEntities: List<RepoEntity>)
 }

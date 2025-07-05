@@ -2,9 +2,9 @@ package com.loskon.base.utils
 
 import androidx.appcompat.app.AppCompatDelegate
 
-object ColorUtil {
+object ThemeChanger {
 
-    fun toggleDarkMode(darkMode: Boolean) {
+    fun activateDarkMode(darkMode: Boolean) {
         if (darkMode) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         } else {

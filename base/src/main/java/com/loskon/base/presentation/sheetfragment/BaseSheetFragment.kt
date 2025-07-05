@@ -11,6 +11,9 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.loskon.base.R
 
+/**
+ * BottomSheetDialogFragment with custom style
+ */
 open class BaseSheetFragment(
     @LayoutRes val layoutId: Int = 0
 ) : BottomSheetDialogFragment() {

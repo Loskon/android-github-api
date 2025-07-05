@@ -6,12 +6,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.loskon.base.widget.swiprerefreshlayout.CustomSwipeRefreshLayout
+    <com.loskon.base.widget.swiprerefreshlayout.StyledSwipeRefreshLayout
         android:id="@+id/refreshLayoutUserProfile"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="@dimen/bottom_bar_height"
-        app:progressBackgroundColor="@color/swipe_background_color"
+        app:progressBackgroundColor="@color/progress_background"
         app:schemeColors="?android:colorPrimary">
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -54,24 +54,24 @@
             </com.google.android.material.appbar.AppBarLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_repositories"
+                android:id="@+id/rv_repos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_public_repositories"
-                tools:listitem="@layout/item_repository_card" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_public_repos"
+                tools:listitem="@layout/item_repo_card" />
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-    </com.loskon.base.widget.swiprerefreshlayout.CustomSwipeRefreshLayout>
+    </com.loskon.base.widget.swiprerefreshlayout.StyledSwipeRefreshLayout>
 
     <ImageView
         android:id="@+id/iv_user_profile"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="@dimen/image_warning"
+        android:layout_height="@dimen/image_warning"
         android:layout_gravity="center"
         android:visibility="gone"
         app:srcCompat="@drawable/ic_warning"
@@ -95,7 +95,7 @@
         android:layout_height="@dimen/bottom_bar_height"
         android:layout_gravity="bottom"
         android:layout_marginTop="@dimen/margin_xsmall"
-        app:backgroundTint="@color/bottom_bar_background_color"
+        app:backgroundTint="@color/bottom_bar_background"
         app:navigationIcon="@drawable/baseline_navigate_before_black_24"
         app:navigationIconTint="?android:colorPrimary">
 
@@ -112,7 +112,7 @@
             android:paddingEnd="@dimen/margin_medium"
             android:paddingBottom="@dimen/margin_xsmall"
             android:text="@string/no_internet_connection"
-            android:textColor="@color/error_color"
+            android:textColor="@color/bg_error"
             android:textSize="@dimen/text_medium"
             android:visibility="gone"
             tools:visibility="visible" />
