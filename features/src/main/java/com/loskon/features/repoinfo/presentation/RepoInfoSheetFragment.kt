@@ -1,4 +1,4 @@
-package com.loskon.features.repositoryinfo.presentation
+package com.loskon.features.repoinfo.presentation
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,26 +8,25 @@ import androidx.navigation.fragment.navArgs
 import com.loskon.base.customtab.CustomTab
 import com.loskon.base.datetime.toFormatString
 import com.loskon.base.extension.coroutines.observe
-import com.loskon.base.extension.view.setClickListener
 import com.loskon.base.extension.view.setDebounceClickListener
 import com.loskon.base.extension.view.setGoneVisibleKtx
+import com.loskon.base.extension.view.setTextClickListener
 import com.loskon.base.presentation.sheetfragment.BaseSheetFragment
 import com.loskon.base.viewbinding.viewBinding
 import com.loskon.features.R
-import com.loskon.features.databinding.SheetRepositoryInfoBinding
-import com.loskon.features.model.RepositoryModel
+import com.loskon.features.databinding.SheetRepoInfoBinding
+import com.loskon.features.model.RepoModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class RepoInfoSheetFragment : BaseSheetFragment(R.layout.sheet_repository_info) {
+class RepoInfoSheetFragment : BaseSheetFragment(R.layout.sheet_repo_info) {
 
     private val viewModel by viewModel<RepoInfoViewModel>()
-    private val binding by viewBinding(SheetRepositoryInfoBinding::bind)
+    private val binding by viewBinding(SheetRepoInfoBinding::bind)
     private val args by navArgs<RepoInfoSheetFragmentArgs>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        if (savedInstanceState == null) viewModel.setRepository(args.repository)
+        if (savedInstanceState == null) viewModel.getCachedRepo(args.repo)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -38,8 +37,8 @@ class RepoInfoSheetFragment : BaseSheetFragment(R.layout.sheet_repository_info) 
     }
 
     private fun setupViewsListener() {
-        binding.btnSheetRepositoryInfoClose.setDebounceClickListener { dismiss() }
-        binding.tvRepositoryUrl.setClickListener { openUrl(it) }
+        binding.btnSheetRepoInfoClose.setDebounceClickListener { dismiss() }
+        binding.tvRepoUrl.setTextClickListener { openUrl(it) }
     }
 
     private fun openUrl(url: String) {
@@ -52,35 +51,35 @@ class RepoInfoSheetFragment : BaseSheetFragment(R.layout.sheet_repository_info) 
     }
 
     private fun installObserver() {
-        viewModel.getRepoInfoState.observe(viewLifecycleOwner) { repository ->
-            repository?.let { setRepository(it) }
+        viewModel.getRepoInfoState.observe(viewLifecycleOwner) { repos ->
+            repos?.let { getCachedRepo(it) }
         }
     }
 
-    private fun setRepository(repository: RepositoryModel) {
+    private fun getCachedRepo(repo: RepoModel) {
         with(binding) {
-            repository.apply {
-                tvRepositoryName.text = name
+            repo.apply {
+                tvRepoName.text = name
 
                 if (description.isNotEmpty()) {
-                    tvRepositoryDescreption.text = description
+                    tvRepoDescreption.text = description
                 } else {
-                    tvRepositoryDescreptionHeader.setGoneVisibleKtx(false)
-                    tvRepositoryDescreption.setGoneVisibleKtx(false)
+                    tvRepoDescreptionHeader.setGoneVisibleKtx(false)
+                    tvRepoDescreption.setGoneVisibleKtx(false)
                 }
 
                 if (language.isNotEmpty()) {
-                    tvRepositoryLanguage.text = language
+                    tvRepoLanguage.text = language
                 } else {
-                    tvRepositoryLanguageHeader.setGoneVisibleKtx(false)
-                    tvRepositoryLanguage.setGoneVisibleKtx(false)
+                    tvRepoLanguageHeader.setGoneVisibleKtx(false)
+                    tvRepoLanguage.setGoneVisibleKtx(false)
                 }
 
-                tvRepositorySize.text = size.toString()
-                tvRepositoryCreatedDate.text = createdAt.toFormatString()
-                tvRepositoryUpdatedDate.text = updatedAt.toFormatString()
-                tvRepositoryPushedDate.text = pushedAt.toFormatString()
-                tvRepositoryUrl.text = htmlUrl
+                tvRepoSize.text = size.toString()
+                tvRepoCreatedDate.text = createdAt.toFormatString()
+                tvRepoUpdatedDate.text = updatedAt.toFormatString()
+                tvRepoPushedDate.text = pushedAt.toFormatString()
+                tvRepoUrl.text = htmlUrl
             }
         }
     }

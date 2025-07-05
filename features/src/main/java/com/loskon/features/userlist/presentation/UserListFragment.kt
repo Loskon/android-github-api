@@ -60,7 +60,7 @@ class UserListFragment : Fragment(R.layout.fragment_user_list) {
     }
 
     private fun installObservers() {
-        viewModel.getUserListState.observe(viewLifecycleOwner) {
+        viewModel.userListStateFlow.observe(viewLifecycleOwner) {
             when (it) {
                 is UserListState.Loading -> {
                     binding.indUserList.isVisible = true

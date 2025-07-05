@@ -9,7 +9,7 @@ import com.loskon.base.extension.coroutines.observe
 import com.loskon.base.extension.view.setDebouncePreferenceClickListener
 import com.loskon.base.extension.view.setPreferenceChangeListener
 import com.loskon.base.presentation.preferencefragment.BasePreferenceFragment
-import com.loskon.base.utils.ColorUtil
+import com.loskon.base.utils.ThemeChanger
 import com.loskon.features.R
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -27,7 +27,7 @@ class SettingsFragment : BasePreferenceFragment(R.xml.root_preferences) {
     }
 
     private fun installObservers() {
-        viewModel.getSettingsAction.observe(viewLifecycleOwner) {
+        viewModel.settingsActionFlow.observe(viewLifecycleOwner) {
             when (it) {
                 is SettingsAction.ShowSnackbar -> {
                     showSnackbar(getString(R.string.data_cleared), success = true)
@@ -51,7 +51,7 @@ class SettingsFragment : BasePreferenceFragment(R.xml.root_preferences) {
 
     private fun setupPreferencesListeners() {
         darkModeSwitch?.setPreferenceChangeListener {
-            ColorUtil.toggleDarkMode(it)
+            ThemeChanger.activateDarkMode(it)
         }
         clearData?.setDebouncePreferenceClickListener {
             viewModel.clearData()

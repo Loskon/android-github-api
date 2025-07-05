@@ -7,7 +7,7 @@ import com.loskon.features.model.toUserModel
 import com.loskon.features.userlist.domain.UserListRepository
 import com.loskon.network.source.NetworkDataSource
 
-class UserListRepositoryImpl(
+class UserListRepoImpl(
     private val networkDataSource: NetworkDataSource,
     private val localDataSource: LocalDataSource
 ) : UserListRepository {
@@ -20,7 +20,7 @@ class UserListRepositoryImpl(
         return localDataSource.getCachedUsers()?.map { it.toUserModel() }
     }
 
-    override suspend fun setUsers(users: List<UserModel>) {
-        localDataSource.setUsers(users.map { it.toUserEntity() })
+    override suspend fun setUsersInCache(users: List<UserModel>) {
+        localDataSource.setUsersInCache(users.map { it.toUserEntity() })
     }
 }

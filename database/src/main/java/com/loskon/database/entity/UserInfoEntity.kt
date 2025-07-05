@@ -9,19 +9,19 @@ import java.time.LocalDateTime
 data class UserInfoEntity(
     @PrimaryKey
     @ColumnInfo(name = "id")
-    val id: Long? = null,
+    val id: Long,
     @ColumnInfo(name = "login")
-    val login: String? = null,
+    val login: String,
     @ColumnInfo(name = "avatar_url")
-    val avatarUrl: String? = null,
+    val avatarUrl: String,
     @ColumnInfo(name = "html_url")
-    val htmlUrl: String? = null,
+    val htmlUrl: String,
     @ColumnInfo(name = "type")
-    val type: String? = null,
+    val type: String,
     @ColumnInfo(name = "name")
-    val name: String? = null,
+    val name: String,
     @ColumnInfo(name = "location")
-    val location: String? = null,
+    val location: String,
     @ColumnInfo(name = "created_at")
-    val createdAt: LocalDateTime? = null
+    val createdAt: LocalDateTime
 )

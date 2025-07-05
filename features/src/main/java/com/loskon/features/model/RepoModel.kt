@@ -1,13 +1,13 @@
 package com.loskon.features.model
 
 import android.os.Parcelable
-import com.loskon.database.entity.RepositoryEntity
+import com.loskon.database.entity.RepoEntity
 import com.loskon.network.dto.RepoDto
 import kotlinx.parcelize.Parcelize
 import java.time.LocalDateTime
 
 @Parcelize
-data class RepositoryModel(
+data class RepoModel(
     val id: Long = 0L,
     val name: String = "",
     val htmlUrl: String = "",
@@ -19,8 +19,8 @@ data class RepositoryModel(
     val language: String = ""
 ) : Parcelable
 
-fun RepoDto.toRepositoryModel(): RepositoryModel {
-    return RepositoryModel(
+fun RepoDto.toRepoModel(): RepoModel {
+    return RepoModel(
         id = id ?: 0L,
         name = name ?: "",
         htmlUrl = htmlUrl ?: "",
@@ -33,22 +33,23 @@ fun RepoDto.toRepositoryModel(): RepositoryModel {
     )
 }
 
-fun RepositoryEntity.toRepositoryModel(): RepositoryModel {
-    return RepositoryModel(
-        id = id ?: 0L,
-        name = fullName ?: "",
-        htmlUrl = htmlUrl ?: "",
-        description = description ?: "",
-        createdAt = createdAt ?: LocalDateTime.now(),
-        updatedAt = updatedAt ?: LocalDateTime.now(),
-        pushedAt = pushedAt ?: LocalDateTime.now(),
-        size = size ?: 0L,
-        language = language ?: ""
+fun RepoEntity.toRepoModel(): RepoModel {
+    return RepoModel(
+        id = id,
+        name = fullName,
+        htmlUrl = htmlUrl,
+        description = description,
+        createdAt = createdAt,
+        updatedAt = updatedAt,
+        pushedAt = pushedAt,
+        size = size,
+        language = language
     )
 }
 
-fun RepositoryModel.toRepositoryEntity(login: String): RepositoryEntity {
-    return RepositoryEntity(
+fun RepoModel.toRepoEntity(login: String): RepoEntity {
+    return RepoEntity(
+        login = login,
         id = id,
         fullName = name,
         htmlUrl = htmlUrl,
@@ -57,7 +58,6 @@ fun RepositoryModel.toRepositoryEntity(login: String): RepositoryEntity {
         updatedAt = updatedAt,
         pushedAt = pushedAt,
         size = size,
-        language = language,
-        login = login
+        language = language
     )
 }

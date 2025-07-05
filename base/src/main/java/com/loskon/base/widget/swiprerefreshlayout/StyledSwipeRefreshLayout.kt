@@ -5,7 +5,7 @@ import android.util.AttributeSet
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.loskon.base.R
 
-class CustomSwipeRefreshLayout(
+class StyledSwipeRefreshLayout(
     context: Context,
     attrs: AttributeSet
 ) : SwipeRefreshLayout(context, attrs) {
@@ -13,9 +13,9 @@ class CustomSwipeRefreshLayout(
     init {
         context.theme.obtainStyledAttributes(attrs, R.styleable.SwipeRefreshLayout, 0, 0).apply {
             val progressBackgroundColor = getInt(R.styleable.SwipeRefreshLayout_progressBackgroundColor, 0)
-            setProgressBackgroundColorSchemeColor(progressBackgroundColor)
-
             val schemeColors = getInt(R.styleable.SwipeRefreshLayout_schemeColors, 0)
+
+            setProgressBackgroundColorSchemeColor(progressBackgroundColor)
             setColorSchemeColors(schemeColors)
 
             recycle()

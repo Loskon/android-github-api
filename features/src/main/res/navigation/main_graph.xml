@@ -26,19 +26,19 @@
             android:name="username"
             app:argType="string" />
         <action
-            android:id="@+id/openRepositoryInfoSheetFragment"
-            app:destination="@id/repositoryInfo" />
+            android:id="@+id/openRepoInfoSheetFragment"
+            app:destination="@id/repoInfo" />
     </fragment>
 
     <dialog
-        android:id="@+id/repositoryInfo"
-        android:name="com.loskon.features.repositoryinfo.presentation.RepoInfoSheetFragment"
-        android:label="RepositoryInfoBottomSheetFragment"
-        tools:layout="@layout/sheet_repository_info">
+        android:id="@+id/repoInfo"
+        android:name="com.loskon.features.repoinfo.presentation.RepoInfoSheetFragment"
+        android:label="RepoInfoBottomSheetFragment"
+        tools:layout="@layout/sheet_repo_info">
 
         <argument
-            android:name="repository"
-            app:argType="com.loskon.features.model.RepositoryModel" />
+            android:name="repo"
+            app:argType="com.loskon.features.model.RepoModel" />
     </dialog>
 
     <fragment

@@ -1,14 +1,14 @@
 package com.loskon.githubapi
 
 import android.app.Application
-import com.loskon.base.utils.ColorUtil
+import com.loskon.base.utils.ThemeChanger
 import com.loskon.database.databaseModule
-import com.loskon.features.repositoryinfo.repoInfoModule
+import com.loskon.features.repoinfo.repoInfoModule
 import com.loskon.features.settings.settingsModule
 import com.loskon.features.userlist.userListModule
 import com.loskon.features.userprofile.userProfileModule
-import com.loskon.features.util.network.connectionManagerModule
-import com.loskon.features.util.preference.AppPreference
+import com.loskon.features.util.connect.connectionManagerModule
+import com.loskon.features.util.preference.AppPref
 import com.loskon.network.networkModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
@@ -18,22 +18,22 @@ class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        ThemeChanger.activateDarkMode(AppPref.hasDarkMode(this))
         if (BuildConfig.DEBUG) Timber.plant(Timber.DebugTree())
-        ColorUtil.toggleDarkMode(AppPreference.getHasDarkMode(this))
-        initializeKoin(this)
+        initKoin()
     }
 
-    private fun initializeKoin(application: Application) {
+    private fun initKoin() {
         startKoin {
-            androidContext(application)
+            androidContext(this@App)
             modules(
                 listOf(
+                    connectionManagerModule,
+                    databaseModule,
                     networkModule,
                     userListModule,
                     userProfileModule,
                     repoInfoModule,
-                    connectionManagerModule,
-                    databaseModule,
                     settingsModule
                 )
             )

@@ -6,27 +6,27 @@ import androidx.recyclerview.widget.RecyclerView
 import com.loskon.base.extension.view.setDebounceClickListener
 import com.loskon.base.extension.view.textWithGone
 import com.loskon.base.viewbinding.viewBinding
-import com.loskon.features.databinding.ItemRepositoryCardBinding
-import com.loskon.features.model.RepositoryModel
+import com.loskon.features.databinding.ItemRepoCardBinding
+import com.loskon.features.model.RepoModel
 
-class RepoListAdapter : RecyclerView.Adapter<RepoListAdapter.RepositoryViewHolder>() {
+class RepoListAdapter : RecyclerView.Adapter<RepoListAdapter.RepoViewHolder>() {
 
-    private var clickListener: ((RepositoryModel) -> Unit)? = null
-    private var list: List<RepositoryModel> = emptyList()
+    private var onItemClickListener: ((RepoModel) -> Unit)? = null
+    private var list: List<RepoModel> = emptyList()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepositoryViewHolder {
-        return RepositoryViewHolder(parent.viewBinding(ItemRepositoryCardBinding::inflate))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepoViewHolder {
+        return RepoViewHolder(parent.viewBinding(ItemRepoCardBinding::inflate))
     }
 
-    override fun onBindViewHolder(holder: RepositoryViewHolder, position: Int) {
-        val repository = list[position]
+    override fun onBindViewHolder(holder: RepoViewHolder, position: Int) {
+        val repo = list[position]
 
         with(holder.binding) {
-            repository.apply {
-                tvRepositoryNameCard.text = name
-                tvRepositoryDescriptionCard.textWithGone(description)
-                tvRepositoryLanguageCard.textWithGone(language)
-                cardViewRepository.setDebounceClickListener { clickListener?.invoke(this) }
+            repo.apply {
+                tvRepoNameCard.text = name
+                tvRepoDescriptionCard.textWithGone(description)
+                tvRepoLanguageCard.textWithGone(language)
+                cardViewRepo.setDebounceClickListener { onItemClickListener?.invoke(this) }
             }
         }
     }
@@ -34,14 +34,14 @@ class RepoListAdapter : RecyclerView.Adapter<RepoListAdapter.RepositoryViewHolde
     override fun getItemCount(): Int = list.size
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setRepositories(newList: List<RepositoryModel>) {
+    fun setRepos(newList: List<RepoModel>) {
         list = newList
         notifyDataSetChanged()
     }
 
-    fun setItemClickListener(newClickListener: ((RepositoryModel) -> Unit)?) {
-        clickListener = newClickListener
+    fun setOnItemClickListener(onItemClickListener: ((RepoModel) -> Unit)?) {
+        this.onItemClickListener = onItemClickListener
     }
 
-    class RepositoryViewHolder(val binding: ItemRepositoryCardBinding) : RecyclerView.ViewHolder(binding.root)
+    class RepoViewHolder(val binding: ItemRepoCardBinding) : RecyclerView.ViewHolder(binding.root)
 }

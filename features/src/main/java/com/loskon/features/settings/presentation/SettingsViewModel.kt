@@ -10,7 +10,7 @@ class SettingsViewModel(
 ) : BaseViewModel() {
 
     private val settingsAction = MutableStateFlow<SettingsAction?>(null)
-    val getSettingsAction get() = settingsAction.asStateFlow()
+    val settingsActionFlow get() = settingsAction.asStateFlow()
 
     fun clearData() {
         launchErrorJob {

@@ -4,6 +4,9 @@ import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.AppBarLayout.OnOffsetChangedListener
 import kotlin.math.abs
 
+/**
+ * Listener to determine if the AppBarLayout of a view is collapsed or expanded
+ */
 enum class AppBarLayoutState {
     EXPANDED,
     COLLAPSED,

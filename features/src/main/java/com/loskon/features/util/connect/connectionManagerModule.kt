@@ -1,4 +1,4 @@
-package com.loskon.features.util.network
+package com.loskon.features.util.connect
 
 import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module

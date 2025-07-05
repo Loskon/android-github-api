@@ -1,4 +1,4 @@
-package com.loskon.features.util.network
+package com.loskon.features.util.connect
 
 import android.content.Context
 import android.net.ConnectivityManager
@@ -8,7 +8,7 @@ class ConnectionManager(context: Context) {
 
     private val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
-    fun hasConnected(): Boolean {
+    fun hasConnect(): Boolean {
         val network = connectivityManager.activeNetwork ?: return false
         val activeNetwork = connectivityManager.getNetworkCapabilities(network) ?: return false
 

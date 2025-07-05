@@ -2,7 +2,7 @@ package com.loskon.database.source
 
 import com.loskon.database.dao.UserDao
 import com.loskon.database.db.UserDatabase
-import com.loskon.database.entity.RepositoryEntity
+import com.loskon.database.entity.RepoEntity
 import com.loskon.database.entity.UserEntity
 import com.loskon.database.entity.UserInfoEntity
 import kotlin.coroutines.resume
@@ -10,32 +10,33 @@ import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
 class LocalDataSource(
-    private val userDao: UserDao,
     private val userDatabase: UserDatabase
 ) {
 
-    suspend fun getCachedUsers(): List<UserEntity>? {
-        return userDao.getCachedUsers()
+    private val userDao: UserDao = userDatabase.userDao()
+
+    suspend fun setUsersInCache(users: List<UserEntity>) {
+        userDao.setUsersInCache(users)
     }
 
-    suspend fun setUsers(users: List<UserEntity>) {
-        userDao.insertUsers(users)
+    suspend fun setUserInCache(user: UserInfoEntity) {
+        userDao.setUserInCache(user)
+    }
+
+    suspend fun setReposInCache(repos: List<RepoEntity>) {
+        userDao.setReposInCache(repos)
+    }
+
+    suspend fun getCachedUsers(): List<UserEntity>? {
+        return userDao.getCachedUsers()
     }
 
     suspend fun getCachedUser(login: String): UserInfoEntity? {
         return userDao.getCachedUser(login)
     }
 
-    suspend fun getCachedRepositories(login: String): List<RepositoryEntity>? {
-        return userDao.getCachedRepositories(login)
-    }
-
-    suspend fun setUser(user: UserInfoEntity) {
-        userDao.insertUser(user)
-    }
-
-    suspend fun setRepositories(repositories: List<RepositoryEntity>) {
-        userDao.insertRepositories(repositories)
+    suspend fun getCachedRepos(login: String): List<RepoEntity>? {
+        return userDao.getCachedRepos(login)
     }
 
     @Suppress("TooGenericExceptionCaught")

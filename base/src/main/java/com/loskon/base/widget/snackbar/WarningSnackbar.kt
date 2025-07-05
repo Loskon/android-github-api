@@ -16,16 +16,16 @@ class WarningSnackbar : BaseSnackbar() {
     ): WarningSnackbar {
         make(view, message, Snackbar.LENGTH_LONG)
         setAnchorView(anchorView)
-        setTextColor(Color.WHITE)
-        setBackgroundTintList(view.context.getColorKtx(getSuccessColorId(success)))
+        setActionTextColor(Color.WHITE)
+        setBackgroundColor(view.context.getColorKtx(getSuccessColorId(success)))
         return this
     }
 
     private fun getSuccessColorId(success: Boolean): Int {
         return if (success) {
-            R.color.success_color
+            R.color.bg_success
         } else {
-            R.color.error_color
+            R.color.bg_error
         }
     }
 }

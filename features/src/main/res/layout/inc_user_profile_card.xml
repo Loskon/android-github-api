@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/margin_xsmall"
-        app:cardBackgroundColor="@color/card_view_background_color"
+        app:cardBackgroundColor="@color/card_view_background"
         app:cardCornerRadius="@dimen/margin_xsmall"
         app:cardUseCompatPadding="true"
         app:layout_constraintEnd_toEndOf="parent"
@@ -39,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_small"
                 android:gravity="center"
-                android:textColor="@color/primary_text_color"
+                android:textColor="@color/primary_text"
                 android:textSize="@dimen/text_medium"
                 android:textStyle="bold"
                 tools:text="mojombo" />
@@ -50,7 +50,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_xsmall"
                 android:gravity="center"
-                android:textColor="@color/secondary_text_color"
+                android:textColor="@color/secondary_text"
                 tools:text="Tom Preston-Werner" />
 
             <TextView
@@ -59,7 +59,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_xsmall"
                 android:gravity="center"
-                android:textColor="@color/secondary_text_color"
+                android:textColor="@color/secondary_text"
                 tools:text="San Francisco" />
 
             <TextView
@@ -68,7 +68,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_xsmall"
                 android:gravity="center"
-                android:textColor="@color/secondary_text_color"
+                android:textColor="@color/secondary_text"
                 tools:text="Created: 10/20/07" />
         </LinearLayout>
 
@@ -80,7 +80,7 @@
         android:layout_height="@dimen/toolbar_height"
         android:gravity="center"
         android:padding="@dimen/margin_small"
-        android:text="@string/public_repositories"
+        android:text="@string/public_repos"
         android:textColor="?android:colorPrimary"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
