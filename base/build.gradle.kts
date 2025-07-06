@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlin)
+    alias(libs.plugins.composeCompiler)
 }
 
 android {
@@ -34,6 +35,7 @@ android {
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_21)
             freeCompilerArgs.add("-Xannotation-default-target=first-only")
+            freeCompilerArgs.add("-opt-in=androidx.compose.material3.ExperimentalMaterial3Api")
         }
     }
 
@@ -54,6 +56,9 @@ dependencies {
     implementation(libs.bundles.lifecycle)
     implementation(libs.browser)
     implementation(libs.timber)
+    implementation(libs.compose)
+    implementation(libs.composePreview)
+    implementation(libs.composeMaterial2)
     testImplementation(libs.mockito)
     testImplementation(libs.junit4)
     androidTestImplementation(libs.extJunit)

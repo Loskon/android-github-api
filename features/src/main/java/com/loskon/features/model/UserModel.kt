@@ -15,8 +15,7 @@ data class UserModel(
     val location: String = "",
     val createdAt: LocalDateTime = LocalDateTime.now(),
     // own
-    val repos: List<RepoModel> = emptyList(),
-    val fromCache: Boolean = false
+    val repos: List<RepoModel> = emptyList()
 )
 
 fun UserDto.toUserModel(): UserModel {

@@ -10,6 +10,9 @@
         android:label="UsersFragment"
         tools:layout="@layout/fragment_user_list">
         <action
+            android:id="@+id/openUserProfileFragmentCompose"
+            app:destination="@id/userProfileFragmentCompose" />
+        <action
             android:id="@+id/openUserProfileFragment"
             app:destination="@id/userProfileFragment" />
         <action
@@ -27,6 +30,19 @@
             app:argType="string" />
         <action
             android:id="@+id/openRepoInfoSheetFragment"
+            app:destination="@id/repoInfo" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/userProfileFragmentCompose"
+        android:name="com.loskon.features.userprofile.presentation.UserProfileComposeFragment"
+        android:label="fragment_user_profile"
+        tools:layout="@layout/fragment_user_profile">
+        <argument
+            android:name="username"
+            app:argType="string" />
+        <action
+            android:id="@+id/openRepoInfoBottomSheetFragment"
             app:destination="@id/repoInfo" />
     </fragment>
 

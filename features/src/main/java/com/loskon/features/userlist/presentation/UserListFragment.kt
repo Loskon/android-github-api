@@ -50,7 +50,9 @@ class UserListFragment : Fragment(R.layout.fragment_user_list) {
             viewModel.getUsers()
         }
         userListAdapter.setOnItemClickListener { user ->
-            val action = UserListFragmentDirections.openUserProfileFragment(user.login)
+            /*            val action = UserListFragmentDirections.openUserProfileFragment(user.login)
+                        findNavController().navigate(action)*/
+            val action = UserListFragmentDirections.openUserProfileFragmentCompose(user.login)
             findNavController().navigate(action)
         }
         binding.bottomBarUsersList.setNavigationOnClickListener {

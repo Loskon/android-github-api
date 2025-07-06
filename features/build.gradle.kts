@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.kotlin)
     alias(libs.plugins.parcelize)
     alias(libs.plugins.navigation)
+    alias(libs.plugins.composeCompiler)
 }
 
 android {
@@ -35,6 +36,7 @@ android {
     kotlin {
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_21)
+            freeCompilerArgs.add("-opt-in=androidx.compose.material3.ExperimentalMaterial3Api")
         }
     }
 
@@ -65,6 +67,7 @@ dependencies {
     implementation(libs.compose)
     implementation(libs.composePreview)
     implementation(libs.composeMaterial2)
+    implementation(libs.composeConstraint)
     testImplementation(libs.mockito)
     testImplementation(libs.junit4)
     androidTestImplementation(libs.extJunit)
