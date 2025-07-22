@@ -7,7 +7,6 @@ plugins {
     alias(libs.plugins.kotlin).apply(false)
     alias(libs.plugins.gms).apply(false)
     alias(libs.plugins.firebaseCrashlytics).apply(false)
-    alias(libs.plugins.kapt).apply(false)
     alias(libs.plugins.navigation).apply(false)
     alias(libs.plugins.parcelize).apply(false)
     alias(libs.plugins.ksp).apply(false)
