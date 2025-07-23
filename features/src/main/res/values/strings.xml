@@ -3,10 +3,11 @@
     <string name="no_internet_connection">No internet connection</string>
     <string name="error_loading">Error loading!</string>
     <string name="data_cleared">Data cleared</string>
+    <string name="retry">RETRY</string>
     <!-- User Profile Screen -->
     <string name="created_date">Created: %1$s</string>
-    <string name="public_repositories">Public repositories:</string>
-    <string name="no_public_repositories">No public repositories</string>
+    <string name="public_repos">Public repositories:</string>
+    <string name="no_public_repos">No public repositories</string>
     <!-- Repository Info Screen -->
     <string name="description_header">Description</string>
     <string name="language_header">Language</string>
@@ -14,7 +15,7 @@
     <string name="created_date_header">Created</string>
     <string name="updated_date_header">Updated</string>
     <string name="pushed_date_header">Pushed</string>
-    <string name="link_to_repository_header">Link</string>
+    <string name="link_to_repo_header">Link</string>
     <string name="to_close">To close</string>
     <!-- Preference Headers -->
     <string name="settings_app_header">Appearance settings</string>
@@ -29,6 +30,4 @@
     <!-- Preference Keys  -->
     <string name="dark_mode_key">dark_mode_key</string>
     <string name="clear_data_key">clear_data_key</string>
-    <string name="number_of_results_key">number_of_results_key</string>
-    <string name="since_key">since_key</string>
 </resources>

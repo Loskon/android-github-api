@@ -7,7 +7,8 @@ import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 
-class LocalDateTimeMoshiAdapter {
+@Suppress("unused")
+class DateTimeMoshiAdapter {
     private val formatter = DateTimeFormatter.ISO_DATE_TIME
 
     @ToJson

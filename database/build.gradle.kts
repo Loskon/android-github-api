@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlin)
@@ -10,9 +12,7 @@ android {
 
     defaultConfig {
         minSdk = libs.versions.minSdk.get().toInt()
-
-        buildConfigField("String", "API_BASE_URL", "\"https://api.github.com/\"")
-
+        buildConfigField("String", "DATABASE_NAME", "\"github.db\"")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -28,12 +28,14 @@ android {
 
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
-        sourceCompatibility = JavaVersion.VERSION_18
-        targetCompatibility = JavaVersion.VERSION_18
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
 
-    kotlinOptions {
-        jvmTarget = "18"
+    kotlin {
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_21)
+        }
     }
 
     buildFeatures {
@@ -44,17 +46,15 @@ android {
 dependencies {
     coreLibraryDesugaring(libs.desugar)
     implementation(libs.core)
+    implementation(libs.roomRuntime)
     implementation(libs.roomKtx)
     implementation(libs.roomPaging)
     annotationProcessor(libs.roomCompiler)
-    ksp(libs.roomCompiler)
     implementation(libs.koin)
     implementation(libs.timber)
+    ksp(libs.roomCompiler)
     testImplementation(libs.mockito)
     testImplementation(libs.junit4)
     androidTestImplementation(libs.extJunit)
     androidTestImplementation(libs.espresso)
-
-    implementation(libs.bundles.retrofitMoshi)
-    implementation(projects.network)
 }

@@ -8,7 +8,7 @@
     android:layout_height="wrap_content"
     android:layout_marginStart="@dimen/margin_xsmall"
     android:layout_marginEnd="@dimen/margin_xsmall"
-    app:cardBackgroundColor="@color/card_view_background_color"
+    app:cardBackgroundColor="@color/card_view_background"
     app:cardCornerRadius="@dimen/margin_xsmall"
     app:cardUseCompatPadding="true"
     app:rippleColor="?attr/colorControlHighlight">
@@ -37,7 +37,7 @@
             android:layout_marginStart="@dimen/margin_xmedium"
             android:ellipsize="end"
             android:gravity="start"
-            android:textColor="@color/primary_text_color"
+            android:textColor="@color/primary_text"
             android:textSize="@dimen/text_medium"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"

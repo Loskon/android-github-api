@@ -16,7 +16,7 @@ class UserListInteractor(
         return userListRepository.getCachedUsers()
     }
 
-    suspend fun setUsers(users: List<UserModel>) {
-        userListRepository.setUsers(users)
+    suspend fun setUsersInCache(users: List<UserModel>) {
+        userListRepository.setUsersInCache(users)
     }
 }

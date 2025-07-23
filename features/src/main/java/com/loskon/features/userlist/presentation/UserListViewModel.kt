@@ -5,7 +5,7 @@ import androidx.paging.cachedIn
 import androidx.paging.map
 import com.loskon.base.presentation.viewmodel.BaseViewModel
 import com.loskon.features.userlist.domain.UserListInteractor
-import com.loskon.features.util.network.ConnectManager
+import com.loskon.features.util.connect.ConnectManager
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -18,7 +18,7 @@ class UserListViewModel(
 ) : BaseViewModel() {
 
     private val userListState = MutableStateFlow<UserListState>(UserListState.Loading)
-    val getUserListState get() = userListState.asStateFlow()
+    val userListStateFlow get() = userListState.asStateFlow()
 
     private var job: Job? = null
 
@@ -34,7 +34,7 @@ class UserListViewModel(
             users.collectLatest {
                 Timber.d("UserCollectLatest SET")
                 val pp = it.map { ss->
-                    Timber.d("UserCollectLatest: " + ss)
+                    Timber.d("UserCollectLatest: %s", ss)
                     return@map ss
                 }
                 userListState.emit(

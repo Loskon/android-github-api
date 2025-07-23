@@ -17,7 +17,7 @@
         tools:ignore="DataExtractionRules">
 
         <activity
-            android:name="com.loskon.githubapi.SplashActivity"
+            android:name="com.loskon.githubapi.MainActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/SplashScreenTheme"
@@ -27,12 +27,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity
-            android:name="com.loskon.githubapi.MainActivity"
-            android:exported="true"
-            tools:ignore="LockedOrientationActivity" />
-
     </application>
 
 </manifest>

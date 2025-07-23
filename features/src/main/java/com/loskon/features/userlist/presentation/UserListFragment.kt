@@ -21,7 +21,6 @@ class UserListFragment : Fragment(R.layout.fragment_user_list) {
 
     private val viewModel: UserListViewModel by viewModel()
     private val binding by viewBinding(FragmentUserListBinding::bind)
-
     private val userListPagingAdapter = UserListPagingAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,21 +62,22 @@ class UserListFragment : Fragment(R.layout.fragment_user_list) {
     }
 
     private fun installObservers() {
-        viewModel.getUserListState.observe(viewLifecycleOwner) {
+        viewModel.userListStateFlow.observe(viewLifecycleOwner) {
             when (it) {
                 is UserListState.Loading -> {
-                    binding.indicatorUserList.isVisible = true
+                    binding.indUserList.isVisible = true
                 }
 
                 is UserListState.Success -> {
                     binding.tvNoInternetUserList.isVisible = it.hasConnect.not()
-                    binding.indicatorUserList.isVisible = false
+                    binding.indUserList.isVisible = false
                     userListPagingAdapter.submitData(it.users)
                     Timber.d("submitData")
                 }
 
                 is UserListState.Failure -> {
-                    binding.indicatorUserList.isVisible = false
+                    binding.indUserList.isVisible = false
+                    binding.ivUserList.isVisible = true
                     binding.tvNoInternetUserList.isVisible = false
                     showWarningSnackbar(getString(R.string.error_loading))
                 }
@@ -86,6 +86,9 @@ class UserListFragment : Fragment(R.layout.fragment_user_list) {
     }
 
     private fun showWarningSnackbar(message: String) {
-        WarningSnackbar().make(binding.root, binding.bottomBarUsersList, message, success = false).show()
+        WarningSnackbar()
+            .make(binding.root, binding.bottomBarUsersList, message, success = false)
+            .setAction(getString(R.string.retry)) { viewModel.getUsers() }
+            .show()
     }
 }

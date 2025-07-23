@@ -12,6 +12,9 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
+/**
+ * ViewModel with exception handler
+ */
 @Suppress("unused")
 open class BaseViewModel : ViewModel() {
 
@@ -21,8 +24,8 @@ open class BaseViewModel : ViewModel() {
     protected fun launchErrorJob(
         dispatcher: CoroutineDispatcher = Dispatchers.IO,
         error: MutableStateFlow<Throwable?>? = errorState,
-        errorBlock: ((Throwable) -> Unit)? = null,
         startBlock: (() -> Unit)? = null,
+        errorBlock: ((Throwable) -> Unit)? = null,
         block: suspend () -> Unit
     ): Job {
         return viewModelScope.launch(dispatcher + getExceptionHandler(error, errorBlock)) {

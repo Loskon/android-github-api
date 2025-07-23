@@ -15,7 +15,7 @@ data class UserModel(
     val location: String = "",
     val createdAt: LocalDateTime = LocalDateTime.now(),
     // own
-    val repositories: List<RepositoryModel> = emptyList(),
+    val repos: List<RepoModel> = emptyList(),
     val fromCache: Boolean = false
 )
 
@@ -34,12 +34,12 @@ fun UserDto.toUserModel(): UserModel {
 
 fun UserEntity.toUserModel(): UserModel {
     return UserModel(
-        id = id ?: 0,
-        login = login ?: "",
-        avatarUrl = avatarUrl ?: "",
-        htmlUrl = htmlUrl ?: "",
-        type = type ?: "",
-        createdAt = createdAt ?: LocalDateTime.now()
+        login = login,
+        id = id,
+        avatarUrl = avatarUrl,
+        htmlUrl = htmlUrl,
+        type = type,
+        createdAt = createdAt
     )
 }
 
@@ -56,14 +56,14 @@ fun UserModel.toUserEntity(): UserEntity {
 
 fun UserInfoEntity.toUserModel(): UserModel {
     return UserModel(
-        id = id ?: 0,
-        login = login ?: "",
-        avatarUrl = avatarUrl ?: "",
-        htmlUrl = htmlUrl ?: "",
-        type = type ?: "",
-        name = name ?: "",
-        location = location ?: "",
-        createdAt = createdAt ?: LocalDateTime.now()
+        login = login,
+        id = id,
+        avatarUrl = avatarUrl,
+        htmlUrl = htmlUrl,
+        type = type,
+        name = name,
+        location = location,
+        createdAt = createdAt
     )
 }
 

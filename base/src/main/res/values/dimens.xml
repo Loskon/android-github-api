@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Regular margin -->
+    <dimen name="margin_xtiny">1dp</dimen>
     <dimen name="margin_tiny">2dp</dimen>
     <dimen name="margin_xsmall">4dp</dimen>
     <dimen name="margin_small">8dp</dimen>
@@ -17,8 +18,9 @@
     <dimen name="text_medium">16sp</dimen>
     <dimen name="text_large">20sp</dimen>
     <dimen name="text_higher">24sp</dimen>
-    <!-- Special -->
+    <!-- Views -->
     <dimen name="dialog_corner_radius">4dp</dimen>
     <dimen name="bottom_bar_height">46dp</dimen>
     <dimen name="toolbar_height">38dp</dimen>
+    <dimen name="image_warning">60dp</dimen>
 </resources>

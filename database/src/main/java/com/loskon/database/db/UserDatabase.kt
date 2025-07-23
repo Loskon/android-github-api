@@ -7,7 +7,7 @@ import com.loskon.database.convertor.DateTimeConverter
 import com.loskon.database.dao.RemoteKeyDao
 import com.loskon.database.dao.UserDao
 import com.loskon.database.entity.RemoteKeyEntity
-import com.loskon.database.entity.RepositoryEntity
+import com.loskon.database.entity.RepoEntity
 import com.loskon.database.entity.UserEntity
 import com.loskon.database.entity.UserInfoEntity
 
@@ -15,7 +15,7 @@ import com.loskon.database.entity.UserInfoEntity
     entities = [
         UserEntity::class,
         UserInfoEntity::class,
-        RepositoryEntity::class,
+        RepoEntity::class,
         RemoteKeyEntity::class
     ],
     version = 1,

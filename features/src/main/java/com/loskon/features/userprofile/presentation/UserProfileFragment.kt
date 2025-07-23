@@ -12,6 +12,7 @@ import com.loskon.base.datetime.toFormatString
 import com.loskon.base.extension.coroutines.observe
 import com.loskon.base.extension.fragment.getColor
 import com.loskon.base.extension.fragment.primaryColor
+import com.loskon.base.extension.view.setOnCanceledRefreshListener
 import com.loskon.base.extension.view.textWithGone
 import com.loskon.base.viewbinding.viewBinding
 import com.loskon.base.widget.appbarlayout.AppBarLayoutState
@@ -21,7 +22,7 @@ import com.loskon.base.widget.snackbar.WarningSnackbar
 import com.loskon.features.R
 import com.loskon.features.databinding.FragmentUserProfileBinding
 import com.loskon.features.model.UserModel
-import com.loskon.network.imageloader.ImageLoader
+import com.loskon.features.util.imageloader.loadImage
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
@@ -30,7 +31,7 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
     private val binding by viewBinding(FragmentUserProfileBinding::bind)
     private val args: UserProfileFragmentArgs by navArgs()
 
-    private val repositoriesAdapter = RepoListAdapter()
+    private val repoListAdapter = RepoListAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,18 +47,17 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
     }
 
     private fun configureRecyclerView() {
-        with(binding.rvRepositories) {
+        with(binding.rvRepos) {
             (itemAnimator as? SimpleItemAnimator)?.supportsChangeAnimations = false
             layoutManager = LinearLayoutManager(requireContext())
             itemAnimator = AddItemAnimator()
-            adapter = repositoriesAdapter
+            adapter = repoListAdapter
         }
     }
 
     private fun setupViewsListener() {
-        binding.refreshLayoutUserProfile.setOnRefreshListener {
+        binding.refreshLayoutUserProfile.setOnCanceledRefreshListener {
             viewModel.getUser(args.username)
-            binding.refreshLayoutUserProfile.isRefreshing = false
         }
         binding.appBarUserProfile.setChangeStateListener { state ->
             if (state == AppBarLayoutState.EXPANDED) {
@@ -66,8 +66,8 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
                 binding.refreshLayoutUserProfile.isEnabled = false
             }
         }
-        repositoriesAdapter.setItemClickListener { repository ->
-            val action = UserProfileFragmentDirections.openRepositoryInfoSheetFragment(repository)
+        repoListAdapter.setOnItemClickListener {
+            val action = UserProfileFragmentDirections.openRepoInfoSheetFragment(it)
             findNavController().navigate(action)
         }
         binding.bottomBarUserProfile.setNavigationOnClickListener {
@@ -76,46 +76,40 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
     }
 
     private fun installObserver() {
-        viewModel.getUserProfileState.observe(viewLifecycleOwner) {
+        viewModel.userProfileStateFlow.observe(viewLifecycleOwner) {
             when (it) {
                 is UserProfileState.Loading -> {
-                    binding.indicatorUserProfile.isVisible = true
+                    binding.indUserProfile.isVisible = true
                 }
 
                 is UserProfileState.Success -> {
-                    binding.indicatorUserProfile.isVisible = false
+                    binding.indUserProfile.isVisible = false
+                    binding.ivUserProfile.isVisible = false
                     binding.coordLayoutUserProfile.isVisible = true
                     binding.tvNoInternetUserProfile.isVisible = false
                     setUser(it.user)
                 }
 
                 is UserProfileState.Failure -> {
-                    binding.indicatorUserProfile.isVisible = false
+                    binding.indUserProfile.isVisible = false
+                    binding.ivUserProfile.isVisible = true
                     binding.tvNoInternetUserProfile.isVisible = false
                     showWarningSnackbar(getString(R.string.error_loading))
                 }
 
                 is UserProfileState.ConnectionFailure -> {
-                    binding.indicatorUserProfile.isVisible = false
+                    binding.indUserProfile.isVisible = false
                     binding.tvNoInternetUserProfile.isVisible = true
 
                     if (it.user != null) {
-                        binding.coordLayoutUserProfile.isVisible = true
                         setUser(it.user)
+                        binding.coordLayoutUserProfile.isVisible = true
+                    } else {
+                        binding.ivUserProfile.isVisible = true
                     }
-                }
-            }
-        }
-    }
 
-    private fun setRepositoriesHeader(emptyRepositories: Boolean) {
-        with(binding.incUserProfileCard.tvPublicRepositoriesHeader) {
-            if (emptyRepositories) {
-                text = getString(R.string.no_public_repositories)
-                setTextColor(getColor(R.color.repositories_text_color))
-            } else {
-                text = getString(R.string.public_repositories)
-                setTextColor(primaryColor)
+                    showWarningSnackbar(getString(R.string.no_internet_connection))
+                }
             }
         }
     }
@@ -124,18 +118,33 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
         with(binding.incUserProfileCard) {
             user.apply {
                 binding.toolbarUserProfile.title = login
-                ImageLoader.load(ivUserProfileAvatar, avatarUrl)
+                ivUserProfileAvatar.loadImage(avatarUrl)
                 tvUserProfileLogin.text = login
                 tvUserProfileName.textWithGone(name)
                 tvUserProfileLocation.textWithGone(location)
                 tvUserProfileCreatedDate.text = getString(R.string.created_date, createdAt.toFormatString())
-                repositoriesAdapter.setRepositories(repositories)
-                setRepositoriesHeader(repositories.isEmpty())
+                repoListAdapter.setRepos(repos)
+                getCachedReposHeader(repos.isEmpty())
+            }
+        }
+    }
+
+    private fun getCachedReposHeader(emptyRepos: Boolean) {
+        with(binding.incUserProfileCard.tvPublicRepositoriesHeader) {
+            if (emptyRepos) {
+                text = getString(R.string.no_public_repos)
+                setTextColor(getColor(R.color.repos_text_color))
+            } else {
+                text = getString(R.string.public_repos)
+                setTextColor(primaryColor)
             }
         }
     }
 
     private fun showWarningSnackbar(message: String) {
-        WarningSnackbar().make(binding.root, binding.bottomBarUserProfile, message, success = false).show()
+        WarningSnackbar()
+            .make(binding.root, binding.bottomBarUserProfile, message, success = false)
+            .setAction(getString(R.string.retry)) { viewModel.getUser(args.username) }
+            .show()
     }
 }

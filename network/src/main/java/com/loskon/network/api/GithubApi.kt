@@ -1,12 +1,10 @@
 package com.loskon.network.api
 
-import com.loskon.network.BuildConfig
-import com.loskon.network.dto.RepositoryDto
+import com.loskon.network.dto.RepoDto
 import com.loskon.network.dto.UserDto
 import com.loskon.network.dto.UserSearchDto
 import retrofit2.Response
 import retrofit2.http.GET
-import retrofit2.http.Headers
 import retrofit2.http.Path
 import retrofit2.http.Query
 
@@ -31,7 +29,7 @@ interface GithubApi {
     ): Response<UserDto>
 
     @GET("users/{username}/repos")
-    suspend fun getRepositories(
+    suspend fun getRepos(
         @Path("username") username: String
-    ): Response<List<RepositoryDto>>
+    ): Response<List<RepoDto>>
 }

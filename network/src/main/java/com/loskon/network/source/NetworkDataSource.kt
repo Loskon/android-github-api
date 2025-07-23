@@ -1,7 +1,7 @@
 package com.loskon.network.source
 
 import com.loskon.network.api.GithubApi
-import com.loskon.network.dto.RepositoryDto
+import com.loskon.network.dto.RepoDto
 import com.loskon.network.dto.UserDto
 import java.io.IOException
 
@@ -39,8 +39,8 @@ class NetworkDataSource(
         }
     }
 
-    suspend fun getRepositories(username: String): List<RepositoryDto> {
-        val response = githubApi.getRepositories(username)
+    suspend fun getRepos(username: String): List<RepoDto> {
+        val response = githubApi.getRepos(username)
 
         return if (response.isSuccessful) {
             response.body() ?: throw IOException("Empty body")

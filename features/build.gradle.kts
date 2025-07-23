@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlin)
@@ -26,12 +28,14 @@ android {
 
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
-        sourceCompatibility = JavaVersion.VERSION_18
-        targetCompatibility = JavaVersion.VERSION_18
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
 
-    kotlinOptions {
-        jvmTarget = "18"
+    kotlin {
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_21)
+        }
     }
 
     buildFeatures {
@@ -41,9 +45,9 @@ android {
 
 dependencies {
     coreLibraryDesugaring(libs.desugar)
-    implementation(projects.base)
     implementation(projects.network)
     implementation(projects.database)
+    implementation(projects.base)
     implementation(libs.core)
     implementation(libs.appcompat)
     implementation(libs.material)
@@ -54,6 +58,7 @@ dependencies {
     implementation(libs.preference)
     implementation(libs.bundles.lifecycle)
     implementation(libs.bundles.navigation)
+    implementation(libs.bundles.coil)
     implementation(libs.paging3)
     implementation(libs.koin)
     implementation(libs.timber)

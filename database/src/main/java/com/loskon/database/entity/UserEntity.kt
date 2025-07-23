@@ -11,13 +11,13 @@ data class UserEntity(
     @ColumnInfo(name = "id")
     var id: Int = 0,
     @ColumnInfo(name = "login")
-    val login: String? = null,
+    val login: String,
     @ColumnInfo(name = "avatar_url")
-    val avatarUrl: String? = null,
+    val avatarUrl: String,
     @ColumnInfo(name = "html_url")
-    val htmlUrl: String? = null,
+    val htmlUrl: String,
     @ColumnInfo(name = "type")
-    val type: String? = null,
+    val type: String,
     @ColumnInfo(name = "created_at")
-    val createdAt: LocalDateTime? = null
+    val createdAt: LocalDateTime
 )

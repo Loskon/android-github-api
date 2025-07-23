@@ -17,7 +17,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import timber.log.Timber
 
-class UserListRepositoryImpl(
+class UserListRepoImpl(
     private val localRemoteMediator: LocalRemoteMediator,
     private val networkDataSource: NetworkDataSource,
     private val localDataSource: LocalDataSource
@@ -37,7 +37,7 @@ class UserListRepositoryImpl(
         ).flow.map { pagingData ->
             pagingData.map {
                 val ss = it.toUserModel()
-                Timber.d("USER DATA: " + ss)
+                Timber.d("USER DATA: %s", ss)
                 ss
             }
         }
@@ -49,8 +49,8 @@ class UserListRepositoryImpl(
                 val users = networkDataSource.getUsers(since, pageSize).map { it.toUserEntity() }
                 val endPagination = users.isEmpty()
 
-                Timber.d("apiusers: " + users)
-                Timber.d("endPagination: " + endPagination)
+                Timber.d("apiusers: %s", users)
+                Timber.d("endPagination: %s", endPagination)
 
                 val prevKey = if (since == STARTING_PAGE_INDEX) null else since
                 val nextKey = if (endPagination) null else users.lastOrNull()?.id
@@ -68,8 +68,8 @@ class UserListRepositoryImpl(
         return localDataSource.getCachedUsers()?.map { it.toUserModel() }
     }
 
-    override suspend fun setUsers(users: List<UserModel>) {
-        localDataSource.setUsers(users.map { it.toUserEntity() })
+    override suspend fun setUsersInCache(users: List<UserModel>) {
+        localDataSource.setUsersInCache(users.map { it.toUserEntity() })
     }
 
     companion object {

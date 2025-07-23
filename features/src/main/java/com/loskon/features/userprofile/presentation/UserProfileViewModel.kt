@@ -1,9 +1,8 @@
 package com.loskon.features.userprofile.presentation
 
-import com.loskon.base.extension.coroutines.onStart
 import com.loskon.base.presentation.viewmodel.BaseViewModel
 import com.loskon.features.userprofile.domain.UserProfileInteractor
-import com.loskon.features.util.network.ConnectManager
+import com.loskon.features.util.connect.ConnectManager
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -14,24 +13,24 @@ class UserProfileViewModel(
 ) : BaseViewModel() {
 
     private val userProfileState = MutableStateFlow<UserProfileState>(UserProfileState.Loading)
-    val getUserProfileState get() = userProfileState.asStateFlow()
+    val userProfileStateFlow get() = userProfileState.asStateFlow()
 
     private var job: Job? = null
 
     fun getUser(login: String) {
         job?.cancel()
         job = launchErrorJob(
-            errorBlock = { userProfileState.tryEmit(UserProfileState.Failure) }
+            startBlock = { userProfileState.tryEmit(UserProfileState.Loading) },
+            errorBlock = { userProfileState.tryEmit(UserProfileState.Failure) },
         ) {
             if (connectManager.hasConnect()) {
                 val user = userProfileInteractor.getUser(login)
+                userProfileInteractor.setUserInCache(user)
                 userProfileState.emit(UserProfileState.Success(user))
-                userProfileInteractor.setUser(user)
             } else {
-                userProfileState.emit(UserProfileState.ConnectionFailure(userProfileInteractor.getCachedUser(login)))
+                val user = userProfileInteractor.getCachedUser(login)
+                userProfileState.emit(UserProfileState.ConnectionFailure(user))
             }
-        }.onStart {
-            userProfileState.tryEmit(UserProfileState.Loading)
         }
     }
 }

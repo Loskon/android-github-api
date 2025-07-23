@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlin)
@@ -10,7 +12,7 @@ android {
 
     defaultConfig {
         minSdk = libs.versions.minSdk.get().toInt()
-        buildConfigField("String", "API_BASE_URL", "\"https://api.github.com/\"")
+        buildConfigField("String", "API_URL", "\"https://api.github.com/\"")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -26,12 +28,15 @@ android {
 
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
-        sourceCompatibility = JavaVersion.VERSION_18
-        targetCompatibility = JavaVersion.VERSION_18
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
 
-    kotlinOptions {
-        jvmTarget = "18"
+    kotlin {
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_21)
+            freeCompilerArgs.add("-Xannotation-default-target=first-only")
+        }
     }
 
     buildFeatures {
@@ -42,7 +47,7 @@ android {
 dependencies {
     coreLibraryDesugaring(libs.desugar)
     implementation(libs.core)
-    implementation(libs.bundles.retrofitMoshi)
+    implementation(libs.bundles.retrofit)
     implementation(libs.moshi)
     implementation(libs.coil)
     implementation(libs.paging3)

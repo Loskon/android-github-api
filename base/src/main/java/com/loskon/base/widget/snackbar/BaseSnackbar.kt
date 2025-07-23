@@ -3,7 +3,6 @@ package com.loskon.base.widget.snackbar
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
-import android.graphics.Typeface
 import android.view.View
 import android.widget.TextView
 import com.google.android.material.button.MaterialButton
@@ -11,35 +10,37 @@ import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.snackbar.SnackbarContentLayout
 
-@Suppress("unused")
+/**
+ * Allows to create a custom snackbar
+ */
+@Suppress("unused", "ktlint:standard:wrapping")
 @SuppressLint("RestrictedApi")
 open class BaseSnackbar {
 
     private var snackbar: Snackbar? = null
-
-    private var onDismissedListener: (() -> Unit)? = null
     private var onShowListener: (() -> Unit)? = null
+    private var onDismissedListener: (() -> Unit)? = null
 
-    fun make(view: View, message: String?, length: Int): BaseSnackbar {
-        snackbar = Snackbar.make(view, message ?: UNKNOWN_ERROR_MESSAGE, length)
-        setupSnackbarTransientListener()
+    fun make(view: View, message: String, length: Int): BaseSnackbar {
+        snackbar = Snackbar.make(view, message, length)
+        addSnackbarTransientListener()
         return this
     }
 
-    fun make(context: Context, view: View, message: String?, length: Int): BaseSnackbar {
-        snackbar = Snackbar.make(context, view, message ?: UNKNOWN_ERROR_MESSAGE, length)
-        setupSnackbarTransientListener()
+    fun make(context: Context, view: View, message: String, length: Int): BaseSnackbar {
+        snackbar = Snackbar.make(context, view, message, length)
+        addSnackbarTransientListener()
         return this
     }
 
-    fun make(view: View, addedView: View?, length: Int = Snackbar.LENGTH_INDEFINITE): BaseSnackbar {
+    fun make(view: View, addedView: View, length: Int): BaseSnackbar {
         snackbar = Snackbar.make(view, "", length)
         (snackbar?.view as Snackbar.SnackbarLayout?)?.addView(addedView)
-        setupSnackbarTransientListener()
+        addSnackbarTransientListener()
         return this
     }
 
-    private fun setupSnackbarTransientListener() {
+    private fun addSnackbarTransientListener() {
         snackbar?.addCallback(object : BaseTransientBottomBar.BaseCallback<Snackbar>() {
             override fun onShown(transientBottomBar: Snackbar?) {
                 onShowListener?.invoke()
@@ -57,31 +58,20 @@ open class BaseSnackbar {
         return this
     }
 
-    fun setAction(text: String, action: () -> Unit) {
-        snackbar?.setAction(text) { action() }
+    fun setAction(text: String, action: () -> Unit): BaseSnackbar {
+        snackbar?.setAction(text) {
+            action()
+            dismiss()
+        }
+        return this
     }
 
-    fun setActionRippleColor(color: Int) {
-        getSnackbarMaterialButton()?.rippleColor = ColorStateList.valueOf(color)
-    }
-
-    fun setActionStroke(width: Int, color: Int) {
-        getSnackbarMaterialButton()?.strokeWidth = width
-        getSnackbarMaterialButton()?.strokeColor = ColorStateList.valueOf(color)
-    }
-
-    fun setBackgroundTintList(color: Int) {
+    fun setBackgroundColor(color: Int) {
         snackbar?.view?.backgroundTintList = ColorStateList.valueOf(color)
     }
 
-    fun setFont(font: Typeface?) {
-        getSnackbarTextView()?.typeface = font
-        getSnackbarMaterialButton()?.typeface = font
-    }
-
-    fun setTextColor(color: Int) {
-        getSnackbarTextView()?.setTextColor(color)
-        getSnackbarMaterialButton()?.setTextColor(color)
+    fun setActionTextColor(color: Int) {
+        snackbarButton?.setTextColor(color)
     }
 
     fun enableHideByClickSnackbar() {
@@ -100,26 +90,18 @@ open class BaseSnackbar {
         this.onDismissedListener = onDismissedListener
     }
 
-    private fun getSnackbarTextView(): TextView? {
-        val snackbarLayout = snackbar?.view as Snackbar.SnackbarLayout?
-        val snackContentLayout = snackbarLayout?.getChildAt(0) as SnackbarContentLayout?
+    val snackbarTextView
+        get() = ((snackbar?.view as Snackbar.SnackbarLayout?)
+            ?.getChildAt(0) as SnackbarContentLayout?)
+            ?.getChildAt(0) as TextView?
 
-        return snackContentLayout?.getChildAt(0) as TextView?
-    }
-
-    private fun getSnackbarMaterialButton(): MaterialButton? {
-        val snackbarLayout = snackbar?.view as Snackbar.SnackbarLayout?
-        val snackContentLayout = snackbarLayout?.getChildAt(0) as SnackbarContentLayout?
-
-        return snackContentLayout?.getChildAt(1) as MaterialButton?
-    }
+    val snackbarButton
+        get() = ((snackbar?.view as Snackbar.SnackbarLayout?)
+            ?.getChildAt(0) as SnackbarContentLayout?)
+            ?.getChildAt(1) as MaterialButton?
 
     inline fun create(functions: BaseSnackbar.() -> Unit): BaseSnackbar {
         this.functions()
         return this
-    }
-
-    companion object {
-        private const val UNKNOWN_ERROR_MESSAGE = "Unknown error"
     }
 }

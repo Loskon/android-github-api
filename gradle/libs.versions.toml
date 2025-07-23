@@ -7,10 +7,10 @@ compileSdk = "36"
 versionCode = "1"
 versionName = "1.0.0"
 ## App
-agp = "8.10.1"
-kotlin = "2.1.21"
+agp = "8.11.1"
+kotlin = "2.2.0"
+ksp = "2.2.0-2.0.2"
 core = "1.16.0"
-ksp = "2.1.21-2.0.2"
 ## Desugar
 desugar = "2.1.5"
 ## Checks
@@ -26,23 +26,23 @@ swiperefreshlayout = "1.1.0"
 activity = "1.10.1"
 fragment = "1.8.8"
 preference = "1.2.1"
-lifecycle = "2.9.1"
-navigation = "2.9.0"
-parcelize = "2.1.21"
+lifecycle = "2.9.2"
+navigation = "2.9.2"
+parcelize = "2.2.0"
 ## Firebase
-firebaseCrashlytics = "3.0.4"
-firebaseBom = "33.15.0"
-gms = "4.4.2"
+firebaseCrashlytics = "3.0.5"
+firebaseBom = "34.0.0"
+gms = "4.4.3"
 ## Paging
 paging3 = "3.3.6"
 ## DB
-room = "2.7.1"
+room = "2.7.2"
 ## Network
 retrofit = "3.0.0"
-okHttp = "4.12.0"
+okHttp = "5.1.0"
 moshi = "1.15.2"
 ## ImageLoader
-coil = "2.7.0"
+coil = "3.3.0"
 ## DI
 koin = "4.1.0"
 ## Logs
@@ -53,12 +53,14 @@ mockito = "5.18.0"
 extJunit = "1.2.1"
 espresso = "3.6.1"
 ## Misc
-splashscreen = "1.1.0-rc01"
+splashscreen = "1.2.0-rc01"
 browser = "1.8.0"
 
 [libraries]
 ## Desugar
 desugar = { module = "com.android.tools:desugar_jdk_libs", version.ref = "desugar" }
+## Kotlin
+core = { module = "androidx.core:core-ktx", version.ref = "core" }
 ## Android
 appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
 material = { module = "com.google.android.material:material", version.ref = "material" }
@@ -72,26 +74,27 @@ lifecycleRuntime = { module = "androidx.lifecycle:lifecycle-runtime-ktx", versio
 lifecycleViewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
 navigationFragment = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigation" }
 navigationUi = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigation" }
-core = { module = "androidx.core:core-ktx", version.ref = "core" }
 ## Firebase
 firebaseBom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
-firebaseAnalytics = { module = "com.google.firebase:firebase-analytics-ktx" }
-firebaseCrashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx" }
+firebaseAnalytics = { module = "com.google.firebase:firebase-analytics" }
+firebaseCrashlytics = { module = "com.google.firebase:firebase-crashlytics" }
 ## Paging
 paging3 = { module = "androidx.paging:paging-runtime", version.ref = "paging3" }
 ## DB
+roomRuntime = { module = "androidx.room:room-runtime", version.ref = "room" }
 roomCompiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 roomKtx = { module = "androidx.room:room-ktx", version.ref = "room" }
 roomPaging= { module = "androidx.room:room-paging", version.ref = "room" }
 ## Network
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
-retrofitConverterMoshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "retrofit" }
+retrofitConverter = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "retrofit" }
 okHttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okHttp" }
 okHttpLogging = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "okHttp" }
 moshi = { module = "com.squareup.moshi:moshi-kotlin", version.ref = "moshi" }
 moshiCodegen = { module = "com.squareup.moshi:moshi-kotlin-codegen", version.ref = "moshi" }
 ## ImageLoader
-coil = { module = "io.coil-kt:coil", version.ref = "coil" }
+coil = { module = "io.coil-kt.coil3:coil", version.ref = "coil" }
+coilOkHttp = { module = "io.coil-kt.coil3:coil-network-okhttp", version.ref = "coil" }
 ## DI
 koin = { module = "io.insert-koin:koin-android", version.ref = "koin" }
 ## Logs
@@ -111,7 +114,9 @@ browser = { module = "androidx.browser:browser", version.ref = "browser" }
 lifecycle = ["lifecycleRuntime", "lifecycleViewmodel"]
 navigation = ["navigationFragment", "navigationUi"]
 ## Network
-retrofitMoshi = ["retrofit", "retrofitConverterMoshi", "okHttp", "okHttpLogging"]
+retrofit = ["retrofit", "retrofitConverter", "okHttp", "okHttpLogging"]
+## ImageLoader
+coil = ["coil", "coilOkHttp"]
 
 [plugins]
 ## Android
@@ -121,7 +126,6 @@ navigation = { id = "androidx.navigation.safeargs.kotlin", version.ref = "naviga
 parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "parcelize" }
 ## Kotlin
 kotlin = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 ## Checks
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 ktlint = { id = "org.jmailen.kotlinter", version.ref = "ktlint" }

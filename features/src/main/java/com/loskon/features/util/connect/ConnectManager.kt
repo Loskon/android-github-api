@@ -1,4 +1,4 @@
-package com.loskon.features.util.network
+package com.loskon.features.util.connect
 
 import android.content.Context
 import android.net.ConnectivityManager

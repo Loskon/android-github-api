@@ -1,7 +1,7 @@
 package com.loskon.network
 
 import com.loskon.network.api.GithubApi
-import com.loskon.network.moshiadapter.LocalDateTimeMoshiAdapter
+import com.loskon.network.moshiadapter.DateTimeMoshiAdapter
 import com.loskon.network.source.NetworkDataSource
 import com.loskon.network.source.NetworkPagingDataSource
 import com.squareup.moshi.Moshi
@@ -14,21 +14,17 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
 
 val networkModule = module {
-    single { provideLoggingInterceptor() }
-    single { provideOkHttp(get()) }
-    single { provideMoshi() }
-    single { provideRetrofit(get(), get()) }
+    single { provideOkHttp() }
+    single { provideRetrofit(get()) }
     single { provideGithubApi(get()) }
     single { NetworkDataSource(get()) }
     single { NetworkPagingDataSource(get()) }
 }
 
-private fun provideLoggingInterceptor(): HttpLoggingInterceptor {
-    return HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
-}
-
 @Suppress("MagicNumber")
-private fun provideOkHttp(logging: HttpLoggingInterceptor): OkHttpClient {
+private fun provideOkHttp(): OkHttpClient {
+    val logging = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+
     return OkHttpClient.Builder().apply {
         connectTimeout(30L, TimeUnit.SECONDS)
         readTimeout(30L, TimeUnit.SECONDS)
@@ -37,14 +33,16 @@ private fun provideOkHttp(logging: HttpLoggingInterceptor): OkHttpClient {
     }.build()
 }
 
-private fun provideMoshi(): Moshi {
-    return Moshi.Builder().addLast(KotlinJsonAdapterFactory()).add(LocalDateTimeMoshiAdapter()).build()
-}
+private fun provideRetrofit(okHttp: OkHttpClient): Retrofit {
+    val moshi = Moshi
+        .Builder()
+        .addLast(KotlinJsonAdapterFactory())
+        .add(DateTimeMoshiAdapter())
+        .build()
 
-private fun provideRetrofit(okHttp: OkHttpClient, moshi: Moshi): Retrofit {
     return Retrofit.Builder()
         .client(okHttp)
-        .baseUrl(BuildConfig.API_BASE_URL)
+        .baseUrl(BuildConfig.API_URL)
         .addConverterFactory(MoshiConverterFactory.create(moshi))
         .build()
 }

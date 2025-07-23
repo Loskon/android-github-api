@@ -10,5 +10,5 @@ interface UserListRepository {
 
     suspend fun getCachedUsers(): List<UserModel>?
 
-    suspend fun setUsers(users: List<UserModel>)
+    suspend fun setUsersInCache(users: List<UserModel>)
 }
