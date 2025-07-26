@@ -10,6 +10,9 @@ import com.loskon.database.entity.RemoteKeyEntity
 interface RemoteKeyDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertKeys(remoteKey: List<RemoteKeyEntity>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertKey(remoteKey: RemoteKeyEntity)
 
     @Query("SELECT * FROM remote_keys WHERE user_id = :userId")

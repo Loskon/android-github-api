@@ -8,7 +8,7 @@ class UserListInteractor(
     private val userListRepository: UserListRepository
 ) {
 
-    suspend fun getUsers(): Flow<PagingData<UserModel>> {
+    fun getUsers(): Flow<PagingData<UserModel>> {
         return userListRepository.getUsers()
     }
 

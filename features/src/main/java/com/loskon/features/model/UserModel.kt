@@ -2,6 +2,7 @@ package com.loskon.features.model
 
 import com.loskon.database.entity.UserEntity
 import com.loskon.database.entity.UserInfoEntity
+import com.loskon.network.dto.RepoDto
 import com.loskon.network.dto.UserDto
 import java.time.LocalDateTime
 
@@ -50,7 +51,8 @@ fun UserModel.toUserEntity(): UserEntity {
         avatarUrl = avatarUrl,
         htmlUrl = htmlUrl,
         type = type,
-        createdAt = createdAt
+        createdAt = createdAt,
+        stars = 0
     )
 }
 
@@ -87,6 +89,19 @@ fun UserDto.toUserEntity(): UserEntity {
         avatarUrl = avatarUrl ?: "",
         htmlUrl = htmlUrl ?: "",
         type = type ?: "",
-        createdAt = createdAt ?: LocalDateTime.now()
+        createdAt = createdAt ?: LocalDateTime.now(),
+        stars = 0
+    )
+}
+
+fun RepoDto.toUserEntity(): UserEntity {
+    return UserEntity(
+        id = stars,
+        login = fullName,
+        avatarUrl = "",
+        htmlUrl = "",
+        type = "",
+        createdAt = createdAt ?: LocalDateTime.now(),
+        stars = 0
     )
 }

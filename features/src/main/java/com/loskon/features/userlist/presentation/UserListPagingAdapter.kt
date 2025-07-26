@@ -43,8 +43,8 @@ class UserListPagingAdapter(
 object UserListDiffUtil : DiffUtil.ItemCallback<UserModel>() {
 
     override fun areItemsTheSame(oldItem: UserModel, newItem: UserModel): Boolean {
-        Timber.d("areItemsTheSame: %s", oldItem.id.toString() + "/" + newItem.id + " " + (oldItem.id == newItem.id))
-        return oldItem.id == newItem.id
+        Timber.d("areItemsTheSame: %s", oldItem.login.toString() + "/" + newItem.login + " " + (oldItem.login == newItem.login))
+        return oldItem.login == newItem.login
     }
 
     override fun areContentsTheSame(oldItem: UserModel, newItem: UserModel): Boolean {

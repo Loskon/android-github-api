@@ -19,8 +19,8 @@ class NetworkDataSource(
         }
     }
 
-    suspend fun getUserSearch(since: Int, pageSize: Int): List<UserDto> {
-        val response = githubApi.getUserSearch(page = since, perPage = pageSize)
+    suspend fun getSearchUser(page: Int, perPage: Int): List<UserDto> {
+        val response = githubApi.getSearchUser(page = page, perPage = perPage)
 
         return if (response.isSuccessful) {
             response.body()?.items ?: throw IOException("Empty body")
@@ -44,6 +44,16 @@ class NetworkDataSource(
 
         return if (response.isSuccessful) {
             response.body() ?: throw IOException("Empty body")
+        } else {
+            throw IOException("Http status code: " + response.code())
+        }
+    }
+
+    suspend fun getSearchRepos(page: Int, perPage: Int): List<RepoDto> {
+        val response = githubApi.getSearchRepos(query = "Android", page = page, perPage = perPage)
+
+        return if (response.isSuccessful) {
+            response.body()?.items ?: throw IOException("Empty body")
         } else {
             throw IOException("Http status code: " + response.code())
         }

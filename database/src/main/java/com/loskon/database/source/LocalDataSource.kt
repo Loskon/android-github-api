@@ -51,6 +51,13 @@ class LocalDataSource(
         }
     }
 
+    suspend fun insertUsersAndKeys(keys: List<RemoteKeyEntity>, response: List<UserEntity>) {
+        userDatabase.withTransaction {
+            remoteKeyDao.insertKeys(keys)
+            userDao.setUsersInCache(response)
+        }
+    }
+
     suspend fun insertUsersAndKey(key: RemoteKeyEntity, response: List<UserEntity>) {
         userDatabase.withTransaction {
             remoteKeyDao.insertKey(key)

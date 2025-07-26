@@ -57,4 +57,7 @@ dependencies {
     testImplementation(libs.junit4)
     androidTestImplementation(libs.extJunit)
     androidTestImplementation(libs.espresso)
+
+    implementation(libs.bundles.retrofit)
+    implementation(projects.network)
 }

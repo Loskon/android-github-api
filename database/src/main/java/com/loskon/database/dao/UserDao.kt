@@ -11,8 +11,11 @@ import com.loskon.database.entity.UserInfoEntity
 
 @Dao
 interface UserDao {
-    @Query("SELECT * FROM users ORDER BY id ASC")
+    @Query("SELECT * FROM users ORDER BY stars DESC, login ASC")
     fun getUsers(): PagingSource<Int, UserEntity>
+
+    @Query("SELECT * FROM users WHERE login LIKE :query ORDER BY stars DESC, login ASC")
+    fun getUsers(query: String): PagingSource<Int, UserEntity>
 
     @Query("SELECT * FROM users")
     suspend fun getCachedUsers(): List<UserEntity>?

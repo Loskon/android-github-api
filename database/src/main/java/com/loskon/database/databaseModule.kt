@@ -11,7 +11,7 @@ import org.koin.dsl.module
 val databaseModule = module {
     single { provideDatabase(androidContext()) }
     single { LocalDataSource(get()) }
-    single { LocalRemoteMediator(get()) }
+    factory { LocalRemoteMediator(get()) }
 }
 
 private fun provideDatabase(context: Context): UserDatabase {

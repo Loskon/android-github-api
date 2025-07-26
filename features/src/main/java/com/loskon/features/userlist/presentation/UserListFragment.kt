@@ -4,18 +4,19 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.SimpleItemAnimator
-import com.loskon.base.extension.coroutines.observe
 import com.loskon.base.extension.view.setOnCanceledRefreshListener
 import com.loskon.base.viewbinding.viewBinding
 import com.loskon.base.widget.recyclerview.AddItemAnimator
 import com.loskon.base.widget.snackbar.WarningSnackbar
 import com.loskon.features.R
 import com.loskon.features.databinding.FragmentUserListBinding
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import timber.log.Timber
 
 class UserListFragment : Fragment(R.layout.fragment_user_list) {
 
@@ -62,7 +63,7 @@ class UserListFragment : Fragment(R.layout.fragment_user_list) {
     }
 
     private fun installObservers() {
-        viewModel.userListStateFlow.observe(viewLifecycleOwner) {
+/*        viewModel.userListStateFlow.observe(viewLifecycleOwner) {
             when (it) {
                 is UserListState.Loading -> {
                     binding.indUserList.isVisible = true
@@ -82,6 +83,18 @@ class UserListFragment : Fragment(R.layout.fragment_user_list) {
                     showWarningSnackbar(getString(R.string.error_loading))
                 }
             }
+        }*/
+
+/*        viewModel.usersFlow.observe(viewLifecycleOwner) {
+            binding.tvNoInternetUserList.isVisible = false
+            binding.indUserList.isVisible = false
+            userListPagingAdapter.submitData(it)
+        }*/
+
+        lifecycleScope.launch {
+            binding.tvNoInternetUserList.isVisible = false
+            binding.indUserList.isVisible = false
+            viewModel.usersFlow.collectLatest(userListPagingAdapter::submitData)
         }
     }
 

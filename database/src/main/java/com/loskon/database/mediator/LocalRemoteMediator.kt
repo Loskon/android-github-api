@@ -4,10 +4,14 @@ import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
+import androidx.room.withTransaction
 import com.loskon.database.db.UserDatabase
 import com.loskon.database.entity.RemoteKeyEntity
 import com.loskon.database.entity.UserEntity
+import com.loskon.network.api.GithubApi
+import com.loskon.network.dto.RepoDto
 import timber.log.Timber
+import java.time.LocalDateTime
 
 @OptIn(ExperimentalPagingApi::class)
 class LocalRemoteMediator(
@@ -23,10 +27,11 @@ class LocalRemoteMediator(
         loadType: LoadType, state: PagingState<Int, UserEntity>
     ): MediatorResult {
 
-        val since = when (loadType) {
+        val page = when (loadType) {
             LoadType.REFRESH -> {
-                Timber.d("RemoteKey REFRESH: %s", STARTING_SINCE_INDEX)
-                STARTING_SINCE_INDEX
+                val remoteKeys = getRemoteKeyClosestToCurrentPosition(state)
+                Timber.d("RemoteKey REFRESH: %s", remoteKeys?.nextKey)
+                remoteKeys?.nextKey?.minus(1) ?: STARTING_PAGE_INDEX
             }
 
             LoadType.PREPEND -> {
@@ -42,16 +47,26 @@ class LocalRemoteMediator(
             }
         }
 
-        Timber.d("RemoteKey page: " + since)
+        Timber.d("RemoteKey page: " + page)
 
         return try {
             val refresh = (loadType == LoadType.REFRESH)
-            onRefreshListener?.invoke(since.toInt(), state.config.pageSize, refresh)
+            onRefreshListener?.invoke(page, state.config.pageSize, refresh)
 
             MediatorResult.Success(endPagination == true)
         } catch (exception: Exception) {
             Timber.e(exception)
             MediatorResult.Error(exception)
+        }
+    }
+
+    private suspend fun getRemoteKeyClosestToCurrentPosition(
+        state: PagingState<Int, UserEntity>
+    ): RemoteKeyEntity? {
+        return state.anchorPosition?.let { position ->
+            state.closestItemToPosition(position)?.id?.let { userId ->
+                userDatabase.remoteKeyDao().remoteKeyUserId(userId)
+            }
         }
     }
 
@@ -79,16 +94,14 @@ class LocalRemoteMediator(
 
     companion object {
 
-        private const val STARTING_SINCE_INDEX = 0
-        private const val SINCE_PAGE_SIZE = 20
+        private const val STARTING_PAGE_INDEX = 1
     }
 }
 
-/*
 @OptIn(ExperimentalPagingApi::class)
 class LocalRemoteMediator2(
     private val service: GithubApi,
-    private val repoDatabase: UserDatabase
+    private val database: UserDatabase
 ) : RemoteMediator<Int, UserEntity>() {
 
     override suspend fun initialize(): InitializeAction {
@@ -100,63 +113,48 @@ class LocalRemoteMediator2(
         val page = when (loadType) {
             LoadType.REFRESH -> {
                 val remoteKeys = getRemoteKeyClosestToCurrentPosition(state)
-                Log.d("Tag22", "RemoteKey REFRESH: $remoteKeys")
-                remoteKeys?.nextKey?.minus(20) ?: STARTING_PAGE_INDEX
+                Timber.d("RemoteKey REFRESH: %s", remoteKeys?.nextKey)
+                remoteKeys?.nextKey?.minus(1) ?: STARTING_PAGE_INDEX
             }
             LoadType.PREPEND -> {
                 val remoteKeys = getRemoteKeyForFirstItem(state)
-                // If remoteKeys is null, that means the refresh result is not in the database yet.
-                // We can return Success with `endOfPaginationReached = false` because Paging
-                // will call this method again if RemoteKeys becomes non-null.
-                // If remoteKeys is NOT NULL but its prevKey is null, that means we've reached
-                // the end of pagination for prepend.
                 val prevKey = remoteKeys?.prevKey
-                Log.d("Tag22", "RemoteKey PREPEND: $prevKey")
-                if (prevKey == null) {
-                    return MediatorResult.Success(endOfPaginationReached = remoteKeys != null)
-                }
+                Timber.d("RemoteKey PREPEND: %s", prevKey)
+                if (prevKey == null) return MediatorResult.Success(endOfPaginationReached = remoteKeys != null)
                 prevKey
             }
             LoadType.APPEND -> {
                 val remoteKeys = getRemoteKeyForLastItem(state)
-                // If remoteKeys is null, that means the refresh result is not in the database yet.
-                // We can return Success with `endOfPaginationReached = false` because Paging
-                // will call this method again if RemoteKeys becomes non-null.
-                // If remoteKeys is NOT NULL but its nextKey is null, that means we've reached
-                // the end of pagination for append.
                 val nextKey = remoteKeys?.nextKey
-                Log.d("Tag22", "RemoteKey APPEND: $nextKey")
-                if (nextKey == null) {
-                    return MediatorResult.Success(endOfPaginationReached = remoteKeys != null)
-                }
+                Timber.d("RemoteKey APPEND: %s", nextKey)
+                if (nextKey == null) return MediatorResult.Success(endOfPaginationReached = remoteKeys != null)
                 nextKey
             }
         }
 
         try {
-            Log.d("Tag22", "RemoteKey page: $page")
-            //val apiResponse = service.getUserSearch(page = page, perPage = state.config.pageSize)
-            //val repos = apiResponse.items
-
-            val apiResponse = service.getUsers(since = page, pageSize = state.config.pageSize)
-            val repos = apiResponse.body()?.sortedBy { it.id } ?: emptyList()
+            Timber.d("RemoteKey page: " + page)
+            val apiResponse = service.getSearchRepos(query = "Android", page = page, perPage = state.config.pageSize)
+            val repos = apiResponse.body()?.items ?: throw Exception("Empty body")
             val endOfPaginationReached = repos.isEmpty()
 
-            repoDatabase.withTransaction {
+            database.withTransaction {
                 if (loadType == LoadType.REFRESH) {
-                    repoDatabase.remoteKeyDao().clearRemoteKey()
-                    repoDatabase.userDao().clearUsers()
+                    database.remoteKeyDao().clearRemoteKey()
+                    database.userDao().clearUsers()
                 }
 
-                val prevKey = if (page == STARTING_PAGE_INDEX) null else page - SINCE_PAGE_SIZE
-                val nextKey = if (endOfPaginationReached) null else page + SINCE_PAGE_SIZE
-                val keys = repos.map { RemoteKeyEntity(userId = it.id ?: 0L, prevKey = prevKey, nextKey = nextKey) }
+                val prevKey = if (page == STARTING_PAGE_INDEX) null else page - 1
+                val nextKey = if (endOfPaginationReached) null else page + 1
+                val keys = repos.map { RemoteKeyEntity(userId = it.id?.toInt() ?: 0, prevKey = prevKey, nextKey = nextKey) }
 
-                repoDatabase.remoteKeyDao().insertKey(keys)
-                repoDatabase.userDao().insertUsers(repos.map { it.toUserEntity2() })
+                database.remoteKeyDao().insertKeys(keys)
+                database.userDao().setUsersInCache(repos.map { it.toUserEntity2() })
             }
+
             return MediatorResult.Success(endOfPaginationReached = endOfPaginationReached)
-        } catch (exception: IOException) {
+        } catch (exception: Exception) {
+            Timber.d(exception)
             return MediatorResult.Error(exception)
         }
     }
@@ -164,14 +162,14 @@ class LocalRemoteMediator2(
     private suspend fun getRemoteKeyForLastItem(state: PagingState<Int, UserEntity>): RemoteKeyEntity? {
         return state.pages.lastOrNull { it.data.isNotEmpty() }?.data?.lastOrNull()
             ?.let { repo ->
-                repoDatabase.remoteKeyDao().remoteKeyUserId(repo.id)
+                database.remoteKeyDao().remoteKeyUserId(repo.id)
             }
     }
 
     private suspend fun getRemoteKeyForFirstItem(state: PagingState<Int, UserEntity>): RemoteKeyEntity? {
         return state.pages.firstOrNull { it.data.isNotEmpty() }?.data?.firstOrNull()
             ?.let { repo ->
-                repoDatabase.remoteKeyDao().remoteKeyUserId(repo.id)
+                database.remoteKeyDao().remoteKeyUserId(repo.id)
             }
     }
 
@@ -180,7 +178,7 @@ class LocalRemoteMediator2(
     ): RemoteKeyEntity? {
         return state.anchorPosition?.let { position ->
             state.closestItemToPosition(position)?.id?.let { repoId ->
-                repoDatabase.remoteKeyDao().remoteKeyUserId(repoId)
+                database.remoteKeyDao().remoteKeyUserId(repoId)
             }
         }
     }
@@ -192,13 +190,14 @@ class LocalRemoteMediator2(
     }
 }
 
-fun UserDto.toUserEntity2(): UserEntity {
+fun RepoDto.toUserEntity2(): UserEntity {
     return UserEntity(
-        login = login ?: "",
-        id = id ?: 0,
-        avatarUrl = avatarUrl ?: "",
-        htmlUrl = htmlUrl ?: "",
-        type = type ?: "",
-        createdAt = createdAt ?: LocalDateTime.now()
+        id = id?.toInt() ?: 0,
+        login = fullName,
+        avatarUrl = "",
+        htmlUrl = "",
+        type = "",
+        createdAt = createdAt ?: LocalDateTime.now(),
+        stars = stars
     )
-}*/
+}

@@ -19,5 +19,7 @@ data class UserEntity(
     @ColumnInfo(name = "type")
     val type: String,
     @ColumnInfo(name = "created_at")
-    val createdAt: LocalDateTime
+    val createdAt: LocalDateTime,
+    @ColumnInfo(name = "stars")
+    val stars: Int
 )

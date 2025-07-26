@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface UserListRepository {
 
-    suspend fun getUsers(): Flow<PagingData<UserModel>>
+    fun getUsers(): Flow<PagingData<UserModel>>
 
     suspend fun getCachedUsers(): List<UserModel>?
 

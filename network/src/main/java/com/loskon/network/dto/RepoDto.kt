@@ -23,5 +23,10 @@ data class RepoDto(
     @Json(name = "size")
     val size: Long? = null,
     @Json(name = "language")
-    val language: String? = null
+    val language: String? = null,
+
+    @Json(name = "stargazers_count")
+    val stars: Int,
+    @Json(name = "full_name")
+    val fullName: String
 )

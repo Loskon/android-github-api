@@ -1,8 +1,9 @@
 package com.loskon.network.api
 
 import com.loskon.network.dto.RepoDto
+import com.loskon.network.dto.SearchRepoDto
+import com.loskon.network.dto.SearchUserDto
 import com.loskon.network.dto.UserDto
-import com.loskon.network.dto.UserSearchDto
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -17,11 +18,11 @@ interface GithubApi {
     ): Response<List<UserDto>>
 
     @GET("search/users?sort=joined")
-    suspend fun getUserSearch(
-        @Query("q") since: String = "type:user",
+    suspend fun getSearchUser(
+        @Query("q") query: String = "type:user",
         @Query("page") page: Int,
         @Query("per_page") perPage: Int,
-    ): Response<UserSearchDto>
+    ): Response<SearchUserDto>
 
     @GET("users/{username}")
     suspend fun getUser(
@@ -32,4 +33,11 @@ interface GithubApi {
     suspend fun getRepos(
         @Path("username") username: String
     ): Response<List<RepoDto>>
+
+    @GET("search/repositories?sort=stars")
+    suspend fun getSearchRepos(
+        @Query("q") query: String,
+        @Query("page") page: Int,
+        @Query("per_page") perPage: Int
+    ): Response<SearchRepoDto>
 }
